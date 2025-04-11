@@ -1,0 +1,4 @@
+Definições de validação de dados de entrada, como:
+
+userValidation.js (validação de dados de usuário)
+postValidation.js (validação de postagens)

@@ -1,0 +1,53 @@
+const database = require("../database/connection");
+
+class Semiotic {
+
+  async create(semiotic) {
+
+    try {
+      await database("t_semiotica").insert({
+        id_projeto: semiotic.id, 
+        id_usuario: semiotic.userId, 
+        nm_signo: semiotic.signo, 
+        ds_problemas:semiotic.anotacaoSemiotica, 
+        ds_recomendacoes:semiotic.recomendacaoSemiotica, 
+        ds_caminho: semiotic.imagem
+      });
+      return { success: true, message: "A semiótica foi salva com sucesso!" };
+    } catch (err) {
+      console.error("Erro ao salvar semiótica:", err);
+      throw err;
+    }}
+  
+    async findByProject(userId, projetoId) {
+      try {
+        const results = await database("t_semiotica")
+          .select("id_semiotica", "id_projeto", "nm_signo", "ds_problemas", "ds_recomendacoes", "ds_observacoes", "st_correcao")
+          .where({ id_usuario: userId, id_projeto: projetoId });
+  
+        return results;
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    async correct({ idSemiotica, userId, observacao }) {
+      try {
+        const result = await database("t_semiotica")
+          .where({ id_semiotica: idSemiotica, id_usuario: userId })
+          .update({
+            ds_observacoes: observacao,
+            st_correcao: 1
+          });
+  
+        return result; // número de linhas atualizadas
+
+      } catch (err) {
+        console.error("Erro ao corrigir semiótica:", err);
+        throw err;
+      }
+    }
+
+}
+
+module.exports = new Semiotic();
