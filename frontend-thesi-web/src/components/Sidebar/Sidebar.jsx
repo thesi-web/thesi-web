@@ -1,0 +1,74 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import styles from './Sidebar.module.css';
+import SidebarItem from '../SidebarItem/SidebarItem';
+import SidebarProject from '../SidebarProject/SidebarProject';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import Warning from '../Warning/Warning';
+
+const Sidebar = ({ show }) => {
+
+  const [totalProjetos, setTotalProjetos] = useState([]);
+
+  const fetchProjects = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/all', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`, 
+        },
+      });
+      const data = await response.json();
+      setTotalProjetos(data); // Atualiza o estado com os projetos da API
+    } catch (error) {
+      console.error('Erro ao buscar os projetos:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  console.log(totalProjetos);
+
+  return (
+    <div className={show ? styles.active : styles.disable}>
+          
+      <div className={styles.headerIcons}>
+        <div className={styles.logo}>thesi</div>
+        <i className="bi bi-pencil-square"></i>
+      </div>
+      
+      <div>
+        <SidebarItem label={"Página Inicial"} icon={<i class="bi bi-cup"></i>} />
+        <SidebarItem label={"Caixa de Entrada"} icon={<i className="bi bi-mailbox"></i>} />
+      </div>
+
+        <div className={styles.title}>Projetos</div>
+
+      <div className={styles.projectContainer} >
+        {totalProjetos.length > 0 ? (
+          totalProjetos.map((projeto, index) => (
+            <div key={index}>
+              <SidebarProject label={projeto.nm_projeto} emoji={"🌈"} />
+            </div>
+          ))
+        ) : (
+          < Warning icon={<i class="bi bi-stars"></i>} title={"Não há projetos"} message={"seus projetos aparecerão aqui"} />
+        )}
+      </div>
+
+      <div className={styles.footerContainer}>
+        <SidebarItem label={"Configurações"} icon={<i className="bi bi-gear"></i>} />
+        <SidebarItem label={"Lixeira"} icon={<i className="bi bi-trash3"></i>} />
+        <SidebarItem label={"Convidar membros"} icon={<i className="bi bi-person-plus"></i>} />
+        <div className={styles.footerIcons}>
+          <i className="bi bi-calendar2-check"></i>
+          <i className="bi bi-question-circle"></i>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;

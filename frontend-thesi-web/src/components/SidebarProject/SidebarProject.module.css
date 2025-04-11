@@ -1,0 +1,28 @@
+.item {
+    display: flex;
+    align-items: center;
+    padding: 5px 16px;
+    margin: 0 0 20px 0; 
+    cursor: pointer;
+    color: #000000;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .item:hover {
+    background-color: #F0F0EF;
+  }
+  
+  .emoji {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #A6A299;
+  }
+  
+  .label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #5F5E5B;
+  }

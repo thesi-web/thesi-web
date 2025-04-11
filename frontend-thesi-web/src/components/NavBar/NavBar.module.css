@@ -1,0 +1,9 @@
+.navContainer{
+    display: flex;
+    justify-content: space-between;
+    background-color: aqua;
+}
+
+.navOptions {
+    background-color: firebrick;
+}

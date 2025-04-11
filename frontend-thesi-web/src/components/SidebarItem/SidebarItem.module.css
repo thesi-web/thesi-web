@@ -1,0 +1,29 @@
+.item {
+    display: flex;
+    align-items: center;
+    padding: 3px 16px;
+    margin: 0 0 3px 0; 
+    cursor: pointer;
+    color: #000000;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .item:hover {
+    background-color: #F0F0EF;
+  }
+  
+  .icon {
+    font-size: 18px;
+    color: #A6A299;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #5F5E5B;
+  }
+  
