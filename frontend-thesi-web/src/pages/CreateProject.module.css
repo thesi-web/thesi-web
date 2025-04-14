@@ -1,0 +1,24 @@
+.ProjectContainer {
+    min-height: 100vh;
+    min-width: 100vw;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    padding: 40px;
+  }
+
+.form {
+    margin: 20px 0px;
+    width: 35vw;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+}

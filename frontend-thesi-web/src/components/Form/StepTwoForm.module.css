@@ -1,0 +1,21 @@
+.uploadContainer {
+    padding-bottom: 10px;
+    border: 1px dashed #5F5E5B;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+.uploadContainer.dragging {
+    background-color: #eef6ff;
+    border-color: #3399ff;
+  }
+
+.filesContainer {
+    margin-bottom: 10px;
+    overflow-y: auto;
+    height: 100%;
+}

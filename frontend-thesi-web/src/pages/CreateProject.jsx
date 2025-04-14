@@ -1,9 +1,16 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import styles from './CreateProject.module.css'
 import InputText from '../components/InputText/InputText';
+import Button from '../components/Button/Button';
+import TextArea from '../components/TextArea/TextArea';
+import SideBar from '../components/Sidebar/Sidebar'
+import MultiStepForm from './MultiForm';
 
 
 function CreateProject() {
+
+  const [step, setStep] = useState(1);
 
   const [nameProject, setNameProject] = useState("");
   const [studentNames, setStudentNames] = useState("");
@@ -103,92 +110,22 @@ function CreateProject() {
     }
   };
 
+  const platforms = [
+    { label: "Web"},
+    { label: "Mobile"},
+    { label: "Desktop"},
+    { label: "Multiplataforma"},
+  ];
+  
   
 return (
-  <div className='cp-container'>
-     
-    <div className={'fo-formulario'}>
-        <div className='thesi-titulo-lilas-secao'>CRIAR PROJETO</div>
-      
-      <form method='POST' onSubmit={handleSubmit} encType='multipart/form-data'>
-      
-      <InputText 
-        label={"Nome de Projeto"}
-        type={'text'} 
-        placeholder={'Digite o nome do projeto'} 
-        onChange={handleNameProject} 
-        required />
-        
-        
-  
-        
-        <label className='thesi-label'>NOME DOS PARTICIPANTES:</label>
-        <input className='cp-input' type='text' placeholder='Digite o nomes dos integrantes do projeto' onChange={handleStudentNames} required ></input>
-        <div className='cp-flex-box'>
-          <i className="bi bi-person-fill-add cp-icon"></i>
-        </div>
-        <label className='thesi-label'>OBJETIVO DO PROJETO:</label>
-        <textarea className='cp-input-textarea' placeholder='Descreva sucintamente a finalidade do projeto' onChange={handleProductObjetive} maxLength={200} required></textarea>
-        
-        <label className='thesi-label'>TIPO DE USUÁRIO</label>
-        <textarea className='cp-input-textarea' placeholder='Descreva os tipos de usuário' onChange={handleUserType} maxLength={200} required></textarea>
-        
-        <label className='thesi-label'>PLATAFORMA DO PROJETO</label>
-        <select className='cp-input' onChange={handleProjectPlatform} value={projectPlatform} required>
-          <option value="">Selecione uma plataforma</option>
-          <option value="Web">Web</option>
-          <option value="Mobile">Mobile</option>
-          <option value="Desktop">Desktop</option>
-          <option value="Multiplataforma">Multiplataforma</option>
-        </select>
-
-          <div className='thesi-titulo-lilas-secao'>
-            EXPORTAR ARQUIVOS
-          </div>
-          <div className='thesi-label'>
-            PROTÓTIPOS
-          </div>
-            <div className='thesi-texto'>
-              Lembre-se, os protótipos são as <div className='thesi-negrito'>telas</div> que serão avaliadas! 
-            </div>
-            {errorMessage && (
-              <div className="thesi-mensagem-de-erro ">{errorMessage}</div>
-            )}
-              <input className='cp-escolher-arquivo' id='prototipo' type='file' name='template' accept='image/*' onChange={handleTemplateFile} multiple></input>
-              <label htmlFor='prototipo' className='thesi-botao-azul'>PROCURAR ARQUIVOS</label>
-              {templateFile.length > 0 && (
-                <div>
-                    {templateFile.map((file, index) => (
-                      <div className='cp-arqivos-carregados' key={index}>{file.name} <i class="bi bi-x-lg" style={{ marginLeft: '10px' }} onClick={() => removeFile(file.name, 'template')}
-                      ></i> </div>
-                    ))}
-                </div>
-              )}
-          <div className='thesi-label'>
-            ARQUIVOS DE MODELAGEM FUNCIONAL
-          </div>
-            <div className='thesi-texto'>Os arquivos de modelagem funcional podem ser: <div className='thesi-negrito'>Diagrama de Caso de Uso</div>, <div className='thesi-negrito'>Persona</div>, <div className='thesi-negrito'>UX Canvas</div>... Eles são essenciais para descrever e planejar o comportamento de um sistema do ponto de vista do <div className='thesi-negrito'>usuário</div>.
-          </div>
-            <input className='cp-escolher-arquivo' id='arquivos' type='file' name='modeling' accept='.docx,.doc,.pdf,.png,.jpeg' onChange={handleModelingFile} multiple></input>
-            <label htmlFor='arquivos' className='thesi-botao-azul' >PROCURAR ARQUIVOS</label>
-            {modelingFile.length > 0 && (
-              <div> 
-                  {modelingFile.map((file, index) => (
-                    <div className='cp-arqivos-carregados' key={index}>
-                      {file.name} <i class="bi bi-x" style={{ marginLeft: '10px' }} onClick={() => removeFile(file.name, 'modeling')} ></i>
-                    </div> 
-                  ))}
-              </div>
-            )}
-           
-          
-          <button className='thesi-botao-verde'type='submit' disabled={isLoading}
-          >
-            {isLoading ? 'CRIANDO PROJETO...' : 'CRIAR PROJETO'}
-          </button>
-      </form>
-    </div>
-  </div>
+  <>
+  <div className={styles.ProjectContainer}>
+    <div className='h1'>✨Criar Projeto</div>
+      <p> Crie seu projeto em poucos cliques e envie os arquivos necessários. </p>
+        < MultiStepForm />
+      </div>
+    </>
   )
 }
 

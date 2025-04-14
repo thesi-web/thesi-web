@@ -4,7 +4,6 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -14,7 +13,46 @@
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  align-items: center;     /* alinha verticalmente */
+  min-width: 100vh;
   min-height: 100vh;
+}
+
+
+.h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #37352F;
+}
+
+.h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #37352F;
+}
+
+.h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #37352F;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #37352F;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5F5E5B;
+  margin-bottom: 10px;
+  margin-top: 3px;
+}
+
+p {
+  color: #A6A299;
+  font-size: small;
+  margin: 0;
 }

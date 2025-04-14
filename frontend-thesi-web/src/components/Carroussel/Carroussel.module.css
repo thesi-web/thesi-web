@@ -1,0 +1,25 @@
+.carrousselContainer {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.imageContainer {
+    flex: 0 0 auto;
+    border: 1px solid black;
+    width: 300px;
+    height: 150px;
+    margin: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.imageContainer:hover{
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.096);
+}
+
+.imageContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }

@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import CriarConta from './pages/CriarConta';
 import HomePage from './pages/HomePage';
 import CreateProject from './pages/CreateProject';
+import Project from './pages/Project';
 
 function App() {
 
@@ -14,7 +15,8 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/criar-conta" element={<CriarConta/>} />
         <Route path="/home" element={<HomePage/>} />
-        <Route exact path="/create/project" element={<CreateProject/>} />
+        <Route path ="/create/project" element={<CreateProject/>} />
+        <Route path='/project' element={<Project/>} />
 
         {/*
         <Route exact path="/esqueci-senha" element={<EsqueceuSenha />} />

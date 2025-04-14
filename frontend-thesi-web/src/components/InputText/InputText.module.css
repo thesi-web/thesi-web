@@ -9,8 +9,13 @@
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #5F5E5B;
     outline: none;
     padding: 4px 0;
     color: #000;
+    margin-bottom: 10px;
 }
+
+.input::placeholder {
+    color: #a6a29979;
+  }

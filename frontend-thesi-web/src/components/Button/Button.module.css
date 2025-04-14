@@ -1,15 +1,106 @@
-.base {
-
+.enabled {
+    background-color: #37352F;
+    border: solid 1px #37352F;
+    padding: 8px 16px;
+    color: white;
+    margin-left: -1px;
+    width: 100px;
+    cursor: pointer;
 }
 
-.primary {
-
+.disabled {
+    padding: 8px 16px;
+    background-color: transparent;
+    border: solid 1px #37352F;
+    color: #37352F;
+    margin-left: -1px;
+    margin-bottom: 20px;
+    width: 100px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
 }
 
-.secondary {
-
+.disabled:hover {
+    background-color: #37352F;
+    color: white;
 }
 
-.danger {
-    
+.upload {
+    padding: 0;
+    margin-left: 5px;
+    cursor: pointer;
+    color: #37352F;
+    border: none;
+    background-color: transparent;
+    font-size: small;
+    font-family: 'Inter';
+    font-weight: 500;
 }
+
+.upload:hover {
+    text-decoration: underline;
+}
+
+.success {
+    background-color: #37352F;
+    border: 1px solid #37352F;
+    color: white;
+    cursor: pointer;
+    font-family: 'Inter';
+    font-weight: 400;
+    padding: 6px 18px;
+    font-size: 12px;
+}    
+
+.cancel {
+    padding: 8px 16px;
+    background-color: transparent;
+    border: solid 1px #5F5E5B;
+    color: #5F5E5B;
+    width: 150px;
+}
+
+.success:hover {
+    background-color: #37352f; /* tom mais escuro do verde atual */
+    transition: background-color 0.3s ease;
+}
+
+.icon {
+    font-size: 18px;
+    color: #37352F;
+  }
+
+.transparent {
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: #37352F;
+    cursor: pointer;
+    display: flex;
+    font-family: 'Inter';
+    font-weight: 500;
+}
+
+.transparent:hover{
+    text-decoration: underline;
+}
+
+.iconLeft {
+    margin-right: 8px;
+    display: inline-flex;
+    font-size: 18px;
+    color: #37352F;
+  }
+  
+.iconRight {
+margin-left: 8px;
+display: inline-flex;
+font-size: 18px;
+color: #37352F;
+}
+
+  .none{
+    background-color: transparent;
+    border: none;
+  }
+  

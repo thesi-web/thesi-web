@@ -5,10 +5,14 @@ import SidebarItem from '../SidebarItem/SidebarItem';
 import SidebarProject from '../SidebarProject/SidebarProject';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Warning from '../Warning/Warning';
+import InboxDrawer from './InboxDrawer';
 
-const Sidebar = ({ show }) => {
+const Sidebar = ({ show, onOpenInbox }) => {
 
   const [totalProjetos, setTotalProjetos] = useState([]);
+
+  const [showInbox, setShowInbox] = useState(false);
+
 
   const fetchProjects = async () => {
     try {
@@ -33,6 +37,8 @@ const Sidebar = ({ show }) => {
 
   return (
     <div className={show ? styles.active : styles.disable}>
+      {showInbox && <InboxDrawer onClose={() => setShowInbox(false)} />}
+
           
       <div className={styles.headerIcons}>
         <div className={styles.logo}>thesi</div>
@@ -41,7 +47,11 @@ const Sidebar = ({ show }) => {
       
       <div>
         <SidebarItem label={"Página Inicial"} icon={<i class="bi bi-cup"></i>} />
-        <SidebarItem label={"Caixa de Entrada"} icon={<i className="bi bi-mailbox"></i>} />
+        <SidebarItem 
+          label={"Caixa de Entrada"} 
+          icon={<i className="bi bi-mailbox"></i>} 
+          onClick={onOpenInbox}
+        />
       </div>
 
         <div className={styles.title}>Projetos</div>

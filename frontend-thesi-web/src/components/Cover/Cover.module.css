@@ -1,0 +1,8 @@
+.cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #5F5E5B;
+    width: 100vw;
+    height: 198px;
+}

@@ -1,0 +1,16 @@
+.textarea {
+  background-color: #a6a2990e; 
+  border: none;                  
+  color: #37352F;                   
+  outline: none;                 
+  resize: none;               
+  width: 100%;
+  height: 60px;
+  font-family: 'Inter';
+  margin-bottom: 3px;
+  padding: 5px;
+}
+
+.textarea::placeholder {
+  color: #a6a29979;
+}

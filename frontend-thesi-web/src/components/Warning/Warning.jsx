@@ -1,9 +1,15 @@
 import React from 'react'
 import styles from './Warning.module.css'
 
-const Warning = ( { icon, title, message} ) => {
+const Warning = ( { icon, title, message, variant = 'warningContainer'} ) => {
+
+  const variants = {
+      warningContainer: styles.warningContainer,
+      disabled: styles.disabled
+    }
+
   return (
-    <div className={styles.warningContainer}>
+    <div className={`${variants[variant]}`}>
         <div className={styles.icon}>
             {icon}
         </div>

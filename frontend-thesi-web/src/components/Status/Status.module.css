@@ -1,0 +1,27 @@
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 11px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100px;
+    height: 20px;
+  }
+  
+  .emAndamento {
+    background-color: #7e7b7427; /* amarelo/laranja */
+    color: #7E7B74;
+  }
+  
+  .atrasado {
+    background-color: #c9a43d2d;
+    color: #C9A43D;
+  }
+  
+  .entregue {
+    background-color: #5a8f6318; /* verde */
+    color: #5A8F63;
+  }
+
+  

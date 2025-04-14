@@ -1,0 +1,30 @@
+.title {
+    font-family: 'Inter';
+    font-size: 12px;
+    font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+.icon {
+    font-size: 18px;
+    color: #a6a299;
+    margin: 5px;
+}
+
+.file {
+    background-color: #a6a2991c;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nameContainer{
+    display: flex;
+    align-items: center;
+}
