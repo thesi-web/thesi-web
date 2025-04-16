@@ -64,3 +64,20 @@
   margin: 14px 0 0 0;
 }
 
+.iconContainer{
+  display: flex;
+}
+
+.icons {
+  font-size: 18px;
+  color: #5F5E5B;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 8px;
+  margin-left: 5px;
+  padding: 0 5px;
+} 
+
+.icons:hover {
+  background-color: #F0F0EF;
+}

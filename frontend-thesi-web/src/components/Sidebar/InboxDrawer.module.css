@@ -8,6 +8,7 @@
     animation:  slideIn 0.3s ease-out;
     display: flex;
     flex-direction: column;
+    z-index: 20; /* coloca um valor maior que o nav */
   }
   
 .headerContainer {
@@ -15,11 +16,10 @@
     display: flex;
     justify-content: space-between;
     padding: 8px 16px 0 16px;
-    align-items: center;
 } 
 
 .headerIcons {
-    font-size: 14px;
+    font-size: 18px;
     color: #5F5E5B;
     cursor: pointer;
     transition: background-color 0.2s ease;

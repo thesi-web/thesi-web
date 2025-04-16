@@ -1,0 +1,93 @@
+.severidade1 {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 15px;
+    border: 1px solid #489D26;
+    font-weight: 700;
+    background-color: #42C62F;
+    color: #FFFFFF;
+    box-shadow: 0px 4px 0px 0px #489D26;
+    padding: 5px;
+    transition: opacity 0.3s ease;
+    cursor: unset;
+  } .ah-severidade-1:hover {
+    opacity: 0;
+  }
+  
+  .severidade12 {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 15px;
+    border: 1px solid #678A44;
+    background-color: #A1D76A;
+    font-weight: 700;
+    color: #FFFFFF;
+    box-shadow: 0px 4px 0px 0px #678A44;
+    padding: 5px;
+    transition: opacity 0.3s ease;
+  } .ah-severidade-2:hover {
+    opacity: 0;
+  }
+  
+  .severidade13 {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 15px;
+    border: 1px solid #AD9D2F;
+    font-weight: 700;
+    background-color: #F9E143;
+    color: #FFFFFF;
+    box-shadow: 0px 4px 0px 0px #AD9D2F;
+    padding: 5px;
+    transition: opacity 0.3s ease; /* Adicionando uma transição suave */
+  }
+  .ah-severidade-3:hover {
+    opacity: 0;
+  }
+  
+  
+  .severidade14 {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 15px;
+    border: 1px solid #AD7B2F;
+    font-weight: 700;
+    background-color: #F9B143;
+    color: #FFFFFF;
+    box-shadow: 0px 4px 0px 0px #AD7B2F;
+    padding: 5px;
+    transition: opacity 0.3s ease;
+  } .ah-severidade-4:hover {
+    opacity: 0;
+  }
+  
+  .severidade15 {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 15px;
+    border: 1px solid #B20000;
+    font-weight: 700;
+    background-color: #FF0000;
+    color: #FFFFFF;
+    box-shadow: 0px 4px 0px 0px #B20000;
+    padding: 5px;
+    transition: opacity 0.3s ease;
+  } .ah-severidade-5:hover {
+    opacity: 0;
+  }
+  

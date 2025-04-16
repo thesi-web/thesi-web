@@ -16,7 +16,13 @@ const Button = ({
     success: styles.success,
     cancel: styles.cancel,
     transparent: styles.transparent,
-    none: styles.none
+    none: styles.none,
+    activeL: styles.activeL,
+    deactivatedL: styles.deactivatedL,
+    activeR: styles.activeR,
+    deactivatedR: styles.deactivatedR,
+    likert: styles.likertScale,
+    deactivated: styles.deactivated
   };
 
   const iconClass =
@@ -24,7 +30,7 @@ const Button = ({
 
   return (
     <button
-      className={`${variants[variant]}`}
+      className={`${styles.button} ${styles[variant] || ''}`}
       onClick={onClick}
       type={type}
     >

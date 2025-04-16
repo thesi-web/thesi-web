@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-//import Navbar from '../components/layout/Navbar'
-//import DESIGNER from '../assets/img/BemVindo.png';
 
 const BemVindo = () => {
   const [role, setRole] = useState('');
@@ -13,7 +11,7 @@ const BemVindo = () => {
 
   return (
     <div>
-        <Navbar/>
+  
         <div className='i-container'>
           <div className='i-titulo-container'>
             <div className='i-titulo'>

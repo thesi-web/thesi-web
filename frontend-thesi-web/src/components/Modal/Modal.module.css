@@ -23,18 +23,25 @@
 
 .header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 20px;
     font-size: 14px;
 }
 
 .content {
-    margin: 20px;
-    background-color: aquamarine;
+    margin: 0px 20px;
+    background-color: rgba(211, 211, 211, 0.233);
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .sideBarModal{
     display: flex;
+    flex-direction: column;
     width: 22%;
     background-color: #F8F8F7;
     border-right: 0.5px solid #F0F0EF;
@@ -45,3 +52,19 @@
     width: 100%;
 }
 
+.tabButtons {
+    background-color: #5f5e5b1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
