@@ -27,7 +27,7 @@ function Login() {
       const { token } = response.data;
 
       localStorage.setItem("token", token);
-      navigate('/welcome');
+      navigate('/home');
     } catch (error) {
       if (error.response?.status === 401) {
         setErrorMessage('Credenciais inválidas. Tente novamente.');

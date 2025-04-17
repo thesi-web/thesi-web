@@ -12,17 +12,14 @@ class ProjectController {
       const { name, authors, objective, user, platform } = req.body;
   
       const templates = req.files["template"] || [];
-      const modelings = req.files["modeling"] || [];
   
       if (templates.length === 0) {
         return res.status(400).send("Não é possível criar um projeto sem imagens");
       }
   
-      if (templates.length > 5 || modelings.length > 5) {
+      if (templates.length > 5) {
         return res.status(400).send("Máximo de 5 arquivos e 5 protótipos permitidos");
       }
-  
-      console.log("[Controller] req.files:", req.files);
 
       const uploader = new uploadService();
   
@@ -36,24 +33,13 @@ class ProjectController {
         });
       }
   
-      const uploadedModelings = [];
-      for (const file of modelings) {
-        await uploader.execute(file.filename);
-        const url = `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${file.filename}`;
-        uploadedModelings.push({
-          originalname: file.originalname,
-          url: url
-        });
-      }
-  
       const project = {
         name,
         authors,
         objective,
         user,
         platform,
-        templates: uploadedTemplates,
-        modelings: uploadedModelings
+        templates: uploadedTemplates
       };
   
       const result = await Project.create(project, userId);
@@ -178,50 +164,3 @@ class ProjectController {
 }
 
 module.exports = new ProjectController();
-
-
- /*
-    async create(req, res){
-        try {
-                
-                const userId = req.userId; // já vem do middleware
-
-                const { name, authors, objective, user, platform } = req.body;
-
-                const templates = req.files["template"] || [];
-                const modelings = req.files["modeling"] || [];
-
-                if (templates.length === 0) {
-                return res.status(400).send("Não é possível criar um projeto sem imagens");
-                }
-
-                if (templates.length > 5 || modelings.length > 5) {
-                return res.status(400).send("Máximo de 5 arquivos e 5 protótipos permitidos");
-                }
-
-                const project = {
-                    name,
-                    authors,
-                    objective,
-                    user,
-                    platform,
-                    templates: templates.map((file) => ({
-                        originalname: file.originalname,
-                        buffer: fs.readFileSync(file.path),
-                    })),
-                    modelings: modelings.map((file) => ({
-                        originalname: file.originalname,
-                        buffer: fs.readFileSync(file.path),
-                    })),
-                };
-
-                const result = await Project.create(project, userId);
-
-                res.status(201).json({ msg: "Projeto criado com sucesso", id: result.projectId });
-
-  } catch (err) {
-    console.error("Erro na criação do projeto:", err);
-    deleteUploadedFiles(req.file);
-    res.status(500).json({ erro: "Erro ao criar projeto" });
-  }}
-  */

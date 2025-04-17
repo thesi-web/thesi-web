@@ -22,15 +22,14 @@ class s3Aws {
             throw new Error("Tipo de conteúdo não encontrado");
         }
 
-        console.log("CAMINHO COMPLETO DO ARQUIVO:", originalPath);
-
         const fileContent = await fs.promises.readFile(originalPath);
 
         await this.client.putObject({
-            Bucket: process.env.AWS_BUCKET_NAME,
+            Bucket: process.env.S3_BUCKET,
             Key: filename,
             Body: fileContent,
             ContentType: contentType,
+            ACL: 'public-read'
         }).promise();
 
         return `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${filename}`;

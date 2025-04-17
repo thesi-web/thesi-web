@@ -11,6 +11,7 @@ export default function StepOneForm({ projectData, setProjectData }) {
     setProjectData({ ...projectData, [key]: e.target.value });
   };
 
+
   return (
     <>
       <InputText label="Nome do Projeto" type="text" placeholder="digite o nome" onChange={handleChange('name')} value={projectData.name} required />

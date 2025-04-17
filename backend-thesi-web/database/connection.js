@@ -17,7 +17,7 @@ const database = knex({
 });
 
 // Testar conexão com consulta simples
-database.raw("SELECT 1")
+database.raw("SET lc_time = 'pt_BR.UTF-8'")
   .then(() => {
     console.log("Conectado ao banco de dados com sucesso!");
   })

@@ -1,3 +1,4 @@
+require("dotenv").config();
 // Importa o framework Express
 const express = require('express')
 // Cria uma instância do aplicativo Express
@@ -21,7 +22,6 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-require("dotenv").config();
 
 /* 
     Inicializa o pacote dotenv para carregar automaticamente as variáveis definidas no arquivo .env, 

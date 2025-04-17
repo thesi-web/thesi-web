@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Sidebar.module.css';
 import SidebarItem from '../SidebarItem/SidebarItem';
 import SidebarProject from '../SidebarProject/SidebarProject';
@@ -7,6 +7,13 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import Warning from '../Warning/Warning';
 
 const Sidebar = ({ show, onOpenInbox, onClose }) => {
+
+  const navigate = useNavigate();
+
+  
+  const handleClick = (id) => {
+    navigate(`/project/${id}`);
+  };
 
   const [totalProjetos, setTotalProjetos] = useState([]);
 
@@ -29,8 +36,6 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
     fetchProjects();
   }, []);
 
-  console.log(totalProjetos);
-
   return (
     <div className={show ? styles.active : styles.disable}>
           
@@ -43,7 +48,8 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
       </div>
       
       <div>
-        <SidebarItem label={"Página Inicial"} icon={<i class="bi bi-cup"></i>} />
+      <Link to="/home" ><SidebarItem label={"Página Inicial"} icon={<i className="bi bi-cup"></i>} /></Link>
+        
         <SidebarItem 
           label={"Caixa de Entrada"} 
           icon={<i className="bi bi-mailbox"></i>} 
@@ -56,12 +62,12 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
       <div className={styles.projectContainer} >
         {totalProjetos.length > 0 ? (
           totalProjetos.map((projeto, index) => (
-            <div key={index}>
+            <div key={index} onClick={() => handleClick(projeto.id_projeto)}>
               <SidebarProject label={projeto.nm_projeto} emoji={"🌈"} />
             </div>
           ))
         ) : (
-          < Warning icon={<i class="bi bi-stars"></i>} title={"Não há projetos"} message={"seus projetos aparecerão aqui"} />
+          < Warning icon={<i className="bi bi-stars"></i>} title={"Não há projetos"} message={"seus projetos aparecerão aqui"} />
         )}
       </div>
 

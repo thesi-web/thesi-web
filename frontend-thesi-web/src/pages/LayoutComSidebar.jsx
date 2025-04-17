@@ -40,7 +40,7 @@ const handleCloseInbox = () => {
 
       <div className={styles.navContainer}>
         <div className={styles.icons} onClick={() => setShowSidebar(true)}>
-          <i class="bi bi-chevron-double-right"></i>
+          <i className="bi bi-chevron-double-right"></i>
         </div>
       </div>
         

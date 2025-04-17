@@ -4,7 +4,7 @@ const authorization = require("../middlewares/authorization");
 const ProjectController = require("../controllers/ProjectController");
 const upload = require("../middlewares/upload");
 
-router.post("/project", upload.fields([{ name: "template", maxCount: 5 }, { name: "modeling", maxCount: 5 },]), authorization, ProjectController.create); //OK 07-04-2025
+router.post("/project", upload.fields([{ name: "template", maxCount: 5 }]), authorization, ProjectController.create); //OK 07-04-2025
 router.get('/project', authorization, ProjectController.getAll); //OK 07-04-2025
 router.get('/project/:projetoId', authorization, ProjectController.getById); //OK 07-04-2025
 router.delete("/project/:id", authorization, ProjectController.delete); //OK 07-04-2025

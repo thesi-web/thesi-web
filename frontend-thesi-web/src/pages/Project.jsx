@@ -1,33 +1,61 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Status from '../components/Status/Status'
 import styles from "./Project.module.css"
 import Cover from '../components/Cover/Cover'
 import Carroussel from '../components/Carroussel/Carroussel'
 import Button from '../components/Button/Button'
-import Modal from '../components/Modal/Modal'
-import { useState } from 'react'
+import { useParams } from 'react-router-dom';
 
 const Project = () => {
+
+  const [projeto, setProjeto] = useState({ imagens: [] });
+
+  const [loading, setLoading] = useState(true);
+  
+  const [error, setError] = useState(null);
+
+  const { projetoId } = useParams();
+
+  useEffect(() => {
+
+    const fetchProjeto = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/project/${projetoId}`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, 
+          },
+        }); 
+        if (!response.ok) {
+          throw new Error('Erro ao buscar o projeto.');
+        }
+        const data = await response.json();
+        console.log(data);
+        setProjeto(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+
+    };
+
+    fetchProjeto();
+  }, [projetoId]);
 
   return (
     <div className={styles.page}>
         <Cover />  
         <div className={styles.projectContainer}>
             <div className={styles.titleContainer} >
-            <div className={'title'}>🌈 A grande conquista</div>
-            <Status />
+            <div className={'title'}>{projeto.nm_projeto}</div>
+            <Status status={`${projeto.ds_status}`}/>
             </div>
-                <p> Criado dia 13 de abril de 2025 </p>
+                <p> Criado dia {projeto.dt_criacao} </p>
             <div className={styles.objectiveContainer}>
-                Avaliar a interface do site Globo.com na seção de votos para o reality show A Grande Conquista.
+                {projeto.ds_projeto}
             </div>
-            <Carroussel images={[
-            'img1.png',
-            'img2.png',
-            'img3.png',
-            'img4.png',
-            'img5.png'
-            ]} />
+            <Carroussel images={projeto.imagens} />
             <div className={styles.buttonContainer}>
              <Button type='submit' variant='success'>Entregar Projeto</Button>
             </div>

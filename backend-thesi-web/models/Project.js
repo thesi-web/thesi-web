@@ -24,19 +24,6 @@ class Project {
           id_projeto: projectId,
           id_usuario: userId
         });
-  
-        for (const file of project.modelings) {
-          await uploader.execute(file.originalname); // Faz upload
-        
-          const fileUrl = `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${file.originalname}`;
-        
-          await trx("t_arquivos").insert({
-            id_projeto: projectId,
-            id_usuario: userId,
-            nm_arquivo: file.originalname,
-            ds_arquivo: fileUrl, // agora é o link da AWS
-          });
-        }
         
         for (const image of project.templates) {
 
@@ -85,13 +72,23 @@ class Project {
           "P.ds_projeto",
           "P.ds_usuario",
           "P.ds_plataforma",
-          database.raw(`TO_CHAR(dt_criacao, 'DD/MM/YYYY') AS dt_criacao`),
+          database.raw(`TO_CHAR(dt_criacao, 'DD "de" TMMonth "de" YYYY') AS dt_criacao`),
           database.raw(`TO_CHAR(dt_entrega, 'DD/MM/YYYY') AS dt_entrega`),
           "U.ds_status"
         )
         .where("U.id_usuario", userId)
         .andWhere("P.id_projeto", projetoId)
         .first();
+
+        if (!projeto) return null;
+
+        // Buscar imagens relacionadas ao projeto
+        const imagens = await database("t_imagens")
+        .where("id_projeto", projetoId)
+        .select("ds_caminho");
+
+        // Adiciona ao objeto
+        projeto.imagens = imagens.map(img => img.ds_caminho);
   
       return projeto;
   
@@ -166,7 +163,8 @@ class Project {
     return await database("t_projeto as P")
       .join("t_projeto_usuario as U", "P.id_projeto", "U.id_projeto")
       .select(
-        "P.nm_projeto"
+        "P.nm_projeto",
+        "P.id_projeto"
       )
       .where("U.id_usuario", userId);
   }

@@ -20,7 +20,7 @@ function App() {
         <Route element={<LayoutComSidebar/>}>
           <Route path="/home" element={<BemVindo/>} />
           <Route path ="/create/project" element={<CreateProject/>} />
-          <Route path='/project' element={<Project/>} />
+          <Route path='/project/:projetoId' element={<Project/>} />
           <Route path='/teste' element={<Heuristic/>} />
         </Route>
 

@@ -12,7 +12,7 @@ const Carroussel = ({ images }) => {
       </div>
         <p>Clique em uma tela para iniciar a avaliação</p>
       <div className={styles.carrousselContainer}>
-        {images.map((img, index) => (
+        {Array.isArray(images) && images.map((img, index) => (
           <div
             key={index}
             className={styles.imageContainer}
