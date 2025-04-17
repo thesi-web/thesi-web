@@ -4,7 +4,7 @@ import FormHeuristica from '../Form/FormHeuristica';
 import FormSemiotica from '../Form/FormSemiotica';
 import Button from '../Button/Button';
 
-const Modal = ({ isOpen, setModalOpen }) => {
+const Modal = ({ isOpen, setModalOpen, src, alt  }) => {
 
   const [selectedTab, setSelectedTab] = useState('heuristica');
 
@@ -53,6 +53,7 @@ const Modal = ({ isOpen, setModalOpen }) => {
             <i className="bi bi-x-lg" onClick={setModalOpen}></i>
           </div>
           <div className={styles.content}>
+            <img src={src} alt={alt} />  {/*O COMPONENTE DE AVALIAR IMAGEM VIRÁ AQUI*/}
           </div>
           <div className={styles.buttonContainer}>
             <Button icon={<i class="bi bi-arrow-right-circle"></i>} variant='transparent'>Concluir Avaliação</Button>
