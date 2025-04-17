@@ -1,5 +1,6 @@
 .item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 5px 16px;
     margin: 0 0 20px 0; 
@@ -11,6 +12,7 @@
   
   .item:hover {
     background-color: #F0F0EF;
+    
   }
   
   .emoji {
@@ -25,4 +27,33 @@
     font-size: 14px;
     font-weight: 500;
     color: #5F5E5B;
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  
+  .buttonWrapper {
+    display: none;
+  }
+  
+  .item:hover .buttonWrapper {
+    display: inline-block;
+  }
+
+.textContainer {
+  display: flex;
+}
+
+.projectIcon {
+  font-size: 13px;
+  color: #5F5E5B;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  padding: 0 5px;
+  border-radius: 5px;
+} 
+
+.projectIcon:hover {
+  background-color: #e2e2e2;
+}
