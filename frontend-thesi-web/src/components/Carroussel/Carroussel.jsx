@@ -22,7 +22,7 @@ const Carroussel = ({ images }) => {
 
             {/* modal só aparece quando o índice atual está aberto */}
             {openModalIndex === index && (
-              <Modal src={img} alt={`Tela ${index + 1}`} isOpen={openModalIndex === index} setModalOpen={() => setOpenModalIndex(null)}>
+              <Modal src={img} index={index + 1} alt={`Tela ${index + 1}`} isOpen={openModalIndex === index} setModalOpen={() => setOpenModalIndex(null)}>
               </Modal>
             )}
           </div>
