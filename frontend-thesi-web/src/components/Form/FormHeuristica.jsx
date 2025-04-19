@@ -94,17 +94,18 @@ const FormHeuristica = ({
     <form onSubmit={SubmitHeuristica} className={styles.form} method="POST" encType="multipart/form-data">
       <div className='label'>Heurística</div>
       <select value={heuristica} onChange={(e) => setHeuristica(e.target.value)}>
-        <option>Visibilidade do Status do Sistema</option>
-        <option>Correspondência entre o Sistema e o Mundo Real</option>
-        <option>Controle e Liberdade do Usuário</option>
-        <option>Consistência e Padrões</option>
-        <option>Prevenção de Erros</option>
-        <option>Reconhecimento em vez de Lembrança</option>
-        <option>Flexibilidade e Eficiência de Uso</option>
-        <option>Design Estético e Minimalista</option>
-        <option>Reconhecer, Diagnosticar e se Recuperar de Erros</option>
-        <option>Ajuda e Documentação</option>
+        <option value={0}>Visibilidade do Status do Sistema</option>
+        <option value={1}>Correspondência entre o Sistema e o Mundo Real</option>
+        <option value={2}>Controle e Liberdade do Usuário</option>
+        <option value={3}>Consistência e Padrões</option>
+        <option value={4}>Prevenção de Erros</option>
+        <option value={5}>Reconhecimento em vez de Lembrança</option>
+        <option value={6}>Flexibilidade e Eficiência de Uso</option>
+        <option value={7}>Design Estético e Minimalista</option>
+        <option value={8}>Reconhecer, Diagnosticar e se Recuperar de Erros</option>
+        <option value={9}>Ajuda e Documentação</option>
       </select>
+
 
       <div className='label'>Problemas</div>
       <TextArea
@@ -127,14 +128,13 @@ const FormHeuristica = ({
       <div className='label'>Grau de severidade</div>
       <div className={styles.buttonContainer}>
         {[1, 2, 3, 4, 5].map((valor) => (
-          <Button
-            key={valor}
-            value={valor}
-            variant={`likertScale${valor}`}
-            onClick={handleSeveridade}
-          >
-            {valor}
-          </Button>
+        <Button
+          key={valor}
+          variant={`likertScale${valor}`}
+          onClick={() => handleSeveridade(valor)}
+        >
+          {valor}
+      </Button>
         ))}
       </div>
 

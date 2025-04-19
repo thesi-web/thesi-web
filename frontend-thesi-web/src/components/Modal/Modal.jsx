@@ -23,7 +23,10 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
   const handleHeuristica = (event) => setHeuristica(event.target.value);
   const handleAnotacao = (event) => setAnotacao(event.target.value);
   const handleRecomendacao = (event) => setRecomendacao(event.target.value);
-  const handleSeveridade = (event) => setSeveridade(event.target.value);
+  const handleSeveridade = (valor) => {
+    setSeveridade(valor);
+  };
+  
 
   // Novo: estado vindo do Canva
   const [activeRectangle, setActiveRectangle] = useState(null);
