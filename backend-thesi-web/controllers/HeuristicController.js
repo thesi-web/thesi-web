@@ -4,34 +4,35 @@ const Heuristic = require("../models/Heuristic");
 class HeuristicController {
 
   async create(req, res) {
-    try {
-      const userId = req.userId;
-      const { heuristica, anotacao, recomendacao, severidade, imagem } = req.body;
-      const id = req.headers["projeto-id"];
-  
-      if (!imagem) {
-        return res.status(400).json({ erro: "URL da imagem não fornecida" });
-      }
-  
-      const heuristic = {
-        id,
-        userId,
-        heuristica,
-        anotacao,
-        recomendacao,
-        severidade,
-        imagem,
-      };
-  
-      await Heuristic.create(heuristic);
-      res.status(201).json({ mensagem: "Marcação heurística criada com sucesso!" });
-  
-    } catch (err) {
-      console.error("Erro na criação de uma marcação heurística:", err);
-      res.status(500).json({ erro: "Erro ao criar uma marcação heurística" });
+  try {
+    const userId = req.userId;
+    const { heuristica, anotacao, recomendacao, severidade, imagem } = req.body;
+    const id = req.headers["projeto-id"];
+
+    if (!imagem) {
+      return res.status(400).json({ erro: "URL da imagem não fornecida" });
     }
+
+    const heuristic = {
+      id,
+      userId,
+      heuristica,
+      anotacao,
+      recomendacao,
+      severidade,
+      imagem, // ← já é a URL da AWS, salva direto
+    };
+
+    await Heuristic.create(heuristic);
+    res.status(201).json({ mensagem: "Marcação heurística criada com sucesso!" });
+
+  } catch (err) {
+    console.error("Erro na criação de uma marcação heurística:", err);
+    res.status(500).json({ erro: "Erro ao criar uma marcação heurística" });
   }
-  
+}
+
+
   async getByProject(req, res) {
 
     const userId = req.userId;
