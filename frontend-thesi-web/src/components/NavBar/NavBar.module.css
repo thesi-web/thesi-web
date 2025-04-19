@@ -1,9 +1,16 @@
 .navContainer{
-    display: flex;
-    justify-content: space-between;
-    background-color: aqua;
+  background-color: aqua;
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
 }
 
-.navOptions {
-    background-color: firebrick;
+.optionsContainer{
+    display: flex;
+    background-color: yellowgreen;
+}
+
+.buttonsContainer{
+    display: flex;
+    background-color: blueviolet;
 }

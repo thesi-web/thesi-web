@@ -6,48 +6,43 @@ import { Link } from 'react-router-dom';
 const NavBar = () => {
   return (
     <div>
-      <nav>
-        <div className={styles.navContainer}>
+      <nav className={styles.navContainer} >
+
+        <div className={styles.optionsContainer} >
+            <Button>
+              Opção 1
+            </Button>
           
-          <div className={styles.navOptions} >
+            <Button>
+              Opção 1
+            </Button>
 
-            <ul>
-              <Button>
-                Opção 1
-              </Button>
-            
-              <Button>
-                Opção 1
-              </Button>
+            <Button>
+              Opção 1
+            </Button>
 
-              <Button>
-                Opção 1
-              </Button>
+            <Button>
+              Opção 1
+            </Button>
 
-              <Button>
-                Opção 1
-              </Button>
+            <Button>
+              Opção 1
+            </Button>
 
-              <Button>
-                Opção 1
-              </Button>
-
-              <Button>
-                Opção 1
-              </Button>
-            </ul>
-
-          </div>
-
-          <div>
-             <Button>
-                <Link to="/login" > Login </Link>
-              </Button>
-              <Button>
-                Sing Up
-              </Button>
-          </div>
+            <Button>
+              Opção 1
+            </Button>
         </div>
+
+        <div className={styles.buttonsContainer} >
+            <Button>
+              <Link to="/login" > Login </Link>
+            </Button>
+            <Button>
+              Sign Up
+            </Button>
+        </div>
+
       </nav>
     </div>
   );

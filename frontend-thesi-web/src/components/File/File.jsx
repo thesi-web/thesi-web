@@ -7,7 +7,7 @@ const File = ( { title, onClick }) => {
     <div className={styles.file}>
         <div className={styles.nameContainer} >
         <div className={styles.icon}>
-            <i class="bi bi-image"></i>
+            <i className="bi bi-image"></i>
         </div>
         <div className={styles.title}>
             {title} 

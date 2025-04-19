@@ -76,3 +76,9 @@ select {
   background-size: 1em;
   padding-right: 2em; /* Espaço para a setinha */
 }
+
+canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* ou cover se quiser preencher mesmo que corte */
+}

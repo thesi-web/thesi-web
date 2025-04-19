@@ -7,6 +7,7 @@ import Project from './pages/Project';
 import Heuristic from './components/Heuristic/Heuristic';
 import LayoutComSidebar from './pages/LayoutComSidebar';
 import BemVindo from './pages/BemVindo';
+import Homescreen from './pages/Homescreen';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Homescreen/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/criar-conta" element={<CriarConta/>} />
         {/* Página que contém a sidebar (Cuidado!) */}
@@ -21,7 +23,7 @@ function App() {
           <Route path="/home" element={<BemVindo/>} />
           <Route path ="/create/project" element={<CreateProject/>} />
           <Route path='/project/:projetoId' element={<Project/>} />
-          <Route path='/teste' element={<Heuristic/>} />
+          <Route path='/rate/project/:projetoId' element={<Heuristic/>} />
         </Route>
 
       </Routes>

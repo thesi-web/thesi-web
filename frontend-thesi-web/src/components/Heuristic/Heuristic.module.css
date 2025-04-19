@@ -1,6 +1,5 @@
 .heuristicContainer {
     border-bottom: 1px solid #CCC;
-    border-top: 1px solid #CCC;
     display: flex;
     width: 100vw;
     justify-content: center;
@@ -34,12 +33,61 @@
 }
 
 .subtitle {
-    color: #5F5E5B;
-    font-size: 12px;
+    color: #A6A299;
+    font-size: small;
     font-weight: 400;
 }
 
 .boxContainer{
-    width: 300px;
+    width: 220px;
     margin: 0px 10px;
 }
+
+.severityContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    align-items: center;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px;
+  }
+  
+  input[type='checkbox'] {
+    display: none;
+  }
+  
+  .button {
+    width: 40px;  /* largura total do switch */
+    height: 22px; /* altura do switch */
+    background-color: #ccc;
+    border-radius: 50px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .button::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: white;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s;
+  }
+  
+  input:checked + .button {
+    background-color: #4cd137;
+  }
+  
+  input:checked + .button::before {
+    transform: translateX(18px); /* deve ser: largura total - largura da bolinha - margem */
+  }
+  

@@ -19,6 +19,20 @@ class User {
     }
   }
 
+  async findByName(name) {
+    try {
+      const result = await database("t_usuario")
+        .whereILike("nm_usuario", `%${name}%`)
+        .select("id_usuario as id", "nm_usuario as name")
+        .limit(10); // Limita o número de resultados
+  
+      return result;
+    } catch (err) {
+      console.error("Erro ao procurar o nome solicitado", err);
+      throw err;
+    }
+  }  
+
   async findByEmail(email) {
     try {
       const result = await database("t_usuario")

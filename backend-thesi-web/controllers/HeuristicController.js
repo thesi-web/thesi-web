@@ -6,17 +6,13 @@ class HeuristicController {
   async create(req, res) {
     try {
       const userId = req.userId;
-      const { heuristica, anotacao, recomendacao, severidade } = req.body;
+      const { heuristica, anotacao, recomendacao, severidade, imagem } = req.body;
       const id = req.headers["projeto-id"];
-      const imagem = req.file;
-
+  
       if (!imagem) {
-        return res.status(400).json({ erro: "Imagem não fornecida" });
+        return res.status(400).json({ erro: "URL da imagem não fornecida" });
       }
-
-      const bufferImagem = fs.readFileSync(imagem.path);
-      fs.unlinkSync(imagem.path);
-
+  
       const heuristic = {
         id,
         userId,
@@ -24,18 +20,18 @@ class HeuristicController {
         anotacao,
         recomendacao,
         severidade,
-        imagem: bufferImagem,
+        imagem,
       };
-
+  
       await Heuristic.create(heuristic);
       res.status(201).json({ mensagem: "Marcação heurística criada com sucesso!" });
-
+  
     } catch (err) {
       console.error("Erro na criação de uma marcação heurística:", err);
       res.status(500).json({ erro: "Erro ao criar uma marcação heurística" });
     }
   }
-
+  
   async getByProject(req, res) {
 
     const userId = req.userId;

@@ -1,5 +1,5 @@
 .icon {
-    color: #5F5E5B;
+    color: #A6A299;
     font-size: 25px;
 }
 
@@ -10,8 +10,8 @@
 }
 
 .explanation {
-    color: #5F5E5B;
-    font-size: 12px;
+    color: #A6A299;
+    font-size: small;
     font-weight: 400;
     text-transform: lowercase;
     margin-bottom: 5px;

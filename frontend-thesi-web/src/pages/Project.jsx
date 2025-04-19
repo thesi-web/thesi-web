@@ -51,11 +51,11 @@ const Project = () => {
             <div className={'title'}>{projeto.nm_projeto}</div>
               <Status status={`${projeto.ds_status}`}/>
             </div>
-                <p> Criado dia {projeto.dt_criacao} </p>
+                <p> Criado dia {projeto.dt_criacao} por {projeto.criador} </p>
             <div className={styles.objectiveContainer}>
                 {projeto.ds_projeto}
             </div>
-              <Carroussel images={projeto.imagens} />
+              <Carroussel images={projeto.imagens} projetoId={projetoId} />
             <div className={styles.buttonContainer}>
              <Button type='submit' variant='success'>Entregar Projeto</Button>
             </div>

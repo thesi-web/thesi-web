@@ -1,6 +1,6 @@
 .severidade1 {
     display: flex;
-    position: absolute;
+    
     align-items: center;
     justify-content: center;
     height: 20px;
@@ -17,9 +17,8 @@
     opacity: 0;
   }
   
-  .severidade12 {
+  .severidade2 {
     display: flex;
-    position: absolute;
     align-items: center;
     justify-content: center;
     height: 20px;
@@ -35,9 +34,8 @@
     opacity: 0;
   }
   
-  .severidade13 {
+  .severidade3 {
     display: flex;
-    position: absolute;
     align-items: center;
     justify-content: center;
     height: 20px;
@@ -55,9 +53,8 @@
   }
   
   
-  .severidade14 {
+  .severidade4 {
     display: flex;
-    position: absolute;
     align-items: center;
     justify-content: center;
     height: 20px;
@@ -73,9 +70,8 @@
     opacity: 0;
   }
   
-  .severidade15 {
+  .severidade5 {
     display: flex;
-    position: absolute;
     align-items: center;
     justify-content: center;
     height: 20px;

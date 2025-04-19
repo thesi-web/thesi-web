@@ -2,3 +2,66 @@
     display: flex;
     justify-content: center;
 }
+
+.namesContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.searchResults {
+    position: fixed;
+    border: 1px solid #5F5E5B;
+    max-height: 150px;
+    overflow-y: auto;
+    background: white;
+    padding: 10px 5px;
+    margin: 0;
+    border-radius: 5px;
+  }
+  
+  .name {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .name:hover {
+    background-color: #a6a2990e;
+  }
+  
+.selectedList {
+    margin: 0;
+    display: flex;  
+}
+
+.selectedParticipant{
+    display: flex;
+    background-color: #a6a2990e;
+    color: #37352F;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 400;
+    align-items: center;
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+.selectedParticipant:hover {
+    background-color: #F0F0EF;
+}
+  
+.icon {
+    font-size: 12px;
+    color: #37352F;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: 5px;
+    margin-left: 5px;
+    padding: 0 5px;
+  } 
+  
+  .icon:hover {
+    background-color: #e4e4e4;
+  }

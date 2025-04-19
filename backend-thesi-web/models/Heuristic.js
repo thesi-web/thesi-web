@@ -22,9 +22,21 @@ class Heuristic {
   
     async findByProject(userId, projetoId) {
       try {
-        const results = await database("t_heuristica")
-          .select("id_heuristica", "id_projeto", "nm_heuristica", "ds_problemas", "ds_observacoes", "ds_recomendacoes", "nr_severidade", "st_correcao")
-          .where({ id_usuario: userId, id_projeto: projetoId });
+        const results = await database("t_heuristica as h")
+        .select(
+          "h.id_heuristica",
+          "h.id_projeto",
+          "h.nm_heuristica",
+          "h.ds_problemas",
+          "h.ds_observacoes",
+          "h.ds_recomendacoes",
+          "h.nr_severidade",
+          "h.st_correcao",
+          "h.ds_caminho",
+          "u.nm_usuario"
+        )
+        .join("t_usuario as u", "h.id_usuario", "u.id_usuario")
+        .where({ "h.id_projeto": projetoId });
   
         return results;
       } catch (error) {

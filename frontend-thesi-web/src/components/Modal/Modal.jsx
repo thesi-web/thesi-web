@@ -5,23 +5,39 @@ import FormSemiotica from '../Form/FormSemiotica';
 import Button from '../Button/Button';
 import Canva from '../Canva/Canva';
 
-const Modal = ({ isOpen, setModalOpen, index, src }) => {
+const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
   const [selectedTab, setSelectedTab] = useState('heuristica');
+
+  // Semiótica
   const [signo, setSigno] = useState('');
-
-  const [activeRectangle, setActiveRectangle] = useState(null);
-  const [marks, setMarks] = useState([]);
-
   const handleSigno = (novoSigno) => {
     setSigno(novoSigno);
   };
 
-  const handleNewMark = (rectangle) => {
-    setMarks((prev) => [...prev, rectangle]);
-    setActiveRectangle(rectangle);
+  // Heurística
+  const [heuristica, setHeuristica] = useState('');
+  const [anotacao, setAnotacao] = useState('');
+  const [recomendacao, setRecomendacao] = useState('');
+  const [severidade, setSeveridade] = useState(1);
+
+  const handleHeuristica = (event) => setHeuristica(event.target.value);
+  const handleAnotacao = (event) => setAnotacao(event.target.value);
+  const handleRecomendacao = (event) => setRecomendacao(event.target.value);
+  const handleSeveridade = (event) => setSeveridade(event.target.value);
+
+  // Novo: estado vindo do Canva
+  const [activeRectangle, setActiveRectangle] = useState(null);
+  const [imagemURL, setImagemURL] = useState(null);
+
+  const handleSaveForm = (data) => {
+    console.log('Form salvo com:', { ...data, activeRectangle, imagemURL });
+    // aqui você pode chamar sua API, por exemplo
+    setActiveRectangle(null);
   };
 
-  if (!isOpen) return null;
+  const handleCancelForm = () => {
+    setActiveRectangle(null);
+  };
 
   return (
     <div className={styles.backdrop} onClick={setModalOpen}>
@@ -29,13 +45,13 @@ const Modal = ({ isOpen, setModalOpen, index, src }) => {
         <div className={styles.sideBarModal}>
           <div className={styles.tabButtons}>
             <Button
-              variant={`${selectedTab === 'heuristica' ? 'activeL' : 'deactivatedL'}`}
+              variant={selectedTab === 'heuristica' ? 'activeL' : 'deactivatedL'}
               onClick={() => setSelectedTab('heuristica')}
             >
               Heurística
             </Button>
             <Button
-              variant={`${selectedTab === 'semiotica' ? 'activeR' : 'deactivatedR'}`}
+              variant={selectedTab === 'semiotica' ? 'activeR' : 'deactivatedR'}
               onClick={() => setSelectedTab('semiotica')}
             >
               Semiótica
@@ -43,7 +59,25 @@ const Modal = ({ isOpen, setModalOpen, index, src }) => {
           </div>
 
           <div className={styles.formContainer}>
-            {selectedTab === 'heuristica' && <FormHeuristica />}
+            {selectedTab === 'heuristica' && (
+              <FormHeuristica
+                heuristica={heuristica}
+                anotacao={anotacao}
+                recomendacao={recomendacao}
+                severidade={severidade}
+                idProjeto={projetoId}
+                handleSeveridade={handleSeveridade}
+                setHeuristica={setHeuristica}
+                setAnotacao={setAnotacao}
+                setRecomendacao={setRecomendacao}
+                setSeveridade={setSeveridade}
+                activeRectangle={activeRectangle}
+                onSave={handleSaveForm}
+                onCancel={handleCancelForm}
+                imagemComMarca={imagemURL} 
+              />
+            )}
+
             {selectedTab === 'semiotica' && (
               <FormSemiotica handleSigno={handleSigno} signo={signo} />
             )}
@@ -56,7 +90,11 @@ const Modal = ({ isOpen, setModalOpen, index, src }) => {
             <i className="bi bi-x-lg" onClick={setModalOpen}></i>
           </div>
           <div className={styles.content}>
-            <Canva imagemURL={src} />
+            <Canva
+              imagem={src}
+              setActiveRectangle={setActiveRectangle}
+              setImagemURL={setImagemURL}
+            />
           </div>
           <div className={styles.buttonContainer}>
             <Button icon={<i className="bi bi-arrow-right-circle"></i>} variant="transparent">

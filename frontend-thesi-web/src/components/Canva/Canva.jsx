@@ -1,68 +1,100 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 
-const Canva = ({ imagemURL, onNewMark, onImagemURLChange }) => {
+const Canvas = ({ imagem, setActiveRectangle, setImagemURL }) => {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [startX, setStartX] = useState(0);
   const [startY, setStartY] = useState(0);
-  const [activeRectangle, setActiveRectangle] = useState(null);
+  const [loadedImage, setLoadedImage] = useState(null);
   const [marks, setMarks] = useState([]);
   const [isMarking, setIsMarking] = useState(false);
-  const [loadedImage, setLoadedImage] = useState(null);
 
-  // Carrega imagem quando imagemURL muda
   useEffect(() => {
-    if (!imagemURL) return;
-    const img = new Image();
-    img.onload = () => setLoadedImage(img);
-    img.src = imagemURL;
-  }, [imagemURL]);
-
-  // Redesenha o canvas quando a imagem ou os retângulos mudam
+    if (!imagem) return;
+  
+    // Converter imagem para blob
+    fetch(imagem)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const img = new Image();
+        const blobUrl = URL.createObjectURL(blob);
+        img.src = blobUrl;
+  
+        img.onload = () => {
+          const canvas = canvasRef.current;
+          const container = canvas.parentElement;
+  
+          if (canvas && container) {
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+          }
+  
+          setLoadedImage(img);
+  
+          // libera a URL do blob quando não precisar mais
+          URL.revokeObjectURL(blobUrl);
+        };
+      })
+      .catch((err) => {
+        console.error("Erro ao carregar imagem como blob:", err);
+      });
+  }, [imagem]);
+  
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || !loadedImage) return;
-    const ctx = canvas.getContext('2d');
-    canvas.width = loadedImage.width;
-    canvas.height = loadedImage.height;
 
+    const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(loadedImage, 0, 0);
+    ctx.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
 
     marks.forEach((rect) => {
       ctx.strokeStyle = 'rgba(0, 255, 0, 0.7)';
       ctx.lineWidth = 2;
       ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
     });
-  }, [loadedImage, marks]);
+  }, [imagem, marks, loadedImage]);
+
+  const getMousePos = (e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY,
+    };
+  };
 
   const handleMouseDown = (e) => {
     if (isMarking) return;
+    const { x, y } = getMousePos(e);
     setIsDrawing(true);
-    const rect = canvasRef.current.getBoundingClientRect();
-    setStartX(e.clientX - rect.left);
-    setStartY(e.clientY - rect.top);
+    setStartX(x);
+    setStartY(y);
   };
 
   const handleMouseMove = (e) => {
-    if (!isDrawing || !loadedImage) return;
+    if (!isDrawing) return;
 
+    const { x: currentX, y: currentY } = getMousePos(e);
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    const rect = canvas.getBoundingClientRect();
-    const currentX = e.clientX - rect.left;
-    const currentY = e.clientY - rect.top;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(loadedImage, 0, 0);
+    if (loadedImage) {
+      ctx.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
+    }
 
-    marks.forEach((mark) => {
+    marks.forEach((rect) => {
       ctx.strokeStyle = 'rgba(0, 255, 0, 0.7)';
       ctx.lineWidth = 2;
-      ctx.strokeRect(mark.x, mark.y, mark.width, mark.height);
+      ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
     });
 
-    // Retângulo atual em vermelho
     ctx.strokeStyle = 'rgba(255, 0, 0, 0.7)';
     ctx.lineWidth = 2;
     ctx.strokeRect(startX, startY, currentX - startX, currentY - startY);
@@ -71,34 +103,57 @@ const Canva = ({ imagemURL, onNewMark, onImagemURLChange }) => {
   const handleMouseUp = (e) => {
     if (!isDrawing) return;
 
-    const rect = canvasRef.current.getBoundingClientRect();
-    const endX = e.clientX - rect.left;
-    const endY = e.clientY - rect.top;
+    const { x: endX, y: endY } = getMousePos(e);
     const width = endX - startX;
     const height = endY - startY;
 
     const newRectangle = { x: startX, y: startY, width, height };
-    setMarks((prev) => [...prev, newRectangle]);
-    setActiveRectangle(newRectangle);
     setIsDrawing(false);
-    setIsMarking(true);
+    handleNewMark(newRectangle);
 
-    if (onNewMark) onNewMark(newRectangle);
     handleImagemUrl();
   };
 
   const handleImagemUrl = () => {
     const canvas = canvasRef.current;
-    if (canvas) {
+    if (canvas && loadedImage) {
       const dataURL = canvas.toDataURL();
-      if (onImagemURLChange) onImagemURLChange(dataURL);
+      atualizarImagemURL(dataURL);
+    } else {
+      console.error("Canvas ou imagem não estão carregados corretamente");
     }
+  };
+
+  const atualizarImagemURL = (url) => {
+    setImagemURL(url); // agora vem do Modal
+  };
+
+  const handleNewMark = (rectangle) => {
+    setMarks((prevMarks) => [...prevMarks, rectangle]);
+    setActiveRectangle(rectangle); // agora vem do Modal
+    setIsMarking(true);
+  };
+
+  const handleSaveForm = (data) => {
+    setMarks((prevMarks) =>
+      prevMarks.map((mark) =>
+        mark === activeRectangle ? { ...mark, ...data } : mark
+      )
+    );
+    setActiveRectangle(null);
+    setMarks([]);
+    setIsMarking(false);
+  };
+
+  const handleCancelForm = () => {
+    setMarks((prevMarks) => prevMarks.slice(0, -1));
+    setActiveRectangle(null);
+    setIsMarking(false);
   };
 
   return (
     <canvas
       ref={canvasRef}
-      style={{ border: "1px solid #ccc", cursor: isMarking ? "not-allowed" : "crosshair" }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -106,4 +161,4 @@ const Canva = ({ imagemURL, onNewMark, onImagemURLChange }) => {
   );
 };
 
-export default Canva;
+export default Canvas;

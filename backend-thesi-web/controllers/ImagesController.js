@@ -1,6 +1,13 @@
 const Images = require("../models/Images");
 const path = require("path");
 const fs = require("fs");
+const AWS = require('aws-sdk');
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,     // ou direto na string, se estiver testando local
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION, // ou a sua região
+});
 
 class ImagesController {
 
@@ -95,6 +102,39 @@ class ImagesController {
       res.status(500).json({ erro: "Erro ao avaliar imagem", detalhes: err.message });
     }
   }
+
+  async upload(req, res) {
+
+    try {
+      console.log('req.file:', req.file);
+      const file = req.file;
+
+      if (!file) {
+        return res.status(400).json({ erro: 'Arquivo não encontrado' });
+      }
+  
+      const fileContent = fs.readFileSync(file.path);
+  
+      const fileName = `${Date.now()}-${file.originalname.replace(/\s+/g, '-')}`;
+      const params = {
+        Bucket: process.env.S3_BUCKET,
+        Key: `heuristic/${fileName}`,
+        Body: fileContent,
+        ContentType: file.mimetype,
+        ACL: 'public-read',
+      };
+  
+      const data = await s3.upload(params).promise();
+  
+      fs.unlinkSync(file.path);
+  
+      res.json({ url: data.Location });
+    } catch (err) {
+      console.error('Erro ao subir imagem:', err);
+      res.status(500).json({ erro: 'Erro ao subir imagem' });
+    }
+  }
+  
 
 }
 

@@ -44,6 +44,21 @@ class UserController {
     }
   }
 
+  async searchUser(req, res) {
+    const search = req.query.search?.trim();
+  
+    if (!search || search.length < 2) {
+      return res.status(400).json({ message: 'Digite pelo menos 2 letras' });
+    }    
+  
+    try {
+      const usuarios = await User.findByName(search);
+      res.json(usuarios);
+    } catch (err) {
+      res.status(500).json({ message: 'Erro interno' });
+    }
+  }
+
   async login(req, res) {
 
     const { email, password } = req.body;

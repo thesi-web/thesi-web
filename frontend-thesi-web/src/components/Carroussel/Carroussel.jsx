@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './Carroussel.module.css';
 import Modal from '../Modal/Modal';
 
-const Carroussel = ({ images }) => {
+const Carroussel = ({ images, projetoId }) => {
   const [openModalIndex, setOpenModalIndex] = useState(null); // null = nenhum modal aberto
 
   return (
@@ -22,7 +22,7 @@ const Carroussel = ({ images }) => {
 
             {/* modal só aparece quando o índice atual está aberto */}
             {openModalIndex === index && (
-              <Modal src={img} index={index + 1} alt={`Tela ${index + 1}`} isOpen={openModalIndex === index} setModalOpen={() => setOpenModalIndex(null)}>
+              <Modal src={img} projetoId={projetoId} index={index + 1} alt={`Tela ${index + 1}`} isOpen={openModalIndex === index} setModalOpen={() => setOpenModalIndex(null)}>
               </Modal>
             )}
           </div>

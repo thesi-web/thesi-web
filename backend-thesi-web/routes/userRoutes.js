@@ -9,5 +9,6 @@ router.post("/logout", UserController.logout); //OK 06-04-2025 -> Simbólico poi
 router.get("/user", authorization, UserController.getUserInfo); //OK 06-04-2025
 router.post("/request/password/change", UserController.requestPasswordChange); //OK 06-04-2025
 router.post("/password/change", UserController.changePassword); // -> ver como o token foi gerado no frontend pra testar!
+router.get("/search/user", authorization, UserController.searchUser);
 
 module.exports = router;

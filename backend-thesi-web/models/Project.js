@@ -15,6 +15,7 @@ class Project {
             ds_projeto: project.objective,
             ds_usuario: project.user,
             ds_plataforma: project.platform,
+            id_criador: userId
           })
           .returning("id_projeto");
   
@@ -24,6 +25,16 @@ class Project {
           id_projeto: projectId,
           id_usuario: userId
         });
+
+        const allParticipants = project.authors || [];
+        const uniqueParticipants = [...new Set(allParticipants)].filter(p => p !== userId);
+
+        for (const participantId of uniqueParticipants) {
+          await trx("t_projeto_usuario").insert({
+            id_projeto: projectId,
+            id_usuario: participantId,
+          });
+        }
         
         for (const image of project.templates) {
 
@@ -64,7 +75,8 @@ class Project {
   async findById(projetoId, userId) {
     try {
       const projeto = await database("t_projeto as P")
-        .join("t_projeto_usuario as U", "P.id_projeto", "U.id_projeto")
+        .join("t_usuario as U", "P.id_criador", "U.id_usuario"  )
+        .join("t_projeto_usuario as PU", "P.id_projeto", "PU.id_projeto")
         .select(
           "P.id_projeto",
           "P.nm_projeto",
@@ -72,11 +84,12 @@ class Project {
           "P.ds_projeto",
           "P.ds_usuario",
           "P.ds_plataforma",
-          database.raw(`TO_CHAR(dt_criacao, 'DD "de" TMMonth "de" YYYY') AS dt_criacao`),
-          database.raw(`TO_CHAR(dt_entrega, 'DD/MM/YYYY') AS dt_entrega`),
-          "U.ds_status"
-        )
-        .where("U.id_usuario", userId)
+          "U.nm_usuario AS criador",
+          database.raw(`TO_CHAR("P"."dt_criacao", 'DD "de" TMMonth "de" YYYY') AS dt_criacao`),
+          database.raw(`TO_CHAR("P"."dt_entrega", 'DD/MM/YYYY') AS dt_entrega`),
+          "PU.ds_status"
+        )        
+        .where("PU.id_usuario", userId)
         .andWhere("P.id_projeto", projetoId)
         .first();
 

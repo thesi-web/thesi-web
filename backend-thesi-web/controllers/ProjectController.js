@@ -5,6 +5,7 @@ const { uploadService } = require('../services/uploadService');
 
 class ProjectController {
 
+  /*
   async create(req, res) {
     try {
       const userId = req.userId;
@@ -43,6 +44,7 @@ class ProjectController {
       };
   
       const result = await Project.create(project, userId);
+
   
       res.status(201).json({ msg: "Projeto criado com sucesso", id: result.projectId });
   
@@ -51,6 +53,60 @@ class ProjectController {
       res.status(500).json({ erro: "Erro ao criar projeto" });
     }
   }
+  */
+
+  async create(req, res) {
+    try {
+      const userId = req.userId;
+      const { name, authors, objective, user, platform } = req.body;
+  
+      const templates = req.files["template"] || [];
+  
+      if (templates.length === 0) {
+        return res.status(400).send("Não é possível criar um projeto sem imagens");
+      }
+  
+      if (templates.length > 5) {
+        return res.status(400).send("Máximo de 5 arquivos e 5 protótipos permitidos");
+      }
+  
+      //Converte authors para array de inteiros
+      const participants = typeof authors === "string"
+        ? authors.split(',').map((id) => parseInt(id.trim())).filter((id) => !isNaN(id))
+        : Array.isArray(authors)
+          ? authors.map((id) => parseInt(id)).filter((id) => !isNaN(id))
+          : [];
+  
+      const uploader = new uploadService();
+  
+      const uploadedTemplates = [];
+      for (const file of templates) {
+        await uploader.execute(file.filename);
+        const url = `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${file.filename}`;
+        uploadedTemplates.push({
+          originalname: file.originalname,
+          url: url
+        });
+      }
+  
+      const project = {
+        name,
+        authors: participants, // <- agora é array de ints
+        objective,
+        user,
+        platform,
+        templates: uploadedTemplates
+      };
+  
+      const result = await Project.create(project, userId);
+  
+      res.status(201).json({ msg: "Projeto criado com sucesso", id: result.projectId });
+  
+    } catch (err) {
+      console.error("Erro na criação do projeto:", err);
+      res.status(500).json({ erro: "Erro ao criar projeto" });
+    }
+  }  
 
   async getAll(req, res) {
     try {

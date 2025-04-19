@@ -13,28 +13,29 @@ class s3Aws {
     }
 
     async saveFile(filename) {
-
+        // Remove espaços
+        const sanitizedFilename = `${filename.replace(/\s+/g, '-')}`;
+      
         const originalPath = path.resolve(__dirname, '..', 'uploads', filename);
-
         const contentType = mime.lookup(filename);
-
+      
         if (!contentType) {
-            throw new Error("Tipo de conteúdo não encontrado");
+          throw new Error("Tipo de conteúdo não encontrado");
         }
-
+      
         const fileContent = await fs.promises.readFile(originalPath);
-
+      
         await this.client.putObject({
-            Bucket: process.env.S3_BUCKET,
-            Key: filename,
-            Body: fileContent,
-            ContentType: contentType,
-            ACL: 'public-read'
+          Bucket: process.env.S3_BUCKET,
+          Key: sanitizedFilename,
+          Body: fileContent,
+          ContentType: contentType,
+          ACL: 'public-read'
         }).promise();
-
-        return `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${filename}`;
-
-    }
+      
+        return `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${sanitizedFilename}`;
+      }
+      
 }
 
 module.exports = { s3Aws };

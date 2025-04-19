@@ -22,7 +22,7 @@ const Button = ({
     activeR: styles.activeR,
     deactivatedR: styles.deactivatedR,
     likert: styles.likertScale,
-    deactivated: styles.deactivated
+    deactivated: styles.deactivated,
   };
 
   const iconClass =
