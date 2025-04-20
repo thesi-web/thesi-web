@@ -1,46 +1,26 @@
-import React from 'react';
+import classNames from 'classnames';
 import styles from './Button.module.css';
 
-const Button = ({
-  children,
-  onClick,
-  variant,
-  icon,
-  iconPosition = 'right', 
-  type = 'button'
-}) => {
-  const variants = {
-    enabled: styles.enabled,
-    disabled: styles.disabled,
-    upload: styles.upload,
-    success: styles.success,
-    cancel: styles.cancel,
-    transparent: styles.transparent,
-    none: styles.none,
-    activeL: styles.activeL,
-    deactivatedL: styles.deactivatedL,
-    activeR: styles.activeR,
-    deactivatedR: styles.deactivatedR,
-    likert: styles.likertScale,
-    deactivated: styles.deactivated,
-  };
+const Button = ({ children, onClick, variant, icon, iconPosition = 'right', type = 'button', disabled }) => {
 
-  const iconClass =
-    iconPosition === 'left' ? styles.iconLeft : styles.iconRight;
+  const buttonClass = classNames(
+    styles.button,
+    styles[variant],
+    {
+      [styles.disabled]: disabled,
+    }
+  );
+
+  const iconClass = classNames({
+    [styles.iconLeft]: icon && iconPosition === 'left',
+    [styles.iconRight]: icon && iconPosition === 'right',
+  });
 
   return (
-    <button
-      className={`${styles.button} ${styles[variant] || ''}`}
-      onClick={onClick}
-      type={type}
-    >
-      {icon && iconPosition === 'left' && (
-        <span className={iconClass}>{icon}</span>
-      )}
+    <button onClick={onClick} type={type} className={buttonClass} disabled={disabled} >
+      {icon && iconPosition === 'left' && <span className={iconClass}>{icon}</span>}
       {children}
-      {icon && iconPosition === 'right' && (
-        <span className={iconClass}>{icon}</span>
-      )}
+      {icon && iconPosition === 'right' && <span className={iconClass}>{icon}</span>}
     </button>
   );
 };

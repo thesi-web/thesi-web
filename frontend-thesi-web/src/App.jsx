@@ -7,7 +7,7 @@ import Project from './pages/Project';
 import Heuristic from './components/Heuristic/Heuristic';
 import LayoutComSidebar from './pages/LayoutComSidebar';
 import BemVindo from './pages/BemVindo';
-import Homescreen from './pages/Homescreen';
+import LandingPage from './pages/LandingPage';
 
 function App() {
 
@@ -15,7 +15,7 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Homescreen/>} />
+        <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/criar-conta" element={<CriarConta/>} />
         {/* Página que contém a sidebar (Cuidado!) */}

@@ -1,9 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-family-base: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --color-heading: #37352F;
+  --color-subtext: #A6A299;
+  --color-label: #5F5E5B;
+
+  /* Cores da aplicação */
+  --color-primary: #0057ff;
+  --color-primary-hover: #0044cc;
+  --color-disabled: #dbdbdb;
+  --color-secondary: #E5E5E5;
+  --color-text: #ffffff;
+
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+
+  font-family: var(--font-family-base);
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,56 +37,73 @@
 body {
   margin: 0;
   display: flex;
-  align-items: center;     /* alinha verticalmente */
-  min-width: 100vh;
+  align-items: center;
+  min-width: 100vw;
   min-height: 100vh;
+  font-size: var(--font-size-base);
 }
 
+/* Títulos */
 
 .h3 {
-  font-size: 14px;
-  font-weight: 600;
-  color: #37352F;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
 }
 
 .h2 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #37352F;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
 }
 
 .h1 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #37352F;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 800;
-  color: #37352F;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-heading);
 }
 
+/* Texto auxiliar e labels */
+
 .label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #5F5E5B;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-label);
   margin-bottom: 10px;
   margin-top: 3px;
 }
 
 p {
-  color: #A6A299;
-  font-size: small;
+  color: var(--color-subtext);
+  font-size: var(--font-size-base);
   margin: 0;
 }
 
+/* Responsividade */
+@media (min-width: 768px) {
+  :root {
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-md: 18px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
+    --font-size-2xl: 28px;
+  }
+}
+
+/* Campos */
 select {
-  font-size: 14px;
+  font-size: var(--font-size-base);
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid #5F5E5B;
+  border-bottom: 1px solid var(--color-label);
   outline: none;
   padding: 4px 0;
   color: #000;
@@ -74,11 +115,17 @@ select {
   background-repeat: no-repeat;
   background-position: right 0.5em center;
   background-size: 1em;
-  padding-right: 2em; /* Espaço para a setinha */
+  padding-right: 2em;
 }
 
+/* Canvas */
 canvas {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* ou cover se quiser preencher mesmo que corte */
+  object-fit: contain;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

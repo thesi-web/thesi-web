@@ -1,16 +1,7 @@
 .navContainer{
-  background-color: aqua;
+  position: fixed;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 100vw;
-}
-
-.optionsContainer{
-    display: flex;
-    background-color: yellowgreen;
-}
-
-.buttonsContainer{
-    display: flex;
-    background-color: blueviolet;
+  padding: 20px 0px;
 }

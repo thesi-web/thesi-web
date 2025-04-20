@@ -41,7 +41,20 @@ const Heuristic = () => {
   return (
     <div>
       {heuristica.map((item, index) => (
-        <div key={index} className={styles.heuristicContainer}>
+        <div key={index} className={styles.contentContainer} >
+
+          <div className={styles.titleContainer} >
+              <div className={styles.title}>
+                Enviar para o relatório final
+              </div>
+              <div className={styles.buttonContainer}>
+                <input id="check" type='checkbox' />
+                <label for="check" className={styles.button}  ></label>
+            </div>
+          </div>
+
+
+        <div className={styles.heuristicContainer} >
           <div className={styles.imageContainer}>
             <div className={styles.title}>Tela</div>
             <div className={styles.image}>
@@ -69,12 +82,8 @@ const Heuristic = () => {
             <div className={styles.title}>Recomendações</div>
             <p>{item.ds_recomendacoes}</p>
           </div>
+        </div>
           
-          <div className={styles.buttonContainer}>
-              <input id="check" type='checkbox' />
-              <label for="check" className={styles.button}  ></label>
-          </div>
-
         </div>
       ))}
     </div>

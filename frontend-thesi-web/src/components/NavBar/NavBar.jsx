@@ -5,46 +5,33 @@ import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   return (
-    <div>
       <nav className={styles.navContainer} >
-
         <div className={styles.optionsContainer} >
-            <Button>
-              Opção 1
-            </Button>
-          
-            <Button>
-              Opção 1
-            </Button>
-
-            <Button>
-              Opção 1
-            </Button>
-
-            <Button>
-              Opção 1
-            </Button>
-
-            <Button>
-              Opção 1
-            </Button>
-
-            <Button>
-              Opção 1
-            </Button>
+          <Button variant={'outline'}>
+            Opção 1
+          </Button>
+          <Button variant={'outline'}>
+            Opção 1
+          </Button>
+          <Button variant={'outline'}>
+            Opção 1
+          </Button>         
+          <Button variant={'outline'}>
+            Opção 1
+          </Button>
+          <Button variant={'outline'}>
+            Opção 1
+          </Button>    
         </div>
-
         <div className={styles.buttonsContainer} >
-            <Button>
-              <Link to="/login" > Login </Link>
+            <Button variant={'transparent'}>
+              <Link to="/login" > Sign in </Link>
             </Button>
-            <Button>
+            <Button variant={'primary'} >
               Sign Up
             </Button>
         </div>
-
       </nav>
-    </div>
   );
 };
 

@@ -1,0 +1,21 @@
+.sectionContainer{
+    align-items: center;
+    background-color:rgba(220, 220, 220, 0.158);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.sectionContainer img {
+    object-fit:fill;
+}
+
+.contentContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50vw;
+    height: 30vh;
+    padding: 40px;
+    position: absolute;
+}

@@ -1,9 +1,30 @@
+.contentContainer {
+  border-bottom: 1px solid #CCC;
+  padding-bottom: 10px;
+  margin: 20px 0px;
+}
+
 .heuristicContainer {
-    border-bottom: 1px solid #CCC;
-    display: flex;
-    width: 100vw;
-    justify-content: center;
-    padding: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+
+
+.titleContainer{
+  display: flex;
+  padding: 0px 20px;
+  justify-content: space-between;
+}
+
+.boxContainer{
+  width: 250px;
+}
+
+.severityContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .image {
@@ -18,10 +39,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-  
-.imageContainer{
-    margin: 0px 20px;
 }
 
 
@@ -38,23 +55,10 @@
     font-weight: 400;
 }
 
-.boxContainer{
-    width: 220px;
-    margin: 0px 10px;
-}
-
-.severityContainer{
-    display: flex;
-    flex-direction: column;
-    margin: 0px 10px;
-    align-items: center;
-}
-
 .buttonContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 10px;
   }
   
   input[type='checkbox'] {
@@ -90,4 +94,3 @@
   input:checked + .button::before {
     transform: translateX(18px); /* deve ser: largura total - largura da bolinha - margem */
   }
-  
