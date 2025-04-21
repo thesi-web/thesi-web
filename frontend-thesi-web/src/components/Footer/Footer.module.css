@@ -1,0 +1,47 @@
+.footer {
+    padding: 30px 60px;
+}
+
+.contentContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    border-bottom: solid 1px #cccccccc;
+    padding-bottom: 30px;
+}
+
+.title{
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+}
+
+.connectContainer{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.buttonContainer{
+    display: flex;
+    width: 6vw;
+    justify-content: space-around;
+    padding: 30px;
+}
+
+.inputContainer{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin: 30px;
+    background-color:rgba(220, 220, 220, 0.185);
+}
+
+.input{
+    border: none;
+    outline: none;
+    display: flex;
+    padding: 2px;
+    background-color: transparent;
+}

@@ -1,0 +1,22 @@
+.sectionContainer{
+  height: 100vh;
+  padding: 60px;
+}
+
+.contentContainer{
+ display: flex;
+ justify-content: space-around;
+}
+
+.noticesContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonContainer {
+    margin-top: 20px;
+}
+
+.messageContainer{
+  width: 30vw;
+}

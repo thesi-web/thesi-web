@@ -28,7 +28,7 @@ const NavBar = () => {
               <Link to="/login" > Sign in </Link>
             </Button>
             <Button variant={'primary'} >
-              Sign Up
+              Sign up
             </Button>
         </div>
       </nav>

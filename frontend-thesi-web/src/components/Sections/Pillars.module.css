@@ -1,11 +1,10 @@
 .sectionContainer {
-    background-color: rgba(220, 220, 220, 0.432);
+    background-color:rgba(220, 220, 220, 0.158);
     height: 50vh;
     align-items: center;
-    padding: 40px;
+    padding: 60px;
     display: flex;
     flex-direction: column;
-    position: absolute;
 }
 
 .contentContainer{

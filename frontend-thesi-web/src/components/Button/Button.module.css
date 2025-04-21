@@ -63,10 +63,6 @@
     transition: background-color 0.3s ease;
 }
 
-.icon {
-    font-size: 18px;
-    color: #37352F;
-  }
 
 .transparent {
     align-items: center;
@@ -83,24 +79,10 @@
     text-decoration: underline;
 }
 
-.iconLeft {
-    margin-right: 8px;
-    display: inline-flex;
-    font-size: 18px;
-    color: #37352F;
-  }
-  
-.iconRight {
-margin-left: 8px;
-display: inline-flex;
-font-size: 18px;
-color: #37352F;
+.none{
+background-color: transparent;
+border: none;
 }
-
-  .none{
-    background-color: transparent;
-    border: none;
-  }
 
 .activeL {
     margin: 0;
@@ -326,4 +308,14 @@ color: #37352F;
   color: #A6A6A6;
   cursor: not-allowed;
 }
-  
+
+/*Apenas o ícone*/
+.icon {
+    background-color: transparent;
+    padding: 5px 8px;
+    font-size: var(--font-size-base);
+}
+
+.icon:hover{
+    background-color: #a6a6a62c;
+}

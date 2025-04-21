@@ -1,0 +1,25 @@
+.noticeContainer {
+    display: flex;
+    margin: 10px;
+}
+
+.dateContainer{
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    align-items: center;
+}
+
+.month{
+    font-size: var(--font-size-sm);
+    color: var(--color-label);
+    font-weight: var(--font-weight-bold);
+    margin: -10px;
+}
+
+.contentContainer {
+    padding: 0px 10px;
+    width: 40vw;
+}
