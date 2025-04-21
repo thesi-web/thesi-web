@@ -10,3 +10,12 @@
  .titleContainer {
     margin-bottom: 80px;
  }
+
+ .navContainer{
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   padding: 20px;
+   width: 100vw;
+   position: fixed;
+ }

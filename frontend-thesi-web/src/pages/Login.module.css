@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.textContainer{
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0px 20px;
+}
+
+.rememberContainer{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.line {
+    background-color: var(--color-primary);
+    text-align: center;
+    color: white;
+    padding: 5px;
+    margin-bottom: 40px;
+}
+
+.contentContainer {
+    height: 80vh;
+    display: flex;
+    box-shadow: -2px 0 100px rgba(0, 0, 0, 0.068);
+}
+
+img {
+    background-color: rgba(224, 224, 224, 0.24);
+    width: 30vw;
+}
+
+.formContainer{
+    padding: 80px;
+}

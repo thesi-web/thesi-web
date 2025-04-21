@@ -32,8 +32,7 @@ const StepTwo = ({
   };
 
   return (
-    <div>
-   
+    <div>  
       <form onSubmit={handleSubmit}>
         <InputText label={"Enter your phone number"} type="text" name="phone" value={phone} onChange={handlePhoneChange} placeholder="(dd) 9 0000-0000" required />
         <div className={'subtitle'}> Why do we ask for your <b>phone number</b>? </div>
@@ -45,8 +44,8 @@ const StepTwo = ({
         {successMessage && <div>{successMessage}</div>}
 
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }} >
-        <Button variant={'transparent'} type="button" onClick={prevStep}>Back</Button>
-        <Button variant={'secondary'} type="submit">Create account</Button>
+        <Button variant={'transparent'} type={'button'} onClick={prevStep}>Back</Button>
+        <Button type={"submit"} variant={'secondary'}>Create account</Button>
       </div>
       </form>
     </div>

@@ -36,11 +36,11 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
     <div>
       <form onSubmit={tokenSent ? handleValidateToken : handleSendToken}>
         <InputText
-          label="Institutional email"
+          label="Institutional e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={tokenSent}
-          placeholder={'enter your email address'}
+          placeholder={'enter your e-mail address'}
         />
         <div className={'subtitle'} > Use your @fatec.sp.gov.br domain email to participate in collaborative projects </div>
 
@@ -55,7 +55,7 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
           </>
         )}
 
-          <Button type="submit" variant="primary" id="form_btn" >
+          <Button type={"submit"} variant={"primary"} id={"form_btn"} >
             {tokenSent ? "Check my code" : "Get code"}
           </Button>
 

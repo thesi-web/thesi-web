@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import StepOne from '../components/CreateAccount/StepOne';
 import StepTwo from '../components/CreateAccount/Steptwo';
 import axios from 'axios';
 import styles from './CreateAccount.module.css'
+import Button from "../components/Button/Button";
 
 function CreateAccount() {
 
@@ -43,7 +44,7 @@ function CreateAccount() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/auth/register', {
+      const response = await axios.post('http://localhost:3000/api/user', {
         name,
         phone,
         email,
@@ -71,9 +72,30 @@ function CreateAccount() {
            /[!@#$%^&*(),.?":{}|<>]/.test(password);
   };
 
-  return (
-    <div className={styles.container} >
+  console.log(name,phone, email, password, confirmPassword);
 
+  return (
+    
+    <div>
+      
+      <div className={styles.navContainer}> 
+        <Link to="/" >
+          <Button variant={'transparent'}>
+            Back 
+          </Button>
+        </Link>
+
+        <Link to="/login" >
+        <div style={{ display: 'flex', alignItems: 'center' }}> 
+            Already have an account?
+          <Button variant={'transparent'}>
+            Sign in 
+          </Button>
+          </div>
+        </Link>
+      </div>
+
+    <div className={styles.container} >
       <div className={styles.titleContainer}>
         {step === 1 && (
           <>
@@ -117,6 +139,7 @@ function CreateAccount() {
         />
       )}
     </div>
+</div>
   );
 }
 

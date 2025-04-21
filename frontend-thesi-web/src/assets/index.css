@@ -127,7 +127,12 @@ canvas {
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: var(--color-primary);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--color-primary-hover);
 }
 
 .subtitle{
@@ -153,7 +158,7 @@ input::placeholder {
 }
 
 Button#form_btn {
-  margin-top: 20px;
+  margin: 20px 0px;
 }
 
 form {

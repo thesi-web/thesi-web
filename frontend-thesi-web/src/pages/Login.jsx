@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import InputText from '../components/InputText/InputText';
+import Button from '../components/Button/Button';
+import styles from './Login.module.css'
 
 function Login() {
 
@@ -40,80 +43,59 @@ function Login() {
   };
 
   return (
-    <div> 
-      <div className='au-botao-login-container'>
-        <div>
-          <button className='thesi-botao-branco'>
-            <Link to="/home" className='thesi-link'>RETORNAR</Link>
-          </button>
-        </div>
-      </div>
+    <div className={styles.container} > 
 
-      <div className="lo-flexbox">
-        <div className="lo-logo-container">  
-          <img className="login-logo" alt="THESI" />
-          <div className="lo-titulo-container">
-            Avaliação simples e cooperativa. Vem ser THESI!
-          </div>
-        </div> 
-
-        <div className="lo-container">
-          <div className="thesi-container"> 
-            <div className="thesi-titulo">Entrar</div>
-            <form className="login-form" onSubmit={handleSubmit}>  
+      <div className={styles.contentContainer}>
+        <div className={styles.formContainer}>
+          <form onSubmit={handleSubmit}>
+            <InputText
+              label={'E-mail'}
+              type="email"
+              name="email"
+              value={email}
+              placeholder="enter your e-mail addres"
+              onChange={handleEmailChange}
+              required
+            />
+            <InputText
+              label={'Password'}
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Senha"
+              onChange={handlePasswordChange}
+              required
+            />
+        
+            <div className={styles.rememberContainer} >
               <input
-                className="thesi-input"
-                type="email"
-                name="email"
-                value={email}
-                placeholder="E-mail"
-                onChange={handleEmailChange}
-                required
+                type="checkbox"
+                id="remember-me"
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
               />
-              <input
-                className="thesi-input"
-                type="password"
-                name="password"
-                value={password}
-                placeholder="Senha"
-                onChange={handlePasswordChange}
-                required
-              />
-              <div className="lo-esqueceu-container">
-                <Link to="/esqueci-senha" className="lo-esqueceu">ESQUECEU?</Link>
-              </div>
-              <div className="lo-lembrar-me-container">
-                <div className="lo-lembrar-me">
-                  <input
-                    className="thesi-checkbox"
-                    type="checkbox"
-                    id="remember-me"
-                    checked={rememberMe}
-                    onChange={() => setRememberMe(!rememberMe)}
-                  />
-                  <div className="lo-lembrar-me-texto">Lembrar-me</div>
-                </div>
-              </div>
-
-              {errorMessage && <div className="thesi-mensagem-de-erro">{errorMessage}</div>}
-
-              <div className="thesi-botao-container"> 
-                <button
-                  type="submit"
-                  className="thesi-botao-roxo lo-espaco"
-                  disabled={loading}
-                >
-                  {loading ? "Carregando..." : "ENTRAR"}
-                </button>
-              </div>
-            </form>
-
-            <div className="thesi-texto">
-              Não tem uma conta?
-              <Link to="/criar-conta" className="thesi-negrito"> CRIAR NOVA CONTA</Link>
+              <div> Remember me </div>
+              <a href={'/forgot/password'} >Forgot your password?</a>
             </div>
-          </div>
+
+            {errorMessage && <div>{errorMessage}</div>}
+        
+              <Button
+                variant={'secondary'}
+                type="submit"
+                disabled={loading}
+                id={'form_btn'}
+              >
+                {loading ? "Loading..." : "Log in"}
+              </Button>
+
+            <div className={styles.textContainer} >
+              <div>Don't have an account?</div>
+              <a to={'/create/account'}>Register here </a>
+            </div>             
+          </form>
         </div>
+        <img/>
       </div>
     </div>  
   );

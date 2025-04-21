@@ -3,7 +3,8 @@ const Professor = require("../models/Professor")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userService = require("../services/userService");
-const { gerarToken, validarToken } = require("../utils/token")
+const { gerarToken, validarToken } = require("../utils/token");
+const { enviarEmailBoasVindas } = require("../utils/email");
 
 class UserController {
 
@@ -29,13 +30,15 @@ class UserController {
 
       // Criação do usuário
       const t_usuario = {
-        phone,
-        name,
-        email,
+        phone: phone.trim(),
+        name: name.trim(),
+        email: email.toLowerCase(),
         password,
       };
 
       await User.create(t_usuario);
+      await enviarEmailBoasVindas(email,name);
+
       return res.status(201).json({ msg: "Usuário criado com sucesso!" });
 
     } catch (err) {
