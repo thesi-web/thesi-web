@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './Button.module.css';
 
-const Button = ({ children, onClick, variant, icon, iconPosition = 'right', type = 'button', disabled }) => {
+const Button = ({ children, onClick, variant, icon, iconPosition = 'right', type = 'button', disabled, id }) => {
 
   const buttonClass = classNames(
     styles.button,
@@ -17,7 +17,7 @@ const Button = ({ children, onClick, variant, icon, iconPosition = 'right', type
   });
 
   return (
-    <button onClick={onClick} type={type} className={buttonClass} disabled={disabled} >
+    <button onClick={onClick} type={type} className={buttonClass} disabled={disabled} id={id} >
       {icon && iconPosition === 'left' && <span className={iconClass}>{icon}</span>}
       {children}
       {icon && iconPosition === 'right' && <span className={iconClass}>{icon}</span>}

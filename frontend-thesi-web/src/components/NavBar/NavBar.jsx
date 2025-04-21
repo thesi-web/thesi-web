@@ -24,12 +24,16 @@ const NavBar = () => {
           </Button>    
         </div>
         <div className={styles.buttonsContainer} >
-            <Button variant={'transparent'}>
-              <Link to="/login" > Sign in </Link>
-            </Button>
-            <Button variant={'primary'} >
-              <Link to={"/create/account"}> Sign up </Link>
-            </Button>
+            <Link to="/login" >
+              <Button variant={'transparent'}>
+                Sign in 
+              </Button>
+            </Link>
+            <Link to={"/create/account"}>
+              <Button variant={'primary'} >
+               Sign up 
+              </Button>
+            </Link>
         </div>
       </nav>
   );

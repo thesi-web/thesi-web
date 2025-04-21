@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import StepOne from `../components/Create Account/StepOne`;
-import StepTwo from `../components/Create Account/StepTwo`;
+import StepOne from '../components/CreateAccount/StepOne';
+import StepTwo from '../components/CreateAccount/Steptwo';
 import axios from 'axios';
+import styles from './CreateAccount.module.css'
 
 function CreateAccount() {
 
@@ -71,7 +72,23 @@ function CreateAccount() {
   };
 
   return (
-    <div>
+    <div className={styles.container} >
+
+      <div className={styles.titleContainer}>
+        {step === 1 && (
+          <>
+            <div className="h1">Practical, safe.</div>
+            <p>Create your Thesi account in just a few steps!</p>
+          </>
+        )}
+        {step === 2 && (
+          <>
+            <div className="h1">Create your profile</div>
+            <p>Here's how your Thesi profile will look to others</p>
+          </>
+        )}
+      </div>
+
       {step === 1 && (
         <StepOne
           email={email}

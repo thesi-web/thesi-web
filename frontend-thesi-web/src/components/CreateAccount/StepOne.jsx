@@ -5,7 +5,6 @@ import axios from "axios";
 
 const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextStep }) => {
 
-  const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
   const [tokenSent, setTokenSent] = useState(false);
   const [message, setMessage] = useState('');
@@ -24,7 +23,9 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
   const handleValidateToken = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/confirm/token', { email, token });
+      const response = await axios.post('http://localhost:3000/api/confirm/token', { 
+        email, 
+        token: verificationCode, });
       nextStep(); // Callback para o próximo passo
     } catch (error) {
       setMessage("Código inválido ou expirado.");
@@ -39,8 +40,9 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={tokenSent}
+          placeholder={'enter your email address'}
         />
-        <p> Use your @fatec.sp.gov.br domain email to participate in collaborative projects </p>
+        <div className={'subtitle'} > Use your @fatec.sp.gov.br domain email to participate in collaborative projects </div>
 
         {tokenSent && (
           <>
@@ -49,13 +51,13 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
               value={verificationCode}
               onChange={(e) => setVerificationCode(e.target.value)}
             />
-            <p>We've sent a code to your inbox </p>
+            <div className={'subtitle'} >We've sent a code to your inbox </div>
           </>
         )}
 
-        <Button type="submit" variant="primary">
-          {tokenSent ? "Verificar Código" : "Enviar Código"}
-        </Button>
+          <Button type="submit" variant="primary" id="form_btn" >
+            {tokenSent ? "Check my code" : "Get code"}
+          </Button>
 
         {message && <p>{message}</p>}
       </form>

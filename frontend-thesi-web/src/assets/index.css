@@ -10,6 +10,8 @@
   --color-heading: #37352F;
   --color-subtext: #A6A299;
   --color-label: #5F5E5B;
+  --color-placeholder: #ccc;
+  --color-transparency: #5f5e5b38;
 
   /* Cores da aplicação */
   --color-primary: #0057ff;
@@ -71,12 +73,10 @@ body {
 
 /* Texto auxiliar e labels */
 
-.label {
+label {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-medium);
   color: var(--color-label);
-  margin-bottom: 10px;
-  margin-top: 3px;
 }
 
 p {
@@ -128,4 +128,41 @@ canvas {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.subtitle{
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-subtext);
+}
+
+
+
+input {
+  font-size: var(--font-size-base);
+  width: 100%;
+  display: flex;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #000;
+}
+
+input::placeholder {
+  color: var(--color-placeholder);
+}
+
+Button#form_btn {
+  margin-top: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+}
+
+b:hover{
+  text-decoration: underline;
+  cursor: pointer;
 }

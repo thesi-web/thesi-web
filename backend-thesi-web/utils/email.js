@@ -39,7 +39,7 @@ exports.enviarEmailToken = async (destinatario, token) => {
     html: `
       <div style="font-family: Arial, sans-serif; padding: 10px;">
         <h2>Email verification</h2>
-        <p>To complete your sign-up, you can use the code below to create your account.</p>
+        <p>To complete your sign-up, you can use the code below to create your account.✨</p>
         <h1 style="color: #2E86C1;">${token}</h1>
         <p>This code will expire in 10 minutes.</p>
       </div>
