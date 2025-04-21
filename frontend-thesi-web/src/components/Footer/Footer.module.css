@@ -1,47 +1,42 @@
 .footer {
-    padding: 30px 60px;
+    padding: 80px;
 }
 
 .contentContainer {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    display: flex;
     border-bottom: solid 1px #cccccccc;
-    padding-bottom: 30px;
+    justify-content: space-between;
+    padding-bottom: 80px;
 }
 
-.title{
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-base);
-}
-
-.connectContainer{
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-}
-
-.buttonContainer{
-    display: flex;
-    width: 6vw;
-    justify-content: space-around;
-    padding: 30px;
+.titleContainer{
+    text-align: center;
+    margin-top: 80px;
 }
 
 .inputContainer{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 5px;
-    margin: 30px;
-    background-color:rgba(220, 220, 220, 0.185);
+    background-color:#cccccc49;
+    width: 30vw;
 }
 
 .input{
     border: none;
     outline: none;
-    display: flex;
-    padding: 2px;
     background-color: transparent;
+    display: flex;
+    width: 100%;
+}
+
+.inputContent {
+    display: flex;
+    justify-content: center;
+    margin: 80px 0px;
+}
+
+.contentContainer p:hover {
+    text-decoration: underline;
 }

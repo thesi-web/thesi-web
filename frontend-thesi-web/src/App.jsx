@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Login from './pages/Login'
-import CriarConta from './pages/CriarConta';
 import CreateProject from './pages/CreateProject';
 import Project from './pages/Project';
 import Heuristic from './components/Heuristic/Heuristic';
 import LayoutComSidebar from './pages/LayoutComSidebar';
 import BemVindo from './pages/BemVindo';
 import Hero from './pages/Hero';
+import CreateAccount from './pages/CreateAccount';
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Hero/>} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/criar-conta" element={<CriarConta/>} />
+        <Route path="/create/account" element={<CreateAccount/>} />
         {/* Página que contém a sidebar (Cuidado!) */}
         <Route element={<LayoutComSidebar/>}>
           <Route path="/home" element={<BemVindo/>} />

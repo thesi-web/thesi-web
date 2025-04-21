@@ -8,7 +8,7 @@ const News = () => {
     <div className={styles.sectionContainer} >
         <div className={styles.contentContainer}>
           <div className={styles.messageContainer} >
-            <div className='title'>What's news?</div>
+            <div className='title'>What's new?</div>
             <p>We're constantly evolving! Stay up to date with our latest news and never miss a thing.</p>
             <div className={styles.buttonContainer} ><Button variant={'primary'} >View all</Button></div>
           </div>

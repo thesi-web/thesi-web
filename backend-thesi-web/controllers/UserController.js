@@ -3,7 +3,7 @@ const Professor = require("../models/Professor")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userService = require("../services/userService");
-const { enviarRecuperacao } = require("../services/authService");
+const { gerarToken, validarToken } = require("../utils/token")
 
 class UserController {
 
@@ -177,6 +177,37 @@ class UserController {
       ).json({ error: error.message });
     }
   }
+
+
+  async  requestToken(req, res) {
+
+    const { email } = req.body;
+
+    if (!email.endsWith('@fatec.sp.gov.br')) {
+      return res.status(400).json({ error: 'O e-mail precisa ser institucional da FATEC.' });
+    }
+
+    try {
+      await gerarToken(email);
+      return res.status(200).json({ message: 'Token enviado com sucesso.' });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  async confirmToken(req, res) {
+    
+    const { email, token } = req.body;
+  
+    const valido = validarToken(email, token);
+  
+    if (!valido) {
+      return res.status(400).json({ error: 'Token inválido ou expirado.' });
+    }
+  
+    return res.status(200).json({ message: 'Token conferido!' });
+  }
+  
 
 }
 

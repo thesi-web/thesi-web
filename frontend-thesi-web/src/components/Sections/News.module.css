@@ -1,16 +1,19 @@
 .sectionContainer{
   height: 100vh;
-  padding: 60px;
+  padding: 80px;
 }
 
 .contentContainer{
  display: flex;
- justify-content: space-around;
+ justify-content: space-between;
+ height: 100vh;
 }
 
 .noticesContainer{
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
+  justify-content: center;
 }
 
 .buttonContainer {

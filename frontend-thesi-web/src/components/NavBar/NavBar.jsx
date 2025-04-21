@@ -8,19 +8,19 @@ const NavBar = () => {
       <nav className={styles.navContainer} >
         <div className={styles.optionsContainer} >
           <Button variant={'outline'}>
-            Opção 1
+            Heuristic
           </Button>
           <Button variant={'outline'}>
-            Opção 1
+            Semiotic
           </Button>
           <Button variant={'outline'}>
-            Opção 1
+            Laws of UX
           </Button>         
           <Button variant={'outline'}>
-            Opção 1
+            User Persona
           </Button>
           <Button variant={'outline'}>
-            Opção 1
+            Diagrams
           </Button>    
         </div>
         <div className={styles.buttonsContainer} >
@@ -28,7 +28,7 @@ const NavBar = () => {
               <Link to="/login" > Sign in </Link>
             </Button>
             <Button variant={'primary'} >
-              Sign up
+              <Link to={"/create/account"}> Sign up </Link>
             </Button>
         </div>
       </nav>

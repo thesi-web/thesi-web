@@ -11,7 +11,7 @@ const Notice = ( {day, month, title, text} ) => {
         </div>
 
         <div className={styles.contentContainer}>
-            <div className='h3'>{title}</div>
+            <div className={styles.title}>{title}</div>
             <div className={styles.text}><p>{text}</p></div>
         </div>
 

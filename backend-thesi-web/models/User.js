@@ -1,11 +1,13 @@
 const database = require("../database/connection");
 const bcrypt = require("bcrypt");
+const { gerarToken } = require("../utils/token");
 
 class User {
 
   async create(user) {
     try {
       const hashedPassword = await bcrypt.hash(user.password, 10);
+
       await database("t_usuario").insert({
         nr_telefone: user.phone,
         nm_usuario: user.name,
@@ -85,7 +87,7 @@ class User {
     }
 
   }
-
+  
 }
 
 module.exports = new User();
