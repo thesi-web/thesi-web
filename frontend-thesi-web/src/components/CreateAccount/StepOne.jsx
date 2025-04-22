@@ -55,7 +55,7 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
           </>
         )}
 
-          <Button type={"submit"} variant={"primary"} id={"form_btn"} >
+          <Button type={"submit"} variant={"secondary"} id={"form_btn"} >
             {tokenSent ? "Check my code" : "Get code"}
           </Button>
 

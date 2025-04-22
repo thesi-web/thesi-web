@@ -94,7 +94,7 @@ function CreateAccount() {
       <div className={styles.titleContainer}>
         {step === 1 && (
           <>
-            <div className="h1">Practical, safe.</div>
+            <div className="title">Practical, safe.</div>
             <p>Create your Thesi account in just a few steps!</p>
           </>
         )}
