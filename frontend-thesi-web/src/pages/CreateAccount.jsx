@@ -85,14 +85,9 @@ function CreateAccount() {
           </Button>
         </Link>
 
-        <Link to="/login" >
         <div style={{ display: 'flex', alignItems: 'center' }}> 
-            Already have an account?
-          <Button variant={'transparent'}>
-            Sign in 
-          </Button>
-          </div>
-        </Link>
+          Already have an account? <a style={{ marginLeft: '10px' }} href="/login" >Sign in</a>
+        </div>
       </div>
 
     <div className={styles.container} >

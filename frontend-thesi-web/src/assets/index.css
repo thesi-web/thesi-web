@@ -128,6 +128,7 @@ canvas {
 a {
   text-decoration: none;
   color: var(--color-primary);
+  cursor: pointer;
 }
 
 a:hover {

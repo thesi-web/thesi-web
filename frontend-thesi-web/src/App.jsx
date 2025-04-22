@@ -8,6 +8,7 @@ import LayoutComSidebar from './pages/LayoutComSidebar';
 import BemVindo from './pages/BemVindo';
 import Hero from './pages/Hero';
 import CreateAccount from './pages/CreateAccount';
+import ForgotPassword from './pages/ForgotPassword';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Hero/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/create/account" element={<CreateAccount/>} />
+        <Route exact path="/forgot/password/:token" element={<ForgotPassword/>} />
         {/* Página que contém a sidebar (Cuidado!) */}
         <Route element={<LayoutComSidebar/>}>
           <Route path="/home" element={<BemVindo/>} />

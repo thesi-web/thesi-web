@@ -48,6 +48,10 @@ function Login() {
       <div className={styles.contentContainer}>
         <div className={styles.formContainer}>
           <form onSubmit={handleSubmit}>
+            <div className={styles.titleContainer} >
+              <div className={'title'} >Sign in</div>
+              <p> Hey! Good to see you again! Let's get you signed in 🐣</p>
+             </div>
             <InputText
               label={'E-mail'}
               type="email"
@@ -91,7 +95,7 @@ function Login() {
 
             <div className={styles.textContainer} >
               <div>Don't have an account?</div>
-              <a to={'/create/account'}>Register here </a>
+              <a href={'/create/account'}>Register here </a>
             </div>             
           </form>
         </div>
