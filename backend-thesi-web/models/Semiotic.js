@@ -9,9 +9,11 @@ class Semiotic {
         id_projeto: semiotic.id, 
         id_usuario: semiotic.userId, 
         nm_signo: semiotic.signo, 
-        ds_problemas:semiotic.anotacaoSemiotica, 
         ds_recomendacoes:semiotic.recomendacaoSemiotica, 
-        ds_caminho: semiotic.imagem
+        ds_caminho: semiotic.imagem,
+        ds_esperada: semiotic.esperada,
+        ds_possivel: semiotic.possivel,
+        ds_quebra: semiotic.quebra
       });
       return { success: true, message: "A semiótica foi salva com sucesso!" };
     } catch (err) {

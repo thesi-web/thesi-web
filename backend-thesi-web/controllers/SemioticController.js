@@ -6,24 +6,22 @@ class SemioticController {
     async create(req, res) {
         try {
           const userId = req.userId;
-          const { signo, anotacaoSemiotica, recomendacaoSemiotica } = req.body;
+          const { signo, esperada, possivel, quebra, recomendacaoSemiotica, imagem } = req.body;
           const id = req.headers["projeto-id"];
-          const imagem = req.file;
     
           if (!imagem) {
-            return res.status(400).json({ erro: "Imagem não fornecida" });
+            return res.status(400).json({ erro: "URL da imagem não fornecida" });
           }
-    
-          const bufferImagem = fs.readFileSync(imagem.path);
-          fs.unlinkSync(imagem.path);
     
           const semiotic = {
             id,
             userId,
             signo,
-            anotacaoSemiotica,
+            esperada, 
+            possivel, 
+            quebra,
             recomendacaoSemiotica,
-            imagem: bufferImagem,
+            imagem,
           };
     
           await Semiotic.create(semiotic);
@@ -35,49 +33,49 @@ class SemioticController {
         }
       }
     
-      async getByProject(req, res) {
-    
-        const userId = req.userId;
-    
-        const { projetoId } = req.params;
-    
-        try {
-        
-          const semiotics = await Semiotic.findByProject(userId, projetoId);
-          res.json(semiotics);
-    
-        } catch (err) {
-          res.status(500).json({ erro: "Erro ao buscar marcações semióticas", details: err.message });
-        }
+    async getByProject(req, res) {
+  
+      const userId = req.userId;
+  
+      const { projetoId } = req.params;
+  
+      try {
+      
+        const semiotics = await Semiotic.findByProject(userId, projetoId);
+        res.json(semiotics);
+  
+      } catch (err) {
+        res.status(500).json({ erro: "Erro ao buscar marcações semióticas", details: err.message });
       }
-    
-      async correct(req, res) {
-    
-        const { idSemiotica, observacao } = req.body;
-    
-        const userId = req.userId;
-    
-        if (!userId) {
-            return res.status(401).json({ erro: "Token não fornecido" });
-        }
-    
-        if (!idSemiotica || !observacao || observacao.trim() === "") {
-          return res.status(400).json({ erro: "Parâmetros ausentes ou inválidos" });
-        }
-    
-        try {
-          const linhasAfetadas = await Semiotic.corrigir({ idSemiotica, userId, observacao });
-    
-          if (linhasAfetadas === 0) {
-            return res.status(404).json({ erro: "Marcação semiótica não encontrada ou você não tem permissão." });
-          }
-    
-          res.json({ mensagem: "Marcação semiótica corrigida com sucesso!" });
-    
-        } catch (err) {
-          res.status(500).json({ erro: "Erro ao corrigir marcação semiótica", detalhes: err.message });
-        }
     }
+  
+    async correct(req, res) {
+  
+      const { idSemiotica, observacao } = req.body;
+  
+      const userId = req.userId;
+  
+      if (!userId) {
+          return res.status(401).json({ erro: "Token não fornecido" });
+      }
+  
+      if (!idSemiotica || !observacao || observacao.trim() === "") {
+        return res.status(400).json({ erro: "Parâmetros ausentes ou inválidos" });
+      }
+  
+      try {
+        const linhasAfetadas = await Semiotic.corrigir({ idSemiotica, userId, observacao });
+  
+        if (linhasAfetadas === 0) {
+          return res.status(404).json({ erro: "Marcação semiótica não encontrada ou você não tem permissão." });
+        }
+  
+        res.json({ mensagem: "Marcação semiótica corrigida com sucesso!" });
+  
+      } catch (err) {
+        res.status(500).json({ erro: "Erro ao corrigir marcação semiótica", detalhes: err.message });
+      }
+  }
 }
 
 module.exports = new SemioticController();

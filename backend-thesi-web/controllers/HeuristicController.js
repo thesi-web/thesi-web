@@ -30,7 +30,7 @@ class HeuristicController {
     console.error("Erro na criação de uma marcação heurística:", err);
     res.status(500).json({ erro: "Erro ao criar uma marcação heurística" });
   }
-}
+  }
 
 
   async getByProject(req, res) {
