@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const { verificarToken } = require("../utils/token");
+const database = require('../database/connection'); 
 
 exports.redefinirSenha = async (token, novaSenha) => {
     

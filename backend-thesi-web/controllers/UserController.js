@@ -3,8 +3,9 @@ const Professor = require("../models/Professor")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userService = require("../services/userService");
-const { gerarToken, validarToken } = require("../utils/token");
-const { enviarEmailBoasVindas } = require("../utils/email");
+const { gerarToken, validarToken, gerarTokenRecuperacao } = require("../utils/token");
+const { enviarEmailBoasVindas, enviarEmailRecuperacao } = require("../utils/email");
+
 
 class UserController {
 
@@ -149,7 +150,8 @@ class UserController {
   
     try {
 
-      const resposta = await enviarRecuperacao(email);
+      const token = await gerarTokenRecuperacao(email);
+      const resposta = await enviarEmailRecuperacao(email, token);
       return res.status(200).json(resposta);
 
 

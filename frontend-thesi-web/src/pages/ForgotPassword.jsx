@@ -17,14 +17,14 @@ const [email, setEmail] = useState ('');
     const handleSubmit = async (event) => {
       event.preventDefault();
       
-      console.log(email);
-
       if (!email) {
         console.error("Email é obrigatório");
         return;
       }
+
+      console.log("Email sendo enviado:", email);
       
-      const res = await fetch("http://localhost:3001/recuperar-senha", {
+      const res = await fetch("http://localhost:3000/api/request/password/change", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,13 +34,10 @@ const [email, setEmail] = useState ('');
       
       if (res.ok) {
         console.log("E-mail enviado com sucesso");
-        setTimeout(() => navigate("/Login"), 1000);
-  
       } else {
         console.log("Erro na requisição:", res.statusText);
       }
     };
-  
 
   return (
     <div>   

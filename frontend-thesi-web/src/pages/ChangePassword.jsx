@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import InputText from "../components/InputText/InputText";
 import Button from "../components/Button/Button"
 import styles from './ChangePassword.module.css'
 
 function ChangePassword() {
   const { token } = useParams();
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -35,6 +36,9 @@ function ChangePassword() {
 
       if (res.ok) {
         setMessage("Senha redefinida com sucesso!");
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
       } else {
         const errorData = await res.json();
         setMessage(errorData.error || "Erro ao redefinir a senha.");
@@ -73,7 +77,7 @@ function ChangePassword() {
         <Button id={'form_btn'} variant={'secondary'} type={"submit"}>
             Reset password
         </Button>
-        {message && <div className="thesi-mensagem">{message}</div>}
+        {message && <div className={''}>{message}</div>}
       </form>
     </div>
 

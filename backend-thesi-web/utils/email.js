@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const emailUser = process.env.EMAIL_USER;
 const emailPass = process.env.EMAIL_PASS;
 
-exports.enviarEmailRecuperacao = async (destinatario, nome, token) => {
+exports.enviarEmailRecuperacao = async (destinatario, token) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -15,13 +15,18 @@ exports.enviarEmailRecuperacao = async (destinatario, nome, token) => {
   const mailOptions = {
     from: emailUser,
     to: destinatario,
-    subject: 'Recuperação de Senha',
-    text: `Olá ${nome}! Clique no link abaixo para redefinir sua senha:\n\nhttp://localhost:3002/redefinir-senha/${token}`,
+    subject: `Here's you magic link`,
+    html: `
+        <div style="font-family: Arial, sans-serif; padding: 10px;">
+            <h2>Change your password.✨</h2>
+            <p>Hey!</p>
+            <p>Don't worry, here's your magic link! use it to reset your password:</p>
+            <a>http://http://localhost:5173/change/password/${token}</a>
+        </div>
+    `,
   };
-
   await transporter.sendMail(mailOptions);
 };
-
 
 exports.enviarEmailToken = async (destinatario, token) => {
   const transporter = nodemailer.createTransport({
