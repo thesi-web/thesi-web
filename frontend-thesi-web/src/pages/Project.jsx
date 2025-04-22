@@ -57,7 +57,7 @@ const Project = () => {
             </div>
               <Carroussel images={projeto.imagens} projetoId={projetoId} />
             <div className={styles.buttonContainer}>
-             <Button type='submit' variant='success'>Entregar Projeto</Button>
+             <Button type='submit' variant='secondary'>Entregar Projeto</Button>
             </div>
         </div>
     </div>

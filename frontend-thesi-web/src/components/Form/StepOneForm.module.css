@@ -1,8 +1,9 @@
 .buttonContainer {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  background-color: var(--color-primary-transparency);
+  padding: 0.3em;
+  margin: 0.5em 0em;
 }
-
 .namesContainer{
     display: flex;
     flex-direction: column;
@@ -10,13 +11,12 @@
 
 .searchResults {
     position: fixed;
-    border: 1px solid #5F5E5B;
+    border: solid 1px var(--color-transparency);
     max-height: 150px;
     overflow-y: auto;
     background: white;
-    padding: 10px 5px;
+    padding: 0.3em ;
     margin: 0;
-    border-radius: 5px;
   }
   
   .name {
@@ -24,44 +24,65 @@
     font-weight: 400;
     padding: 5px;
     cursor: pointer;
-    border-radius: 5px;
+    font-size: var(--font-size-base);
   }
   
   .name:hover {
-    background-color: #a6a2990e;
+    background-color: var(--color-primary-transparency);
+    color: var(--color-primary);
   }
   
 .selectedList {
-    margin: 0;
-    display: flex;  
+  margin: 0;
+  display: flex;
+  background-color: #5f5e5b04;
+  padding: 0.3em;
+  overflow: hidden;
+  max-width: 25vw;
+  border: solid 1px transparent;
 }
 
-.selectedParticipant{
-    display: flex;
-    background-color: #a6a2990e;
-    color: #37352F;
-    padding: 5px 10px;
-    font-size: 12px;
-    font-weight: 400;
-    align-items: center;
-    margin: 0 3px;
-    cursor: pointer;
+.selectedList:hover{
+  border: solid 1px var(--color-transparency);
 }
 
-.selectedParticipant:hover {
-    background-color: #F0F0EF;
+
+.selectedParticipant {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+  border: 0.5px solid transparent;
+  border-radius: 8px;
+  padding: 4px 8px;
+  margin: 0.3em;
+  max-width: 100%;
+  overflow: hidden;
 }
-  
+
+.selectedParticipant > div:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px; /* ou qualquer valor que funcione bem no seu layout */
+}
+
+.selectedParticipant:hover{
+  border: 0.5px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
 .icon {
-    font-size: 12px;
-    color: #37352F;
+    font-size: var(--font-size-base);
+    color: var(--color-primary);
     cursor: pointer;
-    transition: background-color 0.2s ease;
-    border-radius: 5px;
+    transition: all 0.2s ease;
     margin-left: 5px;
-    padding: 0 5px;
+    padding: 0 0.1em;
+    border-radius: 5px;
   } 
   
-  .icon:hover {
-    background-color: #e4e4e4;
-  }
+.icon:hover {
+  background-color: crimson;
+  color: white;
+}

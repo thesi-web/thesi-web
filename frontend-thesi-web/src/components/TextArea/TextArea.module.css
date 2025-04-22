@@ -1,15 +1,20 @@
 .textarea {
-  background-color: #a6a2990e; 
-  border: none;                  
-  color: #37352F;                   
+  background-color: #5f5e5b04;
+  border: solid 1px transparent;                  
+  color: var(--color-heading);                   
   outline: none;                 
   resize: none;               
   height: 60px;
+  font-size: var(--font-size-base);
   font-family: 'Inter';
-  margin-bottom: 3px;
-  padding: 5px;
+  margin: 0.5em 0em;
+  padding: 0.6em ;
 }
 
 .textarea::placeholder {
-  color: #a6a29979;
+  color: var(--color-placeholder);
+}
+
+.textarea:hover{
+  border: solid 1px var(--color-transparency);
 }

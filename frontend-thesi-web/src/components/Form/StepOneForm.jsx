@@ -59,10 +59,10 @@ export default function StepOneForm({ projectData, setProjectData }) {
 
   return (
     <>
-      <InputText label="Nome do Projeto" type="text" placeholder="digite o nome" onChange={handleChange('name')} value={projectData.name} required />
-        <label className='label'>Participantes</label>
+      <InputText label="Project Name" type="text" placeholder="enter the project name" onChange={handleChange('name')} value={projectData.name} required />
+      
       <div className={styles.namesContainer}>
-        <InputText type="text" placeholder="adicione mais participantes ao projeto"
+        <InputText label='Name of participants' type="text" placeholder="add more participants to the project"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -80,20 +80,20 @@ export default function StepOneForm({ projectData, setProjectData }) {
             {selectedParticipants.map((user) => (
               <div key={user.id} className={styles.selectedParticipant}>
                 <div>{user.name}</div>
-                <div className={styles.icon} onClick={() => handleRemoveUser(user.id)}><i className="bi bi-x-lg"></i></div>
+                <div className={styles.icon} onClick={() => handleRemoveUser(user.id)}><i className="bi bi-x"></i></div>
               </div>
             ))}
           </div>
         )}
 </div>
-      <div className='label'>Objetivo</div>
-      <TextArea placeholder="descreva a finalidade do projeto" onChange={handleChange('objective')} value={projectData.objective} maxLength={200} required />
-      <div className='label'>Plataforma</div>
+      <label>Objective</label>
+      <TextArea placeholder="describe the purpose of the project" onChange={handleChange('objective')} value={projectData.objective} maxLength={200} required />
+      <label>Platform</label>
       <div className={styles.buttonContainer}>
         {platforms.map((label) => (
           <Button
             key={label}
-            variant={projectData.platform === label ? "enabled" : "disabled"}
+            variant={projectData.platform === label ? "highcontrast" : "lowcontrast"}
             onClick={() => setProjectData({ ...projectData, platform: label })}
           >
             {label}

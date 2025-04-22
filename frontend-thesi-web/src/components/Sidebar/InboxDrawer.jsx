@@ -6,7 +6,7 @@ const InboxDrawer = ({ onClose, closing }) => {
   return (
     <div className={`${styles.drawer} ${closing ? styles.slideOut : styles.slideIn}`}>
       <div className={styles.headerContainer}>
-        <div className={styles.logo}>Caixa de Entrada</div>
+        <div className={'h3'}>Inbox</div>
         <div className={styles.headerIcons} onClick={onClose}>
           <i className="bi bi-chevron-double-left"></i>
         </div>
@@ -14,8 +14,8 @@ const InboxDrawer = ({ onClose, closing }) => {
       </div>
       <Warning 
         icon={<i className="bi bi-envelope-x"></i>} 
-        title={"Não há mensagens"} 
-        message={"aparecerá uma notificação aqui em caso de @menção e novos projetos"} 
+        title={"No messages"}
+        message={"A notification will appear here in case of @mentions and new projects"}
       />
     </div>
   );

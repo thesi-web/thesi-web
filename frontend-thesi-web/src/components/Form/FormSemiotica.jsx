@@ -20,38 +20,38 @@ const FormSemiotica = ({
   return (
 
     <form onSubmit={SubmitSemiotica} className={styles.form}>
-      <div className='label'>Signo semiótico</div>
+      <label className='label'>Signo semiótico</label>
         <div className={styles.buttonContainer}>
           <Button
             value="estatico"
-            variant={signo === "estatico" ? "activeL" : "deactivatedL"}
+            variant={signo === "estatico" ? "highcontrast" : "lowcontrast"}
             onClick={() => handleSigno("estatico")}
           >
-            Estático
+            Static
           </Button>
           <Button
             value="dinamico"
-            variant={signo === "dinamico" ? "active" : "deactivated"}
+            variant={signo === "dinamico" ? "highcontrast" : "lowcontrast"}
             onClick={() => handleSigno("dinamico")}
           >
-            Dinâmico
+            Dynamic
           </Button>
           <Button
             value="meta"
-            variant={signo === "meta" ? "activeR" : "deactivatedR"}
+            variant={signo === "meta" ? "highcontrast" : "lowcontrast"}
             onClick={() => handleSigno("meta")}
           >
             Meta
           </Button>
         </div>
 
-      <div className='label'>O signo comunica sua função?</div>
+      <label className='label'>O signo comunica sua função?</label>
       <TextArea placeholder="diga se a função do elemento foi facilmente entendida pelo usuário" onChange={handleAnotacaoSemiotica} value={anotacaoSemiotica} maxLength={200} required />
 
-      <div className='label'>Recomendações</div>
+      <label className='label'>Recomendações</label>
       <TextArea placeholder="escreva as recomendações para os problemas encontrados" onChange={handleRecomendacaoSemiotica} value={recomendacaoSemiotica} maxLength={200} required />
 
-      <Button variant={'save'} type={"submit"} disabled={isSubmitting}>
+      <Button id='form_btn' variant='secondary' type={"submit"} disabled={isSubmitting}>
         {isSubmitting ? 'Salvando...' : 'Salvar'}
       </Button>
     </form>

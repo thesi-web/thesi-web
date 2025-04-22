@@ -9,14 +9,6 @@
     padding: 40px;
   }
 
-.form {
-    margin: 20px 0px;
-    width: 35vw;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-}
-
 .buttonContainer {
     display: flex;
     justify-content: space-between;

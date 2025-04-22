@@ -92,7 +92,7 @@ const FormHeuristica = ({
   
   return (
     <form onSubmit={SubmitHeuristica} className={styles.form} method="POST" encType="multipart/form-data">
-      <div className='label'>Heurística</div>
+      <label className='label'>Heurística</label>
       <select value={heuristica} onChange={(e) => setHeuristica(e.target.value)}>
         <option value={0}>Visibilidade do Status do Sistema</option>
         <option value={1}>Correspondência entre o Sistema e o Mundo Real</option>
@@ -107,7 +107,7 @@ const FormHeuristica = ({
       </select>
 
 
-      <div className='label'>Problemas</div>
+      <label className='label'>Problemas</label>
       <TextArea
         placeholder="Descreva os problemas encontrados"
         value={anotacao}
@@ -116,7 +116,7 @@ const FormHeuristica = ({
         required
       />
 
-      <div className='label'>Recomendações</div>
+      <label className='label'>Recomendações</label>
       <TextArea
         placeholder="Escreva as recomendações para os problemas encontrados"
         value={recomendacao}
@@ -125,12 +125,12 @@ const FormHeuristica = ({
         required
       />
 
-      <div className='label'>Grau de severidade</div>
+      <label>Grau de severidade</label>
       <div className={styles.buttonContainer}>
         {[1, 2, 3, 4, 5].map((valor) => (
         <Button
           key={valor}
-          variant={`likertScale${valor}`}
+          variant={`likert${valor}`}
           onClick={() => handleSeveridade(valor)}
         >
           {valor}
@@ -138,7 +138,7 @@ const FormHeuristica = ({
         ))}
       </div>
 
-      <Button variant="save" type="submit" disabled={isSubmitting}>
+      <Button id='form_btn' variant="secondary" type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Salvando...' : 'Salvar'}
       </Button>
     </form>

@@ -5,11 +5,11 @@ import CreateProject from './pages/CreateProject';
 import Project from './pages/Project';
 import Heuristic from './components/Heuristic/Heuristic';
 import LayoutComSidebar from './pages/LayoutComSidebar';
-import BemVindo from './pages/BemVindo';
 import Hero from './pages/Hero';
 import CreateAccount from './pages/CreateAccount';
 import ForgotPassword from './pages/ForgotPassword';
 import ChangePassword from './pages/ChangePassword';
+import Homescreen from './pages/Homescreen';
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
         <Route path="/forgot/password" element={<ForgotPassword/>}/>
         {/* Página que contém a sidebar (Cuidado!) */}
         <Route element={<LayoutComSidebar/>}>
-          <Route path="/home" element={<BemVindo/>} />
+          <Route path="/home" element={<Homescreen/>} />
           <Route path ="/create/project" element={<CreateProject/>} />
           <Route path='/project/:projetoId' element={<Project/>} />
           <Route path='/rate/project/:projetoId' element={<Heuristic/>} />

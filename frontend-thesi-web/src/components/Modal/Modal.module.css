@@ -14,8 +14,7 @@
 .modal {
     display: flex;
     background-color: white;
-    border-radius: 10px;
-    width: 80vw;
+    width: 85vw;
     height: 80vh;
     overflow: auto;
     position: relative;
@@ -24,8 +23,8 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    font-size: 14px;
+    padding: 1.5em;
+    font-size: var(--font-size-base);
 }
 
 .content {
@@ -35,17 +34,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0.5em;
 }
 
 .sideBarModal{
     display: flex;
-    flex-direction: column;
-    width: 22%;
-    background-color: #F8F8F7;
+    flex-direction: column; 
+    background-color: #ffffff;
     border-right: 0.5px solid #F0F0EF;
-    padding: 20px;
+    padding: 1em;
 }
 
 .imageContainer{
@@ -53,18 +50,10 @@
 }
 
 .tabButtons {
-    background-color: #5f5e5b1a;
+    background-color: var(--color-primary-transparency);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    height: 30px;
-}
-
-.buttonContainer{
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 20px;
+    padding: 0.3em;
+    margin-bottom: 0.5em;
 }

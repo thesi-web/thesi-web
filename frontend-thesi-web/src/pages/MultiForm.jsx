@@ -87,9 +87,10 @@ export default function MultiStepForm() {
         {step > 1 && (
           <Button
             iconPosition='left'
-            icon={<i className="bi bi-arrow-left-circle"></i>} // ✅ Corrigido
+            icon={<i className="bi bi-arrow-left-circle"></i>} 
             variant='transparent'
             onClick={() => setStep(step - 1)}
+            id='form_btn'
           >
             Anterior
           </Button>
@@ -97,16 +98,17 @@ export default function MultiStepForm() {
 
         {step < 2 && (
           <Button
-            icon={<i className="bi bi-arrow-right-circle"></i>} // ✅ Corrigido
+            icon={<i className="bi bi-arrow-right-circle"></i>}
             variant='transparent'
             onClick={() => setStep(step + 1)}
+            id='form_btn'
           >
             Próximo
           </Button>
         )}
 
         {step === 2 && (
-          <Button type='submit' variant='success'>
+          <Button type='submit' variant='success' id='form_btn'>
             Criar Projeto
           </Button>
         )}

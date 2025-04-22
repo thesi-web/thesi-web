@@ -1,7 +1,8 @@
 .buttonContainer {
-    display: flex;
-    margin-bottom: 10px;
-    height: 30px;
+  display: flex;
+  background-color: var(--color-primary-transparency);
+  padding: 0.3em;
+  margin: 0.5em 0em;
 }
 
 .form {

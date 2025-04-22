@@ -12,31 +12,26 @@
   }
   
 .headerContainer {
-    margin-bottom: 14px;
+    margin-bottom: 0.5em;
     display: flex;
     justify-content: space-between;
-    padding: 8px 16px 0 16px;
+    padding: 0.5em;
+    align-items: center;
 } 
 
 .headerIcons {
-    font-size: 18px;
-    color: #5F5E5B;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    padding: 0 5px;
-    border-radius: 8px;
+  font-size: var(--font-size-lg);
+  color: var(--color-heading);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0 0.3em;
 } 
 
 .headerIcons:hover {
-    background-color: #F0F0EF;
+  background-color: var(--color-primary-transparency);
+  color: var(--color-primary);
 }
 
-.logo {
-    font-size: 14px;
-    font-weight: 600;
-    color: #5F5E5B;
-}
- 
 .slideIn {
     animation: slideIn 0.3s ease-out forwards;
   }

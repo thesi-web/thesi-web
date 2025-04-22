@@ -46,18 +46,19 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
     <div className={styles.backdrop} onClick={setModalOpen}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.sideBarModal}>
+          
           <div className={styles.tabButtons}>
             <Button
-              variant={selectedTab === 'heuristica' ? 'activeL' : 'deactivatedL'}
+              variant={selectedTab === 'heuristica' ? 'highcontrast' : 'lowcontrast'}
               onClick={() => setSelectedTab('heuristica')}
             >
-              Heurística
+              Heuristic
             </Button>
             <Button
-              variant={selectedTab === 'semiotica' ? 'activeR' : 'deactivatedR'}
+              variant={selectedTab === 'semiotica' ? 'highcontrast' : 'lowcontrast'}
               onClick={() => setSelectedTab('semiotica')}
             >
-              Semiótica
+              Semiotic
             </Button>
           </div>
 
@@ -89,8 +90,8 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
 
         <div className={styles.imageContainer}>
           <div className={styles.header}>
-            <div className={'h2'}>{`Tela ${index}`}</div>
-            <i className="bi bi-x-lg" onClick={setModalOpen}></i>
+          <div className={'h2'}>{`Tela ${index}`}</div>
+           <div><Button variant='close' icon={<i class="bi bi-x"></i>} onClick={setModalOpen}></Button></div>
           </div>
           <div className={styles.content}>
             <Canva
@@ -99,11 +100,7 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
               setImagemURL={setImagemURL}
             />
           </div>
-          <div className={styles.buttonContainer}>
-            <Button icon={<i className="bi bi-arrow-right-circle"></i>} variant="transparent">
-              Concluir Avaliação
-            </Button>
-          </div>
+          
         </div>
       </div>
     </div>

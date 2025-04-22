@@ -38,46 +38,47 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
 
   return (
     <div className={show ? styles.active : styles.disable}>
-          
-      <div className={styles.headerIcons}>
-        <div className={styles.logo}>thesi</div>
-        <div className={styles.iconContainer}>
-          <div className={styles.icons} onClick={onClose} ><i className="bi bi-chevron-double-left"/></div>
-          <Link to="/create/project" ><div className={styles.icons}><i className="bi bi-pencil-square"></i></div></Link>
+      <div className={styles.container}>
+        <div className={styles.headerIcons}>
+          <div className={styles.logo}>Thesi</div>
+          <div className={styles.iconContainer}>
+            <div className={styles.icons} onClick={onClose} ><i className="bi bi-chevron-double-left"/></div>
+            <Link to="/create/project" ><div className={styles.icons}><i className="bi bi-pencil-square"></i></div></Link>
+          </div>
         </div>
-      </div>
-      
-      <div>
-      <Link to="/home" ><SidebarItem label={"Página Inicial"} icon={<i className="bi bi-cup"></i>} /></Link>
         
-        <SidebarItem 
-          label={"Caixa de Entrada"} 
-          icon={<i className="bi bi-mailbox"></i>} 
-          onClick={onOpenInbox}
-        />
-      </div>
+        <div>
+        <Link to="/home" ><SidebarItem label={"Home"} icon={<i className="bi bi-cup"></i>} /></Link>
+          
+          <SidebarItem 
+            label={"Inbox"} 
+            icon={<i className="bi bi-mailbox"></i>} 
+            onClick={onOpenInbox}
+          />
+        </div>
 
-        <div className={styles.title}>Projetos</div>
+        <div className={styles.title}>Projects</div>
 
-      <div className={styles.projectContainer} >
-        {totalProjetos.length > 0 ? (
-          totalProjetos.map((projeto, index) => (
-            <div key={index} onClick={() => handleClick(projeto.id_projeto)}>
-              <SidebarProject label={projeto.nm_projeto} emoji={"🌈"} />
-            </div>
-          ))
-        ) : (
-          < Warning icon={<i className="bi bi-stars"></i>} title={"Não há projetos"} message={"seus projetos aparecerão aqui"} />
-        )}
-      </div>
+        <div className={styles.projectContainer} >
+          {totalProjetos.length > 0 ? (
+            totalProjetos.map((projeto, index) => (
+              <div key={index} onClick={() => handleClick(projeto.id_projeto)}>
+                <SidebarProject label={projeto.nm_projeto} emoji={"🌈"} />
+              </div>
+            ))
+          ) : (
+            < Warning icon={<i className="bi bi-stars"></i>} title={""} message={"your projects will appear here"} />
+          )}
+        </div>
 
-      <div className={styles.footerContainer}>
-        <SidebarItem label={"Configurações"} icon={<i className="bi bi-gear"></i>} />
-        <SidebarItem label={"Lixeira"} icon={<i className="bi bi-trash3"></i>} />
-        <SidebarItem label={"Convidar membros"} icon={<i className="bi bi-person-plus"></i>} />
-        <div className={styles.footerIcons}>
-          <i className="bi bi-calendar2-check"></i>
-          <i className="bi bi-question-circle"></i>
+        <div className={styles.footerContainer}>
+          <SidebarItem label={"Settings"} icon={<i className="bi bi-gear"></i>} />
+          <SidebarItem label={"Trash"} icon={<i className="bi bi-trash3"></i>} />
+          <SidebarItem label={"Invite members"} icon={<i className="bi bi-person-plus"></i>} />
+          <div className={styles.footerIcons}>
+            <div className={styles.icons}><i className="bi bi-calendar2-check"></i></div>
+            <div className={styles.icons}><i className="bi bi-question-circle"></i></div>
+          </div>
         </div>
       </div>
     </div>

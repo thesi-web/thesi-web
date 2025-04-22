@@ -1,12 +1,21 @@
-import React from 'react'
-import NavBar from '../components/NavBar/NavBar'
+import React from 'react';
 
-const Homescreen = () => {
+const Homescreen = ( {role} ) => {
+  
   return (
-    <div>
-        <NavBar/>
-    </div>
+    <div className='view' >
+      <div >
+        Bem-vindo a THESI!
+      </div>
+
+      {role === 'aluno' && (
+        <p> Aluno </p>
+      )}
+      {role === 'professor' && (
+          <p> Professor </p>
+      )}
+    </div>   
   )
 }
 
-export default Homescreen
+export default Homescreen;

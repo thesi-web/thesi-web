@@ -1,7 +1,7 @@
 import styles from './Stepper.module.css';
 
 export default function Stepper({ currentStep }) {
-  const steps = ['Informações gerais', 'Upload dos protótipos'];
+  const steps = ['General information', 'Uploading prototypes'];
 
   return (
     <div className={styles.stepper}>
