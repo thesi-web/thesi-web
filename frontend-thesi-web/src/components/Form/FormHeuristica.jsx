@@ -5,20 +5,19 @@ import styles from './FormHeuristica.module.css';
 
 const FormHeuristica = ({
   heuristica,
+  setHeuristica,
   anotacao,
+  setAnotacao,
   recomendacao,
+  setRecomendacao,
   severidade,
+  setSeveridade,
+  handleSeveridade,
   idProjeto,
   imagemComMarca,
-  handleSeveridade,
-  setHeuristica,
-  setAnotacao,
-  setRecomendacao,
-  setSeveridade,
   onSave,
 }) => {
 
-  console.log(imagemComMarca);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -71,7 +70,6 @@ const FormHeuristica = ({
       });
   
       if (response.ok) {
-        alert('Heurística salva com sucesso!');
         onSave();
       } else {
         const errorData = await response.json();
@@ -91,7 +89,7 @@ const FormHeuristica = ({
   };
   
   return (
-    <form onSubmit={SubmitHeuristica} className={styles.form} method="POST" encType="multipart/form-data">
+    <form onSubmit={SubmitHeuristica} method="POST" encType="multipart/form-data">
       <label className='label'>Heurística</label>
       <select value={heuristica} onChange={(e) => setHeuristica(e.target.value)}>
         <option value={0}>Visibilidade do Status do Sistema</option>
@@ -116,7 +114,7 @@ const FormHeuristica = ({
         required
       />
 
-      <label className='label'>Recomendações</label>
+      <label className='label'>Recommendations</label>
       <TextArea
         placeholder="Escreva as recomendações para os problemas encontrados"
         value={recomendacao}
@@ -139,14 +137,10 @@ const FormHeuristica = ({
       </div>
 
       <Button id='form_btn' variant="secondary" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Salvando...' : 'Salvar'}
+        {isSubmitting ? 'Saving...' : 'Save'}
       </Button>
     </form>
   );
 };
 
 export default FormHeuristica;
-
-
-
-//activeRectangle, onSave, onCancel, idProjeto, imagemURL

@@ -21,7 +21,7 @@ exports.enviarEmailRecuperacao = async (destinatario, token) => {
             <h2>Change your password.✨</h2>
             <p>Hey!</p>
             <p>Don't worry, here's your magic link! use it to reset your password:</p>
-            <a>http://http://localhost:5173/change/password/${token}</a>
+            <a>http://localhost:5173/change/password/${token}</a>
         </div>
     `,
   };

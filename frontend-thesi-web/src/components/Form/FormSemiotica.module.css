@@ -9,9 +9,3 @@
     display: flex;
     flex-direction: column;
 }
-
-/*
-  icon={<i class="bi bi-ui-checks"></i>}
-  icon={<i class="bi bi-info-circle"></i>}
-  icon={<i class="bi bi-toggles"></i>}
-*/

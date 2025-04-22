@@ -13,6 +13,11 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
   const handleSigno = (novoSigno) => {
     setSigno(novoSigno);
   };
+  const [esperada, setEsperada] = useState('');
+  const [possivel, setPossivel] = useState('');
+  const [quebra, setQuebra] = useState('');
+  const [recomendacaoSemiotica, setRecomendacaoSemiotica] = useState('');
+
 
   // Heurística
   const [heuristica, setHeuristica] = useState('');
@@ -45,6 +50,23 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
   return (
     <div className={styles.backdrop} onClick={setModalOpen}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        
+
+      <div className={styles.imageContainer}>
+          <div className={styles.header}>
+          <div className={'h2'}>{`Tela ${index}`}</div>
+           <div><Button variant='close' icon={<i class="bi bi-x"></i>} onClick={setModalOpen}></Button></div>
+          </div>
+          <div className={styles.content}>
+            <Canva
+              imagem={src}
+              setActiveRectangle={setActiveRectangle}
+              setImagemURL={setImagemURL}
+            />
+          </div>
+          
+        </div>
+        
         <div className={styles.sideBarModal}>
           
           <div className={styles.tabButtons}>
@@ -83,25 +105,29 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
             )}
 
             {selectedTab === 'semiotica' && (
-              <FormSemiotica handleSigno={handleSigno} signo={signo} />
+              <FormSemiotica 
+                handleSigno={handleSigno} 
+                signo={signo} 
+                esperada={esperada}
+                setEsperada={setEsperada}
+                possivel={possivel}
+                setPossivel={setPossivel}
+                quebra={quebra}
+                setQuebra={setQuebra}
+                recomendacaoSemiotica={recomendacaoSemiotica}
+                setRecomendacaoSemiotica={setRecomendacaoSemiotica}
+                activeRectangle={activeRectangle}
+                onSave={handleSaveForm}
+                onCancel={handleCancelForm}
+                imagemComMarca={imagemURL} 
+              />
             )}
           </div>
         </div>
 
-        <div className={styles.imageContainer}>
-          <div className={styles.header}>
-          <div className={'h2'}>{`Tela ${index}`}</div>
-           <div><Button variant='close' icon={<i class="bi bi-x"></i>} onClick={setModalOpen}></Button></div>
-          </div>
-          <div className={styles.content}>
-            <Canva
-              imagem={src}
-              setActiveRectangle={setActiveRectangle}
-              setImagemURL={setImagemURL}
-            />
-          </div>
-          
-        </div>
+       
+
+
       </div>
     </div>
   );
