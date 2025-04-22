@@ -18,6 +18,10 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
   const [quebra, setQuebra] = useState('');
   const [recomendacaoSemiotica, setRecomendacaoSemiotica] = useState('');
 
+  const handleEsperada = (event) => setEsperada(event.target.value);
+  const handlePossivel =  (event) => setPossivel(event.target.value);
+  const handleQuebra = (event) => setQuebra(event.target.value);
+  const handleRecomendacaoSemiotica =  (event) => setRecomendacaoSemiotica(event.target.value);
 
   // Heurística
   const [heuristica, setHeuristica] = useState('');

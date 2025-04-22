@@ -22,7 +22,7 @@ const FormSemiotica = ({
   
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const SubmitHeuristica = async (e) => {
+  const SubmitSemiotica = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
   
