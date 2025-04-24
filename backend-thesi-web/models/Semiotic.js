@@ -21,11 +21,22 @@ class Semiotic {
       throw err;
     }}
   
-    async findByProject(userId, projetoId) {
+    async findByProject(projetoId) {
       try {
-        const results = await database("t_semiotica")
-          .select("id_semiotica", "id_projeto", "nm_signo", "ds_problemas", "ds_recomendacoes", "ds_observacoes", "st_correcao")
-          .where({ id_usuario: userId, id_projeto: projetoId });
+        const results = await database("t_semiotica as s")
+          .select(
+            "s.id_semiotica",
+            "s.id_projeto", 
+            "s.nm_signo", 
+            "s.ds_recomendacoes", 
+            "s.ds_caminho",
+            "s.ds_esperada",
+            "s.ds_possivel",
+            "s.ds_quebra",
+            "u.nm_usuario"
+          )
+          .join("t_usuario as u", "s.id_usuario", "u.id_usuario")
+          .where({ "s.id_projeto": projetoId });
   
         return results;
       } catch (error) {

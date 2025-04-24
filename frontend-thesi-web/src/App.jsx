@@ -11,7 +11,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ChangePassword from './pages/ChangePassword';
 import Homescreen from './pages/Homescreen';
 import ReportComponent from './components/ReportComponent/ReportComponent';
-import Semiotic from './components/ReportComponent/Semiotic';
+import Semiotic from './components/ReportComponent/ReportSemiotic';
 
 
 function App() {
@@ -25,11 +25,11 @@ function App() {
         <Route path="/create/account" element={<CreateAccount/>} />
         <Route path="/change/password/:token" element={<ChangePassword/>} /> {/*saber como protege dps*/}
         <Route path="/forgot/password" element={<ForgotPassword/>}/>
-        <Route path="/report/:projetoId" element={<ReportComponent/>}/>
         <Route path="/teste" element={<Semiotic/>}/>
         {/* Página que contém a sidebar (Cuidado!) */}
         <Route element={<LayoutComSidebar/>}>
           <Route path="/home" element={<Homescreen/>} />
+          <Route path="/report/:projetoId" element={<ReportComponent/>}/>
           <Route path ="/create/project" element={<CreateProject/>} />
           <Route path='/project/:projetoId' element={<Project/>} />
           <Route path='/rate/project/:projetoId' element={<Heuristic/>} />

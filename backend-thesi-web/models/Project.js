@@ -141,7 +141,7 @@ class Project {
 
       const atualizado = await trx("t_projeto_usuario")
         .where({ id_projeto: projetoId, id_usuario: userId })
-        .update({ ds_status: "finalizado" });
+        .update({ ds_status: "entregue" });
   
       await trx.commit();
       return atualizado;
@@ -184,8 +184,3 @@ class Project {
 }
 
 module.exports = new Project();
-
-
-//Falta refatorar a recuperação dos projetos de um projessor: 
-//Antes só tinha a professora Ana com id 1, agora teremos vários professores, cada um com um ID diferente. 
-//Pensar em como vamos colocar isso no banco/recuperar.

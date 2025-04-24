@@ -20,7 +20,7 @@ class Heuristic {
       throw err;
     }}
   
-    async findByProject(userId, projetoId) {
+    async findByProject(projetoId) {
       try {
         const results = await database("t_heuristica as h")
         .select(

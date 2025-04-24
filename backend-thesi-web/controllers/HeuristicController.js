@@ -35,13 +35,11 @@ class HeuristicController {
 
   async getByProject(req, res) {
 
-    const userId = req.userId;
-
     const { projetoId } = req.params;
 
     try {
     
-      const heuristics = await Heuristic.findByProject(userId, projetoId);
+      const heuristics = await Heuristic.findByProject(projetoId);
       res.json(heuristics);
 
     } catch (err) {

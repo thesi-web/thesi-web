@@ -35,13 +35,11 @@ class SemioticController {
     
     async getByProject(req, res) {
   
-      const userId = req.userId;
-  
       const { projetoId } = req.params;
   
       try {
       
-        const semiotics = await Semiotic.findByProject(userId, projetoId);
+        const semiotics = await Semiotic.findByProject(projetoId);
         res.json(semiotics);
   
       } catch (err) {

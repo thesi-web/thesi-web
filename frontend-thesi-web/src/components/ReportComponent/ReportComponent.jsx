@@ -1,35 +1,91 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom'; 
 import styles from './ReportComponent.module.css'
-import HeuristicComponent from '../Heuristic/HeuristicComponent'
-import Severity from '../Severity/Severity'
-
+import ReportHeuristic from './ReportHeuristic'
+import ReportSemiotic from './ReportSemiotic'
 
 const ReportComponent = () => {
+
+  const { projetoId } = useParams();
+  const [semiotica, setSemiotica] = useState([]);
+  const [heuristica, setHeuristica] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
+  useEffect(() => {
+
+    const handleHeuristica = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/heuristic/${projetoId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, 
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        setHeuristica(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    handleHeuristica();
+  }, [projetoId]);
+
+  useEffect(() => {
+    const handleSemiotica = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/semiotic/${projetoId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, 
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        setSemiotica(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    handleSemiotica();
+  }, [projetoId]);
+
   return (
-    <div>
-        
-    <div className={styles.section}>
-        <div className={styles.imagePlaceholder}/>
+    <div className={styles.container}>
+      
+      
+      {heuristica.map((heuristica, index) => (
+              <ReportHeuristic 
+                name={heuristica.nm_heuristica} 
+                severity={heuristica.nr_severidade} 
+                violation={heuristica.ds_problemas} 
+                recommendation={heuristica.ds_recomendacoes}
+                image={heuristica.ds_caminho} />  
+            ))}
 
-        <div className={styles.contentContainer} >
-          <div> 
-            <div className={styles.title}> Heurística Violada </div>
-            <HeuristicComponent number={0} /> 
-          </div>
-          <div>
-          <div className={styles.title}> Grau de Severidade </div>
-          <Severity severity={4} />
-          </div>
-        </div>
-    </div> 
-
-    <div className={styles.container} >
-      <div>
-        <div className={styles.title}> Descrição da Violação </div>
-        <div>texto aqui</div>
-      </div>
-        <div className={styles.title}> Recomendações </div>
-    </div>
+            {semiotica.map((semiotica, index) => (
+              <ReportSemiotic 
+                sign={semiotica.nm_signo} 
+                expected={semiotica.ds_esperada} 
+                possible={semiotica.ds_possivel} 
+                observed={semiotica.ds_quebra} 
+                recommendationS={semiotica.ds_recomendacoes} 
+                image={semiotica.ds_caminho} />
+          ))}
    
     </div>
   )

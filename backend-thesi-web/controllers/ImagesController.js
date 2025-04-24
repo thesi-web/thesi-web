@@ -106,7 +106,7 @@ class ImagesController {
   async upload(req, res) {
 
     try {
-      console.log('req.file:', req.file);
+    
       const file = req.file;
 
       if (!file) {
