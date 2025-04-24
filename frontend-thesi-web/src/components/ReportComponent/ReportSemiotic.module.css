@@ -1,0 +1,58 @@
+.rightPanel {
+    width: 45vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  
+.imagePlaceholder {
+  width: 45vw;
+  height: 300px;
+}
+
+
+.section{
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.title{
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-heading);
+  text-transform: capitalize;
+
+}
+
+.titleBlue{
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  text-transform: capitalize;
+}
+
+.boxColor {
+  background-color: var(--color-primary-transparency);
+  padding: 1em;
+}
+
+.box {
+  background-color: white;
+  padding: 1em;
+}
+
+.content {
+  margin-top: 2em;
+}
+
+.icon {
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
+  margin-left: 0.5em;
+}
+
+.titleContainer{
+  display: flex;
+  margin: 0.5em 0em;
+}

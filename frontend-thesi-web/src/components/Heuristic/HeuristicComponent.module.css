@@ -5,7 +5,7 @@
 
 .title {
     color: var(--color-heading);
-    font-size: 14px;
+    font-size: var(--font-size-base);
     font-weight: 700;
 }
 
@@ -13,5 +13,5 @@
     color: var(--color-primary);
     font-size: var(--font-size-sm);
     text-transform: lowercase;
-    margin-bottom: 5px;
+    margin-bottom: 1em;
 }

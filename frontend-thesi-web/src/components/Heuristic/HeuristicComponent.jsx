@@ -3,59 +3,59 @@ import styles from './HeuristicComponent.module.css'
 
 const HeuristicComponent = ({ number }) => {
   
-    const heuristics = {
-      0: {
-        icon: <i className="bi bi-transparency"></i>
-        ,
-        title: 'Correspondência entre o sistema e o mundo real',
-        explanation: 'Aproveite as percepções dos usuários sobre o mundo'
-      },
-      1: {
-        icon: <i className="bi bi-patch-exclamation"></i>,
-        title: 'Visibilidade do status do sistema',
-        explanation: 'Mantenha o usuário informado sobre o que está acontecendo.'
+  const heuristics = {
+    0: {
+      icon: <i className="bi bi-transparency"></i>,
+      title: 'Match between system and the real world',
+      explanation: 'Leverage users’ understanding of the real world.'
     },
-      2: {
-        icon: <i className="bi bi-arrow-counterclockwise"></i>,
-        title: 'Controle e liberdade do usuário',
-        explanation: 'Permita que o usuário desfaça ações facilmente.'
+    1: {
+      icon: <i className="bi bi-patch-exclamation"></i>,
+      title: 'Visibility of system status',
+      explanation: 'Keep users informed about what is going on.'
     },
-      3: {
-        icon: <i className="bi bi-palette2"></i>,
-        title: 'Consistência e padrões',
-        explanation: 'Use padrões familiares para não confundir o usuário.'
+    2: {
+      icon: <i className="bi bi-arrow-counterclockwise"></i>,
+      title: 'User control and freedom',
+      explanation: 'Allow users to easily undo actions.'
     },
-      4: {
-        icon: <i className="bi bi-bug"></i>,
-        title: 'Prevenção de erros',
-        explanation: 'Evite erros antes que eles aconteçam.'
+    3: {
+      icon: <i className="bi bi-palette2"></i>,
+      title: 'Consistency and standards',
+      explanation: 'Use familiar patterns to avoid confusing users.'
     },
-      5: {
-        icon: <i className="bi bi-hand-index-thumb"></i>,
-        title: 'Reconhecimento em vez de lembrança',
-        explanation: 'Mostre opções em vez de exigir que o usuário memorize.'
+    4: {
+      icon: <i className="bi bi-bug"></i>,
+      title: 'Error prevention',
+      explanation: 'Prevent errors before they occur.'
     },
-      6: {
-        icon: <i className="bi bi-code-slash"></i>,
-        title: 'Flexibilidade e eficiência de uso',
-        explanation: 'Ofereça atalhos para quem já conhece o sistema.'
+    5: {
+      icon: <i className="bi bi-hand-index-thumb"></i>,
+      title: 'Recognition rather than recall',
+      explanation: 'Show options instead of expecting users to remember.'
     },
-      7: {
-        icon: <i className="bi bi-grid-1x2"></i>,
-        title: 'Design estético e minimalista',
-        explanation: 'Mostre só o essencial, sem poluir a interface.'
+    6: {
+      icon: <i className="bi bi-code-slash"></i>,
+      title: 'Flexibility and efficiency of use',
+      explanation: 'Provide shortcuts for experienced users.'
     },
-      8: {
-        icon: <i className="bi bi-arrow-counterclockwise"></i>,
-        title: 'Reconhecer, diagnosticar e se recuperar de erros',
-        explanation: 'Explique erros com clareza e ajude a corrigi-los.'
+    7: {
+      icon: <i className="bi bi-grid-1x2"></i>,
+      title: 'Aesthetic and minimalist design',
+      explanation: 'Display only the essential to keep the interface clean.'
     },
-      9: {
-        icon: <i className="bi bi-patch-question"></i>,
-        title: 'Ajuda e documentação',
-        explanation: 'Disponibilize ajuda útil e fácil de encontrar.'
+    8: {
+      icon: <i className="bi bi-arrow-counterclockwise"></i>,
+      title: 'Help users recognize, diagnose, and recover from errors',
+      explanation: 'Explain errors clearly and guide users to fix them.'
     },
-    }
+    9: {
+      icon: <i className="bi bi-patch-question"></i>,
+      title: 'Help and documentation',
+      explanation: 'Provide helpful and easy-to-find assistance.'
+    },
+  }
+  
   
     const { icon, title, explanation } = heuristics[number]
   

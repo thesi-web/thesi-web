@@ -143,6 +143,18 @@ a:hover {
   color: var(--color-subtext);
 }
 
+.subtext{
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-heading);
+}
+
+.subtext-color{
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-primary);
+}
+
 input {
   font-size: var(--font-size-base);
   width: 100%;

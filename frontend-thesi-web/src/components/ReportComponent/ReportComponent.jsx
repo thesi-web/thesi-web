@@ -84,7 +84,8 @@ const ReportComponent = () => {
                 possible={semiotica.ds_possivel} 
                 observed={semiotica.ds_quebra} 
                 recommendationS={semiotica.ds_recomendacoes} 
-                image={semiotica.ds_caminho} />
+                image={semiotica.ds_caminho}
+                icon={semiotica.nm_signo} />
           ))}
    
     </div>
