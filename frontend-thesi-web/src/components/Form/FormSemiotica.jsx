@@ -130,8 +130,8 @@ const FormSemiotica = ({
         placeholder="what the user might understand (even if it is not ideal)." 
         value={possivel} 
         maxLength={200} 
-        required />
         onChange={(e) => setPossivel(e.target.value)} 
+        required />
       
       <label className='label'>Observed break</label>
       <TextArea 

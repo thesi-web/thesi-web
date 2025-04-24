@@ -67,7 +67,7 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
               </div>
             ))
           ) : (
-            < Warning icon={<i className="bi bi-stars"></i>} title={""} message={"your projects will appear here"} />
+            < Warning icon={<i className="bi bi-stars"></i>} message={"your projects will appear here"} />
           )}
         </div>
 

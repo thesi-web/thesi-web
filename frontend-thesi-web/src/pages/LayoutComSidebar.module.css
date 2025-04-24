@@ -12,16 +12,16 @@
 }
 
 .icons {
-    font-size: 18px;
-    color: #5F5E5B;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    border-radius: 8px;
-    padding: 0 5px;
-  } 
-  
+  font-size: var(--font-size-lg);
+  color: var(--color-heading);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0 0.3em;
+} 
+
 .icons:hover {
-background-color: #F0F0EF;
+  background-color: var(--color-primary-transparency);
+  color: var(--color-primary);
 }
 
 .content {

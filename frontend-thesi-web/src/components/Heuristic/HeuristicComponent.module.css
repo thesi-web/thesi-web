@@ -1,18 +1,17 @@
 .icon {
-    color: #A6A299;
-    font-size: 25px;
+    color: var(--color-primary);
+    font-size: var(--font-size-2xl);
 }
 
 .title {
-    color: #37352F;
+    color: var(--color-heading);
     font-size: 14px;
     font-weight: 700;
 }
 
 .explanation {
-    color: #A6A299;
-    font-size: small;
-    font-weight: 400;
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
     text-transform: lowercase;
     margin-bottom: 5px;
 }

@@ -141,7 +141,7 @@ class Project {
 
       const atualizado = await trx("t_projeto_usuario")
         .where({ id_projeto: projetoId, id_usuario: userId })
-        .update({ ds_status: "FINALIZADO" });
+        .update({ ds_status: "finalizado" });
   
       await trx.commit();
       return atualizado;

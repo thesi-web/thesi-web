@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useImperativeHandle, forwardRef, } from 'react';
 
-const Canvas = ({ imagem, setActiveRectangle, setImagemURL }) => {
+const Canvas = forwardRef(({ imagem, setActiveRectangle, setImagemURL }, ref) => {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -8,6 +8,10 @@ const Canvas = ({ imagem, setActiveRectangle, setImagemURL }) => {
   const [loadedImage, setLoadedImage] = useState(null);
   const [marks, setMarks] = useState([]);
   const [isMarking, setIsMarking] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    limparRetangulos,
+  }));
 
   useEffect(() => {
     if (!imagem) return;
@@ -145,7 +149,7 @@ const Canvas = ({ imagem, setActiveRectangle, setImagemURL }) => {
     setIsMarking(false);
   };
 
-  const handleCancelForm = () => {
+  const limparRetangulos = () => {
     setMarks((prevMarks) => prevMarks.slice(0, -1));
     setActiveRectangle(null);
     setIsMarking(false);
@@ -159,6 +163,6 @@ const Canvas = ({ imagem, setActiveRectangle, setImagemURL }) => {
       onMouseUp={handleMouseUp}
     />
   );
-};
+});
 
 export default Canvas;

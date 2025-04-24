@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './Modal.module.css';
 import FormHeuristica from '../Form/FormHeuristica';
 import FormSemiotica from '../Form/FormSemiotica';
@@ -51,6 +51,14 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
     setActiveRectangle(null);
   };
 
+  const handleLimparRetangulos = () => {
+    if (canvaRef.current) {
+      canvaRef.current.limparRetangulos(); // <-- Chama a função do filho via ref
+    }
+  };
+
+  const canvaRef = useRef(null);
+
   return (
     <div className={styles.backdrop} onClick={setModalOpen}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -58,20 +66,22 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
 
       <div className={styles.imageContainer}>
           <div className={styles.header}>
-          <div className={'h2'}>{`Tela ${index}`}</div>
-           <div><Button variant='close' icon={<i class="bi bi-x"></i>} onClick={setModalOpen}></Button></div>
+           <div className={'h2'}>{`Screen ${index}`}</div>
+           <div><Button variant='primary'  onClick={handleLimparRetangulos}>Clear tag</Button></div>
           </div>
           <div className={styles.content}>
             <Canva
+              ref={canvaRef}
               imagem={src}
               setActiveRectangle={setActiveRectangle}
               setImagemURL={setImagemURL}
             />
-          </div>
-          
+          </div>          
         </div>
         
         <div className={styles.sideBarModal}>
+          
+          <div className={styles.close} ><Button variant='close' icon={<i className="bi bi-x"></i>} onClick={setModalOpen}></Button></div>
           
           <div className={styles.tabButtons}>
             <Button
@@ -110,6 +120,7 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
 
             {selectedTab === 'semiotica' && (
               <FormSemiotica 
+                idProjeto={projetoId}
                 handleSigno={handleSigno} 
                 signo={signo} 
                 esperada={esperada}
@@ -128,9 +139,6 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
             )}
           </div>
         </div>
-
-       
-
 
       </div>
     </div>
