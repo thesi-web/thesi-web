@@ -1,42 +1,42 @@
 .severidade {
+    font-size:  var(--font-size-sm);
     display: flex;
     margin-top: 0.5em;
     align-items: center;
     justify-content: center;
-    height: 20px;
-    width: 15px;
+    height: 15px;
+    width: 10px;
     font-weight: 700;
     color: #FFFFFF;
     padding: 5px;
-    cursor: unset;
   }
 
 .severidade1{
   border: 1px solid #489D26;
   background-color: #42C62F;
-  box-shadow: 0px 4px 0px 0px #489D26;
+  box-shadow: 0px 2px 0px 0px #489D26;
 }
 
 .severidade2 {
   border: 1px solid #678A44;
   background-color: #A1D76A;
-  box-shadow: 0px 4px 0px 0px #678A44;
+  box-shadow: 0px 2px 0px 0px #678A44;
 } 
   
 .severidade3 {
   border: 1px solid #AD9D2F;
   background-color: #F9E143;
-  box-shadow: 0px 4px 0px 0px #AD9D2F;
+  box-shadow: 0px 2px 0px 0px #AD9D2F;
 }
  
 .severidade4 {
   border: 1px solid #AD7B2F;
   background-color: #F9B143;
-  box-shadow: 0px 4px 0px 0px #AD7B2F;
+  box-shadow: 0px 2px 0px 0px #AD7B2F;
 }
   
 .severidade5 {
   border: 1px solid #B20000;
   background-color: #FF0000;
-  box-shadow: 0px 4px 0px 0px #B20000;
+  box-shadow: 0px 2px 0px 0px #B20000;
 }

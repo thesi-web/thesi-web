@@ -1,11 +1,11 @@
 .icon {
     color: var(--color-primary);
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-lg);
 }
 
 .title {
     color: var(--color-heading);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm);
     font-weight: 700;
 }
 

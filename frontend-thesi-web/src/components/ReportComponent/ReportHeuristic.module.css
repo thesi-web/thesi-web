@@ -1,31 +1,31 @@
 .section{
-    width: 100vw;
     display: flex;
     background-color: var(--color-primary-transparency);
     justify-content: space-evenly;
+    
 }
 
 .contentContainer{
-    width: 45vw;
+    width: 25vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .imagePlaceholder {
-    width: 45vw;
-    height: 300px;
+    width: 25vw;
+    height: 30vh;
 }
 
 
 .title{
-font-size: var(--font-size-lg);
+font-size: var(--font-size-base);
 font-weight: var(--font-weight-bold);
 color: var(--color-heading);
 }
 
 .textBox{
-    width: 45vw;
+    width: 26vw;
 }
 
 .container{

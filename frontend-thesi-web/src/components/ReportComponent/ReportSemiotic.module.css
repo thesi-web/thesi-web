@@ -1,24 +1,25 @@
 .rightPanel {
-    width: 45vw;
+    width: 32vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
   
-.imagePlaceholder {
-  width: 45vw;
-  height: 300px;
+  .imagePlaceholder {
+    width: 25vw;
+    height: 30vh;
+    margin-left: 37px;
 }
 
 
 .section{
-  width: 100vw;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  height: 36.2vh;
 }
 
 .title{
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-bold);
   color: var(--color-heading);
   text-transform: capitalize;
@@ -26,7 +27,7 @@
 }
 
 .titleBlue{
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-bold);
   color: var(--color-primary);
   text-transform: capitalize;
@@ -34,12 +35,16 @@
 
 .boxColor {
   background-color: var(--color-primary-transparency);
-  padding: 1em;
+  padding: 0.5em;
+  overflow: hidden;         
+  text-overflow: ellipsis;
 }
 
 .box {
   background-color: white;
-  padding: 1em;
+  padding: 0.5em;
+  overflow: hidden;        
+  text-overflow: ellipsis;
 }
 
 .content {
@@ -48,11 +53,11 @@
 
 .icon {
   color: var(--color-primary);
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
   margin-left: 0.5em;
 }
 
 .titleContainer{
   display: flex;
-  margin: 0.5em 0em;
+  margin: 0.5em 2.2em;
 }

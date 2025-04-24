@@ -42,7 +42,7 @@ const HeuristicComponent = ({ number }) => {
     7: {
       icon: <i className="bi bi-grid-1x2"></i>,
       title: 'Aesthetic and minimalist design',
-      explanation: 'Display only the essential to keep the interface clean.'
+      explanation: 'Display essentials only for a clean UI.'
     },
     8: {
       icon: <i className="bi bi-arrow-counterclockwise"></i>,

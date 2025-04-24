@@ -105,4 +105,5 @@
 }
 .icon:hover{
     background-color: var(--color-primary-transparency);
+    color: var(--color-primary);
 }
