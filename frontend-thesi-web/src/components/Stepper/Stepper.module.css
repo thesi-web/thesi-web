@@ -49,7 +49,7 @@
     margin-top: 9px;
     width: 100%;
     height: 1px;
-    background-color: var(--color-subtext);
+    background-color: var(--color-transparency);
     z-index: 0;
   }
   

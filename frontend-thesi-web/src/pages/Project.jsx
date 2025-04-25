@@ -70,7 +70,7 @@ const Project = () => {
           <div className={'title'}>{projeto.nm_projeto}</div>
           <Status status={`${projeto.ds_status}`} />
         </div>
-        <p> Criado dia {projeto.dt_criacao} por {projeto.criador} </p>
+        <p> Created on {projeto.dt_criacao} by {projeto.criador} </p>
         <div className={styles.objectiveContainer}>
           {projeto.ds_projeto}
         </div>

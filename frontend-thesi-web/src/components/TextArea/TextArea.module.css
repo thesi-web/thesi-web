@@ -1,6 +1,6 @@
 .textarea {
-  background-color: #5f5e5b04;
-  border: solid 1px transparent;                  
+  background-color: transparent;
+  border: solid 1px var(--color-transparency);                 
   color: var(--color-heading);                   
   outline: none;                 
   resize: none;               
@@ -17,4 +17,20 @@
 
 .textarea:hover{
   border: solid 1px var(--color-transparency);
+}
+
+.textarea:active{
+  border: solid 1px var(--color-primary);
+}
+
+.counter {
+  font-size: var(--font-size-sm);
+  color: var(--color-transparency);
+  margin-top: -10px;
+  text-align: end;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
 }

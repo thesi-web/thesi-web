@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react';
 import styles from './TextArea.module.css'
 
 const TextArea = ( {placeholder, onChange, maxLength} ) => {
+
+  const [charCount, setCharCount] = useState(0);
+
+  const handleChange = (e) => {
+    setCharCount(e.target.value.length);
+    if (onChange) {
+      onChange(e);
+    }
+  };
+
   return (
-    <textarea className={styles.textarea} placeholder={placeholder} onChange={onChange} maxLength={maxLength} required >
-    </textarea>
+    <div className={styles.container} >
+      <textarea 
+        className={styles.textarea} 
+        placeholder={placeholder} 
+        onChange={handleChange} 
+        maxLength={maxLength} 
+        required >
+      </textarea>
+      <div className={styles.counter}>
+        {charCount}/{maxLength}
+      </div>
+    </div>
   )
 }
 

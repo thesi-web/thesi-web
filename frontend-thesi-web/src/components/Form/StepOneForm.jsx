@@ -87,7 +87,7 @@ export default function StepOneForm({ projectData, setProjectData }) {
         )}
 </div>
       <label>Objective</label>
-      <TextArea placeholder="describe the purpose of the project" onChange={handleChange('objective')} value={projectData.objective} maxLength={200} required />
+        <TextArea placeholder="describe the purpose of the project" onChange={handleChange('objective')} value={projectData.objective} maxLength={100} required />
       <label>Platform</label>
       <div className={styles.buttonContainer}>
         {platforms.map((label) => (

@@ -40,8 +40,8 @@ export default function StepTwoForm({ projectData, setProjectData }) {
 
   return (
     <>
-      <div className="h3">Exportar arquivos 📌</div>
-      <p>Faça o upload das telas que serão avaliadas</p>
+      <div className="h3">Export Files</div>
+      <p>Upload the screens that will be reviewed</p>
 
       <div
         className={`${styles.uploadContainer} ${isDragging ? styles.dragging : ''}`}
@@ -50,7 +50,7 @@ export default function StepTwoForm({ projectData, setProjectData }) {
         onDragLeave={handleDragLeave}
       >
         <Icon icon={<i className="bi bi-cloud-arrow-up-fill"></i>} />
-        <p>Você pode arrastar e soltar os arquivos aqui ou</p>
+        <p>You can drag and drop files here or</p>
 
         <input
           ref={fileInputRef}
@@ -61,10 +61,10 @@ export default function StepTwoForm({ projectData, setProjectData }) {
           onChange={handleFileChange}
         />
 
-        <Button children="escolher arquivo" variant="upload" onClick={handleButtonClick} />
+        <Button id='form_btn' children="choose file" variant="primary" onClick={handleButtonClick} />
       </div>
 
-      <div className="label">Protótipos</div>
+      <label>Screens</label>
 
       <div className={styles.filesContainer}>
         {projectData.templateFile.length > 0 ? (
@@ -72,7 +72,7 @@ export default function StepTwoForm({ projectData, setProjectData }) {
             <File key={file.name || index} title={file.name} onClick={() => removeFile(file.name)} />
           ))
         ) : (
-          <p className={styles.empty}>Nenhum arquivo enviado ainda.</p>
+          <p className={styles.empty}>No files uploaded yet.</p>
         )}
       </div>
     </>
