@@ -112,7 +112,6 @@ class Project {
   }
   
   async deleteProject(projetoId, userId) {
-
     const trx = await database.transaction();
   
     try {
@@ -120,18 +119,18 @@ class Project {
       await trx("t_semiotica").where("id_projeto", projetoId).del();
       await trx("t_imagens").where({ id_projeto: projetoId, id_usuario: userId }).del();
       await trx("t_arquivos").where({ id_projeto: projetoId, id_usuario: userId }).del();
-      await trx("t_projeto_usuario").where({ id_projeto: projetoId, id_usuario: userId }).del();
+      await trx("t_projeto_usuario").where("id_projeto", projetoId).del();
       await trx("t_projeto").where("id_projeto", projetoId).del();
   
       await trx.commit();
       return { sucesso: true };
-  
+      
     } catch (err) {
       await trx.rollback();
-      console.error("Erro ao deletar projeto completo:", err);
-      throw err;
+      console.error("Erro ao deletar projeto completo:", err.message);
+      throw new Error("Erro ao deletar projeto.");
     }
-  }
+  } 
   
   async finalizeProject(projetoId, userId) {
 

@@ -38,6 +38,7 @@
   
 .buttonWrapper {
   display: none;
+
 }
 
 .item:hover .buttonWrapper {
@@ -60,3 +61,5 @@
   background-color: var(--color-primary-transparency);
   color: var(--color-primary);
 }
+
+

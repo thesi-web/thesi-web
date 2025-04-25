@@ -15,6 +15,25 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
     navigate(`/project/${id}`);
   };
 
+  const handleDelete = async (id) => {
+
+    try {
+      const response = await fetch(`http://localhost:3000/api/project/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (response.ok) {
+        fetchProjects();
+      } else {
+      }
+    } catch (error) {
+      console.error('Erro ao deletar o projeto:', error);
+    }
+  };
+
   const [totalProjetos, setTotalProjetos] = useState([]);
 
   const fetchProjects = async () => {
@@ -63,7 +82,7 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
           {totalProjetos.length > 0 ? (
             totalProjetos.map((projeto, index) => (
               <div key={index} onClick={() => handleClick(projeto.id_projeto)}>
-                <SidebarProject label={projeto.nm_projeto} emoji={"🌈"} />
+                <SidebarProject label={projeto.nm_projeto} emoji={"🌈"} onDelete={() => handleDelete(projeto.id_projeto)}  />
               </div>
             ))
           ) : (

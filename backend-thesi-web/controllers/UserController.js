@@ -121,7 +121,6 @@ class UserController {
   }
 
   async logout(req, res) {
-    // Logout simbólico — o front vai apagar o token.
     return res.status(200).json({ msg: "Logout realizado com sucesso" });
   }
 
@@ -183,7 +182,6 @@ class UserController {
     }
   }
 
-
   async  requestToken(req, res) {
 
     const { email } = req.body;
@@ -212,7 +210,6 @@ class UserController {
   
     return res.status(200).json({ message: 'Token conferido!' });
   }
-  
 
 }
 

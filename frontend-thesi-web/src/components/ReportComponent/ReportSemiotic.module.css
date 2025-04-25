@@ -9,6 +9,7 @@
     width: 25vw;
     height: 30vh;
     margin-left: 37px;
+    object-fit: cover;
 }
 
 

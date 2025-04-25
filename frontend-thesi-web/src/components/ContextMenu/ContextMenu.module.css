@@ -1,0 +1,19 @@
+  
+  .menuItem {
+    padding: 10px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-sm);
+  }
+  
+  .menuItem:hover {
+    background-color: var(--color-primary-transparency);
+    color:var(--color-primary);
+  }
+  
+  .menuItem.delete:hover {
+    background-color: #fee2e2;
+    color:crimson;
+  }
+  
