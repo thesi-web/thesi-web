@@ -26,6 +26,7 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
       });
 
       if (response.ok) {
+        navigate('/home'); 
         fetchProjects();
       } else {
       }

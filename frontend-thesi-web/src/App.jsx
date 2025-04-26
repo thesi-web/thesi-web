@@ -26,13 +26,13 @@ function App() {
         <Route path="/change/password/:token" element={<ChangePassword/>} /> {/*saber como protege dps*/}
         <Route path="/forgot/password" element={<ForgotPassword/>}/>
         <Route path="/teste" element={<Semiotic/>}/>
+        <Route path='/rate/project/:projetoId' element={<Heuristic/>} />
         {/* Página que contém a sidebar (Cuidado!) */}
         <Route element={<LayoutComSidebar/>}>
           <Route path="/home" element={<Homescreen/>} />
           <Route path="/report/:projetoId" element={<ReportComponent/>}/>
           <Route path ="/create/project" element={<CreateProject/>} />
           <Route path='/project/:projetoId' element={<Project/>} />
-          <Route path='/rate/project/:projetoId' element={<Heuristic/>} />
         </Route>
 
       </Routes>

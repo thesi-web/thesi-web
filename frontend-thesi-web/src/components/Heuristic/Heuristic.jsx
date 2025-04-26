@@ -9,6 +9,7 @@ const Heuristic = () => {
   const [heuristica, setHeuristica] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selecionados, setSelecionados] = useState([]);
 
   useEffect(() => {
     const handleHeuristica = async () => {
@@ -38,6 +39,34 @@ const Heuristic = () => {
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>Erro: {error}</p>;
 
+  const handleCheckboxChange = (id) => {
+    setSelecionados((prev) => 
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    );
+  };
+
+  const enviarMarcacoesSelecionadas = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/project/consolidate`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          role: 'professor'
+        },
+        body: JSON.stringify({ ids: selecionados }),
+      });
+  
+      if (!response.ok) throw new Error('Erro ao enviar consolidação');
+  
+      alert('Marcação consolidada com sucesso!');
+    } catch (err) {
+      alert(`Erro: ${err.message}`);
+    }
+  };
+  
+  console.log(selecionados);
+
   return (
     <div>
       {heuristica.map((item, index) => (
@@ -48,8 +77,13 @@ const Heuristic = () => {
                 Enviar para o relatório final
               </div>
               <div className={styles.buttonContainer}>
-                <input id="check" type='checkbox' />
-                <label for="check" className={styles.button}  ></label>
+              <input 
+                id={`check-${item.id_heuristica}`} 
+                type='checkbox' 
+                checked={selecionados.includes(item.id_heuristica)} 
+                onChange={() => handleCheckboxChange(item.id_heuristica)} 
+              />
+              <label htmlFor={`check-${item.id_heuristica}`} className={styles.button}></label>
             </div>
           </div>
 
@@ -75,7 +109,7 @@ const Heuristic = () => {
 
           <div className={styles.boxContainer}>
             <div className={styles.title}>Descrição da violação</div>
-            <p>{item.ds_observacoes}</p>
+            <p>{item.ds_problemas}</p>
           </div>
 
           <div className={styles.boxContainer}>
@@ -86,6 +120,9 @@ const Heuristic = () => {
           
         </div>
       ))}
+
+      <button onClick={enviarMarcacoesSelecionadas}>Enviar Selecionados</button>
+
     </div>
   );
 };

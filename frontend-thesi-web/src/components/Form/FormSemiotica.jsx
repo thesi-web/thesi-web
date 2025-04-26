@@ -77,12 +77,7 @@ const FormSemiotica = ({
         const errorData = await response.json();
         console.error(`Erro: ${errorData.erro}`);
       }
-  
-      // Limpar os campos
-      setEsperada(''),
-      setPossivel(''),
-      setQuebra(''),
-      setRecomendacaoSemiotica('')
+      
     } catch (err) {
       console.error(err);
     }

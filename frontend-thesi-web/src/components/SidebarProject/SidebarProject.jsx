@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './SidebarProject.module.css';
 import ContextMenu from '../ContextMenu/ContextMenu';
 
-const SidebarItem = ({ emoji, label, onClick }) => {
+const SidebarItem = ({ emoji, label, onClick, onDelete }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
@@ -39,10 +39,7 @@ const SidebarItem = ({ emoji, label, onClick }) => {
             console.log("Invite clicked");
             closeMenu();
           }}
-          onDelete={() => {
-            console.log("Delete clicked");
-            closeMenu();
-          }}
+          onDelete={onDelete}
           onClose={closeMenu}
         />
       )}

@@ -42,9 +42,16 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
   const [imagemURL, setImagemURL] = useState(null);
 
   const handleSaveForm = (data) => {
-    console.log('Form salvo com:', { ...data, activeRectangle, imagemURL });
-    // aqui você pode chamar sua API, por exemplo
-    setActiveRectangle(null);
+    setHeuristica('');
+    setAnotacao('');
+    setRecomendacao('');
+    setSeveridade(1);
+    setEsperada('');
+    setPossivel('');
+    setQuebra('');
+    setRecomendacaoSemiotica('');
+    console.log("Salvo com sucesso!")
+    //setActiveRectangle(null);
   };
 
   const handleCancelForm = () => {

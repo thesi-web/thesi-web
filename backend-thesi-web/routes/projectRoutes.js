@@ -11,5 +11,6 @@ router.delete("/project/:id", authorization, ProjectController.delete); //OK 07-
 router.put("/project/:projetoId", authorization, ProjectController.finalize); //OK 07-04-2025
 router.put("/project", authorization, ProjectController.update);
 router.get("/all", authorization, ProjectController.getNameProject);
+router.put('/project/consolidate', ProjectController.consolidar);
 
 module.exports = router;

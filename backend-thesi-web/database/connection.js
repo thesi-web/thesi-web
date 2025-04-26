@@ -26,3 +26,5 @@ database.raw("SET lc_time = 'pt_BR.UTF-8'")
   });
 
 module.exports = database;
+
+

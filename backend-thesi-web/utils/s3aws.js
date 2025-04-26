@@ -21,19 +21,18 @@ class s3Aws {
   }
 
   async saveFile(filename) {
-    
     const extension = path.extname(filename);
     const sanitizedFilename = `arquivo-${uuidv4()}${extension}`;
-
+  
     const contentType = mime.lookup(filename);
     const originalPath = path.resolve(__dirname, '..', 'uploads', filename);
-
+  
     if (!contentType) {
       throw new Error("Tipo de conteúdo não encontrado");
     }
-
+  
     const fileContent = await fs.promises.readFile(originalPath);
-
+  
     await this.client.putObject({
       Bucket: process.env.S3_BUCKET,
       Key: sanitizedFilename,
@@ -41,9 +40,14 @@ class s3Aws {
       ContentType: contentType,
       ACL: 'public-read'
     }).promise();
-
-    return `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${sanitizedFilename}`;
+  
+    return {
+      url: `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${sanitizedFilename}`,
+      filename: sanitizedFilename
+    };
   }
+  
+
 }
 
 export { s3Aws };

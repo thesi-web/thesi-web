@@ -76,11 +76,6 @@ const FormHeuristica = ({
         console.error(`Erro: ${errorData.erro}`);
       }
   
-      // Limpar os campos
-      setHeuristica('');
-      setAnotacao('');
-      setRecomendacao('');
-      setSeveridade(1);
     } catch (err) {
       console.error(err);
     }

@@ -37,18 +37,15 @@ class Project {
         }
         
         for (const image of project.templates) {
-
-          await uploader.execute(image.originalname); 
-        
-          const imageUrl = `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${image.originalname}`;
+          const uploaded = await uploader.execute(image.originalname);
         
           await trx("t_imagens").insert({
             id_projeto: projectId,
             id_usuario: userId,
-            nm_imagem: image.originalname,
-            ds_caminho: imageUrl,
+            nm_imagem: uploaded.filename,     // <- nome gerado
+            ds_caminho: uploaded.url          // <- URL correta
           });
-        }
+        }        
         return { projectId }; // <- esse retorno vai para a constante "result"
       });
       return result; // <- aqui você retorna o resultado para o controller

@@ -5,9 +5,12 @@ import Cover from '../components/Cover/Cover'
 import Carroussel from '../components/Carroussel/Carroussel'
 import Button from '../components/Button/Button'
 import { useParams } from 'react-router-dom';
+import MessageModal from '../components/Modal/MessageModal';
 
 const Project = () => {
+
   const [projeto, setProjeto] = useState({ imagens: [] });
+  const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -56,6 +59,7 @@ const Project = () => {
 
       // Atualiza os dados após sucesso
       await fetchProjeto();
+      setIsMessageModalOpen(false); 
 
     } catch (err) {
       setError(err.message);
@@ -68,7 +72,10 @@ const Project = () => {
       <div className={styles.projectContainer}>
         <div className={styles.titleContainer}>
           <div className={'title'}>{projeto.nm_projeto}</div>
+        <div className={styles.titleContainer}>  
+          <div><i className="bi bi-journals"></i></div>
           <Status status={`${projeto.ds_status}`} />
+        </div>
         </div>
         <p> Created on {projeto.dt_criacao} by {projeto.criador} </p>
         <div className={styles.objectiveContainer}>
@@ -76,11 +83,18 @@ const Project = () => {
         </div>
         <Carroussel images={projeto.imagens} projetoId={projetoId} isDisabled={projeto.ds_status === 'entregue'}  />
         <div className={styles.buttonContainer}>
-          {projeto.ds_status !== 'entregue' && (
-            <Button onClick={entregarProjeto} type="submit" variant="secondary">
-              Submit project
-            </Button>
-          )}
+        {projeto.ds_status !== 'entregue' && (
+          <Button type="submit" variant="secondary" onClick={() => setIsMessageModalOpen(true)}>
+            Submit project
+          </Button>
+        )}
+        {isMessageModalOpen && (
+          <MessageModal
+            isMessageOpen={isMessageModalOpen}
+            setMessageModalOpen={() => setIsMessageModalOpen(false)}
+            onClick={entregarProjeto}
+          />
+        )}
         </div>
       </div>
     </div>
