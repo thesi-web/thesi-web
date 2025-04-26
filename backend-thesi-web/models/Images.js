@@ -1,6 +1,7 @@
 const database = require("../database/connection");
 
 class Images {
+  
   async findById(idImagem) {
     const result = await database("t_imagens")
       .select("nm_imagem", "ds_caminho")

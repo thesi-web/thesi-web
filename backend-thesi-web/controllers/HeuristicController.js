@@ -32,21 +32,6 @@ class HeuristicController {
   }
   }
 
-
-  async getByProject(req, res) {
-
-    const { projetoId } = req.params;
-
-    try {
-    
-      const heuristics = await Heuristic.findByProject(projetoId);
-      res.json(heuristics);
-
-    } catch (err) {
-      res.status(500).json({ erro: "Erro ao buscar marcações heurísticas", details: err.message });
-    }
-  }
-
   async correct(req, res) {
 
     const { idHeuristica, observacao } = req.body;

@@ -44,16 +44,15 @@ class Heuristic {
       }
     }
 
-    async correct({ idHeuristica, userId, observacao }) {
+    async correct({ idHeuristica, userId }) {
       try {
         const result = await database("t_heuristica")
           .where({ id_heuristica: idHeuristica, id_usuario: userId })
           .update({
-            ds_observacoes: observacao,
-            st_correcao: 1
+            st_correcao: true
           });
   
-        return result; // número de linhas atualizadas
+        return result;
 
       } catch (err) {
         console.error("Erro ao corrigir heurística:", err);

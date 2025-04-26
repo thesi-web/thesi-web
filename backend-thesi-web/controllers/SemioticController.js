@@ -32,7 +32,7 @@ class SemioticController {
           res.status(500).json({ erro: "Erro ao criar uma marcação semiótica" });
         }
       }
-    
+ /*   
     async getByProject(req, res) {
   
       const { projetoId } = req.params;
@@ -46,7 +46,7 @@ class SemioticController {
         res.status(500).json({ erro: "Erro ao buscar marcações semióticas", details: err.message });
       }
     }
-  
+ */ 
     async correct(req, res) {
   
       const { idSemiotica, observacao } = req.body;
@@ -77,3 +77,5 @@ class SemioticController {
 }
 
 module.exports = new SemioticController();
+
+

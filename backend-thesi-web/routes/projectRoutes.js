@@ -12,5 +12,6 @@ router.put("/project/:projetoId", authorization, ProjectController.finalize); //
 router.put("/project", authorization, ProjectController.update);
 router.get("/all", authorization, ProjectController.getNameProject);
 router.put('/project/consolidate', ProjectController.consolidar);
+router.get('/marks/:projetoId', authorization, ProjectController.getMarks); //OK 26-04-2025
 
 module.exports = router;

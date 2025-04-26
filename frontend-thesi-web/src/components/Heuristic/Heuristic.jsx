@@ -3,10 +3,12 @@ import styles from './Heuristic.module.css';
 import HeuristicComponent from './HeuristicComponent';
 import Severity from '../Severity/Severity';
 import { useParams } from 'react-router-dom';
+import Button from '../Button/Button'
 
 const Heuristic = () => {
   const { projetoId } = useParams();
   const [heuristica, setHeuristica] = useState([]);
+  const [semiotica, setSemiotica] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selecionados, setSelecionados] = useState([]);
@@ -14,7 +16,7 @@ const Heuristic = () => {
   useEffect(() => {
     const handleHeuristica = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/heuristic/${projetoId}`, {
+        const response = await fetch(`http://localhost:3000/api/marks/${projetoId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -25,7 +27,10 @@ const Heuristic = () => {
         }
 
         const data = await response.json();
-        setHeuristica(data);
+
+        setHeuristica(data.heuristics);
+        setSemiotica(data.semiotics);
+
       } catch (err) {
         setError(err.message);
       } finally {
@@ -34,6 +39,7 @@ const Heuristic = () => {
     };
 
     handleHeuristica();
+
   }, [projetoId]);
 
   if (loading) return <p>Carregando...</p>;
@@ -67,16 +73,42 @@ const Heuristic = () => {
   
   console.log(selecionados);
 
+
   return (
-    <div>
+    <div className={styles.container} >
       {heuristica.map((item, index) => (
         <div key={index} className={styles.contentContainer} >
 
-          <div className={styles.titleContainer} >
-              <div className={styles.title}>
-                Enviar para o relatório final
-              </div>
-              <div className={styles.buttonContainer}>
+          <div className={styles.imageContainer}>
+            <div className={styles.title}>Screen</div>
+            <div className={styles.image}>
+              <img src={item.ds_caminho} alt={`Imagem ${index + 1}`} />
+            </div>
+            <div className={styles.subtitle}>Avaliado por: {item.nm_usuario}</div>
+          </div>
+
+        <div className={styles.heuristic} >
+          <div className={styles.boxContainer}>
+            <div className={styles.title}>Violated heuristic</div>
+            <HeuristicComponent number={item.nm_heuristica} />
+              <div className={styles.title}>Severity level</div>
+              <Severity severity={item.nr_severidade} />
+          </div>
+
+          <div className={styles.boxContainer}>
+            <div className={styles.title}>Violation description</div>
+            <div className='subtext'>{item.ds_problemas}</div>
+          </div>
+
+          <div className={styles.boxContainer}>
+            <div className={styles.title}>Recommendations</div>
+            <div className='subtext'>{item.ds_recomendacoes}</div>
+          </div>
+        </div>
+
+          <div className={styles.checkboxContainer}>
+            <div className={styles.title}> Submit to final report </div>
+            <div className={styles.buttonContainer}>
               <input 
                 id={`check-${item.id_heuristica}`} 
                 type='checkbox' 
@@ -86,42 +118,11 @@ const Heuristic = () => {
               <label htmlFor={`check-${item.id_heuristica}`} className={styles.button}></label>
             </div>
           </div>
-
-
-        <div className={styles.heuristicContainer} >
-          <div className={styles.imageContainer}>
-            <div className={styles.title}>Tela</div>
-            <div className={styles.image}>
-              <img src={item.ds_caminho} alt={`Imagem ${index + 1}`} />
-            </div>
-            <div className={styles.subtitle}>Avaliado por: {item.nm_usuario}</div>
-          </div>
-
-          <div className={styles.boxContainer}>
-            <div className={styles.title}>Heurística Violada</div>
-            <HeuristicComponent number={item.nm_heuristica} />
-          </div>
-
-          <div className={styles.severityContainer}>
-            <div className={styles.title}>Grau de Severidade</div>
-            <Severity severity={item.nr_severidade} />
-          </div>
-
-          <div className={styles.boxContainer}>
-            <div className={styles.title}>Descrição da violação</div>
-            <p>{item.ds_problemas}</p>
-          </div>
-
-          <div className={styles.boxContainer}>
-            <div className={styles.title}>Recomendações</div>
-            <p>{item.ds_recomendacoes}</p>
-          </div>
-        </div>
           
         </div>
       ))}
 
-      <button onClick={enviarMarcacoesSelecionadas}>Enviar Selecionados</button>
+      <Button variant={'secondary'} id={'form_btn'} onClick={enviarMarcacoesSelecionadas}> Consolidate </Button>
 
     </div>
   );

@@ -44,16 +44,15 @@ class Semiotic {
       }
     }
 
-    async correct({ idSemiotica, userId, observacao }) {
+    async correct({ idSemiotica, userId }) {
       try {
         const result = await database("t_semiotica")
           .where({ id_semiotica: idSemiotica, id_usuario: userId })
           .update({
-            ds_observacoes: observacao,
-            st_correcao: 1
+            st_correcao: true
           });
   
-        return result; // número de linhas atualizadas
+        return result;
 
       } catch (err) {
         console.error("Erro ao corrigir semiótica:", err);

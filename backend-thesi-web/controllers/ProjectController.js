@@ -1,5 +1,7 @@
 require("dotenv").config();
+const Heuristic = require("../models/Heuristic");
 const Project = require("../models/Project");
+const Semiotic = require("../models/Semiotic");
 const { uploadService } = require('../services/uploadService');
 
 
@@ -179,6 +181,22 @@ class ProjectController {
   
   }
   
+  async getMarks(req, res) {
+
+    const { projetoId } = req.params;
+
+    try {
+    
+      const semiotics = await Semiotic.findByProject(projetoId);
+      const heuristics = await Heuristic.findByProject(projetoId);
+
+      res.json({ semiotics, heuristics });
+  
+    } catch (err) {
+      res.status(500).json({ erro: "Erro ao buscar marcações", details: err.message });
+    }
+  
+  }
 }
 
 module.exports = new ProjectController();
