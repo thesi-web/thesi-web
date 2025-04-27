@@ -21,44 +21,44 @@ class Semiotic {
       throw err;
     }}
   
-    async findByProject(projetoId) {
-      try {
-        const results = await database("t_semiotica as s")
-          .select(
-            "s.id_semiotica",
-            "s.id_projeto", 
-            "s.nm_signo", 
-            "s.ds_recomendacoes", 
-            "s.ds_caminho",
-            "s.ds_esperada",
-            "s.ds_possivel",
-            "s.ds_quebra",
-            "u.nm_usuario"
-          )
-          .join("t_usuario as u", "s.id_usuario", "u.id_usuario")
-          .where({ "s.id_projeto": projetoId });
-  
-        return results;
-      } catch (error) {
-        throw error;
-      }
-    }
+  async findByProject(projetoId) {
+    try {
+      const results = await database("t_semiotica as s")
+        .select(
+          "s.id_semiotica",
+          "s.id_projeto", 
+          "s.nm_signo", 
+          "s.ds_recomendacoes", 
+          "s.ds_caminho",
+          "s.ds_esperada",
+          "s.ds_possivel",
+          "s.ds_quebra",
+          "u.nm_usuario"
+        )
+        .join("t_usuario as u", "s.id_usuario", "u.id_usuario")
+        .where({ "s.id_projeto": projetoId });
 
-    async correct({ idSemiotica, userId }) {
-      try {
-        const result = await database("t_semiotica")
-          .where({ id_semiotica: idSemiotica, id_usuario: userId })
-          .update({
-            st_correcao: true
-          });
-  
-        return result;
-
-      } catch (err) {
-        console.error("Erro ao corrigir semiótica:", err);
-        throw err;
-      }
+      return results;
+    } catch (error) {
+      throw error;
     }
+  }
+
+  async correctSemiotic({ idSemiotica }) {
+    try {
+      const result = await database("t_semiotica")
+        .where({ id_semiotica: idSemiotica })
+        .update({
+          st_correcao: true
+        });
+
+      return result;
+
+    } catch (err) {
+      console.error("Erro ao corrigir semiótica:", err);
+      throw err;
+    }
+  }
 
 }
 

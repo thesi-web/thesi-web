@@ -20,45 +20,45 @@ class Heuristic {
       throw err;
     }}
   
-    async findByProject(projetoId) {
-      try {
-        const results = await database("t_heuristica as h")
-        .select(
-          "h.id_heuristica",
-          "h.id_projeto",
-          "h.nm_heuristica",
-          "h.ds_problemas",
-          "h.ds_observacoes",
-          "h.ds_recomendacoes",
-          "h.nr_severidade",
-          "h.st_correcao",
-          "h.ds_caminho",
-          "u.nm_usuario"
-        )
-        .join("t_usuario as u", "h.id_usuario", "u.id_usuario")
-        .where({ "h.id_projeto": projetoId });
-  
-        return results;
-      } catch (error) {
-        throw error;
-      }
-    }
+  async findByProject(projetoId) {
+    try {
+      const results = await database("t_heuristica as h")
+      .select(
+        "h.id_heuristica",
+        "h.id_projeto",
+        "h.nm_heuristica",
+        "h.ds_problemas",
+        "h.ds_observacoes",
+        "h.ds_recomendacoes",
+        "h.nr_severidade",
+        "h.st_correcao",
+        "h.ds_caminho",
+        "u.nm_usuario"
+      )
+      .join("t_usuario as u", "h.id_usuario", "u.id_usuario")
+      .where({ "h.id_projeto": projetoId });
 
-    async correct({ idHeuristica, userId }) {
-      try {
-        const result = await database("t_heuristica")
-          .where({ id_heuristica: idHeuristica, id_usuario: userId })
-          .update({
-            st_correcao: true
-          });
-  
-        return result;
-
-      } catch (err) {
-        console.error("Erro ao corrigir heurística:", err);
-        throw err;
-      }
+      return results;
+    } catch (error) {
+      throw error;
     }
+  }
+
+  async correctHeuristic({ idHeuristica }) {
+    try {
+      const result = await database("t_heuristica")
+        .where({ id_heuristica: idHeuristica })
+        .update({
+          st_correcao: true
+        });
+
+      return result;
+
+    } catch (err) {
+      console.error("Erro ao corrigir heurística:", err);
+      throw err;
+    }
+  }
 
 }
 

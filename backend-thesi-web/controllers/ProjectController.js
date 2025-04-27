@@ -170,10 +170,18 @@ class ProjectController {
 
   async consolidar(req, res) {
 
-    const { ids } = req.body;
+    const { heuristics, semiotics } = req.body;
   
     try {
-      await db.query('UPDATE t_heuristica SET st_correcao = true WHERE id IN (?)', [ids]);
+      
+      for (const id of heuristics) {
+        await Heuristic.correctHeuristic({ idHeuristica: id });
+     }
+     
+     for (const id of semiotics) {
+        await Semiotic.correctSemiotic({ idSemiotica: id });
+     }     
+
       res.status(200).json({ message: 'Atualizado com sucesso' });
     } catch (err) {
       res.status(500).json({ error: 'Erro ao atualizar' });

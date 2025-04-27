@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login'
 import CreateProject from './pages/CreateProject';
 import Project from './pages/Project';
-import Heuristic from './components/Heuristic/Heuristic';
 import LayoutComSidebar from './pages/LayoutComSidebar';
 import Hero from './pages/Hero';
 import CreateAccount from './pages/CreateAccount';
@@ -12,6 +11,7 @@ import ChangePassword from './pages/ChangePassword';
 import Homescreen from './pages/Homescreen';
 import ReportComponent from './components/ReportComponent/ReportComponent';
 import Semiotic from './components/ReportComponent/ReportSemiotic';
+import Consolidate from './components/Heuristic/Consolidate';
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
         <Route path="/change/password/:token" element={<ChangePassword/>} /> {/*saber como protege dps*/}
         <Route path="/forgot/password" element={<ForgotPassword/>}/>
         <Route path="/teste" element={<Semiotic/>}/>
-        <Route path='/rate/project/:projetoId' element={<Heuristic/>} />
+        <Route path='/rate/project/:projetoId' element={<Consolidate/>} />
         {/* Página que contém a sidebar (Cuidado!) */}
         <Route element={<LayoutComSidebar/>}>
           <Route path="/home" element={<Homescreen/>} />
