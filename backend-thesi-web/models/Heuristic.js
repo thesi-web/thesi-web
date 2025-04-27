@@ -28,7 +28,6 @@ class Heuristic {
         "h.id_projeto",
         "h.nm_heuristica",
         "h.ds_problemas",
-        "h.ds_observacoes",
         "h.ds_recomendacoes",
         "h.nr_severidade",
         "h.st_correcao",

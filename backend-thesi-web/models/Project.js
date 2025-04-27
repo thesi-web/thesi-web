@@ -149,6 +149,34 @@ class Project {
     }
   }
   
+  async verifyStatus(projetoId) {
+
+    const trx = await database.transaction();
+  
+    try {
+      
+      const projeto = await trx("t_projeto_usuario")
+        .where({ id_projeto: projetoId })
+        .first();
+  
+      if (!projeto) {
+        throw new Error('Projeto não encontrado.');
+      }
+
+      if (projeto.ds_status === 'entregue') {
+        throw new Error('Este projeto já foi entregue e não pode ser corrigido novamente.');
+      }
+      
+      await trx.commit();
+      return projeto;
+
+    } catch (error) {
+      await trx.rollback();
+      console.error('Erro ao verificar status do projeto:', error);
+      throw error;
+    }
+  }
+
   async updateProject({ idProjeto, novoAutor, novaData }) {
     const trx = await database.transaction();
   

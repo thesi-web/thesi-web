@@ -190,20 +190,27 @@ class ProjectController {
   }
   
   async getMarks(req, res) {
-
     const { projetoId } = req.params;
-
+  
     try {
-    
+      // Verifica se o status do projeto é válido para continuar
+      await Project.verifyStatus(projetoId);
+  
+      // Buscar as marcações de semioticas e heurísticas
       const semiotics = await Semiotic.findByProject(projetoId);
       const heuristics = await Heuristic.findByProject(projetoId);
-
+  
+      // Retorna as marcações encontradas
       res.json({ semiotics, heuristics });
   
     } catch (err) {
-      res.status(500).json({ erro: "Erro ao buscar marcações", details: err.message });
+      // Se ocorrer erro, envia uma resposta de erro detalhada
+      console.error("Erro ao buscar marcações:", err);
+      res.status(500).json({
+        erro: "Erro ao buscar marcações",
+        detalhes: err.message || 'Detalhes não disponíveis',
+      });
     }
-  
   }
 }
 
