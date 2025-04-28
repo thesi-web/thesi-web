@@ -15,13 +15,19 @@
 
 .image img {
   width: 20vw;
+  height: 22vh;
+  object-fit: cover;
+  border: rgba(0, 0, 0, 0.1) solid 1px;
 }
 
 
 .boxContainer{
     width: 20vw;
-    height: 30vh;
-    margin-right: 0.5em;
+    height: 15vh;
+    margin: 0.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .title {

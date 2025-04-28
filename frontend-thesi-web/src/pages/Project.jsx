@@ -75,7 +75,9 @@ const Project = () => {
         <div className={styles.titleContainer}>
           <div className={'title'}>{projeto.nm_projeto}</div>
         <div className={styles.titleContainer}>  
-          <div onClick={() => setMarksModal(true)} ><i className="bi bi-journals"></i></div>
+          {projeto.ds_status !== 'entregue' && (
+            <Button id={'bullet'} variant={'icon'} icon={<i className="bi bi-journals"></i>} onClick={() => setMarksModal(true)} />
+          )}
           <Status status={`${projeto.ds_status}`} />
         </div>
         </div>

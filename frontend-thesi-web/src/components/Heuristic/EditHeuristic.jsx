@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import HeuristicComponent from './HeuristicComponent'
-import Severity from '../Severity/Severity'
 import styles from './EditHeuristic.module.css'
 import Button from '../Button/Button'
 import MessageModal from '../Modal/MessageModal'
@@ -12,21 +11,18 @@ const EditHeuristic = ( { image, userName, violatedHeuristic, severityLevel, des
   return (
         <div className={styles.heuristicContainer} >
 
-            <div className={styles.boxContainer}>
-
-            <div className={styles.title}>Screen</div>
-            <div className={styles.image}>
-                <img src={image} alt={`Imagem`} />
-            </div>
-            <div className={styles.subtitle}>Reviewed by: {userName}</div>
-
+            <div className={styles.imageContainer}>
+                    <div className={styles.title}>Screen</div>
+                    <div className={styles.image}>
+                        <img src={image} alt={`Imagem`} />
+                    </div>
+                    <div className={styles.subtitle}>Reviewed by:  {userName}</div>
             </div>
 
             <div className={styles.boxContainer}>
                 <div className={styles.title}>Violated heuristic</div>
                 <HeuristicComponent number={violatedHeuristic} />
-                <div className={styles.title}>Severity level </div>
-                <Severity severity={severityLevel} />
+                <div className={styles.title}>Severity level <div className='subtext'>{severityLevel}</div> </div>
             </div>
 
             <div className={styles.boxContainer}>

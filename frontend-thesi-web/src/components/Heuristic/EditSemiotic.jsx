@@ -16,37 +16,37 @@ const EditSemiotic = ( { image, userName, signName, expected, possible, observed
         <div className={styles.image}>
             <img src={image} alt={`Imagem`} />
         </div>
-        <div className={styles.subtitle}>Avaliado por: {userName}</div>
+        <div className={styles.subtitle}>Reviewed by:  {userName}</div>
         </div>
 
         <div>
-        <div className={styles.boxContainer}>
-            <div className={styles.title}>Type of sign</div>
-            <div className={'subtext'}>sign {signName}</div>
-        </div>
-
-        <div className={styles.boxContainer}>
-            <div className={styles.title}>Expected reading</div>
-            <div className='subtext'>{expected}</div>
-        </div>
+          <div className={styles.title}>Type of sign</div>
+          <div className={'subtext'}>sign {signName}</div>
         </div>
 
         <div>
-        <div className={styles.boxContainer}>
-            <div className={styles.title}>Possible reading</div>
-            <div className='subtext'>{possible}</div>
+          <div className={styles.boxContainer}>
+              <div className={styles.title}>Expected reading</div>
+              <div className='subtext'>{expected}</div>
+          </div>
+          <div className={styles.boxContainer}>
+              <div className={styles.title}>Possible reading</div>
+              <div className='subtext'>{possible}</div>
+          </div>
         </div>
 
+        <div>
         <div className={styles.boxContainer}>
             <div className={styles.title}>Observed break</div>
             <div className='subtext'>{observed}</div>
         </div>
-        </div>
-
         <div className={styles.boxContainer}>
           <div className={styles.title}>Recommendations</div>
           <div className='subtext'>{recommendations}</div>
         </div>
+        </div>
+
+        
 
         <div>
             <Button onClick={() => onDelete(semioticId)} id={'trash_btn'} variant={'close'} icon={<i className="bi bi-trash3"></i>} />
