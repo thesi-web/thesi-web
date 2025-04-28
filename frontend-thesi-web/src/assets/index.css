@@ -207,3 +207,12 @@ b:hover{
   margin-right: 0.5em;
   font-size: var(--font-size-md);
 }
+
+
+.errorMessage{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+}

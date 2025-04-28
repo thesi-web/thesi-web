@@ -27,9 +27,6 @@ function CreateAccount() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log("Password: ", password);
-    console.log("Confirm Password: ", confirmPassword);
-
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
       setErrorMessage('Por favor, insira um e-mail válido.');
@@ -69,16 +66,13 @@ function CreateAccount() {
   };
 
   const validatePassword = (password) => {
-    console.log(password);  // Adicione isto para depuração
+    
     return /[A-Z]/.test(password) &&
            /[a-z]/.test(password) &&
            /\d/.test(password) &&
            /[!@#$%^&*(),.?":{}|<>]/.test(password);
   };
   
-
-  console.log(name,phone, email, password, confirmPassword);
-
   return (
     
     <div>

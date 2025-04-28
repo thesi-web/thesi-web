@@ -25,7 +25,6 @@ const StepTwo = ({
   const handleChange = (event) => {
     
     const { name, value } = event.target;
-    console.log("Campo:", name, "Valor:", value); // Adicione isto
 
     if (name === 'name') setName(value.slice(0, 50));
     if (name === 'password') setPassword(value);

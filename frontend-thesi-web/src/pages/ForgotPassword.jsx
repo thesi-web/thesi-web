@@ -21,8 +21,6 @@ const [email, setEmail] = useState ('');
         console.error("Email é obrigatório");
         return;
       }
-
-      console.log("Email sendo enviado:", email);
       
       const res = await fetch("http://localhost:3000/api/request/password/change", {
         method: "POST",

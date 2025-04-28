@@ -182,22 +182,29 @@ class UserController {
     }
   }
 
-  async  requestToken(req, res) {
-
-    const { email } = req.body;
-
-    if (!email.endsWith('@fatec.sp.gov.br')) {
-      return res.status(400).json({ error: 'O e-mail precisa ser institucional da FATEC.' });
-    }
-
+  async requestToken(req, res) {
     try {
+      const { email } = req.body;
+  
+      if (!email.endsWith('@fatec.sp.gov.br')) {
+        return res.status(400).json({ error: 'Please enter an institutional email address.' });
+      }
+  
+      const achou = await User.findByEmail(email);
+  
+      if (achou) {
+        return res.status(400).json({ error: 'Email already registered.' });
+      }
+  
       await gerarToken(email);
+  
       return res.status(200).json({ message: 'Token enviado com sucesso.' });
+  
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
   }
-
+  
   async confirmToken(req, res) {
     
     const { email, token } = req.body;

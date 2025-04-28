@@ -50,7 +50,6 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
     setPossivel('');
     setQuebra('');
     setRecomendacaoSemiotica('');
-    console.log("Salvo com sucesso!")
     //setActiveRectangle(null);
   };
 

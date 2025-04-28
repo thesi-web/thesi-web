@@ -7,6 +7,7 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
 
   const [tokenSent, setTokenSent] = useState(false);
   const [message, setMessage] = useState('');
+  const [messageToken, setMessageToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSendToken = async (e) => {
@@ -15,9 +16,11 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
     try {
       const response = await axios.post('http://localhost:3000/api/request/token', { email });
       setTokenSent(true);
-      setMessage("Código enviado para seu e-mail.");
     } catch (error) {
-      setMessage(error.response?.data?.error || "Erro ao enviar código.");
+      setMessage(error.response?.data?.error);
+      setTimeout(() => {
+       setMessage('');
+      }, 3000);
     } finally {
       setIsLoading(false);
     }
@@ -33,7 +36,10 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
       });
       nextStep(); // Callback para o próximo passo
     } catch (error) {
-      setMessage("Código inválido ou expirado.");
+      setMessageToken("Invalid or expired code.");
+    setTimeout(() => {
+      setMessageToken('');
+    }, 3000); 
     } finally {
       setIsLoading(false);
     }
@@ -43,22 +49,26 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
     <div>
       <form onSubmit={tokenSent ? handleValidateToken : handleSendToken}>
         <InputText
+          variant={message ? 'errorInput' : 'input'}
           label="Institutional e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={tokenSent || isLoading}
           placeholder={'enter your e-mail address'}
         />
+        {message &&  <div className={'errorMessage'} >{message} <i className="bi bi-exclamation-circle-fill"></i> </div>}
         <div className={'subtitle'}>Use your @fatec.sp.gov.br domain email to participate in collaborative projects</div>
 
         {tokenSent && (
           <>
             <InputText
+              variant={ messageToken ? 'errorInput' : 'input'}
               label="Verification Code"
               value={verificationCode}
               onChange={(e) => setVerificationCode(e.target.value)}
               disabled={isLoading}
             />
+            {messageToken &&  <div className={'errorMessage'}>{messageToken} <i className="bi bi-exclamation-circle-fill"></i> </div>}
             <div className={'subtitle'}>We've sent a code to your inbox</div>
           </>
         )}
@@ -67,7 +77,7 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
           {isLoading ? "Please wait..." : tokenSent ? "Check my code" : "Get code"}
         </Button>
 
-        {message && <p>{message}</p>}
+        
       </form>
     </div>
   );

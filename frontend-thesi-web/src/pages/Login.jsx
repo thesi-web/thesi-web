@@ -81,7 +81,7 @@ function Login() {
               onChange={handlePasswordChange}
               required
             />
-            {errorMessage && <div className={styles.errorMessage} >{errorMessage} <i className="bi bi-exclamation-circle-fill"></i> </div>}
+            {errorMessage && <div className={'errorMessage'} >{errorMessage} <i className="bi bi-exclamation-circle-fill"></i> </div>}
 
             <div className={styles.rememberContainer} >
               <input

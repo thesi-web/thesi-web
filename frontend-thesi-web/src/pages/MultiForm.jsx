@@ -30,7 +30,6 @@ export default function MultiStepForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Enviando tudo:", projectData);
     setIsLoading(true);
     setErrorMessage("");
 
