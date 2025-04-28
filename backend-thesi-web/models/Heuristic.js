@@ -59,6 +59,23 @@ class Heuristic {
     }
   }
 
+  async deleteById(idHeuristica){
+
+    const trx = await database.transaction();
+  
+    try {
+      await trx("t_heuristica").where("id_heuristica", idHeuristica).del();
+      
+      await trx.commit();
+      return { sucesso: true };
+      
+    } catch (err) {
+      await trx.rollback();
+      console.error("Erro ao deletar marcação heurística:", err.message);
+      throw new Error(`Erro ao deletar marcação heurística: ${err.message}`);
+    }
+  }
+
 }
 
 module.exports = new Heuristic();

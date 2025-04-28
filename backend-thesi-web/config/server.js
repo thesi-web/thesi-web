@@ -22,12 +22,6 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-
-/* 
-    Inicializa o pacote dotenv para carregar automaticamente as variáveis definidas no arquivo .env, 
-    tornando-as acessíveis via process.env. Essencial para separar configurações sensíveis do código-fonte principal.
-*/
-
 // Importa os middlewares de erro
 const notFoundHandler = require('../middlewares/notFound')
 const errorHandler = require('../middlewares/errorHandler')

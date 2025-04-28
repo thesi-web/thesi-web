@@ -17,24 +17,22 @@ const FormHeuristica = ({
   imagemComMarca,
   onSave,
 }) => {
-
-
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedSeveridade, setSelectedSeveridade] = useState(severidade);
 
   const SubmitHeuristica = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+
     try {
       const token = localStorage.getItem('token');
-  
-      // CONVERSÃO: transforma a imagem do modal (string base64 ou blob URL) em Blob real
+
       const response1 = await fetch(imagemComMarca);
-      const blob = await response1.blob(); // agora temos um Blob de verdade
-  
+      const blob = await response1.blob();
+
       const formData = new FormData();
-      formData.append('imagem', blob, 'imagem.png'); // nome opcional
-  
+      formData.append('imagem', blob, 'imagem.png');
+
       const uploadResponse = await fetch('http://localhost:3000/api/upload', {
         method: 'POST',
         headers: {
@@ -42,15 +40,14 @@ const FormHeuristica = ({
         },
         body: formData,
       });
-  
+
       if (!uploadResponse.ok) {
         throw new Error('Erro ao enviar imagem para o servidor');
       }
-  
+
       const uploadData = await uploadResponse.json();
       const imagemAWSURL = uploadData.url;
-  
-      // 2. Envia os dados heurísticos com o link da imagem
+
       const body = {
         heuristica,
         anotacao,
@@ -58,7 +55,7 @@ const FormHeuristica = ({
         severidade,
         imagem: imagemAWSURL,
       };
-  
+
       const response = await fetch('http://localhost:3000/api/heuristic', {
         method: 'POST',
         headers: {
@@ -68,21 +65,26 @@ const FormHeuristica = ({
         },
         body: JSON.stringify(body),
       });
-  
+
       if (response.ok) {
         onSave();
       } else {
         const errorData = await response.json();
         console.error(`Erro: ${errorData.erro}`);
       }
-  
+
     } catch (err) {
       console.error(err);
     }
-  
+
     setIsSubmitting(false);
   };
-  
+
+  const handleSeveridadeClick = (valor) => {
+    setSelectedSeveridade(valor); // Atualiza o valor da severidade
+    handleSeveridade(valor); // Chama o método passado por props, caso necessário
+  };
+
   return (
     <form onSubmit={SubmitHeuristica} method="POST" encType="multipart/form-data">
       <label className='label'>Heurística</label>
@@ -98,7 +100,6 @@ const FormHeuristica = ({
         <option value={8}>Reconhecer, Diagnosticar e se Recuperar de Erros</option>
         <option value={9}>Ajuda e Documentação</option>
       </select>
-
 
       <label className='label'>Problemas</label>
       <TextArea
@@ -121,13 +122,13 @@ const FormHeuristica = ({
       <label>Grau de severidade</label>
       <div className={styles.buttonContainer}>
         {[1, 2, 3, 4, 5].map((valor) => (
-        <Button
-          key={valor}
-          variant={`likert${valor}`}
-          onClick={() => handleSeveridade(valor)}
-        >
-          {valor}
-      </Button>
+          <Button
+            key={valor}
+            onClick={() => handleSeveridadeClick(valor)}
+            variant={selectedSeveridade === valor ? 'secondary' : 'primary'}
+          >
+            {valor}
+          </Button>
         ))}
       </div>
 

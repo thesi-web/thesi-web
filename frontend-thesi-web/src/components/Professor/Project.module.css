@@ -1,0 +1,51 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container principal do projeto */
+.thesiProjetoContainer {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    border: solid 1px var(--color-transparency);
+    border-radius: 8px;                
+    color: var(--color-heading);                   
+    outline: none;                 
+    resize: none;               
+    height: 60px;
+    font-size: var(--font-size-base);
+    font-family: 'Inter';
+    margin: 0.5em 0em;
+    padding: 0.6em ;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80vw;
+  }
+
+/* Caixa geral de informações do projeto */
+.prBox {
+  margin: 10px;
+}
+
+.prBoxTitle {
+    margin: 10px;
+    width: 20vw;
+  }
+
+/* Container para o nome do projeto e ID */
+.prNomeContainer {
+  display: flex;
+  cursor: pointer;
+}
+ 
+/* Labels gerais */
+.thesiLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}

@@ -1,6 +1,7 @@
 .textarea {
+  display: flex;
   background-color: transparent;
-  border: solid 1px var(--color-transparency);                 
+  border: solid 1px var(--color-transparency);             
   color: var(--color-heading);                   
   outline: none;                 
   resize: none;               
@@ -9,6 +10,7 @@
   font-family: 'Inter';
   margin: 0.5em 0em;
   padding: 0.6em ;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .textarea::placeholder {

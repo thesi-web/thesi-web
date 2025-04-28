@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useProjects } from '../context/ProjectContext';
 import StepOneForm from '../components/Form/StepOneForm';
 import StepTwoForm from '../components/Form/StepTwoForm';
 import styles from './CreateProject.module.css';
 import Button from '../components/Button/Button';
 import Stepper from '../components/Stepper/Stepper';
 
+
 export default function MultiStepForm() {
+
+  const { fetchProjects } = useProjects();
   
   const navigate = useNavigate();
   
@@ -55,6 +59,7 @@ export default function MultiStepForm() {
       if (res.ok) {
         const jsonResponse = await res.json();
         navigate(`/project/${jsonResponse.id}`);
+         fetchProjects();
       } else {
         const errorResponse = await res.text();
         setErrorMessage(errorResponse);

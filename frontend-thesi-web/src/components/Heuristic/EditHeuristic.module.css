@@ -1,0 +1,38 @@
+.heuristicContainer{
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1em;
+    background-color: white;
+    border: solid 1px var(--color-transparency);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5em;
+}
+
+.image{
+    display: flex;
+}
+
+.image img {
+  width: 20vw;
+}
+
+
+.boxContainer{
+    width: 20vw;
+    height: 30vh;
+    margin-right: 0.5em;
+}
+
+.title {
+    color: var(--color-heading);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+}
+
+.subtitle {
+    color: #A6A299;
+    font-size: small;
+    font-weight: 400;
+}
+

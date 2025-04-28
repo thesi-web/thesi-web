@@ -83,7 +83,7 @@ class UserController {
         const tokenAluno = jwt.sign(
           { id: aluno.id_usuario, role: "aluno" },
           process.env.JWT_SECRET,
-          { expiresIn: "1h" }
+          { expiresIn: "6h" }
         );
 
         return res.status(200).json({
@@ -105,7 +105,7 @@ class UserController {
       const tokenProfessor = jwt.sign(
         { id: professor.id_professor, role: "professor" },
         process.env.JWT_SECRET,
-        { expiresIn: "1h" }
+        { expiresIn: "6h" }
       );
 
       return res.status(200).json({

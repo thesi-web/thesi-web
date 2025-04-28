@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import InputText from '../components/InputText/InputText';
 import Button from '../components/Button/Button';
 import styles from './Login.module.css'
+import { jwtDecode } from "jwt-decode";
 
 function Login() {
 
@@ -20,27 +21,36 @@ function Login() {
   const handlePasswordChange = (event) => setPassword(event.target.value);
 
   const handleSubmit = async (event) => {
-    
     event.preventDefault();
     setErrorMessage('');
     setLoading(true);
-
+  
     try {
       const response = await axios.post('http://localhost:3000/api/login', { email, password });
       const { token } = response.data;
-
+  
       localStorage.setItem("token", token);
-      navigate('/home');
+  
+      const decoded = jwtDecode(token); // Decodifica o token JWT
+      const userRole = decoded.role;    // Pega o papel do usuário
+  
+      if (userRole === 'aluno') {
+        navigate('/home');
+      } else {
+        navigate('/professor/home');
+      }
+  
     } catch (error) {
       if (error.response?.status === 401) {
         setErrorMessage('Credenciais inválidas. Tente novamente.');
       } else {
-        setErrorMessage('Erro ao fazer login. Tente novamente.');
+        setErrorMessage('Invalid email or password. Please try again.');
       }
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className={styles.container} > 
@@ -62,15 +72,17 @@ function Login() {
               required
             />
             <InputText
+              variant={errorMessage ? 'errorInput' : 'input'}
               label={'Password'}
               type="password"
               name="password"
               value={password}
-              placeholder="Senha"
+              placeholder="enter your password"
               onChange={handlePasswordChange}
               required
             />
-        
+            {errorMessage && <div className={styles.errorMessage} >{errorMessage} <i className="bi bi-exclamation-circle-fill"></i> </div>}
+
             <div className={styles.rememberContainer} >
               <input
                 type="checkbox"
@@ -82,7 +94,6 @@ function Login() {
               <a href={'/forgot/password'} >Forgot your password?</a>
             </div>
 
-            {errorMessage && <div>{errorMessage}</div>}
         
               <Button
                 variant={'secondary'}

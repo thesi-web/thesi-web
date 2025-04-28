@@ -47,3 +47,11 @@ img {
 .titleContainer{
     margin-bottom: 20px;
 }
+
+
+.errorMessage{
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-sm);
+    color: var(--color-danger);
+}

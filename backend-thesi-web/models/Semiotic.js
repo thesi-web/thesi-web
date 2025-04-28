@@ -60,6 +60,23 @@ class Semiotic {
     }
   }
 
+  async deleteById(idSemiotica){
+
+    const trx = await database.transaction();
+  
+    try {
+      await trx("t_semiotica").where("id_semiotica", idSemiotica).del();
+      
+      await trx.commit();
+      return { sucesso: true };
+      
+    } catch (err) {
+      await trx.rollback();
+      console.error("Erro ao deletar marcação semiotica:", err.message);
+      throw new Error(`Erro ao deletar marcação semiotica: ${err.message}`);
+    }
+  }
+
 }
 
 module.exports = new Semiotic();

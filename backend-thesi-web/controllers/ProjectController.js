@@ -92,6 +92,28 @@ class ProjectController {
     }
   }
   
+  async getByProfessorId(req, res) {   
+      try {
+        if (req.userRole !== "professor") {
+        return res.status(403).json({ erro: "Acesso negado. Apenas professores podem acessar." });
+      }
+
+      const professorId = req.userId;
+  
+      const projeto = await Project.findByProfessorId(professorId);
+  
+      if (!projeto) {
+        return res.status(404).json({ erro: "Projeto não encontrado ou acesso negado" });
+      }
+  
+      res.json(projeto);
+      
+    } catch (err) {
+      console.error("Erro ao recuperar projeto:", err);
+      res.status(500).json({ erro: "Erro ao buscar o projeto" });
+    }
+  }
+
   async delete(req, res) {
 
     const projetoId = req.params.id;
@@ -121,7 +143,7 @@ class ProjectController {
     }
   
     try {
-      const resultado = await Project.finalizeProject(projetoId, userId);
+      const resultado = await Project.sendProject(projetoId, userId);
   
       if (resultado === 0) {
         return res.status(404).json({ erro: "Projeto não encontrado ou não pertence ao usuário" });
@@ -170,7 +192,7 @@ class ProjectController {
 
   async consolidar(req, res) {
 
-    const { heuristics, semiotics } = req.body;
+    const { heuristics, semiotics, idProjeto } = req.body;
   
     try {
       
@@ -180,7 +202,9 @@ class ProjectController {
      
      for (const id of semiotics) {
         await Semiotic.correctSemiotic({ idSemiotica: id });
-     }     
+     }
+     
+     await Project.finalizeProject(idProjeto);
 
       res.status(200).json({ message: 'Atualizado com sucesso' });
     } catch (err) {

@@ -69,11 +69,11 @@ const Consolidate = () => {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
           role: 'professor'
         },
-        body: JSON.stringify({ heuristics: selecionadosH, semiotics: selecionadosS }),
+        body: JSON.stringify({ heuristics: selecionadosH, semiotics: selecionadosS, idProjeto: projetoId }),
       });
   
       if (!response.ok) throw new Error('Erro ao enviar consolidação');
-      navigate('/home');
+      navigate('/professor/home');
       
     } catch (err) {
       alert(`Erro: ${err.message}`);

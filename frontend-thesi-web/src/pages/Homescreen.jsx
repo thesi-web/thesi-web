@@ -1,21 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 
-const Homescreen = ( {role} ) => {
-  
+const Homescreen = () => {
+
   return (
-    <div className='view' >
-      <div >
+    <div className='view'>
+      <div>
         Bem-vindo a THESI!
-      </div>
-
-      {role === 'aluno' && (
-        <p> Aluno </p>
-      )}
-      {role === 'professor' && (
-          <p> Professor </p>
-      )}
-    </div>   
-  )
+      </div>      
+    </div>
+  );
 }
 
 export default Homescreen;

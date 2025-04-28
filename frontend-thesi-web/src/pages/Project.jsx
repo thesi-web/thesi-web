@@ -6,6 +6,7 @@ import Carroussel from '../components/Carroussel/Carroussel'
 import Button from '../components/Button/Button'
 import { useParams } from 'react-router-dom';
 import MessageModal from '../components/Modal/MessageModal';
+import MarksModal from '../components/Modal/MarksModal';
 
 const Project = () => {
 
@@ -13,6 +14,7 @@ const Project = () => {
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [marksModal, setMarksModal] = useState(false);
 
   const { projetoId } = useParams();
 
@@ -73,7 +75,7 @@ const Project = () => {
         <div className={styles.titleContainer}>
           <div className={'title'}>{projeto.nm_projeto}</div>
         <div className={styles.titleContainer}>  
-          <div><i className="bi bi-journals"></i></div>
+          <div onClick={() => setMarksModal(true)} ><i className="bi bi-journals"></i></div>
           <Status status={`${projeto.ds_status}`} />
         </div>
         </div>
@@ -93,6 +95,16 @@ const Project = () => {
             isMessageOpen={isMessageModalOpen}
             setMessageModalOpen={() => setIsMessageModalOpen(false)}
             onClick={entregarProjeto}
+            title={'Submit Project'}
+            message={`Are you sure? You won't be able to make changes after submission.`}
+            buttonMessage={'Submit'}
+          />
+        )}
+        {marksModal && (
+          <MarksModal
+            isMarksModalOpen={marksModal}
+            setMarksModalOpen={() => setMarksModal(false)}
+            projetoId={projetoId}
           />
         )}
         </div>

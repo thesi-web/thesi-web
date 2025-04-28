@@ -1,4 +1,5 @@
 .input{
+    width: 23.5vw;
     display: flex;
     align-items: center;
     padding: 0.6em ;
@@ -10,3 +11,14 @@
 .input:active{
     border: solid 1px var(--color-primary);
 }
+
+.errorInput {
+    width: 23.5vw;
+    align-items: center;
+    padding: 0.6em ;
+    border: solid 1px crimson;
+    background-color: transparent;
+    margin-bottom: 5px;
+  }
+
+  

@@ -69,6 +69,24 @@ class Project {
       .where("U.id_usuario", userId);
   }
 
+  async findByProfessorId(ProfessorId){
+    return await database("t_projeto as P")
+      .join("t_projeto_usuario as PU", "P.id_projeto", "PU.id_projeto")
+      .join("t_usuario as U", "PU.id_usuario", "U.id_usuario")
+      .select(
+        "P.id_projeto",
+        "P.nm_projeto",
+        "P.nm_autores",
+        "P.id_criador",
+        database.raw(`TO_CHAR("P".dt_criacao, 'DD/MM/YYYY') as dt_criacao`),
+        database.raw(`TO_CHAR("P".dt_entrega, 'DD/MM/YYYY') as dt_entrega`),
+        "PU.ds_status",
+        "U.nm_usuario"
+      )
+      .where("P.id_professor", ProfessorId);
+  }
+  
+
   async findById(projetoId, userId) {
     try {
       const projeto = await database("t_projeto as P")
@@ -129,7 +147,7 @@ class Project {
     }
   } 
   
-  async finalizeProject(projetoId, userId) {
+  async sendProject(projetoId, userId) {
 
     const trx = await database.transaction();
   
@@ -144,11 +162,31 @@ class Project {
   
     } catch (error) {
       await trx.rollback();
-      console.error("Erro ao finalizar projeto:", error);
+      console.error("Erro ao entregar projeto:", error);
       throw error;
     }
   }
   
+  async finalizeProject(projetoId) {
+
+    const trx = await database.transaction();
+  
+    try {
+
+      const atualizado = await trx("t_projeto_usuario")
+        .where({ id_projeto: projetoId })
+        .update({ ds_status: "finalizado" });
+  
+      await trx.commit();
+      return atualizado;
+  
+    } catch (error) {
+      await trx.rollback();
+      console.error("Erro ao finalizar projeto:", error);
+      throw error;
+    }
+  }
+
   async verifyStatus(projetoId) {
 
     const trx = await database.transaction();
@@ -163,7 +201,7 @@ class Project {
         throw new Error('Projeto não encontrado.');
       }
 
-      if (projeto.ds_status === 'entregue') {
+      if (projeto.ds_status === 'finalizado') { //Mexi aqui!
         throw new Error('Este projeto já foi entregue e não pode ser corrigido novamente.');
       }
       

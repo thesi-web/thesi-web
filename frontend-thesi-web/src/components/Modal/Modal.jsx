@@ -88,7 +88,10 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
         
         <div className={styles.sideBarModal}>
           
-          <div className={styles.close} ><Button variant='close' icon={<i className="bi bi-x"></i>} onClick={setModalOpen}></Button></div>
+          <div className={styles.close}>
+            <Button variant='close' icon={<i className="bi bi-x-lg"></i>} onClick={setModalOpen}>
+            </Button>
+          </div>
           
           <div className={styles.tabButtons}>
             <Button

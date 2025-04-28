@@ -71,10 +71,14 @@
 }
 
 .close{
-  background-color: crimson;
-  color: white;
+  color: var(--color-heading);
+  background-color: transparent;
   padding: 0.2em;
 }
+.close:hover{
+  color: var(--color-danger);
+}
+
 
 /*Botão com bordas*/
 .outline{
