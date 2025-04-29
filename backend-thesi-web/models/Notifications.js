@@ -25,6 +25,21 @@ class Notifications {
       .where({ id_usuario: userId, id_projeto: projetoId })
       .update({ ds_lida: true });
   }
+
+  async findByUserId(userId) {
+    try {
+      const results = await database("t_notificacao")
+        .select(
+          "ds_mensagem",
+          "ds_link", 
+        )
+        .where({ "id_usuario": userId });
+
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  }
   
 
 }

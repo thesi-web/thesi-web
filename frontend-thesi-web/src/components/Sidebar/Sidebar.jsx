@@ -36,6 +36,7 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
   };
 
   const [totalProjetos, setTotalProjetos] = useState([]);
+  
 
   const fetchProjects = async () => {
     try {

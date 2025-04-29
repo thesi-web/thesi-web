@@ -5,9 +5,9 @@ class NotificationsController {
     async getAll(req, res) {
         try{
 
-            const userId = req.userId;
+            const userId = req.userId; 
 
-            const notifications = await Notifications.getByUserId(userId);
+            const notifications = await Notifications.findByUserId(userId);
             res.json(notifications);
 
         } catch(err) {
