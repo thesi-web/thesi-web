@@ -1,0 +1,39 @@
+.messageContainer {
+  background-color: white;
+  border-bottom: solid 1px var(--color-transparency);                                         
+  padding: 0.5em ;
+}
+
+.titleContainer{
+    margin-bottom: 0.5em;
+    white-space: normal;
+}
+
+.name {
+    font-size: var( --font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-heading);
+    margin-bottom: 0.5em;
+    margin-right: 0.3em;
+}
+
+.highlited{
+    background-color: var(--color-primary-transparency);
+    margin-right: 0.3em;
+    color: var(--color-primary);
+}
+
+.contentContainer{
+    margin-bottom: 0.5em;
+    white-space: normal;
+}
+
+.nameProject{
+    font-size: var( --font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-heading);
+    margin-bottom: 0.5em;
+    margin-right: 0.3em;
+    border-left: 2px solid var(--color-primary);
+    padding-left: 0.5em;
+}

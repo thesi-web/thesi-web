@@ -2,7 +2,7 @@ const database = require("../database/connection");
 
 class Notifications {
 
-  async create(userId, projetoId, link, mensagem = 'Your project has been corrected') {
+  async create(userId, projetoId, link, mensagem = 'Your project has been corrected.') {
 
     try {
       
@@ -28,12 +28,19 @@ class Notifications {
 
   async findByUserId(userId) {
     try {
-      const results = await database("t_notificacao")
+      const results = await database("t_notificacao as n")
         .select(
-          "ds_mensagem",
-          "ds_link", 
+          "n.ds_mensagem",
+          "n.ds_link", 
+          "pr.nm_professor",
+          "p.nm_projeto",
+          "u.nm_usuario"
         )
-        .where({ "id_usuario": userId });
+        .join("t_projeto as p", "p.id_projeto", "n.id_projeto")
+        .join("t_projeto_usuario as pu", "p.id_projeto", "pu.id_projeto")
+        .join("t_usuario as u", "pu.id_usuario", "u.id_usuario")
+        .join("t_professor as pr", "p.id_professor", "pr.id_professor")
+        .where({ "n.id_usuario": userId });
 
       return results;
     } catch (error) {

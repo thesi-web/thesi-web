@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import styles from './InboxDrawer.module.css';
 import Warning from '../Warning/Warning';
+import Message from '../Message/Message';
 
 const socket = io('http://localhost:3000'); // onde estiver seu socket server
 
@@ -61,7 +62,14 @@ const InboxDrawer = ({ onClose, closing }) => {
         ) : (
           notificacoes.map((n, idx) => (
             <div key={idx} className={styles.notificacao}>
-              <a href={n.link}>{n.mensagem}</a>
+              <Message
+                nomeUsuario={n.nm_usuario}
+                nome={n.nm_professor}
+                nomeProjeto={n.nm_projeto}
+                assunto={'corrected a project.'}
+                mensagem={n.ds_mensagem}
+                link={n.ds_link}
+              />
             </div>
           ))
         )}
