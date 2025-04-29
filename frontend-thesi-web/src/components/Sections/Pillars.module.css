@@ -1,5 +1,5 @@
 .sectionContainer {
-    background-color:rgba(220, 220, 220, 0.158);
+    background-color: var(--color-primary-transparency);
     align-items: center;
     padding: 80px;
     display: flex;

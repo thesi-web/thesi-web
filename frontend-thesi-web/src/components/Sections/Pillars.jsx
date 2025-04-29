@@ -7,7 +7,7 @@ const Pillars = () => {
     <div className={styles.sectionContainer}>
       <div className={styles.contentContainer} >
         <div className='title'>Our pillars</div>
-        <p>
+        <p className='subtext' >
             At Thesi, our three essential pillars are the foundation of everything we do.
             They guide, support, and reflect every decision we make — from research to the final pixels.
             Our pillars keep us aligned with the user experience, ensuring that our designs are inclusive, practical, and truly useful.

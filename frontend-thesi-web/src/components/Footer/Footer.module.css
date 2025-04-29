@@ -19,8 +19,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px;
-    background-color:#cccccc49;
+    background-color:#cccccc18;
     width: 30vw;
+    border-radius: var(--border-radius);
 }
 
 .input{

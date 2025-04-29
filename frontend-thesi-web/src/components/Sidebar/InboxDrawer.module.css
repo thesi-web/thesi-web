@@ -25,6 +25,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 0 0.3em;
+  border-radius: var(--border-radius);
 } 
 
 .headerIcons:hover {

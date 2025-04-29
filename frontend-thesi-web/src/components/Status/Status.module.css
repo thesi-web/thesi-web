@@ -10,22 +10,22 @@
   }
   
   .emAndamento {
-    background-color: #7e7b7427; /* amarelo/laranja */
-    color: #7E7B74;
+    background-color: #3a85ff17 ; /* amarelo/laranja */
+    color: #3A86FF ;
   }
   
-  .finalizado{
-    background-color: #7e7b740c; /* amarelo/laranja */
-    color: #7e7b744d;
+  .entregue{
+    background-color: #00c8960e ; /* verde */
+    color: #00C896;
   }
   .atrasado {
-    background-color: #c9a43d2d;
-    color: #C9A43D;
+    background-color: #f7c8481a ;
+    color: #F7C948 ;
   }
   
-  .entregue {
-    background-color: #5a8f6318; /* verde */
-    color: #5A8F63;
+  .finalizado {
+    background-color: #ff6b6b15  ; /* verde */
+    color: #FF6B6B;
   }
 
   

@@ -10,6 +10,7 @@
   font-family: 'Inter';
   margin: 0.5em 0em;
   padding: 0.6em ;
+  border-radius: var(--border-radius);
 }
 
 .textarea::placeholder {

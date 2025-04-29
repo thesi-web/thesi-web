@@ -14,13 +14,15 @@
   --color-transparency: #5f5e5b38;
 
   /* Cores da aplicação */
-  --color-primary: #0057ff;
-  --color-primary-transparency: #0055ff09;
-  --color-primary-hover: #0044cc;
+  --color-primary: #792AFC;
+  --color-primary-transparency: #7b2afc27;
+  --color-primary-hover: #711cfa;
   --color-disabled: #dbdbdb;
   --color-secondary: #E5E5E5;
   --color-text: #ffffff;
   --color-danger: crimson;
+
+  --border-radius: 5px;
 
   --font-size-sm: 12px;
   --font-size-base: 14px;

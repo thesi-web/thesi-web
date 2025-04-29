@@ -6,6 +6,7 @@
     border: solid 1px var(--color-transparency);
     background-color: transparent;
     margin-bottom: 5px;
+    border-radius: var(--border-radius);
 }
 
 .input:active{

@@ -6,7 +6,7 @@ const Card = ( {icon, title, text} ) => {
     <div className={styles.cardContainer}>
         <div className={styles.iconContainer}>{icon}</div>
         <div className='h3'>{title}</div>
-        <p>{text}</p>
+        <p className='subtext' >{text}</p>
     </div>
   )
 }

@@ -76,6 +76,7 @@
   transition: all 0.2s ease;
   margin-left: 0.2em;
   padding: 0em 0.3em;
+  border-radius: var(--border-radius);
 } 
 
 .icons:hover {

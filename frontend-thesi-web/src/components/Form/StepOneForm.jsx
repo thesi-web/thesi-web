@@ -80,7 +80,7 @@ export default function StepOneForm({ projectData, setProjectData }) {
             {selectedParticipants.map((user) => (
               <div key={user.id} className={styles.selectedParticipant}>
                 <div>{user.name}</div>
-                <div className={styles.icon} onClick={() => handleRemoveUser(user.id)}><i className="bi bi-x"></i></div>
+                <Button variant={'closeList'} icon={<i className="bi bi-x-circle-fill"></i>} onClick={() => handleRemoveUser(user.id)} />
               </div>
             ))}
           </div>

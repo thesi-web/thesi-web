@@ -7,6 +7,7 @@
     border: solid 1px var(--color-transparency);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 0.5em;
+    border-radius: var(--border-radius);
 }
 
 .image{
@@ -25,9 +26,6 @@
     width: 16vw;
     height: 25vh;
     margin-right: 0.5em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .title {

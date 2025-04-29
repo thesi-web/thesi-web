@@ -16,8 +16,9 @@
     background-color: white;
     width: 85vw;
     height: 80vh;
-    overflow: auto;
     position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
 }
 
 .header {
@@ -43,10 +44,9 @@
     background-color: #ffffff;
     border-right: 0.5px solid #F0F0EF;
     padding: 1em;
-}
-
-.imageContainer{
-    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: var(--border-radius);
 }
 
 .tabButtons {
@@ -56,6 +56,7 @@
     align-items: center;
     padding: 0.3em;
     margin: 0.5em 0em;
+    border-radius: var(--border-radius);
 }
 
 

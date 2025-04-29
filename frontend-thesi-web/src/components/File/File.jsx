@@ -13,7 +13,7 @@ const File = ( { title, onClick }) => {
             {title} 
         </div>
         </div>
-        <Button variant={'transparent'} onClick={onClick}>Remover</Button>
+        <Button variant={'message'} onClick={onClick}>Remover</Button>
     </div>
   )
 }

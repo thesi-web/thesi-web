@@ -24,7 +24,7 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
   const handleRecomendacaoSemiotica =  (event) => setRecomendacaoSemiotica(event.target.value);
 
   // Heurística
-  const [heuristica, setHeuristica] = useState('');
+  const [heuristica, setHeuristica] = useState(0);
   const [anotacao, setAnotacao] = useState('');
   const [recomendacao, setRecomendacao] = useState('');
   const [severidade, setSeveridade] = useState(1);
@@ -73,7 +73,7 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
       <div className={styles.imageContainer}>
           <div className={styles.header}>
            <div className={'h2'}>{`Screen ${index}`}</div>
-           <div><Button variant='primary'  onClick={handleLimparRetangulos}>Clear tag</Button></div>
+           <div><Button variant='message'  onClick={handleLimparRetangulos}>Clear tag</Button></div>
           </div>
           <div className={styles.content}>
             <Canva

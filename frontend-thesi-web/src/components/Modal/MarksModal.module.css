@@ -17,9 +17,10 @@
     background-color: white;
     width: 85vw;
     height: 80vh;
-    overflow: auto;
+    overflow-y: auto;
     position: relative;
     padding: 0em 1em;
+    border-radius: var(--border-radius);
 }
 
 .header{

@@ -5,13 +5,13 @@ import Button from '../Button/Button'
 const CanvaSection = () => {
   return (
     <div className={styles.sectionContainer}>
-        <img src={''} />
+        <img src={'/images/canva.png'} />
       <div className={styles.contentContainer} >
         <div>
           <div className='title'>
             Start evaluating interfaces in a simple and practical way!
           </div>
-          <p>
+          <p className='subtext' >
             Join the world's first heuristic evaluation and semiotic inspection platform!
           </p>
         </div>

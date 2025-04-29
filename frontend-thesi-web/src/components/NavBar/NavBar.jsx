@@ -30,7 +30,7 @@ const NavBar = () => {
               </Button>
             </Link>
             <Link to={"/create/account"}>
-              <Button variant={'primary'} >
+              <Button variant={'secondary'} >
                Sign up 
               </Button>
             </Link>

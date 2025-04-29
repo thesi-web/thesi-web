@@ -12,7 +12,7 @@ const Notice = ( {day, month, title, text} ) => {
 
         <div className={styles.contentContainer}>
             <div className={styles.title}>{title}</div>
-            <div className={styles.text}><p>{text}</p></div>
+            <div className={styles.text}><p className='subtext' >{text}</p></div>
         </div>
 
     </div>

@@ -4,6 +4,7 @@
   padding: 0.2em 1em;
   cursor: pointer;
   transition: all 0.2s ease;
+  border-radius: var(--border-radius);
 }
   
 .icon {

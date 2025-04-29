@@ -7,6 +7,7 @@
   cursor: pointer;
   color: var(--color-heading);
   transition: all 0.2s ease;
+  border-radius: var(--border-radius);
 }
   
 .item:hover {
@@ -38,7 +39,6 @@
   
 .buttonWrapper {
   display: none;
-
 }
 
 .item:hover .buttonWrapper {
@@ -60,6 +60,7 @@
 .projectIcon:hover {
   background-color: var(--color-primary-transparency);
   color: var(--color-primary);
+  border-radius: var(--border-radius);
 }
 
 

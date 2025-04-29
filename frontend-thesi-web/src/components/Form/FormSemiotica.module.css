@@ -3,6 +3,7 @@
   background-color: var(--color-primary-transparency);
   padding: 0.3em;
   margin: 0.5em 0em;
+  border-radius: var(--border-radius);
 }
 
 .form {

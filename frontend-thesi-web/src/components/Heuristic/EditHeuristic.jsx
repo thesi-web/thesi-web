@@ -22,7 +22,7 @@ const EditHeuristic = ( { image, userName, violatedHeuristic, severityLevel, des
             <div className={styles.boxContainer}>
                 <div className={styles.title}>Violated heuristic</div>
                 <HeuristicComponent number={violatedHeuristic} />
-                <div className={styles.title}>Severity level <div className='subtext'>{severityLevel}</div> </div>
+                <div className={styles.title}>Severity level <span className='subtext'>{severityLevel}</span> </div>
             </div>
 
             <div className={styles.boxContainer}>

@@ -19,8 +19,9 @@
     background-color: white;
     width: 20vw;
     height: 40vh;
-    overflow: auto;
+    overflow: hidden;
     position: relative;
+    border-radius: var(--border-radius);
 }
 
 .title {

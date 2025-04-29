@@ -111,6 +111,7 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
             onDelete={handleDeleteSemiotica}
           />
         ))}
+        
       </div>
     </div>
   );

@@ -2,7 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #5f5e5b93;
+    background-color: var(--color-primary-transparency);
     width: 100vw;
     height: 198px;
+    border-bottom: solid 1px var(--color-transparency);
 }

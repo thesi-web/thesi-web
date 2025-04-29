@@ -3,7 +3,9 @@
   background-color: var(--color-primary-transparency);
   padding: 0.3em;
   margin: 0.5em 0em;
+  border-radius: var(--border-radius);
 }
+
 .namesContainer{
     display: flex;
     flex-direction: column;
@@ -20,11 +22,9 @@
   }
   
   .name {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: var(--font-size-sm);
     padding: 5px;
     cursor: pointer;
-    font-size: var(--font-size-base);
   }
   
   .name:hover {
@@ -35,29 +35,30 @@
 .selectedList {
   margin: 0;
   display: flex;
-  background-color: #5f5e5b04;
-  padding: 0.3em;
+  background-color: var(--color-primary-transparency);
   overflow: hidden;
   max-width: 25vw;
   border: solid 1px transparent;
+  border-radius: var(--border-radius);
 }
 
 .selectedList:hover{
-  border: solid 1px var(--color-transparency);
+  border: solid 1px var(--color-primary);
 }
-
 
 .selectedParticipant {
   display: flex;
   align-items: center;
   background-color: white;
+  color: var(--color-label);
   cursor: pointer;
-  border: 0.5px solid transparent;
-  border-radius: 8px;
+  border: 1px solid var(--color-transparency);
+  border-radius: 50px;
   padding: 4px 8px;
   margin: 0.3em;
   max-width: 100%;
   overflow: hidden;
+  font-size: var(--font-size-sm);
 }
 
 .selectedParticipant > div:first-child {

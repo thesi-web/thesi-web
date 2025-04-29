@@ -10,6 +10,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: var(--border-radius);
 }
 
 /*Botão primário*/
@@ -18,13 +19,12 @@
   color: var(--color-primary);
   border: solid 1px var(--color-primary);
 }
-.primary:hover:active{
-   background-color: #3879fc;
-}
 .primary:hover {
   color: var(--color-text);
   background-color: var(--color-primary);
-  color: var(--color-text);
+}
+.primary:hover:active{
+   background-color: var(--color-primary-hover);
 }
 
 /*Botão secundário */
@@ -34,7 +34,7 @@
     border: solid 1px var(--color-primary);
   } 
 .secondary:hover{
-  background-color: #3879fc;
+  background-color: var(--color-primary-hover);
 }
 
 .highcontrast {
@@ -44,7 +44,7 @@
   color: var(--color-text);
 } 
 .highcontrast:hover{
-  background-color: #3879fc;
+  background-color: var(--color-primary-hover);
 }
 
 
@@ -83,6 +83,7 @@
 /*Botão com bordas*/
 .outline{
   border-top: solid 2px transparent;
+  border-radius: 0px;
   background-color: transparent;
   transition: border 0.3s ease, transform 0.1s ease;
   transition: color 0.3s ease, transform 0.1s ease;
@@ -120,9 +121,21 @@
 }
 
 .message:hover{
-  background-color: #e5e5e515;
+  background-color: #fafafa;
+  color: var(--color-heading);
+  border: solid 1px var(--color-transparency);
 }
 
+
 .message:hover:active{
-  background-color: #e5e5e565;
+  border: solid 1px var(--color-subtext);
+}
+
+.closeList{
+  color: var(--color-transparency);
+  background-color: transparent;
+  padding: 0.2em;
+}
+.closeList:hover{
+  color: var(--color-danger);
 }

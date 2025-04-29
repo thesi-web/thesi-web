@@ -1,9 +1,12 @@
 import React from 'react'
 import Button from '../Button/Button'
 import styles from './Message.module.css'
-
+import { useNavigate } from 'react-router-dom';
 
 const Message = ( { mensagem, link, assunto, nome, nomeProjeto, nomeUsuario } ) => {
+
+  const navigate = useNavigate();
+
   return (
     <div className={styles.messageContainer}>
 
@@ -32,7 +35,12 @@ const Message = ( { mensagem, link, assunto, nome, nomeProjeto, nomeUsuario } ) 
     </div>
 
 
-      <Button variant={'message'} >Check</Button>
+      <Button 
+        variant={'message'} 
+        onClick={() => navigate(`${link}`)}
+      >
+        Check
+      </Button>
     </div>
   )
 }

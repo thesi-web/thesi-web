@@ -88,7 +88,7 @@ const FormHeuristica = ({
   return (
     <form onSubmit={SubmitHeuristica} method="POST" encType="multipart/form-data">
       <label className='label'>Heurística</label>
-      <select value={heuristica || "0"} onChange={(e) => setHeuristica(e.target.value)}>
+      <select value={heuristica} onChange={(e) => setHeuristica(e.target.value)}>
         <option value={0}>Visibilidade do Status do Sistema</option>
         <option value={1}>Correspondência entre o Sistema e o Mundo Real</option>
         <option value={2}>Controle e Liberdade do Usuário</option>

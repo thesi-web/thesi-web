@@ -10,21 +10,28 @@
 
 .icon {
     font-size: 18px;
-    color: #a6a299;
+    color: var(--color-primary);
     margin: 5px;
 }
 
 .file {
-    background-color: #a6a2991c;
+    background-color:  var(--color-primary-transparency);
     border-radius: 5px;
     padding: 5px;
     margin: 5px 0px;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    border: solid 1px transparent;
+    transition: all 0.2s ease;
+}
+
+.file:hover {
+    border: solid 1px var(--color-primary);
 }
 
 .nameContainer{
     display: flex;
+    width: 10vw;
     align-items: center;
 }
