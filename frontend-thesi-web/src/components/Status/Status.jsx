@@ -15,6 +15,10 @@ const Status = ({ status }) => {
       statusText = 'Entregue';
       statusClass = styles.entregue;
       break;
+      case 'finalizado':
+        statusText = 'Finalizado';
+        statusClass = styles.finalizado;
+        break;
     default:
       statusText = 'Em andamento';
       statusClass = styles.emAndamento;

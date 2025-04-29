@@ -24,7 +24,8 @@
     margin: 0.5em 0em;
     padding: 0.6em ;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 80vw;
+    width: 85vw;
+    align-items: center;
   }
 
 /* Caixa geral de informações do projeto */

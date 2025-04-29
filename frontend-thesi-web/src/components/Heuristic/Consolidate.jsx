@@ -1,3 +1,4 @@
+import { io } from 'socket.io-client';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Button from '../Button/Button'
@@ -7,6 +8,7 @@ import styles from './Consolidate.module.css'
 
 const Consolidate = () => {
 
+  
   const navigate = useNavigate();
   const { projetoId } = useParams();
   const [heuristica, setHeuristica] = useState([]);
@@ -15,6 +17,18 @@ const Consolidate = () => {
   const [error, setError] = useState(null);
   const [selecionadosH, setSelecionadosH] = useState([]);
   const [selecionadosS, setSelecionadosS] = useState([]);
+  const [socket, setSocket] = useState(null);
+
+
+  useEffect(() => {
+    const newSocket = io('http://localhost:3000', { transports: ['websocket'] });
+    setSocket(newSocket);
+  
+    return () => {
+      if (newSocket) newSocket.disconnect();
+    };
+  }, []);
+  
 
   useEffect(() => {
     const handleHeuristica = async () => {
@@ -73,8 +87,15 @@ const Consolidate = () => {
       });
   
       if (!response.ok) throw new Error('Erro ao enviar consolidação');
-      navigate('/professor/home');
       
+      if (socket) {
+        socket.emit('consolidacaoRealizada', { projetoId });
+      } else {
+        console.error('Socket não conectado.');
+      }
+      
+      navigate('/professor/home');
+
     } catch (err) {
       alert(`Erro: ${err.message}`);
     }

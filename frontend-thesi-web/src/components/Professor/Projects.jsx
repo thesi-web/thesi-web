@@ -44,11 +44,6 @@ const Projects = () => {
           <div className={styles.prBoxTitle}>
               <div
                 className={styles.prNomeContainer}
-                onClick={() => {
-                  if (projeto.ds_status !== "cancelado") {
-                    handleClick(projeto.id_projeto);
-                  }
-                }}
               >
               <div className={styles.thesiLabel} id='project_id' > {projeto.id_projeto} </div>
               <div className={styles.thesiLabel}> {projeto.nm_projeto} </div>
@@ -58,7 +53,7 @@ const Projects = () => {
 
           <div className={styles.prBoxTitle}>
             <div className={styles.thesiLabel}>Team members</div>
-            <div className="subtext">
+            <div className="subtext" id={'autores'} >
               {(!projeto.nm_autores || projeto.nm_autores === '{}' || projeto.nm_autores.trim() === '') 
                 ? 'Individual' 
                 : projeto.nm_autores}
@@ -77,21 +72,25 @@ const Projects = () => {
 
           <div className={styles.prBox}>
             <div className={styles.thesiLabel}>Project Status</div>
-            <Status status={projeto.ds_status} />
+            <div className={'subtext'}>{projeto.ds_status}</div>
           </div>
 
-          {projeto.ds_status !== "entregue" && (
+          
             <div className={styles.actions}>
               <Button
-                variant={projeto.ds_status === "em andamento" || projeto.ds_status === "atrasado"
+                variant={projeto.ds_status === "finalizado" || projeto.ds_status === "cancelado"
                   ? 'disabled'
                   : 'secondary'}
-                onClick={() => { /* Adicionar lógica ao clicar no botão */ }}
+                  onClick={() => {
+                    if (projeto.ds_status !== "finalizado") {
+                      handleClick(projeto.id_projeto);
+                    }
+                  }}
               >
-                Configure
+                Consolidate
               </Button>
             </div>
-          )}
+          
         </div>
       ))}
     </div>

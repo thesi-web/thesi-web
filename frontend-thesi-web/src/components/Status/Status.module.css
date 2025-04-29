@@ -14,6 +14,10 @@
     color: #7E7B74;
   }
   
+  .finalizado{
+    background-color: #7e7b740c; /* amarelo/laranja */
+    color: #7e7b744d;
+  }
   .atrasado {
     background-color: #c9a43d2d;
     color: #C9A43D;

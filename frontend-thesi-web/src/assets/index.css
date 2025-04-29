@@ -216,3 +216,9 @@ b:hover{
   font-size: var(--font-size-sm);
   color: var(--color-danger);
 }
+
+#autores {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

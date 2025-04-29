@@ -75,7 +75,7 @@ const Project = () => {
         <div className={styles.titleContainer}>
           <div className={'title'}>{projeto.nm_projeto}</div>
         <div className={styles.titleContainer}>  
-          {projeto.ds_status !== 'entregue' && (
+          {projeto.ds_status !== 'entregue' || 'finalizado' && (
             <Button id={'bullet'} variant={'icon'} icon={<i className="bi bi-journals"></i>} onClick={() => setMarksModal(true)} />
           )}
           <Status status={`${projeto.ds_status}`} />
@@ -85,9 +85,9 @@ const Project = () => {
         <div className={styles.objectiveContainer}>
           {projeto.ds_projeto}
         </div>
-        <Carroussel images={projeto.imagens} projetoId={projetoId} isDisabled={projeto.ds_status === 'entregue'}  />
+        <Carroussel images={projeto.imagens} projetoId={projetoId} isDisabled={projeto.ds_status === 'entregue' || 'finalizado'}  />
         <div className={styles.buttonContainer}>
-        {projeto.ds_status !== 'entregue' && (
+        {projeto.ds_status !== 'entregue' ||'finalizado' && (
           <Button type="submit" variant="secondary" onClick={() => setIsMessageModalOpen(true)}>
             Submit project
           </Button>

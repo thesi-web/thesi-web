@@ -2,22 +2,22 @@ const database = require("../database/connection");
 
 class Notifications {
 
-  async getByUserId(userId) {
+  async create(userId, projetoId, link, mensagem = 'Your project has been corrected') {
 
-    return await database("t_projeto as P")
-    .innerJoin("t_projeto_usuario as PU", "P.id_projeto", "PU.id_projeto")
-    .innerJoin("t_usuario as U", "PU.id_usuario", "U.id_usuario")
-    .select(
-      "P.id_projeto", 
-      "P.nm_projeto", 
-      "P.dt_entrega", 
-      "P.nm_autores", 
-      "PU.ds_lida", 
-      "U.id_usuario", 
-      "U.nm_usuario"
-    )
-    .where("PU.id_usuario", userId)
-    .orderBy("P.dt_criacao", "desc")
+    try {
+      
+      await database("t_notificacao").insert({
+        id_usuario: userId,
+        id_projeto: projetoId,
+        ds_link: link,
+        ds_mensagem: mensagem
+      });
+      return { success: true, message: "Notificação criado com sucesso!" };
+    } catch (err) {
+      console.error("Erro ao criar nofificação:", err);
+      throw err;
+    }
+
   }
 
   async markAsRead(userId, projetoId) {

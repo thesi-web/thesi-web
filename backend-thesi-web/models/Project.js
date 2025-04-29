@@ -86,7 +86,6 @@ class Project {
       .where("P.id_professor", ProfessorId);
   }
   
-
   async findById(projetoId, userId) {
     try {
       const projeto = await database("t_projeto as P")
@@ -243,6 +242,17 @@ class Project {
       )
       .where("U.id_usuario", userId);
   }
+
+  async findMembers(projetoId){
+
+    return await database("t_projeto as P")
+    .join("t_projeto_usuario as PU", "P.id_projeto", "PU.id_projeto")
+    .select(
+      "PU.id_usuario"
+    )
+    .where("PU.id_projeto", projetoId);
+  }
+
 }
 
 module.exports = new Project();
