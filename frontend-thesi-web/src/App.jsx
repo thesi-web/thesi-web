@@ -1,6 +1,6 @@
 // App.jsx
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { ProjectsProvider } from './context/ProjectContext';
 import { jwtDecode } from "jwt-decode";
 import { io } from 'socket.io-client';
@@ -85,7 +85,7 @@ function App() {
   }, [isAuthenticated]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
       <Route path="/" element={<Hero/>} />
         <Route path="/login" element={<Login/>} />
@@ -106,7 +106,7 @@ function App() {
           <Route path='/project/:projetoId' element={<ProtectedRoute roleRequired="aluno"><Project /></ProtectedRoute>} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
