@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 
 const ProjectsContext = createContext();
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const useProjects = () => {
   return useContext(ProjectsContext);

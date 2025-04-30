@@ -1,10 +1,10 @@
-const nodemailer = require("nodemailer");
+import nodemailer from 'nodemailer';
 
 const emailUser = process.env.EMAIL_USER;
 const emailPass = process.env.EMAIL_PASS;
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.VITE_API_URL;
 
-exports.enviarEmailRecuperacao = async (destinatario, token) => {
+export async function enviarEmailRecuperacao(destinatario, token) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -16,20 +16,21 @@ exports.enviarEmailRecuperacao = async (destinatario, token) => {
   const mailOptions = {
     from: emailUser,
     to: destinatario,
-    subject: `Here's you magic link`,
+    subject: `Here's your magic link`,
     html: `
-        <div style="font-family: Arial, sans-serif; padding: 10px;">
-            <h2>Change your password.✨</h2>
-            <p>Hey!</p>
-            <p>Don't worry, here's your magic link! use it to reset your password:</p>
-            <a>${apiUrl}/change/password/${token}</a>
-        </div>
+      <div style="font-family: Arial, sans-serif; padding: 10px;">
+          <h2>Change your password.✨</h2>
+          <p>Hey!</p>
+          <p>Don't worry, here's your magic link! use it to reset your password:</p>
+          <a>${apiUrl}/change/password/${token}</a>
+      </div>
     `,
   };
-  await transporter.sendMail(mailOptions);
-};
 
-exports.enviarEmailToken = async (destinatario, token) => {
+  await transporter.sendMail(mailOptions);
+}
+
+export async function enviarEmailToken(destinatario, token) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -53,9 +54,9 @@ exports.enviarEmailToken = async (destinatario, token) => {
   };
 
   await transporter.sendMail(mailOptions);
-};
+}
 
-exports.enviarEmailBoasVindas = async (destinatario, name) => {
+export async function enviarEmailBoasVindas(destinatario, name) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -69,19 +70,19 @@ exports.enviarEmailBoasVindas = async (destinatario, name) => {
     to: destinatario,
     subject: 'Welcome to Thesi',
     html: `
-        <div style="font-family: Arial, sans-serif; padding: 10px;">
-            <h2>Welcome to Thesi 🐥✨</h2>
-            <p>Hi ${name},</p>
-            <p>Welcome to Thesi — we're thrilled to have you on board!</p>
-            <p>Your account has been successfully created, and you're all set to explore a world of ideas and practical solutions designed just for you.</p>
-            <br/>
-            <p>Let's build something great together.</p>
-            <br/>
-            <p>Cheers,</p>
-            <p><b>The Thesi Team</b></p>
-          </div>
+      <div style="font-family: Arial, sans-serif; padding: 10px;">
+          <h2>Welcome to Thesi 🐥✨</h2>
+          <p>Hi ${name},</p>
+          <p>Welcome to Thesi — we're thrilled to have you on board!</p>
+          <p>Your account has been successfully created, and you're all set to explore a world of ideas and practical solutions designed just for you.</p>
+          <br/>
+          <p>Let's build something great together.</p>
+          <br/>
+          <p>Cheers,</p>
+          <p><b>The Thesi Team</b></p>
+      </div>
     `,
   };
 
   await transporter.sendMail(mailOptions);
-};
+}

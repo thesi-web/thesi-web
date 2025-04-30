@@ -109,7 +109,7 @@ const Notifications = require("../models/Notifications");
 
 // Define a porta do servidor, utilizando a variável de ambiente PORT ou 3000 como padrão
 const port = process.env.PORT || 3000;
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.VITE_API_URL;
 
 // Middleware para erros 404
 app.use(notFoundHandler)

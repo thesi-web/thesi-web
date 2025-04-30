@@ -19,7 +19,7 @@ const FormHeuristica = ({
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedSeveridade, setSelectedSeveridade] = useState(severidade);
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const SubmitHeuristica = async (e) => {
     e.preventDefault();

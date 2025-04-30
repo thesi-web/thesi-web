@@ -9,7 +9,7 @@ const Projects = () => {
 
   const navigate = useNavigate();
   const [projeto, setProjeto] = useState([]);
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handlehProjects = async () => {
     try {

@@ -7,7 +7,7 @@ import styles from './ForgotPassword.module.css'
 function ForgotPassword() {
 
 const [email, setEmail] = useState ('');
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleEmailChange = (event) => {
       setEmail(event.target.value);

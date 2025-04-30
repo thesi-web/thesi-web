@@ -9,7 +9,7 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
   const [message, setMessage] = useState('');
   const [messageToken, setMessageToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleSendToken = async (e) => {
     e.preventDefault();

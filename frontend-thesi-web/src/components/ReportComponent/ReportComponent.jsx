@@ -13,7 +13,7 @@ const ReportComponent = () => {
   const [semiotica, setSemiotica] = useState([]);
   const [heuristica, setHeuristica] = useState([]);
   const [isReady, setIsReady] = useState(false);
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const handleHeuristica = async () => {

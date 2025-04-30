@@ -7,7 +7,7 @@ import Message from '../Message/Message';
 
 const InboxDrawer = ({ onClose, closing }) => {
   
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
   const socket = io(`${apiUrl}`); // onde estiver seu socket server
   const [notificacoes, setNotificacoes] = useState([]);
 

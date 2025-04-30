@@ -9,7 +9,7 @@ import Warning from '../Warning/Warning';
 const Sidebar = ({ show, onOpenInbox, onClose }) => {
 
   const navigate = useNavigate();
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
   
   const handleClick = (id) => {
     navigate(`/project/${id}`);

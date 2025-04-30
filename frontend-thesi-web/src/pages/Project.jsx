@@ -15,7 +15,7 @@ const Project = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [marksModal, setMarksModal] = useState(false);
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const { projetoId } = useParams();
 

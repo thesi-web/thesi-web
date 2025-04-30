@@ -10,7 +10,7 @@ const LayoutComSidebar = () => {
 const [showInbox, setShowInbox] = useState(false);
 const [closingInbox, setClosingInbox] = useState(false);
 const [showSidebar, setShowSidebar] = useState(false);
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const handleCloseInbox = () => {
   setClosingInbox(true);

@@ -8,6 +8,7 @@ import CaseStudies from '../components/Sections/CaseStudies'
 import Footer from '../components/Footer/Footer'
 
 const Hero = () => {
+  
   return (
     <main>
         <NavBar/>
