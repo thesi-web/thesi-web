@@ -113,14 +113,6 @@ const Notifications = require("../models/Notifications");
 const port = process.env.PORT || 3000;
 const apiUrl = process.env.VITE_API_URL;
 
-app.use(express.static(path.join(__dirname, 'dist')));
-
-// Redireciona todas as rotas para o index.html do Vite
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
-
-
 // Middleware para erros 404
 app.use(notFoundHandler)
 
