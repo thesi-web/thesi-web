@@ -21,6 +21,7 @@ const FormSemiotica = ({
 }) => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const SubmitSemiotica = async (e) => {
     e.preventDefault();
@@ -36,7 +37,7 @@ const FormSemiotica = ({
       const formData = new FormData();
       formData.append('imagem', blob, 'imagem.png'); // nome opcional
   
-      const uploadResponse = await fetch('http://localhost:3000/api/upload', {
+      const uploadResponse = await fetch(`${apiUrl}/api/upload`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -61,7 +62,7 @@ const FormSemiotica = ({
         imagem: imagemAWSURL,
       };
   
-      const response = await fetch('http://localhost:3000/api/semiotic', {
+      const response = await fetch(`${apiUrl}/api/semiotic`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

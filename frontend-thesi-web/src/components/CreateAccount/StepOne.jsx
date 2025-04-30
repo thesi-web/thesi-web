@@ -9,12 +9,13 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
   const [message, setMessage] = useState('');
   const [messageToken, setMessageToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const handleSendToken = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/request/token', { email });
+      const response = await axios.post(`${apiUrl}/api/request/token`, { email });
       setTokenSent(true);
     } catch (error) {
       setMessage(error.response?.data?.error);
@@ -30,7 +31,7 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post('http://localhost:3000/api/confirm/token', { 
+      await axios.post(`${apiUrl}/api/confirm/token`, { 
         email, 
         token: verificationCode, 
       });

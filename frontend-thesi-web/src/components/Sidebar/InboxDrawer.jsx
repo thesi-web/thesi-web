@@ -4,17 +4,18 @@ import styles from './InboxDrawer.module.css';
 import Warning from '../Warning/Warning';
 import Message from '../Message/Message';
 
-const socket = io('http://localhost:3000'); // onde estiver seu socket server
 
 const InboxDrawer = ({ onClose, closing }) => {
-
+  
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const socket = io(`${apiUrl}`); // onde estiver seu socket server
   const [notificacoes, setNotificacoes] = useState([]);
 
   useEffect(() => {
     // Função para buscar as notificações antigas
     const fetchNotificacoes = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/notifications/`, {
+        const response = await fetch(`${apiUrl}/api/notifications/`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,

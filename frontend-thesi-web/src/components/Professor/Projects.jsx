@@ -9,10 +9,11 @@ const Projects = () => {
 
   const navigate = useNavigate();
   const [projeto, setProjeto] = useState([]);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const handlehProjects = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/professor/project', {
+      const response = await fetch(`${apiUrl}/api/professor/project`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`, 

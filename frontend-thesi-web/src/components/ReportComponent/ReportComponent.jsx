@@ -12,12 +12,13 @@ const ReportComponent = () => {
   const { projetoId } = useParams();
   const [semiotica, setSemiotica] = useState([]);
   const [heuristica, setHeuristica] = useState([]);
-  const [isReady, setIsReady] = useState(false); // Novo estado
+  const [isReady, setIsReady] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const handleHeuristica = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/heuristic/${projetoId}`, {
+        const response = await fetch(`${apiUrl}/api/heuristic/${projetoId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`, 
           },
@@ -39,7 +40,7 @@ const ReportComponent = () => {
   useEffect(() => {
     const handleSemiotica = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/semiotic/${projetoId}`, {
+        const response = await fetch(`${apiUrl}/api/semiotic/${projetoId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`, 
           },

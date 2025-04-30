@@ -10,6 +10,7 @@ function ChangePassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +26,7 @@ function ChangePassword() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/password/change", {
+      const res = await fetch(`${apiUrl}/api/password/change`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,

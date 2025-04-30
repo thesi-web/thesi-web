@@ -10,6 +10,7 @@ const LayoutComSidebar = () => {
 const [showInbox, setShowInbox] = useState(false);
 const [closingInbox, setClosingInbox] = useState(false);
 const [showSidebar, setShowSidebar] = useState(false);
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const handleCloseInbox = () => {
   setClosingInbox(true);
@@ -22,7 +23,7 @@ const handleCloseInbox = () => {
 const navigate = useNavigate();
 
 const handleLogout = async () => {
-  await fetch("http://localhost:3000/api/logout", { method: "POST" });
+  await fetch(`${apiUrl}/api/logout`, { method: "POST" });
   localStorage.removeItem("token");
   navigate("/");
 };

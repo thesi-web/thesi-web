@@ -7,6 +7,7 @@ import styles from './ForgotPassword.module.css'
 function ForgotPassword() {
 
 const [email, setEmail] = useState ('');
+const apiUrl = process.env.REACT_APP_API_URL;
 
   const handleEmailChange = (event) => {
       setEmail(event.target.value);
@@ -22,7 +23,7 @@ const [email, setEmail] = useState ('');
         return;
       }
       
-      const res = await fetch("http://localhost:3000/api/request/password/change", {
+      const res = await fetch(`${apiUrl}/api/request/password/change`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

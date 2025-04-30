@@ -19,6 +19,7 @@ const FormHeuristica = ({
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedSeveridade, setSelectedSeveridade] = useState(severidade);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const SubmitHeuristica = async (e) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ const FormHeuristica = ({
       const formData = new FormData();
       formData.append('imagem', blob, 'imagem.png');
 
-      const uploadResponse = await fetch('http://localhost:3000/api/upload', {
+      const uploadResponse = await fetch(`${apiUrl}/api/upload`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -56,7 +57,7 @@ const FormHeuristica = ({
         imagem: imagemAWSURL,
       };
 
-      const response = await fetch('http://localhost:3000/api/heuristic', {
+      const response = await fetch(`${apiUrl}/api/heuristic`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

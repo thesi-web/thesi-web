@@ -27,6 +27,7 @@ function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [socketInstance, setSocketInstance] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
 
@@ -56,7 +57,7 @@ function App() {
       const userId = jwtDecode(token).id;
 
       // Criando o socket apenas quando o usuário estiver autenticado
-      const socketInstance = io('http://localhost:3000', {
+      const socketInstance = io(`${apiUrl}`, {
         autoConnect: false,
         auth: { token }
       });

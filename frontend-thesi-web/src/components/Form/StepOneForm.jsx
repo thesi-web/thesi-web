@@ -10,12 +10,13 @@ export default function StepOneForm({ projectData, setProjectData }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedParticipants, setSelectedParticipants] = useState([]);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (searchTerm.length >= 2) {
         const token = localStorage.getItem("token"); // ou onde você armazenou
-          fetch(`http://localhost:3000/api/search/user?search=${encodeURIComponent(searchTerm)}`, {
+          fetch(`${apiUrl}/api/search/user?search=${encodeURIComponent(searchTerm)}`, {
             headers: {
               "Authorization": `Bearer ${token}`,
             },

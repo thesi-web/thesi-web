@@ -9,7 +9,7 @@ import Warning from '../Warning/Warning';
 const Sidebar = ({ show, onOpenInbox, onClose }) => {
 
   const navigate = useNavigate();
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   
   const handleClick = (id) => {
     navigate(`/project/${id}`);
@@ -18,7 +18,7 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
   const handleDelete = async (id) => {
 
     try {
-      const response = await fetch(`http://localhost:3000/api/project/${id}`, {
+      const response = await fetch(`${apiUrl}/api/project/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -40,7 +40,7 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/all', {
+      const response = await fetch(`${apiUrl}/api/all`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`, 

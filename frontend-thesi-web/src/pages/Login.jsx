@@ -13,6 +13,7 @@ function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL;
   
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ function Login() {
     setLoading(true);
   
     try {
-      const response = await axios.post('http://localhost:3000/api/login', { email, password });
+      const response = await axios.post(`${apiUrl}/api/login`, { email, password });
       const { token } = response.data;
   
       localStorage.setItem("token", token);

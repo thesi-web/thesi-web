@@ -7,9 +7,10 @@ import { Link } from 'react-router-dom';
 const NavigationBar = () => {
 
   const navigate = useNavigate();
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const handleLogout = async () => {
-    await fetch("http://localhost:3000/api/logout", { method: "POST" });
+    await fetch(`${apiUrl}/api/logout`, { method: "POST" });
     localStorage.removeItem("token");
     navigate("/");
   };

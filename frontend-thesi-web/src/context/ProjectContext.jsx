@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState } from 'react';
 
 const ProjectsContext = createContext();
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export const useProjects = () => {
   return useContext(ProjectsContext);
 };
@@ -11,7 +13,7 @@ export const ProjectsProvider = ({ children }) => {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/all', {
+      const response = await fetch(`${apiUrl}/api/all`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,

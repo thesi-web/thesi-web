@@ -18,10 +18,11 @@ const Consolidate = () => {
   const [selecionadosH, setSelecionadosH] = useState([]);
   const [selecionadosS, setSelecionadosS] = useState([]);
   const [socket, setSocket] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
 
   useEffect(() => {
-    const newSocket = io('http://localhost:3000', { transports: ['websocket'] });
+    const newSocket = io(`${apiUrl}`, { transports: ['websocket'] });
     setSocket(newSocket);
   
     return () => {
@@ -33,7 +34,7 @@ const Consolidate = () => {
   useEffect(() => {
     const handleHeuristica = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/marks/${projetoId}`, {
+        const response = await fetch(`${apiUrl}/api/marks/${projetoId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -76,7 +77,7 @@ const Consolidate = () => {
 
   const enviarMarcacoesSelecionadas = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/consolidate`, {
+      const response = await fetch(`${apiUrl}/api/consolidate`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

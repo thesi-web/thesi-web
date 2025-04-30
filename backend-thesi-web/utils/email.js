@@ -2,6 +2,7 @@ const nodemailer = require("nodemailer");
 
 const emailUser = process.env.EMAIL_USER;
 const emailPass = process.env.EMAIL_PASS;
+const apiUrl = process.env.REACT_APP_API_URL;
 
 exports.enviarEmailRecuperacao = async (destinatario, token) => {
   const transporter = nodemailer.createTransport({
@@ -21,7 +22,7 @@ exports.enviarEmailRecuperacao = async (destinatario, token) => {
             <h2>Change your password.✨</h2>
             <p>Hey!</p>
             <p>Don't worry, here's your magic link! use it to reset your password:</p>
-            <a>http://localhost:5173/change/password/${token}</a>
+            <a>${apiUrl}/change/password/${token}</a>
         </div>
     `,
   };

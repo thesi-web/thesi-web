@@ -21,6 +21,7 @@ function CreateAccount() {
 
   const navigate = useNavigate();
 
+  const apiUrl = process.env.REACT_APP_API_URL;
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
 
@@ -44,7 +45,7 @@ function CreateAccount() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/user', {
+      const response = await axios.post(`${apiUrl}/api/user`, {
         name,
         phone,
         email,

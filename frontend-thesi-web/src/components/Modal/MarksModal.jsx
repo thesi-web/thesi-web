@@ -9,11 +9,12 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
   const [semiotica, setSemiotica] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   // mover para FORA do useEffect
   const handleHeuristica = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/marks/${projetoId}`, {
+      const response = await fetch(`${apiUrl}/api/marks/${projetoId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -39,7 +40,7 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
 
   const handleDeleteHeuristica = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/heuristic/${id}`, {
+      const response = await fetch(`${apiUrl}/api/heuristic/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -58,7 +59,7 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
 
   const handleDeleteSemiotica = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/semiotic/${id}`, {
+      const response = await fetch(`${apiUrl}/api/semiotic/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,

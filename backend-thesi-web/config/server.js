@@ -109,6 +109,7 @@ const Notifications = require("../models/Notifications");
 
 // Define a porta do servidor, utilizando a variável de ambiente PORT ou 3000 como padrão
 const port = process.env.PORT || 3000;
+const apiUrl = process.env.REACT_APP_API_URL;
 
 // Middleware para erros 404
 app.use(notFoundHandler)
@@ -118,6 +119,6 @@ app.use(errorHandler)
 
 // Inicia o servidor Express na porta definida
 http.listen(port, () => console.log(
-    `Servidor Express rodando em http://localhost:${port};` + `\n` + 
+    `Servidor Express rodando em ${apiUrl}:${port};` + `\n` + 
     `Pressione Ctrl-C para encerrar.`
 ))

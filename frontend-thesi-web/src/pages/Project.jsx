@@ -15,6 +15,7 @@ const Project = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [marksModal, setMarksModal] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const { projetoId } = useParams();
 
@@ -22,7 +23,7 @@ const Project = () => {
   const fetchProjeto = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:3000/api/project/${projetoId}`, {
+      const response = await fetch(`${apiUrl}/api/project/${projetoId}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -48,7 +49,7 @@ const Project = () => {
 
   const entregarProjeto = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/project/${projetoId}`, {
+      const response = await fetch(`${apiUrl}/api/project/${projetoId}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,

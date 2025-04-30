@@ -11,6 +11,8 @@ import Stepper from '../components/Stepper/Stepper';
 export default function MultiStepForm() {
 
   const { fetchProjects } = useProjects();
+
+  const apiUrl = process.env.REACT_APP_API_URL;
   
   const navigate = useNavigate();
   
@@ -47,7 +49,7 @@ export default function MultiStepForm() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch("http://localhost:3000/api/project", {
+      const res = await fetch(`${apiUrl}/api/project`, {
         method: "POST",
         body: projectForm,
         headers: {
