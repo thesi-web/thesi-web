@@ -5,7 +5,8 @@
   "main": "config/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "João Vitor Serra de Freitas",
   "license": "ISC",
@@ -17,7 +18,13 @@
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.1.0",
     "multer": "^1.4.5-lts.2",
+    "nodemailer": "^6.10.1",
     "nodemon": "^3.1.9",
-    "socket.io": "^4.8.1"
+    "pg": "^8.15.6",
+    "socket.io": "^4.8.1",
+    "aws-sdk": "^2.1692.0",
+    "bcrypt": "^5.1.1",
+    "mime": "^4.0.7",
+    "mime-types": "^3.0.1"
   }
 }

@@ -1,23 +1,15 @@
 require("dotenv").config();
-/* 
-    Inicializa o pacote dotenv para carregar automaticamente as variáveis definidas no arquivo .env, 
-    tornando-as acessíveis via process.env. Essencial para separar configurações sensíveis do código-fonte principal.
-*/
 const knex = require("knex");
 
 const database = knex({
   client: "pg",
   connection: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
+    connectionString: process.env.DB_CONNECTION,  // URL de conexão completa
+    ssl: { rejectUnauthorized: false }  // Adicionando a configuração SSL
   }
 });
 
-// Testar conexão com consulta simples
-database.raw("SET lc_time = 'pt_BR.UTF-8'")
+database.raw("SELECT 1")
   .then(() => {
     console.log("Conectado ao banco de dados com sucesso!");
   })
@@ -26,5 +18,3 @@ database.raw("SET lc_time = 'pt_BR.UTF-8'")
   });
 
 module.exports = database;
-
-

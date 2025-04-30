@@ -1,6 +1,6 @@
 const database = require("../database/connection");
-const { uploadService } = require("../services/uploadService");
-const uploader = new uploadService();
+const { UploadService } = require("../services/uploadService");
+const uploader = new UploadService();
 require("dotenv").config();
 
 class Project {

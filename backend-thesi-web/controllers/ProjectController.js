@@ -2,7 +2,7 @@ require("dotenv").config();
 const Heuristic = require("../models/Heuristic");
 const Project = require("../models/Project");
 const Semiotic = require("../models/Semiotic");
-const { uploadService } = require('../services/uploadService');
+const { UploadService } = require('../services/uploadService');
 
 
 class ProjectController {
@@ -29,7 +29,7 @@ class ProjectController {
           ? authors.map((id) => parseInt(id)).filter((id) => !isNaN(id))
           : [];
   
-      const uploader = new uploadService();
+      const uploader = new UploadService();
   
       const uploadedTemplates = [];
       for (const file of templates) {
