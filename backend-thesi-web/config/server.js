@@ -22,7 +22,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", userRoutes); // isso define o prefixo das rotas
+app.use("/api", userRoutes);
+
+app.get('/', (req, res) => {
+  res.send('API THESI está rodando! 🚀');
+});
+
 
 app.use(session({
     secret: process.env.JWT_SECRET,
