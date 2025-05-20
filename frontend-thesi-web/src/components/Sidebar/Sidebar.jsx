@@ -69,14 +69,18 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
         </div>
         
         <div>
-        <Link to="/home" ><SidebarItem label={"Home"} icon={<i className="bi bi-cup"></i>} /></Link>
-          
-          <SidebarItem 
-            label={"Inbox"} 
-            icon={<i className="bi bi-mailbox"></i>} 
-            onClick={onOpenInbox}
-          />
+        <Link to="/home" ><SidebarItem label={"Home"} icon={<i className="bi bi-cup"></i>} /></Link>  
+        <SidebarItem 
+          label={"Inbox"} 
+          icon={<i className="bi bi-mailbox"></i>} 
+          onClick={onOpenInbox}
+        />
+        <Link to="/create/project" ><SidebarItem label={"New Project"} icon={<i className="bi bi-plus-circle"></i>} /></Link>
         </div>
+
+      
+          
+
 
         <div className={styles.title}>Projects</div>
 

@@ -86,7 +86,7 @@ function CreateAccount() {
         </Link>
 
         <div style={{ display: 'flex', alignItems: 'center' }}> 
-          Already have an account? <a style={{ marginLeft: '10px' }} href="/login" >Sign in</a>
+          Already have an account? <Link to="/login" style={{ marginLeft: '10px' }}>Sign in</Link>
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProjects } from '../context/ProjectContext';
 import StepOneForm from '../components/Form/StepOneForm';
@@ -16,6 +16,8 @@ export default function MultiStepForm() {
   
   const navigate = useNavigate();
   
+  const [isStepOneValid, setIsStepOneValid] = useState(false);
+
   const [step, setStep] = useState(1);
 
   const [projectData, setProjectData] = useState({
@@ -28,7 +30,16 @@ export default function MultiStepForm() {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+  const isValid = 
+    projectData.name.trim() !== '' &&
+    projectData.objective.trim() !== '' &&
+    projectData.platform.trim() !== '';
+    setIsStepOneValid(isValid);
+    }, [projectData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +58,17 @@ export default function MultiStepForm() {
     });
 
     const token = localStorage.getItem("token");
+
+    if (
+      projectData.name.trim() === '' ||
+      projectData.objective.trim() === '' ||
+      projectData.platform.trim() === ''
+      ) {
+      setErrorMessage("Preencha todos os dados obrigatórios.");
+      setIsLoading(false);
+      return;
+      }
+
 
     try {
       const res = await fetch(`${apiUrl}/api/project`, {
@@ -95,6 +117,7 @@ export default function MultiStepForm() {
             variant='transparent'
             onClick={() => setStep(step - 1)}
             id='form_btn'
+            disabled={isLoading}
           >
             Anterior
           </Button>
@@ -105,14 +128,20 @@ export default function MultiStepForm() {
             variant='secondary'
             onClick={() => setStep(step + 1)}
             id='form_btn'
+            disabled={!isStepOneValid}
           >
             Next
           </Button>
         )}
 
         {step === 2 && (
-          <Button type='submit' variant='secondary' id='form_btn'>
-            Criar Projeto
+          <Button
+            type='submit'
+            variant='secondary'
+            id='form_btn'
+            disabled={isLoading} // Aqui é onde a mágica acontece
+          >
+            {isLoading ? "Creating..." : "Create Project"}
           </Button>
         )}
       </div>

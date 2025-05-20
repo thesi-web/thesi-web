@@ -181,7 +181,7 @@ class UserController {
       ).json({ error: error.message });
     }
   }
-
+/*
   async requestToken(req, res) {
     try {
       const { email } = req.body;
@@ -204,7 +204,34 @@ class UserController {
       return res.status(500).json({ error: error.message });
     }
   }
-  
+*/
+
+  async requestToken(req, res) {
+    try {
+      const { email } = req.body;
+
+      const allowedDomains = ['@fatec.sp.gov.br', '@maua.br'];
+      const isInstitutionalEmail = allowedDomains.some(domain => email.endsWith(domain));
+
+      if (!isInstitutionalEmail) {
+        return res.status(400).json({ error: 'Please enter an institutional email address.' });
+      }
+
+      const achou = await User.findByEmail(email);
+
+      if (achou) {
+        return res.status(400).json({ error: 'Email already registered.' });
+      }
+
+      await gerarToken(email);
+
+      return res.status(200).json({ message: 'Token enviado com sucesso.' });
+
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
   async confirmToken(req, res) {
     
     const { email, token } = req.body;

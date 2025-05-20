@@ -48,9 +48,9 @@ const apiUrl = import.meta.env.VITE_API_URL;
           </Button>
         </Link>
 
-        <div style={{ display: 'flex', alignItems: 'center' }}> 
-          Already have an account? <a style={{ marginLeft: '10px' }} href="/login" >Sign in</a>
-        </div>
+       <div style={{ display: 'flex', alignItems: 'center' }}> 
+        Already have an account? <Link to="/login" style={{ marginLeft: '10px' }}>Sign in</Link>
+      </div>
       </div>
 
       <div className={styles.container} > 
@@ -77,7 +77,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
           </Button> 
  
           <div className={styles.textContainer} >
-            Don't have an account? <a style={{ marginLeft: '10px' }} to="/create/account">Register here</a>
+            Don't have an account? <Link style={{ marginLeft: '10px' }} to="/create/account">Register here</Link>
           </div>
        </form>
       </div>        

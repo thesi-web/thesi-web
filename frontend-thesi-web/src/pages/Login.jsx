@@ -60,8 +60,8 @@ function Login() {
         <div className={styles.formContainer}>
           <form onSubmit={handleSubmit}>
             <div className={styles.titleContainer} >
-              <div className={'title'} >Sign in</div>
-              <p> Hey! Good to see you again! Let's get you signed in 🐣</p>
+              <div className={'title'}>Sign in</div>
+              <p> Hey! Good to see you again! Let's get you signed in </p>
              </div>
             <InputText
               label={'E-mail'}
@@ -92,7 +92,7 @@ function Login() {
                 onChange={() => setRememberMe(!rememberMe)}
               />
               <div> Remember me </div>
-              <a href={'/forgot/password'} >Forgot your password?</a>
+              <Link to="/forgot/password" >Forgot your password?</Link>
             </div>
 
         
@@ -107,7 +107,7 @@ function Login() {
 
             <div className={styles.textContainer} >
               <div>Don't have an account?</div>
-              <a href={'/create/account'}>Register here </a>
+              <Link to="/create/account">Register here</Link>
             </div>             
           </form>
         </div>

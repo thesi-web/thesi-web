@@ -81,7 +81,9 @@ const Project = () => {
             id="bullet"
             variant="icon"
             icon={<i className="bi bi-journals"></i>}
+            iconPosition='left'
             onClick={() => setMarksModal(true)}
+            children={'Current marks'}
           />
         )}
           <Status status={`${projeto.ds_status}`} />

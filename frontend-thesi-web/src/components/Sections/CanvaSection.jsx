@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './CanvaSection.module.css'
 import Button from '../Button/Button'
+import { Link } from 'react-router-dom';
 
 const CanvaSection = () => {
   return (
@@ -16,7 +17,9 @@ const CanvaSection = () => {
           </p>
         </div>
         <div>
-          <Button variant={'secondary'} >Sign up for Thesi</Button>
+          <Link to={"/create/account"}>
+            <Button variant={'secondary'}>Sign up for Thesi</Button>
+          </Link>
         </div>
       </div>
     </div>

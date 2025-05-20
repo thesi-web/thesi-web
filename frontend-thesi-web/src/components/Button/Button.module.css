@@ -47,7 +47,6 @@
   background-color: var(--color-primary-hover);
 }
 
-
 .lowcontrast {
     display: flex;
     width: 100%;
@@ -56,6 +55,10 @@
 }
 .lowcontrast:hover{
     text-decoration: underline;
+}
+
+.iconLeft {
+  margin-right: 0.3em;
 }
 
 /*Botão transparente*/
@@ -98,8 +101,12 @@
 /*Botão desabilitado*/
 .disabled {
   background-color: #E0E0E0;
+  border: 1px solid #A6A6A6;
   color: #A6A6A6;
   cursor: not-allowed;
+}
+.disabled:hover {
+  background-color: #E0E0E0;
 }
 
 /*Apenas o ícone*/
