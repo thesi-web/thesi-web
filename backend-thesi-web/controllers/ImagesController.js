@@ -2,6 +2,7 @@ const Images = require("../models/Images");
 const path = require("path");
 const fs = require("fs");
 const AWS = require('aws-sdk');
+const { UploadService } = require('../services/uploadService');
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,     // ou direto na string, se estiver testando local
@@ -134,6 +135,42 @@ class ImagesController {
       res.status(500).json({ erro: 'Erro ao subir imagem' });
     }
   }
+
+  async addImage(req, res) {
+      try {
+        const userId = req.userId;
+        const projetoId = req.params.projetoId;
+        const templates = req.files["template"] || [];
+
+         if (templates.length === 0) {
+          return res.status(400).send("Nenhum arquivo enviado");
+        }
+    
+        if (templates.length > 5) {
+          return res.status(400).send("Máximo de 5 arquivos permitidos");
+        }
+
+        const uploader = new UploadService();
+    
+        const uploadedTemplates = [];
+        for (const file of templates) {
+          await uploader.execute(file.filename);
+          const url = `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${file.filename}`;
+          uploadedTemplates.push({
+            filename: file.filename,
+            originalname: file.originalname,
+            url: url
+          });
+        }
+    
+        await Images.add(uploadedTemplates, userId, projetoId);    
+        res.status(201).json({ msg: "Imagem inserida com sucesso!"});
+    
+      } catch (err) {
+        console.error("Erro ao inserir imagem", err);
+        res.status(500).json({ erro: "Erro ao inserir imagem" });
+      }
+  } 
   
 
 }

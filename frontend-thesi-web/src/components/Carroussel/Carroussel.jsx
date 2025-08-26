@@ -32,6 +32,19 @@ const Carroussel = ({ images, projetoId, isDisabled }) => {
             )}
           </div>
         ))}
+
+        {/* Botão de adicionar imagem */}
+        {!isDisabled && images.length < 5 && (
+          <div
+            className={`${styles.imageContainerAdd}`}
+            onClick={() => console.log("Abrir modal de upload de imagem")}
+          >
+            <div className={styles.adicionarContainer}>
+              <i className="bi bi-plus-circle-fill"></i>
+              <div className={styles.adicionarContainerText}>Adicionar imagem</div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

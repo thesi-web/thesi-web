@@ -38,6 +38,25 @@ class Images {
       .where("id_imagem", idImagem);
   }
 
+  async add(images, userId, projetoId) {
+    try {
+      await database.transaction(async (trx) => {         
+        for (const image of images) {
+          await trx("t_imagens").insert({
+            id_projeto: projetoId,
+            id_usuario: userId,
+            nm_imagem: image.filename,
+            ds_caminho: image.url         
+          });
+        }              
+      });
+  
+    } catch (err) {
+      console.error("Não foi possível adicionar a imagem ao projeto:", err);
+      throw err;
+    }
+  }
+
 }
 
 module.exports = new Images();

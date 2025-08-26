@@ -19,7 +19,7 @@
     height: 80vh;
     overflow-y: auto;
     position: relative;
-    padding: 0em 1em;
+    padding: 1em 2em;
     border-radius: var(--border-radius);
 }
 

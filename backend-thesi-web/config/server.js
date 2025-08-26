@@ -121,6 +121,8 @@ app.use(errorHandler)
 
 // Inicia o servidor Express na porta definida
 http.listen(port, () => console.log(
-    `Servidor Express rodando em ${apiUrl}:${port};` + `\n` + 
-    `Pressione Ctrl-C para encerrar.`
+  `Servidor Express rodando em ${apiUrl}:${port};` + `\n` + 
+  `Pressione Ctrl-C para encerrar.`
 ))
+
+console.log(`link das requisições:${apiUrl}`);

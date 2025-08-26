@@ -74,7 +74,7 @@ const Project = () => {
       <Cover />
       <div className={styles.projectContainer}>
         <div className={styles.titleContainer}>
-          <div className={'title'}>{projeto.nm_projeto}</div>
+          <div className={'project-title'}>{projeto.nm_projeto}</div>
         <div className={styles.titleContainer}>  
         {(projeto.ds_status !== 'entregue' && projeto.ds_status !== 'finalizado') && (
           <Button

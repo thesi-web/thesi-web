@@ -7,10 +7,33 @@
 .imageContainer {
     flex: 0 0 auto;
     border: 1px solid black;
+    border-radius: var(--border-radius);
     width: 300px;
     height: 150px;
     margin: 10px;
     overflow: hidden;
+}
+
+.imageContainerAdd{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    border: 1px solid var(--color-heading);
+    border-radius: var(--border-radius);
+    width: 300px;
+    height: 150px;
+    margin: 10px;
+    overflow: hidden;
+    font-size: var(--font-size-2xl);
+    color: var(--color-heading);
+    cursor: pointer;
+}
+
+.imageContainerAdd:hover {
+    border: solid 1px var(--color-primary);
+    background-color: var(--color-primary-transparency);
+    color: var(--color-primary);
 }
 
 .imageContainer img {
@@ -22,4 +45,17 @@
   
 .imageContainer:hover{
     box-shadow: 1px 0 10px rgba(0, 0, 0, 0.096);
+}
+
+.adicionarContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: border 0.3s ease, transform 0.1s ease;
+    transition: color 0.3s ease, transform 0.1s ease;
+}
+
+.adicionarContainerText{
+    font-size: var(--font-size-sm);
 }

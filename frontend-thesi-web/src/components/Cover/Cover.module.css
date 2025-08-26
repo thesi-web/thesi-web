@@ -1,9 +1,7 @@
 .cover {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-primary-transparency);
+
+    background-color: var(--color-primary);
     width: 100vw;
-    height: 198px;
+    height: 10vh;
     border-bottom: solid 1px var(--color-transparency);
 }

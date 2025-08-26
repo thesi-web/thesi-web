@@ -3,6 +3,7 @@ import styles from './MarksModal.module.css';
 import Button from '../Button/Button';
 import EditHeuristic from '../Heuristic/EditHeuristic';
 import EditSemiotic from '../Heuristic/EditSemiotic';
+import Warning from '../Warning/Warning';
 
 const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
   const [heuristica, setHeuristica] = useState([]);
@@ -77,45 +78,50 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
   };
 
   return (
-    <div className={styles.backdrop} onClick={setMarksModalOpen}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.header}>
-          <div className='h3'>Current marks</div>
-          <Button variant='close' icon={<i className="bi bi-x-lg"></i>} onClick={setMarksModalOpen} />
-        </div>
-
-        {heuristica.map((heuristic, index) => (
-          <EditHeuristic
-            key={index}
-            image={heuristic.ds_caminho}
-            userName={heuristic.nm_usuario}
-            violatedHeuristic={heuristic.nm_heuristica}
-            severityLevel={heuristic.nr_severidade}
-            description={heuristic.ds_problemas}
-            recommendations={heuristic.ds_recomendacoes}
-            heuristicId={heuristic.id_heuristica}
-            onDelete={handleDeleteHeuristica}
-          />
-        ))}
-
-        {semiotica.map((semiotic, index) => (
-          <EditSemiotic
-            key={index}
-            image={semiotic.ds_caminho}
-            userName={semiotic.nm_usuario}
-            signName={semiotic.nm_signo}
-            expected={semiotic.ds_esperada}
-            possible={semiotic.ds_possivel}
-            observed={semiotic.ds_quebra}
-            recommendations={semiotic.ds_recomendacoes}
-            semioticId={semiotic.id_semiotica}
-            onDelete={handleDeleteSemiotica}
-          />
-        ))}
-        
+  <div className={styles.backdrop} onClick={setMarksModalOpen}>
+    <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.header}>
+        <div className='h3'>Current marks</div>
+        <Button variant='close' icon={<i className="bi bi-x-lg"></i>} onClick={setMarksModalOpen} />
       </div>
+
+      {/* Mensagem quando não há heurística nem semiótica */}
+      {heuristica.length === 0 && semiotica.length === 0 && !loading && (
+          <Warning icon={<i class="bi bi-exclamation-circle"></i>} title={'Ainda não há marcações!'} message={'Quando uma avaliação heurística ou semiótica for feita, ela aparecerá aqui para edição.'} />
+      )}
+
+      {heuristica.map((heuristic, index) => (
+        <EditHeuristic
+          key={index}
+          image={heuristic.ds_caminho}
+          userName={heuristic.nm_usuario}
+          violatedHeuristic={heuristic.nm_heuristica}
+          severityLevel={heuristic.nr_severidade}
+          description={heuristic.ds_problemas}
+          recommendations={heuristic.ds_recomendacoes}
+          heuristicId={heuristic.id_heuristica}
+          onDelete={handleDeleteHeuristica}
+        />
+      ))}
+
+      {semiotica.map((semiotic, index) => (
+        <EditSemiotic
+          key={index}
+          image={semiotic.ds_caminho}
+          userName={semiotic.nm_usuario}
+          signName={semiotic.nm_signo}
+          expected={semiotic.ds_esperada}
+          possible={semiotic.ds_possivel}
+          observed={semiotic.ds_quebra}
+          recommendations={semiotic.ds_recomendacoes}
+          semioticId={semiotic.id_semiotica}
+          onDelete={handleDeleteSemiotica}
+        />
+      ))}
     </div>
-  );
+  </div>
+);
+
 };
 
 export default MarksModal;
