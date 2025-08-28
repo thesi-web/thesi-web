@@ -47,9 +47,9 @@ const InboxDrawer = ({ onClose, closing }) => {
   return (
     <div className={`${styles.drawer} ${closing ? styles.slideOut : styles.slideIn}`}>
       <div className={styles.headerContainer}>
-        <div className={'h3'}>Inbox</div>
+        <div className={styles.title}>Notificações</div>
         <div className={styles.headerIcons} onClick={onClose}>
-          <i className="bi bi-chevron-double-left"></i>
+          <i className="bi bi-x-lg"></i>
         </div>
       </div>
 
@@ -57,8 +57,8 @@ const InboxDrawer = ({ onClose, closing }) => {
         {notificacoes.length === 0 ? (     
           <Warning 
             icon={<i className="bi bi-envelope-x"></i>} 
-            title={"No messages"}
-            message={"A notification will appear here in case of @mentions and new projects"}
+            title={"Não há mensagens"}
+            message={"As notificações aparecerão aqui em caso de @menção ou novos projetos"}
           />
         ) : (
           notificacoes.map((n, idx) => (
@@ -67,7 +67,7 @@ const InboxDrawer = ({ onClose, closing }) => {
                 nomeUsuario={n.nm_usuario}
                 nome={n.nm_professor}
                 nomeProjeto={n.nm_projeto}
-                assunto={'corrected a project.'}
+                assunto={'corrigiu seu projeto:'}
                 mensagem={n.ds_mensagem}
                 link={n.ds_link}
               />

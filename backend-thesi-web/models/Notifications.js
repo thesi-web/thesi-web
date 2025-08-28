@@ -2,7 +2,7 @@ const database = require("../database/connection");
 
 class Notifications {
 
-  async create(userId, projetoId, link, mensagem = 'Your project has been corrected.') {
+  async create(userId, projetoId, link, mensagem = 'Seu projeto foi corrigido!') {
 
     try {
       

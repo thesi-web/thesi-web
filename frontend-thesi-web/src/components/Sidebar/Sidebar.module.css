@@ -1,85 +1,53 @@
-.active {
-  display: block;
-  border-right: solid 1px var(--color-transparency);
-  height: 100vh;
-  max-width: 30vw;
-  min-width: 16vw; 
+.container {
   background-color: white;
-  padding: 0.5em;
-  resize: horizontal;
-  overflow: auto;
-  transition: all 0.3s ease-in-out;
-  transform: translateX(0);
-  z-index: 999;
-}
-  
-.disable {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  min-width: 16vw; 
-  background-color: #F8F8F7;
-  padding: 0.5em;
-  transition: all 0.3s ease-in-out;
-  transform: translateX(-100%);
+  justify-content: space-around;
+  border: solid 1px var(--color-transparency);
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  width: 15vw;
+  height: initial;
+  padding: 1em;
+  overflow: auto;
   z-index: 999;
 }
 
+.header {
+  display: flex;
+  border-bottom: solid 1px var(--color-transparency);
+  padding-bottom: 0.5em;
+}
 
 .logo {
   font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-medium);
   color: var(--color-heading);
 }
 
-.title {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-normal);
-  color: var(--color-subtext);
-  margin: 0.5em 0em;
+.section {
+  padding: 0.5em 0;
 }
 
-.headerIcons {
+.title {
+  font-size: var(--font-size-sm);
+  color: var(--color-heading);
   margin-bottom: 0.5em;
-  display: flex;
-  justify-content: space-between;
-  padding: 0em 0.5em;
-  align-items: center;
-  font-size: var(--font-size-lg);
+}
+
+.footer {
+  padding: 0.5em 0;
 }
 
 .footerIcons {
   display: flex;
   justify-content: space-between;
-  padding: 0.5em 1em 0 0.5em;
-  align-items: center;
-  font-size: var(--font-size-lg);
-  color: var(--color-heading);
-}
-
-.projectContainer{
-  display: flex;
-  flex-direction: column;
-  padding: 0.1em;
-  height: 45vh;
-  overflow-y: auto;
-}
-
-.iconContainer{
-  display: flex;
-}
-
-.icons {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
   color: var(--color-heading);
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin-left: 0.2em;
-  padding: 0em 0.3em;
-  border-radius: var(--border-radius);
-} 
+}
 
-.icons:hover {
-  background-color: var(--color-primary-transparency);
-  color: var(--color-primary);
+.projectContainer {
+  height: 50vh;
+  overflow-y: auto;
 }

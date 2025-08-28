@@ -1,17 +1,23 @@
 .messageContainer {
   background-color: white;
-  border-bottom: solid 1px var(--color-transparency);                                         
-  padding: 0.5em ;
+  border-radius: 10px;
+  border: solid 1px var(--color-transparency);                                         
+  padding: 1em ;
+  transition: border 0.2s ease;
+}
+
+.messageContainer:hover{
+    cursor: pointer;
+    border-color: var(--color-primary);
 }
 
 .titleContainer{
     margin-bottom: 0.5em;
-    white-space: normal;
 }
 
 .name {
     font-size: var( --font-size-sm);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-medium);
     color: var(--color-heading);
     margin-bottom: 0.5em;
     margin-right: 0.3em;
@@ -25,12 +31,11 @@
 
 .contentContainer{
     margin-bottom: 0.5em;
-    white-space: normal;
 }
 
 .nameProject{
     font-size: var( --font-size-sm);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-medium);
     color: var(--color-heading);
     margin-bottom: 0.5em;
     margin-right: 0.3em;

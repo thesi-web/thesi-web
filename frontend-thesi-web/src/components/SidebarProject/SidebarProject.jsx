@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './SidebarProject.module.css';
 import ContextMenu from '../ContextMenu/ContextMenu';
 
-const SidebarItem = ({ emoji, label, onClick, onDelete }) => {
+const SidebarItem = ({ label, onClick, onDelete }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
@@ -19,7 +19,6 @@ const SidebarItem = ({ emoji, label, onClick, onDelete }) => {
     <>
       <div className={styles.item} onClick={onClick}>
         <div className={styles.textContainer}>
-          <span className={styles.emoji}>{emoji}</span>
           <span className={styles.label}>{label}</span>
         </div>
         <div className={styles.buttonWrapper} onClick={handleButtonClick}>

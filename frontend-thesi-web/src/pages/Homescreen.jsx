@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import styles from './Homescreen.module.css'
 
 const Homescreen = () => {
 
   return (
-    <div className='view'>
-      <div>
-        Bem-vindo a THESI!
-      </div>      
-    </div>
+    <div>
+      Bem-vindo a THESI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    </div>      
   );
 }
 

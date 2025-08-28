@@ -8,7 +8,7 @@ const Message = ( { mensagem, link, assunto, nome, nomeProjeto, nomeUsuario } ) 
   const navigate = useNavigate();
 
   return (
-    <div className={styles.messageContainer}>
+    <div className={styles.messageContainer} onClick={() => navigate(`${link}`)}>
 
     <div className={styles.titleContainer}>
         
@@ -25,7 +25,7 @@ const Message = ( { mensagem, link, assunto, nome, nomeProjeto, nomeUsuario } ) 
       {nomeProjeto}
     </div>
       
-    <div className={styles.contentContainer}>
+    <div className={styles.contentContainer}  >
     <span className="subtext">
         <span className={styles.highlited}>
         @{nomeUsuario}
@@ -35,12 +35,7 @@ const Message = ( { mensagem, link, assunto, nome, nomeProjeto, nomeUsuario } ) 
     </div>
 
 
-      <Button 
-        variant={'message'} 
-        onClick={() => navigate(`${link}`)}
-      >
-        Check
-      </Button>
+      
     </div>
   )
 }

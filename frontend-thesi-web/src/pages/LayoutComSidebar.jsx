@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/Sidebar/Sidebar';
 import InboxDrawer from '../components/Sidebar/InboxDrawer';
 import styles from './LayoutComSidebar.module.css';
-import Button from '../components/Button/Button';
 
 const LayoutComSidebar = () => {
 
 const [showInbox, setShowInbox] = useState(false);
 const [closingInbox, setClosingInbox] = useState(false);
-const [showSidebar, setShowSidebar] = useState(false);
-const apiUrl = import.meta.env.VITE_API_URL;
 
 const handleCloseInbox = () => {
   setClosingInbox(true);
@@ -20,48 +17,25 @@ const handleCloseInbox = () => {
   }, 300); // igual ao tempo da animação
 };
 
-const navigate = useNavigate();
-
-const handleLogout = async () => {
-  await fetch(`${apiUrl}/api/logout`, { method: "POST" });
-  localStorage.removeItem("token");
-  navigate("/");
-};
-
-
   return (
-    <div className={styles.sideBarContainer}>
+    <div className='view'>
+      <div className={styles.container}>
+        <Sidebar onOpenInbox={() => setShowInbox(true)}/>
+          
+        {/* Caixa de entrada */}
+        {showInbox && (
+          <InboxDrawer 
+            onClose={handleCloseInbox}
+            closing={closingInbox}
+          />
+        )}
 
-      <Sidebar 
-        show={showSidebar} 
-        onOpenInbox={() => setShowInbox(true)}
-        onClose={() => {
-          setShowSidebar(false);
-          setShowInbox(false); // fecha a inbox junto
-        }}
-        />
-        
-      {/* Caixa de entrada */}
-      {showInbox && (
-        <InboxDrawer 
-          onClose={handleCloseInbox}
-          closing={closingInbox}
-        />
-      )}
-
-      <div className={styles.navContainer}>
-        <div className={styles.icons} onClick={() => setShowSidebar(true)}>
-          <i className="bi bi-chevron-double-right"></i>
-        </div>
-        <div><Button variant={'transparent'} onClick={handleLogout}> Logout</Button></div>
-      </div>
-        
       <div className={styles.content}>
         <Outlet />
       </div>
-
-      
+      </div>
     </div>
+   
   );
 };
 

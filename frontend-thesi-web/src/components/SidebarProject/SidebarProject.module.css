@@ -2,16 +2,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5em 1em;
-  margin-bottom: 0.1em; 
+  margin-bottom: 0.2em; 
   cursor: pointer;
   color: var(--color-heading);
   transition: all 0.2s ease;
-  border-radius: var(--border-radius);
+  border-left: solid 2px transparent;
+  padding-left: 0.5em;
 }
   
 .item:hover {
-  background-color: var(--color-primary-transparency);
+  border-color: var(--color-primary);
 }
 
 .item:hover .icon,
@@ -19,23 +19,14 @@
   color: var(--color-primary);
 }
   
-.emoji {
-  margin-right: 0.5em;
-  display: flex;
-  align-items: center;
-  font-size: var(--font-size-base);
-}
-  
 .label {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
   color: var(--color-heading);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
 }
-
-
   
 .buttonWrapper {
   display: none;

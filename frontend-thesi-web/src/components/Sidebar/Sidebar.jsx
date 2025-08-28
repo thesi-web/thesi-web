@@ -6,11 +6,17 @@ import SidebarProject from '../SidebarProject/SidebarProject';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Warning from '../Warning/Warning';
 
-const Sidebar = ({ show, onOpenInbox, onClose }) => {
+const Sidebar = ({onOpenInbox}) => {
 
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_API_URL;
   
+  const handleLogout = async () => {
+    await fetch(`${apiUrl}/api/logout`, { method: "POST" });
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   const handleClick = (id) => {
     navigate(`/project/${id}`);
   };
@@ -58,53 +64,49 @@ const Sidebar = ({ show, onOpenInbox, onClose }) => {
   }, []);
 
   return (
-    <div className={show ? styles.active : styles.disable}>
-      <div className={styles.container}>
-        <div className={styles.headerIcons}>
-          <div className={styles.logo}>Thesi</div>
-          <div className={styles.iconContainer}>
-            <div className={styles.icons} onClick={onClose} ><i className="bi bi-chevron-double-left"/></div>
-            <Link to="/create/project" ><div className={styles.icons}><i className="bi bi-pencil-square"></i></div></Link>
-          </div>
-        </div>
-        
-        <div>
-        <Link to="/home" ><SidebarItem label={"Home"} icon={<i className="bi bi-cup"></i>} /></Link>  
-        <SidebarItem 
-          label={"Inbox"} 
-          icon={<i className="bi bi-mailbox"></i>} 
-          onClick={onOpenInbox}
-        />
-        <Link to="/create/project" ><SidebarItem label={"New Project"} icon={<i className="bi bi-plus-circle"></i>} /></Link>
-        </div>
+    <div className={styles.container}>
 
+      <div className={styles.header}>
+        <div className={styles.logo}>
+          Thesi UX
+        </div>
+      </div>
       
-          
+      <div className={styles.section}>
+      <Link to="/home" ><SidebarItem label={"Início"} icon={<i className="bi bi-cup"></i>} /></Link>  
+      <SidebarItem 
+        label={"Notificações"} 
+        icon={<i className="bi bi-mailbox"></i>} 
+        onClick={onOpenInbox}
+      />
+      <Link to="/create/project" ><SidebarItem label={"Novo projeto"} icon={<i className="bi bi-plus-circle"></i>} /></Link>
+      </div>
 
+      <div className={styles.title}>
+        Projetos
+      </div>
 
-        <div className={styles.title}>Projects</div>
+      <div className={styles.projectContainer} >
+        {totalProjetos.length > 0 ? (
+          totalProjetos.map((projeto, index) => (
+            <div key={index} onClick={() => handleClick(projeto.id_projeto)}>
+              <SidebarProject label={projeto.nm_projeto} onDelete={() => handleDelete(projeto.id_projeto)}  />
+            </div>
+          ))
+        ) : (
+          < Warning icon={<i className="bi bi-stars"></i>} message={"seus projetos aparecerão aqui."} />
+        )}
+      </div>
 
-        <div className={styles.projectContainer} >
-          {totalProjetos.length > 0 ? (
-            totalProjetos.map((projeto, index) => (
-              <div key={index} onClick={() => handleClick(projeto.id_projeto)}>
-                <SidebarProject label={projeto.nm_projeto} emoji={"🌈"} onDelete={() => handleDelete(projeto.id_projeto)}  />
-              </div>
-            ))
-          ) : (
-            < Warning icon={<i className="bi bi-stars"></i>} message={"your projects will appear here"} />
-          )}
-        </div>
+      <div className={styles.footer}>
+        <SidebarItem label={"Configurações"} icon={<i className="bi bi-gear"></i>} />
+        <SidebarItem label={"Lixeira"} icon={<i className="bi bi-trash3"></i>} />
+        <SidebarItem label={"Sair"} icon={<i className="bi bi-box-arrow-right"></i>} onClick={handleLogout} />
+      </div>
 
-        <div className={styles.footerContainer}>
-          <SidebarItem label={"Settings"} icon={<i className="bi bi-gear"></i>} />
-          <SidebarItem label={"Trash"} icon={<i className="bi bi-trash3"></i>} />
-          <SidebarItem label={"Invite members"} icon={<i className="bi bi-person-plus"></i>} />
-          <div className={styles.footerIcons}>
-            <div className={styles.icons}><i className="bi bi-calendar2-check"></i></div>
-            <div className={styles.icons}><i className="bi bi-question-circle"></i></div>
-          </div>
-        </div>
+      <div className={styles.footerIcons}>
+        <div className={styles.icons}><i className="bi bi-calendar2-check"></i></div>
+        <div className={styles.icons}><i className="bi bi-question-circle"></i></div>
       </div>
     </div>
   );
