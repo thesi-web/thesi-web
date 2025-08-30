@@ -1,7 +1,5 @@
 .cover {
-
     background-color: var(--color-primary);
-    width: 100vw;
     height: 10vh;
     border-bottom: solid 1px var(--color-transparency);
 }

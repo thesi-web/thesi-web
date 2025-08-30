@@ -7,6 +7,8 @@
     background-color: white;
     margin-bottom: 5px;
     border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family-base);
 }
 
 .input:active{

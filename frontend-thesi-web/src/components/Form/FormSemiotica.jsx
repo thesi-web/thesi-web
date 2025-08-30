@@ -88,21 +88,21 @@ const FormSemiotica = ({
 
   return (
     <form onSubmit={SubmitSemiotica} method="POST" encType="multipart/form-data">
-      <label>Type of sign</label>
+      <label>Tipo de signo</label>
         <div className={styles.buttonContainer}>
           <Button
             value="estatico"
             variant={signo === "estatico" ? "highcontrast" : "lowcontrast"}
             onClick={() => handleSigno("estatico")}
           >
-            Static
+            Estático
           </Button>
           <Button
             value="dinamico"
             variant={signo === "dinamico" ? "highcontrast" : "lowcontrast"}
             onClick={() => handleSigno("dinamico")}
           >
-            Dynamic
+            Dinâmico
           </Button>
           <Button
             value="meta"
@@ -113,40 +113,40 @@ const FormSemiotica = ({
           </Button>
         </div>
 
-      <label className='label'>Expected reading</label>
+      <label className='label'>Leitura esperada</label>
       <TextArea 
-        placeholder="what the system expects the user to understand or do" 
+        placeholder="o que o sistema espera que o usuário entenda ou faça?" 
         onChange={(e) => setEsperada(e.target.value)} 
         value={esperada} 
         maxLength={200} 
         required />
 
-      <label className='label'>Possible reading</label>
+      <label className='label'>Leitura possível</label>
       <TextArea 
-        placeholder="what the user might understand (even if it is not ideal)." 
+        placeholder="o que o usuário pode entender? (mesmo que não seja o ideal)." 
         value={possivel} 
         maxLength={200} 
         onChange={(e) => setPossivel(e.target.value)} 
         required />
       
-      <label className='label'>Observed break</label>
+      <label className='label'>Ruptura observada</label>
       <TextArea 
-        placeholder="describe how the user interpreted or acted differently than the expected reading" 
+        placeholder="explique o que o usuário entendeu ou fez de outro jeito do que o previsto" 
         value={quebra} 
         onChange={(e) => setQuebra(e.target.value)} 
         maxLength={200} 
         required />
       
-      <label className='label'>Recommendations</label>
+      <label className='label'>Recomendações</label>
       <TextArea 
-        placeholder="suggest visual, textual, or behavioral improvements" 
+        placeholder="sugira melhorias visuais, textuais, ou comportamentais " 
         value={recomendacaoSemiotica} 
         onChange={(e)=> setRecomendacaoSemiotica(e.target.value)} 
         maxLength={200} 
         required />
 
       <Button id='form_btn' variant='secondary' type={"submit"} disabled={isSubmitting}>
-        {isSubmitting ? 'Saving...' : 'Save'}
+        {isSubmitting ? 'Salvando...' : 'Salvar anotação'}
       </Button>
     </form>
   );

@@ -75,11 +75,11 @@ body, html {
 }
 
 .project-title {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-heading);
   border-left: solid 0.2em var(--color-primary);
-  padding-left: 0.2em;
+  padding-left: 0.5em;
 }
 
 /* Texto auxiliar e labels */

@@ -68,42 +68,44 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
   return (
     <div className={styles.backdrop} onClick={setModalOpen}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        
-
-      <div className={styles.imageContainer}>
-          <div className={styles.header}>
-           <div className={'h2'}>{`Screen ${index}`}</div>
-           <div><Button variant='message'  onClick={handleLimparRetangulos}>Clear tag</Button></div>
-          </div>
-          <div className={styles.content}>
-            <Canva
-              ref={canvaRef}
-              imagem={src}
-              setActiveRectangle={setActiveRectangle}
-              setImagemURL={setImagemURL}
-            />
-          </div>          
+        <div className={styles.header}>
+          <div className={'h2'}>{`Tela ${index}`}</div>
+          <div onClick={setModalOpen} className={styles.closeModal} > <i className="bi bi-x-lg"></i> </div>
         </div>
-        
-        <div className={styles.sideBarModal}>
-          
-          <div className={styles.close}>
-            <Button variant='close' icon={<i className="bi bi-x-lg"></i>} onClick={setModalOpen}>
-            </Button>
+      <div className={styles.container}>
+                     
+        <div className={styles.teste}>
+          <div className={styles.menu}>
+            <div className={styles.explanation}><p>Você pode desenhar retângulos na tela abaixo para destacar o componente que viola uma restrição heurística ou representa um signo.</p></div>
+            <div><Button variant='message'  onClick={handleLimparRetangulos}>Limpar Tela</Button></div>
+          </div> 
+       
+          <div className={styles.imageContainer}>
+            <div className={styles.content}>
+              <Canva
+                ref={canvaRef}
+                imagem={src}
+                setActiveRectangle={setActiveRectangle}
+                setImagemURL={setImagemURL}
+              />
+            </div>
           </div>
-          
+         </div>
+
+        <div className={styles.sideBarModal}>
+      
           <div className={styles.tabButtons}>
             <Button
               variant={selectedTab === 'heuristica' ? 'highcontrast' : 'lowcontrast'}
               onClick={() => setSelectedTab('heuristica')}
             >
-              Heuristic
+              Heurística
             </Button>
             <Button
               variant={selectedTab === 'semiotica' ? 'highcontrast' : 'lowcontrast'}
               onClick={() => setSelectedTab('semiotica')}
             >
-              Semiotic
+              Semiótica
             </Button>
           </div>
 
@@ -150,8 +152,17 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
         </div>
 
       </div>
+        
+        
+
+      </div>
     </div>
   );
 };
 
 export default Modal;
+
+
+
+
+

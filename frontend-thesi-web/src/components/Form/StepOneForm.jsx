@@ -65,7 +65,7 @@ export default function StepOneForm({ projectData, setProjectData }) {
           <InputText label="Nome do projeto" type="text" placeholder="digite o nome do projeto" onChange={handleChange('name')} value={projectData.name} required />
           
           <label>Objetivo</label>
-          <TextArea placeholder="descreva de sucintamente o objetivo do projeto" onChange={handleChange('objective')} value={projectData.objective} maxLength={100} required />
+          <TextArea placeholder="descreva sucintamente o objetivo do projeto" onChange={handleChange('objective')} value={projectData.objective} maxLength={100} required />
           
           <label>Tipo de plataforma</label>
             <div className={styles.buttonContainer}>

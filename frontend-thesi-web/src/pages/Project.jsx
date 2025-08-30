@@ -71,34 +71,29 @@ const Project = () => {
 
   return (
     <div className={styles.page}>
-      <Cover />
+        <Cover />
       <div className={styles.projectContainer}>
+
         <div className={styles.titleContainer}>
           <div className={'project-title'}>{projeto.nm_projeto}</div>
-        <div className={styles.titleContainer}>  
-        {(projeto.ds_status !== 'entregue' && projeto.ds_status !== 'finalizado') && (
-          <Button
-            id="bullet"
-            variant="icon"
-            icon={<i className="bi bi-journals"></i>}
-            iconPosition='left'
-            onClick={() => setMarksModal(true)}
-            children={'Current marks'}
-          />
-        )}
-          <Status status={`${projeto.ds_status}`} />
+          <div className={styles.statusContainer}>
+            <Status status={`${projeto.ds_status}`} />
+            <i className="bi bi-three-dots"></i>
+          </div>
         </div>
-        </div>
-        <p> Created on {projeto.dt_criacao} by {projeto.criador} </p>
+
+        <p>Criado dia {projeto.dt_criacao} por {projeto.criador} </p>
+
         <div className={styles.objectiveContainer}>
           {projeto.ds_projeto}
         </div>
+        
         <Carroussel images={projeto.imagens} projetoId={projetoId} isDisabled={projeto.ds_status === 'entregue' || projeto.ds_status === 'finalizado'}  />
         <div className={styles.buttonContainer}>
 
         {(projeto.ds_status !== 'entregue' && projeto.ds_status !== 'finalizado') && (
           <Button type="submit" variant="secondary" onClick={() => setIsMessageModalOpen(true)}>
-            Submit project
+            Entregar projeto
           </Button>
         )}
 
@@ -126,3 +121,19 @@ const Project = () => {
 };
 
 export default Project;
+
+
+/*
+
+ {(projeto.ds_status !== 'entregue' && projeto.ds_status !== 'finalizado') && (
+          <Button
+            id="bullet"
+            variant="icon"
+            icon={<i className="bi bi-journal-bookmark"></i>}
+            iconPosition='left'
+            onClick={() => setMarksModal(true)}
+            children={'Current marks'}
+          />
+        )}
+
+*/

@@ -9,58 +9,84 @@
     align-items: center;
     justify-content: center;
     z-index: 999;
-  }
+}
   
 .modal {
-    display: flex;
     background-color: white;
-    width: 85vw;
-    height: 80vh;
+    width: 95vw;
+    height: 90vh;
     position: relative;
-    border-radius: var(--border-radius);
+    border-radius: 10px;
     overflow: hidden;
+}
+
+.sideBarModal{
+    padding: 1em;
+    width: 30vw;
+    border-left: solid 1px var(--color-transparency);
+    overflow-y: auto;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 1.5em;
-    font-size: var(--font-size-base);
+    align-items: center;
+    padding: 1em;
+    border-bottom: solid 1px var(--color-transparency);
+}
+
+.imageContainer {
+    margin-left: 1em;
+    padding: 1em;
+    border-radius: 10px;
+    background-color: var(--color-primary-transparency);
+}
+
+.container {
+   display: flex;
+   justify-content: space-between;
+   height: 80vh;
 }
 
 .content {
-    margin: 0px 20px;
     background-color: rgba(211, 211, 211, 0.233);
     height: 380px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 0.5em;
-}
-
-.sideBarModal{
-    display: flex;
-    flex-direction: column; 
-    background-color: #ffffff;
-    border-right: 0.5px solid #F0F0EF;
-    padding: 1em;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border-radius: var(--border-radius);
 }
 
 .tabButtons {
-    background-color: var(--color-primary-transparency);
     display: flex;
+    background-color: var(--color-primary-transparency);
     justify-content: center;
     align-items: center;
     padding: 0.3em;
-    margin: 0.5em 0em;
+    margin-bottom: 1em;
     border-radius: var(--border-radius);
 }
 
+.closeModal {
+    transition: color 0.2s ease;
+}
+.closeModal:hover {
+    color: var(--color-danger);
+    cursor: pointer;
+}
 
-.close{
+.menu{
+    margin: 1em ;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.explanation {
+    width: 85%;
+}
+
+.teste {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

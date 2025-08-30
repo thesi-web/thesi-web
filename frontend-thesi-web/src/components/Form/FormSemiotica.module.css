@@ -2,7 +2,7 @@
   display: flex;
   background-color: var(--color-primary-transparency);
   padding: 0.3em;
-  margin: 0.5em 0em;
+  margin-bottom: 1em;
   border-radius: var(--border-radius);
 }
 

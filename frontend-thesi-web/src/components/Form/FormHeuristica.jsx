@@ -111,7 +111,7 @@ const FormHeuristica = ({
         required
       />
 
-      <label className='label'>Recommendations</label>
+      <label className='label'>Recomendações</label>
       <TextArea
         placeholder="Escreva as recomendações para os problemas encontrados"
         value={recomendacao}
@@ -134,7 +134,7 @@ const FormHeuristica = ({
       </div>
 
       <Button id='form_btn' variant="secondary" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Saving...' : 'Save'}
+        {isSubmitting ? 'Salvando...' : 'Salvar anotação'}
       </Button>
     </form>
   );

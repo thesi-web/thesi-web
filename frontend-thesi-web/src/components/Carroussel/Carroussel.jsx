@@ -7,8 +7,8 @@ const Carroussel = ({ images, projetoId, isDisabled }) => {
 
   return (
     <div>
-      <div className={'h1'}>Screens</div>
-      <p>{isDisabled ? 'Screens reviewed in this project.' : 'Select a screen to start reviewing.'}</p>
+      <div className={styles.title}>Telas</div>
+      <p>{isDisabled ? 'Telas avaliadas.' : 'Selecione uma tela pra começar a avaliar.'}</p>
       
       <div className={styles.carrousselContainer}>
         {Array.isArray(images) && images.map((img, index) => (
