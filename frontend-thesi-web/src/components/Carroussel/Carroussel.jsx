@@ -2,8 +2,18 @@ import React, { useState } from 'react';
 import styles from './Carroussel.module.css';
 import Modal from '../Modal/Modal';
 
-const Carroussel = ({ images, projetoId, isDisabled }) => {
+const Carroussel = ({ images, projetoId, isDisabled, onUpload  }) => {
+  
   const [openModalIndex, setOpenModalIndex] = useState(null);
+
+  const fileInputRef = React.useRef(null);
+
+  const handleFileChange = (e) => {
+    const files = e.target.files;
+    if (files.length > 0) {
+      onUpload(files); // chama o Project para enviar os arquivos
+    }
+  };
 
   return (
     <div>
@@ -37,7 +47,7 @@ const Carroussel = ({ images, projetoId, isDisabled }) => {
         {!isDisabled && images.length < 5 && (
           <div
             className={`${styles.imageContainerAdd}`}
-            onClick={() => console.log("Abrir modal de upload de imagem")}
+            onClick={() => fileInputRef.current.click()}
           >
             <div className={styles.adicionarContainer}>
               <i className="bi bi-plus-circle-fill"></i>
@@ -45,6 +55,17 @@ const Carroussel = ({ images, projetoId, isDisabled }) => {
             </div>
           </div>
         )}
+
+        {/* input escondido */}
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          multiple
+          onChange={handleFileChange}
+        />
+
       </div>
     </div>
   );

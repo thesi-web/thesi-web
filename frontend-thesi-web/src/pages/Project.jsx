@@ -43,6 +43,33 @@ const Project = () => {
     }
   }, [projetoId]);
 
+   const uploadImages = async (files) => {
+    try {
+      const formData = new FormData();
+      for (const file of files) {
+        formData.append("template", file); // backend espera "template"
+      }
+
+      const response = await fetch(`${apiUrl}/api/images/${projetoId}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao enviar imagem");
+      }
+
+      await fetchProjeto(); // atualiza imagens na tela
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    }
+  };
+
+
   useEffect(() => {
     fetchProjeto();
   }, [fetchProjeto]);
@@ -88,7 +115,12 @@ const Project = () => {
           {projeto.ds_projeto}
         </div>
         
-        <Carroussel images={projeto.imagens} projetoId={projetoId} isDisabled={projeto.ds_status === 'entregue' || projeto.ds_status === 'finalizado'}  />
+        <Carroussel 
+          images={projeto.imagens} p
+          rojetoId={projetoId} 
+          isDisabled={projeto.ds_status === 'entregue' || projeto.ds_status === 'finalizado'}  
+          onUpload={uploadImages}
+          />
         <div className={styles.buttonContainer}>
 
         {(projeto.ds_status !== 'entregue' && projeto.ds_status !== 'finalizado') && (

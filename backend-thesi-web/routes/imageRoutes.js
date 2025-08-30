@@ -5,7 +5,7 @@ const ImagesController = require("../controllers/ImagesController");
 const upload = require("../middlewares/upload");
 
 
-router.post("/images/:projetoId", authorization, ImagesController.addImage); 
+router.post("/images/:projetoId", authorization, upload.array("template", 5), ImagesController.addImage); 
 router.get("/project/images/:projetoId", authorization, ImagesController.getByProject); 
 //  tentando fazer um SELECT incluindo a coluna I.st_avaliacao, mas essa coluna não existe na tabela t_imagens.
 // precisa rever no frontend

@@ -140,7 +140,9 @@ class ImagesController {
       try {
         const userId = req.userId;
         const projetoId = req.params.projetoId;
-        const templates = req.files["template"] || [];
+        const templates = req.files || [];
+
+        console.log(req.files);
 
          if (templates.length === 0) {
           return res.status(400).send("Nenhum arquivo enviado");
