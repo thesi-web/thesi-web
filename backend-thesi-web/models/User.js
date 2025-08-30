@@ -24,8 +24,8 @@ class User {
   async findByName(name) {
     try {
       const result = await database("t_usuario")
-        .whereILike("nm_usuario", `%${name}%`)
-        .select("id_usuario as id", "nm_usuario as name")
+        .whereILike("ds_email", `%${name}%`)
+        .select("id_usuario as id", "nm_usuario as name", "ds_email as email")
         .limit(10); // Limita o número de resultados
   
       return result;

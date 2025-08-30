@@ -1,7 +1,7 @@
 /* Base do botão */
 .button {
   font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   border: none;
   border-radius: 0px;
   padding: 0.6em 1.2em;
@@ -54,7 +54,7 @@
     color: var(--color-primary);
 }
 .lowcontrast:hover{
-    text-decoration: underline;
+    background-color: var(--color-primary-transparency);
 }
 
 .iconLeft {

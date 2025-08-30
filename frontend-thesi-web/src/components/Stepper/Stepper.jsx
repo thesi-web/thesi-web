@@ -1,7 +1,7 @@
 import styles from './Stepper.module.css';
 
 export default function Stepper({ currentStep }) {
-  const steps = ['General information', 'Uploading prototypes'];
+  const steps = ['Informações gerais', 'Upload das telas'];
 
   return (
     <div className={styles.stepper}>
@@ -15,7 +15,6 @@ export default function Stepper({ currentStep }) {
             <span className={`${styles.label} ${isActive ? styles.activeLabel : ''}`}>
               {label}
             </span>
-              <div className={styles.line}></div>
           </div>
         );
       })}

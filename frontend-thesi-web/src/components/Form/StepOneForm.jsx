@@ -15,7 +15,7 @@ export default function StepOneForm({ projectData, setProjectData }) {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (searchTerm.length >= 2) {
-        const token = localStorage.getItem("token"); // ou onde você armazenou
+        const token = localStorage.getItem("token");
           fetch(`${apiUrl}/api/search/user?search=${encodeURIComponent(searchTerm)}`, {
             headers: {
               "Authorization": `Bearer ${token}`,
@@ -60,47 +60,63 @@ export default function StepOneForm({ projectData, setProjectData }) {
 
   return (
     <>
-      <InputText label="Project Name" type="text" placeholder="enter the project name" onChange={handleChange('name')} value={projectData.name} required />
-      
-      <div className={styles.namesContainer}>
-        <InputText label='Name of participants' type="text" placeholder="add more participants to the project"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          {searchResults.length > 0 && (
-            <div className={styles.searchResults}>
-              {searchResults.map((user) => (
-                <div className={styles.name} key={user.id} onClick={() => handleSelectUser(user)}>
-                  {user.name}
-                </div>
+      <div className={styles.container}>
+        <div>
+          <InputText label="Nome do projeto" type="text" placeholder="digite o nome do projeto" onChange={handleChange('name')} value={projectData.name} required />
+          
+          <label>Objetivo</label>
+          <TextArea placeholder="descreva de sucintamente o objetivo do projeto" onChange={handleChange('objective')} value={projectData.objective} maxLength={100} required />
+          
+          <label>Tipo de plataforma</label>
+            <div className={styles.buttonContainer}>
+              {platforms.map((label) => (
+                <Button
+                  key={label}
+                  variant={projectData.platform === label ? "highcontrast" : "lowcontrast"}
+                  onClick={() => setProjectData({ ...projectData, platform: label })}
+                >
+                  {label}
+                </Button>
               ))}
-            </div>
-          )}
-        {selectedParticipants.length > 0 && (
-          <div className={styles.selectedList}>
-            {selectedParticipants.map((user) => (
-              <div key={user.id} className={styles.selectedParticipant}>
-                <div>{user.name}</div>
-                <Button variant={'closeList'} icon={<i className="bi bi-x-circle-fill"></i>} onClick={() => handleRemoveUser(user.id)} />
-              </div>
-            ))}
           </div>
-        )}
-</div>
-      <label>Objective</label>
-        <TextArea placeholder="describe the purpose of the project" onChange={handleChange('objective')} value={projectData.objective} maxLength={100} required />
-      <label>Platform</label>
-      <div className={styles.buttonContainer}>
-        {platforms.map((label) => (
-          <Button
-            key={label}
-            variant={projectData.platform === label ? "highcontrast" : "lowcontrast"}
-            onClick={() => setProjectData({ ...projectData, platform: label })}
-          >
-            {label}
-          </Button>
-        ))}
+        </div>
+
+        <div className={styles.containerName}>
+          <div className={styles.namesContainer}>
+            <InputText label='Participantes' type="text" placeholder="digite o e-mail do participante"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {searchResults.length > 0 && (
+                <div className={styles.searchResults}>
+                  {searchResults.map((user) => (
+                    <div className={styles.name} key={user.id} onClick={() => handleSelectUser(user)}>
+                      {user.email}
+                    </div>
+                  ))}
+                </div>
+              )}
+          </div>
+        </div>
+
+          {selectedParticipants.length > 0 && (
+            <div className={styles.selectedList}>
+              {selectedParticipants.map((user) => (
+                <div key={user.id} className={styles.selectedParticipant}>
+                  <div>
+                    <div className={styles.title} >{user.name}</div>
+                    <p className={styles.email} >{user.email}</p>
+                  </div>
+                  <Button variant={'closeList'} icon={<i className="bi bi-x-circle-fill"></i>} onClick={() => handleRemoveUser(user.id)} />
+                </div>
+              ))}    
+            </div>
+            )}
       </div>
     </>
   );
 }
+
+
+
+

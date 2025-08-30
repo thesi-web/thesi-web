@@ -100,16 +100,24 @@ export default function MultiStepForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form} encType='multipart/form-data'>
+    <form onSubmit={handleSubmit} encType='multipart/form-data'>
+      
+      <div className={styles.titleContainer}>
+        <div className={styles.title}>Novo projeto</div>
+        <p> Crie seu projeto em poucos cliques e faça o upload das telas a serem avaliadas. </p>
+      </div>
+
       <Stepper currentStep={step} />
       
-      {step === 1 && (
-        <StepOneForm projectData={projectData} setProjectData={setProjectData} />
-      )}
+      <div className={styles.formulario}>
+        {step === 1 && (
+          <StepOneForm projectData={projectData} setProjectData={setProjectData} />
+        )}
 
-      {step === 2 && (
-        <StepTwoForm projectData={projectData} setProjectData={setProjectData} />
-      )}
+        {step === 2 && (
+          <StepTwoForm projectData={projectData} setProjectData={setProjectData} />
+        )}
+      </div>
 
       <div className={styles.buttonContainer}>
         {step > 1 && (
@@ -130,7 +138,7 @@ export default function MultiStepForm() {
             id='form_btn'
             disabled={!isStepOneValid}
           >
-            Next
+            Próximo
           </Button>
         )}
 
@@ -141,10 +149,11 @@ export default function MultiStepForm() {
             id='form_btn'
             disabled={isLoading} // Aqui é onde a mágica acontece
           >
-            {isLoading ? "Creating..." : "Create Project"}
+            {isLoading ? "Criando..." : "Criar projeto"}
           </Button>
         )}
       </div>
+      
     </form>
   );
 }

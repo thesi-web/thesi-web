@@ -1,16 +1,26 @@
 .ProjectContainer {
-    min-height: 100vh;
-    min-width: 100vw;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-    padding: 40px;
+  padding: 2em;
   }
 
 .buttonContainer {
     display: flex;
     justify-content: space-between;
     margin-top: auto;
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-heading);
+}
+
+.titleContainer{
+  margin-bottom: 1em;
+}
+
+.formulario {
+  background-color: white;
+  border-radius: 10px;
+  border: solid 1px var(--color-transparency);
+  padding: 1em;
 }

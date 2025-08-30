@@ -1,27 +1,28 @@
 .title {
-    font-family: 'Inter';
-    font-size: 12px;
-    font-weight: 500;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 300px;
 }
 
 .icon {
-    font-size: 18px;
+    background-color: white;
+    padding: 0.1em 0.3em;
+    border-radius: 5px;
+    font-size: var(--font-size-lg);
     color: var(--color-primary);
-    margin: 5px;
+    margin-right: 0.5em;
 }
 
 .file {
     background-color:  var(--color-primary-transparency);
     border-radius: 5px;
-    padding: 5px;
+    padding: 0.5em;
     margin: 5px 0px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-around;
     border: solid 1px transparent;
     transition: all 0.2s ease;
 }
@@ -32,6 +33,5 @@
 
 .nameContainer{
     display: flex;
-    width: 10vw;
     align-items: center;
 }

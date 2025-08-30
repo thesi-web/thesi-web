@@ -4,7 +4,7 @@
     align-items: center;
     padding: 0.6em ;
     border: solid 1px var(--color-transparency);
-    background-color: transparent;
+    background-color: white;
     margin-bottom: 5px;
     border-radius: var(--border-radius);
 }

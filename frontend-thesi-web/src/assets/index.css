@@ -92,7 +92,7 @@ label {
 
 p {
   color: var(--color-subtext);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   margin: 0;
 }
 
@@ -182,7 +182,6 @@ Button#form_btn {
 form {
   display: flex;
   flex-direction: column;
-  width: 25vw;
 }
 
 b:hover{
