@@ -9,7 +9,7 @@ router.post("/images/:projetoId", authorization, upload.array("template", 5), Im
 router.get("/project/images/:projetoId", authorization, ImagesController.getByProject); 
 //  tentando fazer um SELECT incluindo a coluna I.st_avaliacao, mas essa coluna não existe na tabela t_imagens.
 // precisa rever no frontend
-
+router.delete('/image', authorization, ImagesController.deleteImage);
 router.post('/upload', upload.single('imagem'), ImagesController.upload);
 router.get("/images/:idImagem", authorization, ImagesController.getById);
 router.get("/imagem/heuristica/:id", ImagesController.getHeuristicImage);

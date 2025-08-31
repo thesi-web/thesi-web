@@ -63,6 +63,23 @@ class Images {
     }
   }
 
+  async delete(idImage){
+
+    const trx = await database.transaction();
+  
+    try {
+      await trx("t_imagens").where("id_imagem", idImage).del();
+      
+      await trx.commit();
+      return { sucesso: true };
+      
+    } catch (err) {
+      await trx.rollback();
+      console.error("Erro ao deletar imagem:", err.message);
+      throw new Error(`Erro ao deletar imagem: ${err.message}`);
+    }
+  }
+
 }
 
 module.exports = new Images();

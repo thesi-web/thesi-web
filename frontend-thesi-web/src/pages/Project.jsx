@@ -142,6 +142,8 @@ const Project = () => {
           )}
           <div className={styles.statusContainer}>
             <Status status={`${projeto.ds_status}`} />
+            {/* só mostra o lápis se o usuário logado for o criador */}
+            {projeto.id_criador === projeto.id_usuario && (
             <i
             className="bi bi-pencil-square"
             onClick={() => {
@@ -153,6 +155,7 @@ const Project = () => {
             }}
             style={{ cursor: "pointer" }}
           ></i>
+          )}
           </div>
         </div>
 
@@ -184,8 +187,8 @@ const Project = () => {
         )}
         
         <Carroussel 
-          images={projeto.imagens} p
-          rojetoId={projetoId} 
+          images={projeto.imagens} 
+          projetoId={projetoId} 
           isDisabled={projeto.ds_status === 'entregue' || projeto.ds_status === 'finalizado'}  
           onUpload={uploadImages}
           />

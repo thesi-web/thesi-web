@@ -16,7 +16,7 @@ const MessageModal = ({ isMessageOpen, setMessageModalOpen, onClick, title, mess
         </div>
 
         <div className={styles.content} >
-            <div className='title' ><i class="bi bi-exclamation-circle"></i></div>
+            <div className='title' ><i className="bi bi-exclamation-circle"></i></div>
             <div className='subtext' >{message}</div>
         </div>
         

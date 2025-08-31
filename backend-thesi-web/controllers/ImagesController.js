@@ -170,6 +170,27 @@ class ImagesController {
         console.error("Erro ao inserir imagem", err);
         res.status(500).json({ erro: "Erro ao inserir imagem" });
       }
+  }
+  
+  async deleteImage(req, res) {
+
+    const { idImage } = req.body;
+  
+    if (!idImage) {
+      return res.status(400).json({ erro: "Id da imagem não fornecido" });
+    }
+  
+    try {
+      await Images.delete(idImage);
+  
+      res.json({ mensagem: "Imagem deletada com sucesso!" });
+  
+    } catch (err) {
+      res.status(500).json({ 
+        erro: "Erro ao deletar imagem", 
+        detalhes: err.message 
+      });
+    }
   } 
   
 

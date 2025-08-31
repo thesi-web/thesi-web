@@ -93,11 +93,11 @@ class Project {
         .join("t_projeto_usuario as PU", "P.id_projeto", "PU.id_projeto")
         .select(
           "P.id_projeto",
+          "P.id_criador",
           "P.nm_projeto",
-          "P.nm_autores",
           "P.ds_projeto",
-          "P.ds_usuario",
           "P.ds_plataforma",
+          "U.id_usuario",
           "U.nm_usuario AS criador",
           database.raw(`TO_CHAR("P"."dt_criacao", 'DD "de" TMMonth "de" YYYY') AS dt_criacao`),
           database.raw(`TO_CHAR("P"."dt_entrega", 'DD/MM/YYYY') AS dt_entrega`),
@@ -112,10 +112,13 @@ class Project {
         // Buscar imagens relacionadas ao projeto
         const imagens = await database("t_imagens")
         .where("id_projeto", projetoId)
-        .select("ds_caminho");
+        .select("id_imagem", "ds_caminho");
 
         // Adiciona ao objeto
-        projeto.imagens = imagens.map(img => img.ds_caminho);
+        projeto.imagens = imagens.map(img => ({
+          id_imagem: img.id_imagem,
+          ds_caminho: img.ds_caminho
+        }));
   
       return projeto;
   
