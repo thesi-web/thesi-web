@@ -29,7 +29,9 @@
   color: var(--color-subtext);
   font-size: var(--font-size-lg);
   background-color: transparent;
+  border-radius: 5px;
   opacity: 0;
+  padding: 0 0.2em;
   cursor: pointer;
   transition: all 0.2s ease;
   z-index: 10; /* não precisa ser 999 */
@@ -37,6 +39,7 @@
 
 .trashIcon:hover{
     color: var(--color-danger);
+    background-color: var(--color-danger-transparency);
 }
 
 .imageContainer:hover .trashIcon {

@@ -38,8 +38,6 @@ export default function StepTwoForm({ projectData, setProjectData }) {
     fileInputRef.current.click();
   };
 
-  console.log(projectData);
-
   return (
     <>
       <div className="h3">Exportar arquivos</div>

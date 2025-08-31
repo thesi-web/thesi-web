@@ -14,12 +14,8 @@ class ProjectController {
   
       const templates = req.files["template"] || [];
   
-      if (templates.length === 0) {
-        return res.status(400).send("Não é possível criar um projeto sem imagens");
-      }
-  
       if (templates.length > 5) {
-        return res.status(400).send("Máximo de 5 arquivos e 5 protótipos permitidos");
+        return res.status(400).send("Máximo de 5 protótipos permitidos");
       }
   
       //Converte authors para array de inteiros

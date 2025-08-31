@@ -191,6 +191,7 @@ const Project = () => {
           projetoId={projetoId} 
           isDisabled={projeto.ds_status === 'entregue' || projeto.ds_status === 'finalizado'}  
           onUpload={uploadImages}
+          onDelete={fetchProjeto} 
           />
         <div className={styles.buttonContainer}>
 

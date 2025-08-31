@@ -3,7 +3,7 @@ import styles from './Carroussel.module.css';
 import Modal from '../Modal/Modal';
 import MessageModal from '../Modal/MessageModal';
 
-const Carroussel = ({ images, projetoId, isDisabled, onUpload }) => {
+const Carroussel = ({ images, projetoId, isDisabled, onUpload, onDelete }) => {
   
   const [openModalIndex, setOpenModalIndex] = useState(null);
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
@@ -18,7 +18,7 @@ const Carroussel = ({ images, projetoId, isDisabled, onUpload }) => {
     }
   };
 
-  const onDelete = async (id) => {
+  const handleDelete = async (id) => {
     try {
       const response = await fetch(`${apiUrl}/api/image`, {
         method: 'DELETE',
@@ -30,8 +30,9 @@ const Carroussel = ({ images, projetoId, isDisabled, onUpload }) => {
       });
 
       if (response.ok) {
-        setIsMessageModalOpen(false); 
-        
+        setIsMessageModalOpen(false);
+        setImageToDelete(null);
+        onDelete()// <--- chama fetchProjeto do pai 
       } else {
         console.error('Erro ao deletar a imagem');
       }
@@ -99,7 +100,7 @@ const Carroussel = ({ images, projetoId, isDisabled, onUpload }) => {
           accept="image/*"
           ref={fileInputRef}
           style={{ display: "none" }}
-          multiple
+          multiple={false}
           onChange={handleFileChange}
         />
 
@@ -112,7 +113,7 @@ const Carroussel = ({ images, projetoId, isDisabled, onUpload }) => {
           setIsMessageModalOpen(false);
           setImageToDelete(null); // limpa após fechar
         }}
-        onClick={() => onDelete(imageToDelete.id_imagem)}
+        onClick={() => handleDelete(imageToDelete.id_imagem)}
         title={'Excluir Imagem'}
         message={`Você tem certeza que deseja excluir esta imagem permanentemente?`}
         buttonMessage={'Excluir'}

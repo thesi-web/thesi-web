@@ -21,7 +21,7 @@
   --color-secondary: #E5E5E5;
   --color-text: #ffffff;
   --color-danger: crimson;
-  --color-danger-transparency: #fee2e2;
+  --color-danger-transparency: rgba(220, 20, 60, 0.356);
 
   --border-radius: 5px;
 
