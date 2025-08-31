@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './TextArea.module.css'
 
-const TextArea = ( {placeholder, onChange, maxLength} ) => {
+const TextArea = ( {placeholder, value, onChange, maxLength} ) => {
 
   const [charCount, setCharCount] = useState(0);
 
@@ -19,6 +19,7 @@ const TextArea = ( {placeholder, onChange, maxLength} ) => {
         placeholder={placeholder} 
         onChange={handleChange} 
         maxLength={maxLength} 
+        value={value}
         required >
       </textarea>
       <div className={styles.counter}>

@@ -17,5 +17,6 @@ router.get("/trash", authorization, ProjectController.showTrash); //OK 31-08-202
 router.get("/all", authorization, ProjectController.getNameProject);
 router.put('/consolidate', ProjectController.consolidar);
 router.get('/marks/:projetoId', authorization, ProjectController.getMarks); //OK 26-04-2025
+router.put("/edit/project", authorization, ProjectController.edit); //OK 31-08-2025
 
 module.exports = router;

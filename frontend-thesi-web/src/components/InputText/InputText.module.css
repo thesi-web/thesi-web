@@ -11,9 +11,34 @@
     font-family: var(--font-family-base);
 }
 
+.editing {
+    align-items: center;
+    padding: 0.6em ;
+    border: solid 1px var(--color-transparency);
+    background-color: white;
+    margin-left: 1em;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family-base);
+}
+
+
+.editing:active{
+    border: solid 1px var(--color-primary);
+}
+
 .input:active{
     border: solid 1px var(--color-primary);
 }
+
+.editing:focus{
+    border: solid 1px var(--color-primary);
+}
+
+.input:focus{
+    border: solid 1px var(--color-primary);
+}
+
 
 .errorInput {
     width: 23.5vw;

@@ -7,6 +7,8 @@ import Button from '../components/Button/Button'
 import { useParams } from 'react-router-dom';
 import MessageModal from '../components/Modal/MessageModal';
 import MarksModal from '../components/Modal/MarksModal';
+import TextArea from '../components/TextArea/TextArea';
+import InputText from '../components/InputText/InputText';
 
 const Project = () => {
 
@@ -18,6 +20,9 @@ const Project = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
 
   const { projetoId } = useParams();
+
+  const [isEditing, setIsEditing] = useState(false); // <<< modo edição
+  const [editForm, setEditForm] = useState({ ds_projeto: "", nm_projeto: "" }); // << campos editáveis
 
   // função de fetch isolada e memoizada
   const fetchProjeto = useCallback(async () => {
@@ -42,6 +47,30 @@ const Project = () => {
       setLoading(false);
     }
   }, [projetoId]);
+
+  const salvarEdicao = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/api/edit/project/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ 
+          idProjeto: projetoId, 
+          name: editForm.nm_projeto, 
+          description: editForm.ds_projeto 
+        })
+      });
+
+      if (!response.ok) throw new Error("Erro ao salvar edição");
+
+      await fetchProjeto(); // atualiza com dados reais
+      setIsEditing(false); // sai do modo edição
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
    const uploadImages = async (files) => {
     try {
@@ -68,7 +97,6 @@ const Project = () => {
       setError(err.message);
     }
   };
-
 
   useEffect(() => {
     fetchProjeto();
@@ -102,18 +130,58 @@ const Project = () => {
       <div className={styles.projectContainer}>
 
         <div className={styles.titleContainer}>
-          <div className={'project-title'}>{projeto.nm_projeto}</div>
+          {isEditing ? (
+            <InputText
+              placeholder={'digite o nome do projeto'}
+              value={editForm.nm_projeto}
+              onChange={(e) => setEditForm({ ...editForm, nm_projeto: e.target.value })}
+              variant={'editing'}
+            />
+          ) : (
+            <div className={"project-title"}>{projeto.nm_projeto}</div>
+          )}
           <div className={styles.statusContainer}>
             <Status status={`${projeto.ds_status}`} />
-            <i className="bi bi-three-dots"></i>
+            <i
+            className="bi bi-pencil-square"
+            onClick={() => {
+              setEditForm({
+                ds_projeto: projeto.ds_projeto || "",
+                nm_projeto: projeto.nm_projeto || ""
+              });
+              setIsEditing(true);
+            }}
+            style={{ cursor: "pointer" }}
+          ></i>
           </div>
         </div>
 
         <p>Criado dia {projeto.dt_criacao} por {projeto.criador} </p>
 
         <div className={styles.objectiveContainer}>
-          {projeto.ds_projeto}
+          {isEditing ? (
+            <TextArea
+              placeholder={'descreva sucintamente o objetivo do projeto'}
+              value={editForm.ds_projeto}
+              onChange={(e) => setEditForm({ ...editForm, ds_projeto: e.target.value })}
+              maxLength={100}
+            />
+          ) : (
+            projeto.ds_projeto
+          )}
         </div>
+
+        {isEditing && (
+          <div className={styles.buttonEditContainer}>
+            <Button variant="primary" onClick={() => {
+              setIsEditing(false);
+              setEditForm({ nm_projeto: "", ds_projeto: "" });
+            }}>Cancelar</Button>
+            <Button variant="secondary" onClick={salvarEdicao}>
+              Salvar alterações
+            </Button>
+          </div>
+        )}
         
         <Carroussel 
           images={projeto.imagens} p

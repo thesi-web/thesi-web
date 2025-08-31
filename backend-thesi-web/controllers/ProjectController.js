@@ -281,7 +281,22 @@ class ProjectController {
     console.error("Erro ao restaurar:", err);
     return res.status(500).json({ error: "Erro ao restaurar projeto" });
   }
-}
+  }
+
+  async edit(req, res) {
+    const { idProjeto, name, description } = req.body;
+
+    if (!idProjeto || !name?.trim() || !description?.trim()) {
+      return res.status(400).json({ error: "Parâmetros ausentes ou inválidos" });
+    }
+
+    try {
+      await Project.editProject({ idProjeto, name, description });
+      res.status(200).json({ message: "Projeto atualizado com sucesso!" });
+    } catch (err) {
+      res.status(500).json({ error: "Erro ao atualizar projeto", details: err.message });
+    }
+  }
 
 }
 

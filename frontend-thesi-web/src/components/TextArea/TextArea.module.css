@@ -25,6 +25,10 @@
   border: solid 1px var(--color-primary);
 }
 
+.textarea:focus{
+    border: solid 1px var(--color-primary);
+}
+
 .counter {
   font-size: var(--font-size-sm);
   color: var(--color-transparency);

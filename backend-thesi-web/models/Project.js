@@ -299,7 +299,27 @@ class Project {
     console.error("Erro ao restaurar:", error);
     throw error;
   }
-}
+  }
+
+  async editProject({ idProjeto, name, description }) {
+
+    const trx = await database.transaction();
+  
+    try {
+      await trx("t_projeto")
+        .where({ id_projeto: idProjeto })
+        .update({
+          nm_projeto: name,
+          ds_projeto: description,
+        });
+  
+      await trx.commit();
+    } catch (err) {
+      await trx.rollback();
+      console.error("Erro ao atualizar projeto:", err);
+      throw err;
+    }
+  }
 
 
 }
