@@ -11,6 +11,7 @@ router.get('/project/:projetoId', authorization, ProjectController.getById); //O
 router.delete("/project/:id", authorization, ProjectController.delete); //OK 07-04-2025
 router.put("/project/:projetoId", authorization, ProjectController.finalize); //OK 07-04-2025
 router.put("/project", authorization, ProjectController.update);
+router.put("/trash", authorization, ProjectController.moveToTrash);
 router.get("/all", authorization, ProjectController.getNameProject);
 router.put('/consolidate', ProjectController.consolidar);
 router.get('/marks/:projetoId', authorization, ProjectController.getMarks); //OK 26-04-2025

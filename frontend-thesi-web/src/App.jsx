@@ -20,6 +20,7 @@ import Consolidate from './components/Heuristic/Consolidate';
 import Professor from './pages/Professor';
 import Projects from './components/Professor/Projects';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import Trash from './pages/Trash';
 
 let socket;
 
@@ -104,6 +105,7 @@ function App() {
           <Route path="/report/:projetoId" element={<ProtectedRoute roleRequired="aluno"><ReportComponent /></ProtectedRoute>} />
           <Route path="/create/project" element={<ProtectedRoute roleRequired="aluno"><CreateProject /></ProtectedRoute>} />
           <Route path='/project/:projetoId' element={<ProtectedRoute roleRequired="aluno"><Project /></ProtectedRoute>} />
+          <Route path='/trash' element={<ProtectedRoute roleRequired="aluno"><Trash /></ProtectedRoute>} />
         </Route>
       </Routes>
     </HashRouter>

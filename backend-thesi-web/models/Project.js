@@ -240,7 +240,8 @@ class Project {
         "P.nm_projeto",
         "P.id_projeto"
       )
-      .where("U.id_usuario", userId);
+      .where("U.id_usuario", userId)
+      .andWhere("P.st_lixo", "!=", true);
   }
 
   async findMembers(projetoId){
@@ -251,6 +252,22 @@ class Project {
       "PU.id_usuario"
     )
     .where("PU.id_projeto", projetoId);
+  }
+
+  async trash(projetoId) {
+
+    const trx = await database.transaction();
+  
+    try {
+      await trx("t_projeto")
+        .where({ id_projeto: projetoId })
+        .update({ st_lixo: true });
+      await trx.commit();
+    } catch (error) {
+      await trx.rollback();
+      console.error("Erro ao enviar projeto para a lixeira:", error);
+      throw error;
+    }
   }
 
 }

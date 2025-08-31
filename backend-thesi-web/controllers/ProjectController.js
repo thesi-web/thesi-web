@@ -236,6 +236,20 @@ class ProjectController {
       });
     }
   }
+
+  async moveToTrash(req, res) {
+
+    const { idProjeto }= req.body;
+
+    try {
+      await Project.trash(idProjeto);
+      res.status(200).json({ message: 'Movido para a lixeira com sucesso' });
+    } catch (err) {
+      res.status(500).json({ error: 'Erro ao mover para a lixeira' });
+    }
+
+  }
+
 }
 
 module.exports = new ProjectController();

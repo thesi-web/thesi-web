@@ -21,29 +21,32 @@ const Sidebar = ({onOpenInbox}) => {
     navigate(`/project/${id}`);
   };
 
-  const handleDelete = async (id) => {
+  const handleTrash = async (idProjeto) => {
+  try {
+    const response = await fetch(`${apiUrl}/api/trash/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ idProjeto: `${idProjeto}` }), // caso seu backend espere no body
+    });
 
-    try {
-      const response = await fetch(`${apiUrl}/api/project/${id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-
-      if (response.ok) {
-        navigate('/home'); 
-        fetchProjects();
-      } else {
-      }
-    } catch (error) {
-      console.error('Erro ao deletar o projeto:', error);
+    if (!response.ok) {
+      throw new Error("Erro ao mover para a lixeira");
+    } else {
+      fetchProjects();
     }
+
+    console.log("Projeto enviado para lixeira com sucesso!");
+  } catch (error) {
+    console.error("Erro ao mover para a lixeira:", error);
+  }
   };
+
 
   const [totalProjetos, setTotalProjetos] = useState([]);
   
-
   const fetchProjects = async () => {
     try {
       const response = await fetch(`${apiUrl}/api/all`, {
@@ -90,7 +93,7 @@ const Sidebar = ({onOpenInbox}) => {
         {totalProjetos.length > 0 ? (
           totalProjetos.map((projeto, index) => (
             <div key={index} onClick={() => handleClick(projeto.id_projeto)}>
-              <SidebarProject label={projeto.nm_projeto} onDelete={() => handleDelete(projeto.id_projeto)}  />
+              <SidebarProject label={projeto.nm_projeto} onDelete={() => handleTrash(projeto.id_projeto)}  />
             </div>
           ))
         ) : (
@@ -100,7 +103,7 @@ const Sidebar = ({onOpenInbox}) => {
 
       <div className={styles.footer}>
         <SidebarItem label={"Configurações"} icon={<i className="bi bi-gear"></i>} />
-        <SidebarItem label={"Lixeira"} icon={<i className="bi bi-trash3"></i>} />
+        <Link to="/trash" ><SidebarItem label={"Lixeira"} icon={<i className="bi bi-trash3"></i>} /></Link>
         <SidebarItem label={"Sair"} icon={<i className="bi bi-box-arrow-right"></i>} onClick={handleLogout} />
       </div>
 
