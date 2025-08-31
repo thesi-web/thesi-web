@@ -11,17 +11,17 @@ const MessageModal = ({ isMessageOpen, setMessageModalOpen, onClick, title, mess
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         
         <div className={styles.title}>
-          <div className='h3'> {title} </div>
+          <div> {title} </div>
           <Button variant={'close'} onClick={setMessageModalOpen} icon={<i className="bi bi-x-lg"></i>} />
         </div>
 
         <div className={styles.content} >
-            <div className='title' >🐣</div>
+            <div className='title' ><i class="bi bi-exclamation-circle"></i></div>
             <div className='subtext' >{message}</div>
         </div>
         
         <div className={styles.iconsContainer} >
-            <Button variant={'transparent'} onClick={setMessageModalOpen} > Cancel </Button>
+            <Button variant={'transparent'} onClick={setMessageModalOpen} > Cancelar </Button>
             <Button variant={'secondary'} onClick={onClick} > {buttonMessage} </Button>
         </div>
 

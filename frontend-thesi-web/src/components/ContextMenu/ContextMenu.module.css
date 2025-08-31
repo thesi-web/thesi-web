@@ -1,19 +1,41 @@
-  
-  .menuItem {
-    padding: 10px 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    font-size: var(--font-size-sm);
-  }
-  
-  .menuItem:hover {
-    background-color: var(--color-primary-transparency);
-    color:var(--color-primary);
-  }
-  
-  .menuItem.delete:hover {
-    background-color: #fee2e2;
-    color:crimson;
-  }
-  
+.menu {
+  width: 10vw;
+  position: fixed;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  color: var(--color-heading);
+  border: solid 1px var(--color-transparency);
+  border-radius: 10px;  
+  padding: 0.5em;
+  z-index: 9999;
+}
+
+.menuItem {
+  padding: 0.5em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-medium);
+  border-radius: 5px;
+}
+
+.menuItem:hover {
+  background-color: var(--color-primary-transparency);
+  color:var(--color-primary);
+}
+
+.menuItem.delete:hover {
+  background-color: var(--color-danger-transparency);
+  color:var(--color-danger);
+}
+
+.label {
+  margin-left: 0.5em;
+  font-size: var(--font-size-sm);
+}
+
+.linha {
+  border-bottom: solid 1px var(--color-transparency);
+  margin: 0.5em 0;
+ 
+}

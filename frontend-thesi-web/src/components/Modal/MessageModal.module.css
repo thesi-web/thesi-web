@@ -29,7 +29,11 @@
     padding-bottom: 0.5em;
     display: flex;
     justify-content: space-between;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-heading);
 }
+
 
 .icon {
     cursor: pointer;

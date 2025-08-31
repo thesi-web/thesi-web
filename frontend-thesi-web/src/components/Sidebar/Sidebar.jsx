@@ -37,8 +37,7 @@ const Sidebar = ({onOpenInbox}) => {
     } else {
       fetchProjects();
     }
-
-    console.log("Projeto enviado para lixeira com sucesso!");
+    
   } catch (error) {
     console.error("Erro ao mover para a lixeira:", error);
   }

@@ -238,17 +238,50 @@ class ProjectController {
   }
 
   async moveToTrash(req, res) {
+  const { idProjeto } = req.body;
+  const userId = req.userId; // veio do middleware de autorização
 
-    const { idProjeto }= req.body;
+  try {
+    const success = await Project.trash(idProjeto, userId);
 
-    try {
-      await Project.trash(idProjeto);
-      res.status(200).json({ message: 'Movido para a lixeira com sucesso' });
-    } catch (err) {
-      res.status(500).json({ error: 'Erro ao mover para a lixeira' });
+    if (!success) {
+      return res.status(403).json({ error: "Você não tem permissão para mover este projeto para a lixeira." });
     }
 
+    res.status(200).json({ message: "Movido para a lixeira com sucesso" });
+  } catch (err) {
+    console.error("Erro ao mover para a lixeira:", err);
+    res.status(500).json({ error: "Erro ao mover para a lixeira" });
   }
+  }
+
+  async showTrash(req, res) {
+  try {
+    const userId = req.userId; // preenchido pelo middleware
+    
+    const trash = await Project.findTrash(userId);
+
+    // Sempre retorna 200, mesmo que venha vazio
+    res.status(200).json(trash);
+
+  } catch (err) {
+    console.error("Erro ao recuperar projetos:", err);
+    res.status(500).json({ erro: "Erro ao buscar os projetos" });
+  }
+  }
+
+  async restore(req, res) {
+  try {
+    const { idProjeto } = req.body;
+
+    await Project.restore(idProjeto); // chama o model
+
+    return res.status(200).json({ message: "Projeto restaurado com sucesso" });
+  } catch (err) {
+    console.error("Erro ao restaurar:", err);
+    return res.status(500).json({ error: "Erro ao restaurar projeto" });
+  }
+}
 
 }
 

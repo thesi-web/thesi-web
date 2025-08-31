@@ -24,22 +24,16 @@ const ContextMenu = ({ x, y, onEdit, onInvite, onDelete, onClose }) => {
         ref={menuRef}
         className={styles.menu}
         style={{
-          position: 'fixed',
           top: y,
           left: x,
-          background: 'white',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-          color: 'var(--color-heading)',
-          border: 'solid 1px var(--color-transparency)',  
-          padding: '0.3em',
-          zIndex: 9999,
         }}
         onClick={onClose} // fecha ao clicar em qualquer item
       >
     
-      <div className={styles.menuItem} onClick={onEdit}>Edit</div>
-      <div className={styles.menuItem} onClick={onInvite}>Invite</div>
-      <div className={`${styles.menuItem} ${styles.delete}`} onClick={onDelete}>Move to trash</div>
+      <div className={styles.menuItem} onClick={onEdit}><i className="bi bi-pencil-square"></i><div className={styles.label}>Editar</div></div>
+      <div className={styles.menuItem} onClick={onInvite}><i className="bi bi-person-plus"></i><div className={styles.label}>Convidar</div></div>
+      <div className={styles.linha}></div>
+      <div className={`${styles.menuItem} ${styles.delete}`} onClick={onDelete}><i className="bi bi-trash3"></i><div className={styles.label}>Apagar</div></div>
       </div>
     );
   

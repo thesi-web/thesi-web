@@ -120,6 +120,16 @@
     color: var(--color-primary);
 }
 
+.iconDanger {
+    background-color: transparent;
+    padding: 5px 8px;
+    font-size: var(--font-size-base);
+}
+.iconDanger:hover{
+    background-color: var(--color-danger-transparency);
+    color: var(--color-danger);
+}
+
 .message{
   background-color: white;
   border: solid 1px var(--color-secondary);

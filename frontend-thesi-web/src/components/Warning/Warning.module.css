@@ -27,7 +27,6 @@
 
 .message {
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
     color: var(--color-subtext);
     text-align: center;
 }

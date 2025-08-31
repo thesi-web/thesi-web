@@ -254,21 +254,53 @@ class Project {
     .where("PU.id_projeto", projetoId);
   }
 
-  async trash(projetoId) {
+  async trash(projetoId, userId) {
+  const trx = await database.transaction();
 
-    const trx = await database.transaction();
-  
-    try {
-      await trx("t_projeto")
-        .where({ id_projeto: projetoId })
-        .update({ st_lixo: true });
-      await trx.commit();
-    } catch (error) {
-      await trx.rollback();
-      console.error("Erro ao enviar projeto para a lixeira:", error);
-      throw error;
-    }
+  try {
+    const updatedRows = await trx("t_projeto")
+      .where({ id_projeto: projetoId, id_criador: userId }) // só criador pode alterar
+      .update({ st_lixo: true });
+
+    await trx.commit();
+
+    // se não atualizou nenhuma linha, é porque o usuário não é criador
+    return updatedRows > 0;
+  } catch (error) {
+    await trx.rollback();
+    console.error("Erro ao enviar projeto para a lixeira:", error);
+    throw error;
   }
+  }
+
+  async findTrash(userId){
+    return await database("t_projeto as P")
+      .join("t_projeto_usuario as U", "P.id_projeto", "U.id_projeto")
+      .select(
+        "P.id_projeto",
+        "P.nm_projeto",
+      )
+      .where("U.id_usuario", userId)
+      .andWhere("P.st_lixo", true);
+  }
+
+  async restore(idProjeto) {
+  const trx = await database.transaction();
+
+  try {
+    await trx("t_projeto")
+      .where({ id_projeto: idProjeto })
+      .update({ st_lixo: false });
+
+    await trx.commit();
+    return true; // apenas retorna sucesso
+  } catch (error) {
+    await trx.rollback();
+    console.error("Erro ao restaurar:", error);
+    throw error;
+  }
+}
+
 
 }
 
