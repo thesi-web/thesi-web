@@ -1,3 +1,4 @@
+require("dotenv").config();
 const Images = require("../models/Images");
 const path = require("path");
 const fs = require("fs");
@@ -142,8 +143,6 @@ class ImagesController {
         const projetoId = req.params.projetoId;
         const templates = req.files || [];
 
-        console.log(req.files);
-
          if (templates.length === 0) {
           return res.status(400).send("Nenhum arquivo enviado");
         }
@@ -159,7 +158,6 @@ class ImagesController {
           await uploader.execute(file.filename);
           const url = `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${file.filename}`;
           uploadedTemplates.push({
-            filename: file.filename,
             originalname: file.originalname,
             url: url
           });

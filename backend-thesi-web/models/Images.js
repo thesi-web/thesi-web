@@ -1,4 +1,7 @@
 const database = require("../database/connection");
+const { UploadService } = require("../services/uploadService");
+const uploader = new UploadService();
+require("dotenv").config();
 
 class Images {
   
@@ -42,11 +45,14 @@ class Images {
     try {
       await database.transaction(async (trx) => {         
         for (const image of images) {
+
+          const uploaded = await uploader.execute(image.originalname);
+
           await trx("t_imagens").insert({
             id_projeto: projetoId,
             id_usuario: userId,
-            nm_imagem: image.filename,
-            ds_caminho: image.url         
+            nm_imagem: uploaded.filename,
+            ds_caminho: uploaded.url         
           });
         }              
       });
