@@ -16,10 +16,10 @@ export async function enviarEmailRecuperacao(destinatario, token) {
   const mailOptions = {
     from: emailUser,
     to: destinatario,
-    subject: `Here's your magic link`,
+    subject: `Recuperação de senha`,
     html: `
       <div style="font-family: 'Montserrat', Arial, sans-serif; background-color: #f6f8fa; padding: 1em;">
-      <div style="max-width: 600px; margin: auto; background: #fff;  border: 1px solid #e1e4e8; padding: 1em; ">
+      <div style="max-width: 600px; margin: auto; background: #fff;  border: 1px solid #e1e4e8; padding: 2em; ">
         <p style="color: #24292e; font-size: 14px; font-weight: 600;"> Thesi UX </p>
         <h2 style="color: #24292e; font-size: 18px; text-align: center;"> Redefinição senha </h2>
         <p style="color: #586069; font-size: 14px;"> Ei! </p>
@@ -65,7 +65,7 @@ export async function enviarEmailToken(destinatario, token) {
     subject: 'Seu código de verificação',
     html: `
     <div style="font-family: 'Montserrat', Arial, sans-serif; background-color: #f6f8fa; padding: 1em;">
-    <div style="max-width: 600px; margin: auto; background: #fff; border-radius: 10px; padding: 20px; border: 1px solid #e1e4e8;">
+    <div style="max-width: 600px; margin: auto; background: #fff; border-radius: 10px; padding: 1em; border: 1px solid #e1e4e8;">
       <h2 style="color: #24292e; font-size: 18px;">Verifique sua identidade</h2>
       <p style="color: #586069; font-size: 14px;">Aqui está seu código de verificação:</p>
       <h2 style="font-size: 16px; letter-spacing: 5px; color: #24292e; text-align: center;">${token}</h2>
@@ -93,7 +93,7 @@ export async function enviarEmailBoasVindas(destinatario, name) {
     subject: 'Bem-vindo à THESI',
     html: `
       <div style="font-family: 'Montserrat', Arial, sans-serif; background-color: #f6f8fa; padding: 1em;">
-      <div style="max-width: 600px; margin: auto; background: #fff;  border: 1px solid #e1e4e8; ">
+      <div style="max-width: 600px; margin: auto; background: #fff;  border: 1px solid #e1e4e8; padding: 2em;">
         <p style="color: #24292e; font-size: 14px; font-weight: 600; padding-left: 1em;">Thesi UX</p>
         <h2 style="color: #24292e; font-size: 16px; text-align: center;">Olá, ${name}</h2>
         <h2 style="color: #586069; font-size: 18px; text-align: center; ">Prazer em conhecer você!</h2>
@@ -142,13 +142,13 @@ export async function enviarEmailConvite(destinatario, projectName, projectId, t
       subject: `Convite para participar do projeto "${projectName}"`,
       html: `
         <div style="font-family: 'Montserrat', Arial, sans-serif; background-color: #f6f8fa; padding: 1em;">
-          <div style="max-width: 600px; margin: auto; background: #fff;  border: 1px solid #e1e4e8; padding: 1em; ">
+          <div style="max-width: 600px; margin: auto; background: #fff;  border: 1px solid #e1e4e8; padding: 2em; ">
             <p style="color: #24292e; font-size: 14px; font-weight: 600;"> Thesi UX </p>
             <h2 style="color: #24292e; font-size: 18px; text-align: center;"> Convite Recebido </h2>
             <p style="color: #586069; font-size: 14px;"> Você foi convidado(a) para participar do projeto:<p>
             <p style="color: #586069; font-size: 14px; text-align: center;"><b>${projectName}</b></p>
             <p style="color: #586069; font-size: 14px;"> Por favor, aceite ou recuse o convite clicando em um dos botões abaixo. </p>
-          <div style="display: flex; justify-content: center; padding: 1em 0;">
+          <div style="display: flex;  justify-content: center; padding: 1em 0;">
             <a href="${recusarUrl}"
             style="
                 display: inline-block;
