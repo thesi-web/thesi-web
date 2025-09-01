@@ -210,7 +210,7 @@ class UserController {
     try {
       const { email } = req.body;
 
-      const allowedDomains = ['@fatec.sp.gov.br', '@maua.br'];
+      const allowedDomains = ['@fatec.sp.gov.br', '@maua.br', '@gmail.com'];
       const isInstitutionalEmail = allowedDomains.some(domain => email.endsWith(domain));
 
       if (!isInstitutionalEmail) {

@@ -126,3 +126,5 @@ http.listen(port, () => console.log(
 ))
 
 console.log(`link das requisições:${apiUrl}`);
+
+module.exports = { io, mapaDeSockets };

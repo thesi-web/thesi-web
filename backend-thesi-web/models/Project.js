@@ -1,60 +1,143 @@
 const database = require("../database/connection");
+const { io, mapaDeSockets } = require('../config/server');
+const crypto = require('crypto');
 const { UploadService } = require("../services/uploadService");
 const uploader = new UploadService();
+const { enviarEmailConvite } = require("../utils/email");
 require("dotenv").config();
 
 class Project {
 
   async create(project, userId) {
-    try {
-      const result = await database.transaction(async (trx) => {
-        const [inserted] = await trx("t_projeto")
-          .insert({
-            nm_projeto: project.name,
-            nm_autores: project.authors,
-            ds_projeto: project.objective,
-            ds_usuario: project.user,
-            ds_plataforma: project.platform,
-            id_criador: userId
-          })
-          .returning("id_projeto");
-  
-        const projectId = inserted.id_projeto;
-  
-        await trx("t_projeto_usuario").insert({
-          id_projeto: projectId,
-          id_usuario: userId
-        });
+  try {
+    console.log("[MODEL] Iniciando criação de projeto para userId:", userId);
 
-        const allParticipants = project.authors || [];
-        const uniqueParticipants = [...new Set(allParticipants)].filter(p => p !== userId);
+    const result = await database.transaction(async (trx) => {
+      console.log("[MODEL] Inserindo projeto:", project.name);
 
-        for (const participantId of uniqueParticipants) {
-          await trx("t_projeto_usuario").insert({
-            id_projeto: projectId,
-            id_usuario: participantId,
-          });
-        }
-        
-        for (const image of project.templates) {
-          const uploaded = await uploader.execute(image.originalname);
-        
-          await trx("t_imagens").insert({
-            id_projeto: projectId,
-            id_usuario: userId,
-            nm_imagem: uploaded.filename,     // <- nome gerado
-            ds_caminho: uploaded.url          // <- URL correta
-          });
-        }        
-        return { projectId }; // <- esse retorno vai para a constante "result"
+      const [inserted] = await trx("t_projeto")
+        .insert({
+          nm_projeto: project.name,
+          nm_autores: Array.isArray(project.authors) 
+            ? project.authors.join(",") 
+            : project.authors,
+          ds_projeto: project.objective,
+          ds_usuario: project.user,
+          ds_plataforma: project.platform,
+          id_criador: userId
+        })
+        .returning("id_projeto");
+
+      const projectId = inserted.id_projeto;
+      console.log("[MODEL] Projeto inserido com ID:", projectId);
+
+      await trx("t_projeto_usuario").insert({
+        id_projeto: projectId,
+        id_usuario: userId
       });
-      return result; // <- aqui você retorna o resultado para o controller
-    } catch (err) {
-      console.error("Não foi possível criar o projeto:", err);
-      throw err;
-    }
+      console.log("[MODEL] Criador vinculado ao projeto");
+
+      // salva imagens
+      for (const image of project.templates) {
+        console.log("[MODEL] Salvando imagem:", image.originalname);
+        const uploaded = await uploader.execute(image.originalname);
+        await trx("t_imagens").insert({
+          id_projeto: projectId,
+          id_usuario: userId,
+          nm_imagem: uploaded.filename,
+          ds_caminho: uploaded.url
+        });
+      }
+
+      const uniqueParticipants = [...new Set(project.authors)].filter(
+        (p) => String(p) !== String(userId)
+      );
+
+      console.log("[MODEL] Participantes únicos (sem criador):", uniqueParticipants);
+
+      for (const participantId of uniqueParticipants) {
+        console.log("[MODEL] Criando convite para participante:", participantId);
+
+        const token = crypto.randomBytes(16).toString("hex");
+
+        await trx("t_projeto_convite").insert({
+          id_projeto: projectId,
+          id_usuario: participantId,
+          token,
+          ds_status: "pendente"
+        });
+        console.log("[MODEL] Convite inserido para:", participantId);
+
+        // socket
+        const socketId = mapaDeSockets?.[participantId];
+        if (socketId) {
+          io.to(socketId).emit("novoConviteProjeto", {
+            projetoId,
+            mensagem: `Você foi convidado para o projeto ${project.name}`
+          });
+        } else {
+          console.warn("[MODEL] Nenhum socket encontrado para participante:", participantId);
+        }
+
+        // email
+        const userEmail = await trx("t_usuario")
+          .where({ id_usuario: participantId })
+          .first()
+          .then((u) => u?.ds_email);
+
+        console.log("[MODEL] Email encontrado para", participantId, ":", userEmail);
+
+        if (userEmail) {
+          try {
+            await enviarEmailConvite(userEmail, project.name, projectId, token);
+            console.log("[MODEL] Email enviado para:", userEmail);
+          } catch (err) {
+            console.error("[MODEL] Erro ao enviar email para:", userEmail, err);
+          }
+        } else {
+          console.warn("[MODEL] Nenhum email encontrado para participante:", participantId);
+        }
+      }
+
+      return { projectId };
+    });
+
+    return result;
+  } catch (err) {
+    console.error("[MODEL] Não foi possível criar o projeto:", err);
+    throw err;
+  }
   }
 
+  async answer(token, resposta) {
+    return await database.transaction(async (trx) => {
+      const convite = await trx("t_projeto_convite").where({ token }).first();
+
+      if (!convite) {
+        throw new Error("Convite não encontrado");
+      }
+
+      if (convite.ds_status !== "pendente") {
+        throw new Error("Convite já respondido");
+      }
+
+      // atualiza status
+      await trx("t_projeto_convite")
+        .where({ id_convite: convite.id_convite })
+        .update({ ds_status: resposta });
+
+      // se aceitou, adiciona participante no projeto
+      if (resposta === "aceito") {
+        await trx("t_projeto_usuario").insert({
+          id_projeto: convite.id_projeto,
+          id_usuario: convite.id_usuario
+        });
+      }
+
+      return { conviteId: convite.id_projeto_convite, status: resposta };
+    });
+  }
+  
   async findByUserId(userId){
     return await database("t_projeto as P")
       .join("t_projeto_usuario as U", "P.id_projeto", "U.id_projeto")

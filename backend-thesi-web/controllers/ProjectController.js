@@ -19,11 +19,11 @@ class ProjectController {
       }
   
       //Converte authors para array de inteiros
-      const participants = typeof authors === "string"
+      const participants = Array.isArray(authors)
+      ? authors.map((id) => parseInt(id)).filter((id) => !isNaN(id))
+      : typeof authors === "string"
         ? authors.split(',').map((id) => parseInt(id.trim())).filter((id) => !isNaN(id))
-        : Array.isArray(authors)
-          ? authors.map((id) => parseInt(id)).filter((id) => !isNaN(id))
-          : [];
+        : [];
   
       const uploader = new UploadService();
   
@@ -39,7 +39,7 @@ class ProjectController {
   
       const project = {
         name,
-        authors: participants, // <- agora é array de ints
+        authors: participants,
         objective,
         user,
         platform,
@@ -55,6 +55,26 @@ class ProjectController {
       res.status(500).json({ erro: "Erro ao criar projeto" });
     }
   }  
+
+  async answerInvite(req, res) {
+    try {
+      const { token, resposta } = req.query;
+
+      console.log("[CONVITE] Resposta recebida:", resposta, "para token:", token);
+
+      if (!token || !["aceito", "recusado"].includes(resposta)) {
+        return res.status(400).json({ erro: "Token inválido ou resposta inválida" });
+      }
+
+      const result = await Project.answer(token, resposta);
+
+      console.log("[CONVITE] Convite atualizado com sucesso:", result);
+      res.json({ msg: "Resposta registrada com sucesso" });
+    } catch (err) {
+      console.error("[CONVITE] Erro ao responder convite:", err);
+      res.status(500).json({ erro: err.message });
+    }
+  }
 
   async getAll(req, res) {
     try {

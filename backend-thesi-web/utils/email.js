@@ -86,3 +86,38 @@ export async function enviarEmailBoasVindas(destinatario, name) {
 
   await transporter.sendMail(mailOptions);
 }
+
+export async function enviarEmailConvite(destinatario, projectName, projectId, token) {
+  console.log("[EMAIL] Preparando envio para:", destinatario);
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user: emailUser, pass: emailPass }
+    });
+
+    const aceitarUrl = `${apiUrl}api/convite/responder?token=${token}&resposta=aceito`;
+    const recusarUrl = `${apiUrl}api/convite/responder?token=${token}&resposta=recusado`;
+
+    const mailOptions = {
+      from: emailUser,
+      to: destinatario,
+      subject: `Convite para participar do projeto "${projectName}"`,
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 10px;">
+          <h2>Você foi convidado para o projeto ${projectName} 🐥✨</h2>
+          <p>Por favor, aceite ou recuse o convite clicando em um dos botões abaixo:</p>
+          <a href="${aceitarUrl}" style="padding: 10px 20px; background-color: #2ECC71; color: white; text-decoration: none; border-radius: 5px;">Aceitar</a>
+          <a href="${recusarUrl}" style="padding: 10px 20px; background-color: #E74C3C; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">Recusar</a>
+        </div>
+      `
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log("[EMAIL] Email enviado:", info.messageId);
+
+  } catch (err) {
+    console.error("[EMAIL] Falha ao enviar email para", destinatario, ":", err);
+  }
+}
+

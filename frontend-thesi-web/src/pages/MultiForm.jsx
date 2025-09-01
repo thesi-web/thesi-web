@@ -29,6 +29,8 @@ export default function MultiStepForm() {
     templateFile: [],
   });
 
+  console.log(projectData);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -48,7 +50,10 @@ export default function MultiStepForm() {
 
     const projectForm = new FormData();
     projectForm.append("name", projectData.name);
-    projectForm.append("authors", projectData.participants);
+     // envia cada participante separadamente (não JSON.stringify)
+    projectData.participants.forEach((id) => {
+      projectForm.append("authors", id);
+    });
     projectForm.append("objective", projectData.objective);
     projectForm.append("user", projectData.user);
     projectForm.append("platform", projectData.platform);
