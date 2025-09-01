@@ -18,12 +18,32 @@ export async function enviarEmailRecuperacao(destinatario, token) {
     to: destinatario,
     subject: `Here's your magic link`,
     html: `
-      <div style="font-family: Arial, sans-serif; padding: 10px;">
-          <h2>Change your password.✨</h2>
-          <p>Hey!</p>
-          <p>Don't worry, here's your magic link! use it to reset your password:</p>
-          <a>${apiUrl}/change/password/${token}</a>
+      <div style="font-family: 'Montserrat', Arial, sans-serif; background-color: #f6f8fa; padding: 1em;">
+      <div style="max-width: 600px; margin: auto; background: #fff;  border: 1px solid #e1e4e8; padding: 1em; ">
+        <p style="color: #24292e; font-size: 14px; font-weight: 600;"> Thesi UX </p>
+        <h2 style="color: #24292e; font-size: 18px; text-align: center;"> Redefinição senha </h2>
+        <p style="color: #586069; font-size: 14px;"> Ei! </p>
+        <p style="color: #586069; font-size: 14px;"> Não se preocupe, aqui está seu link mágico! Use-o para redefinir sua senha: </p>
+      <div style="display: flex; justify-content: center; padding: 1em 0;">
+        <a href="${apiUrl}/change/password/${token}"
+        style="
+            display: inline-block;
+            background-color: #24292e; 
+            color: #ffffff; 
+            text-decoration: none; 
+            padding: 0.5em 2em; 
+            border-radius: 2em; 
+            text-align: center;
+            font-size: 14px;
+        ">
+          Redefinir senha
+        </a>
       </div>
+
+    </div>
+      <p style="color: #586069; font-size: 12px; text-align: center; padding-top: 1em;">No caso de dúvidas entre em contato — suporte.thesi@gmail.com</p>
+      <p style="color: #586069; font-size: 12px; text-align: center; border-bottom: solid 1px #e1e4e8;  padding-bottom: 2em;">Obrigado, Equipe Thesi UX.</p>
+    </div>
     `,
   };
 
@@ -42,15 +62,17 @@ export async function enviarEmailToken(destinatario, token) {
   const mailOptions = {
     from: emailUser,
     to: destinatario,
-    subject: 'Your registration code',
+    subject: 'Seu código de verificação',
     html: `
-      <div style="font-family: Arial, sans-serif; padding: 10px;">
-        <h2>Email verification 🐣✨</h2>
-        <p>To complete your sign-up, you can use the code below to create your account.</p>
-        <h1 style="color: #2E86C1;">${token}</h1>
-        <p>This code will expire in 10 minutes.</p>
-      </div>
-    `,
+    <div style="font-family: 'Montserrat', Arial, sans-serif; background-color: #f6f8fa; padding: 1em;">
+    <div style="max-width: 600px; margin: auto; background: #fff; border-radius: 10px; padding: 20px; border: 1px solid #e1e4e8;">
+      <h2 style="color: #24292e; font-size: 18px;">Verifique sua identidade</h2>
+      <p style="color: #586069; font-size: 14px;">Aqui está seu código de verificação:</p>
+      <h2 style="font-size: 16px; letter-spacing: 5px; color: #24292e; text-align: center;">${token}</h2>
+      <p style="color: #586069; font-size: 14px;" >Esse código é válido por <strong>15 minutos</strong> e só pode ser usado uma vez.</p>
+      <p style="color: #586069; font-size: 12px; text-align: center; border-top: solid 1px #e1e4e8; padding-top: 1em;">Por favor não compartilhe esse código com ninguém.</p>
+    </div>
+  `,
   };
 
   await transporter.sendMail(mailOptions);
@@ -68,18 +90,33 @@ export async function enviarEmailBoasVindas(destinatario, name) {
   const mailOptions = {
     from: emailUser,
     to: destinatario,
-    subject: 'Welcome to Thesi',
+    subject: 'Bem-vindo à THESI',
     html: `
-      <div style="font-family: Arial, sans-serif; padding: 10px;">
-          <h2>Welcome to Thesi 🐥✨</h2>
-          <p>Hi ${name},</p>
-          <p>Welcome to Thesi — we're thrilled to have you on board!</p>
-          <p>Your account has been successfully created, and you're all set to explore a world of ideas and practical solutions designed just for you.</p>
-          <br/>
-          <p>Let's build something great together.</p>
-          <br/>
-          <p>Cheers,</p>
-          <p><b>The Thesi Team</b></p>
+      <div style="font-family: 'Montserrat', Arial, sans-serif; background-color: #f6f8fa; padding: 1em;">
+      <div style="max-width: 600px; margin: auto; background: #fff;  border: 1px solid #e1e4e8; ">
+        <p style="color: #24292e; font-size: 14px; font-weight: 600; padding-left: 1em;">Thesi UX</p>
+        <h2 style="color: #24292e; font-size: 16px; text-align: center;">Olá, ${name}</h2>
+        <h2 style="color: #586069; font-size: 18px; text-align: center; ">Prazer em conhecer você!</h2>
+        <p style="color: #586069; font-size: 14px; text-align: center" >Sua conta foi criada com sucesso e você está pronto para explorar um mundo de ideias e soluções práticas projetadas especialmente para você.</p>
+        <div style="display: flex; justify-content: center; padding: 1em 0;">
+          <a href="${apiUrl}" 
+          style="
+              display: inline-block;
+              background-color: #24292e; 
+              color: #ffffff; 
+              text-decoration: none; 
+              padding: 0.5em 2em; 
+              border-radius: 2em; 
+              text-align: center;
+              font-size: 14px;
+          ">
+            Começar
+          </a>
+        </div>
+
+      </div>
+        <p style="color: #586069; font-size: 12px; text-align: center; padding-top: 1em;">Bem-vindo à Thesi — estamos muito felizes em ter você conosco!</p>
+        <p style="color: #586069; font-size: 12px; text-align: center; border-bottom: solid 1px #e1e4e8;  padding-bottom: 2em;">Vamos construir algo incrível juntos.</p>
       </div>
     `,
   };
@@ -104,11 +141,46 @@ export async function enviarEmailConvite(destinatario, projectName, projectId, t
       to: destinatario,
       subject: `Convite para participar do projeto "${projectName}"`,
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 10px;">
-          <h2>Você foi convidado para o projeto ${projectName} 🐥✨</h2>
-          <p>Por favor, aceite ou recuse o convite clicando em um dos botões abaixo:</p>
-          <a href="${aceitarUrl}" style="padding: 10px 20px; background-color: #2ECC71; color: white; text-decoration: none; border-radius: 5px;">Aceitar</a>
-          <a href="${recusarUrl}" style="padding: 10px 20px; background-color: #E74C3C; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">Recusar</a>
+        <div style="font-family: 'Montserrat', Arial, sans-serif; background-color: #f6f8fa; padding: 1em;">
+          <div style="max-width: 600px; margin: auto; background: #fff;  border: 1px solid #e1e4e8; padding: 1em; ">
+            <p style="color: #24292e; font-size: 14px; font-weight: 600;"> Thesi UX </p>
+            <h2 style="color: #24292e; font-size: 18px; text-align: center;"> Convite Recebido </h2>
+            <p style="color: #586069; font-size: 14px;"> Você foi convidado(a) para participar do projeto:<p>
+            <p style="color: #586069; font-size: 14px; text-align: center;"><b>${projectName}</b></p>
+            <p style="color: #586069; font-size: 14px;"> Por favor, aceite ou recuse o convite clicando em um dos botões abaixo. </p>
+          <div style="display: flex; justify-content: center; padding: 1em 0;">
+            <a href="${recusarUrl}"
+            style="
+                display: inline-block;
+                background-color: #ffffff; 
+                color: #24292e; 
+                text-decoration: none; 
+                padding: 0.5em 2em; 
+                border-radius: 2em;
+                border: solid 1px #24292e; 
+                text-align: center;
+                font-size: 14px;
+                margin-right: 1em;
+            ">
+              Recusar
+            </a>
+            <a href="${aceitarUrl}"
+            style="
+                display: inline-block;
+                background-color: #24292e; 
+                color: #ffffff; 
+                text-decoration: none; 
+                padding: 0.5em 2em; 
+                border-radius: 2em; 
+                text-align: center;
+                font-size: 14px;
+            ">
+              Aceitar convite
+            </a>
+        </div>
+        </div>
+          <p style="color: #586069; font-size: 12px; text-align: center; padding-top: 1em;">No caso de dúvidas entre em contato — suporte.thesi@gmail.com</p>
+          <p style="color: #586069; font-size: 12px; text-align: center; border-bottom: solid 1px #e1e4e8;  padding-bottom: 2em;">Obrigado, Equipe Thesi UX.</p>
         </div>
       `
     };
