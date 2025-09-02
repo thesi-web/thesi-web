@@ -9,8 +9,11 @@ import MessageModal from '../components/Modal/MessageModal';
 import MarksModal from '../components/Modal/MarksModal';
 import TextArea from '../components/TextArea/TextArea';
 import InputText from '../components/InputText/InputText';
+import { getUsuarioLogado } from '../hooks/auth';
 
 const Project = () => {
+
+  
 
   const [projeto, setProjeto] = useState({ imagens: [] });
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
@@ -124,6 +127,9 @@ const Project = () => {
     }
   };
 
+  //chama o hook que retorna o id do usuário logado na aplicação
+  const usuarioLogado = getUsuarioLogado();
+
   return (
     <div className={styles.page}>
         <Cover />
@@ -143,7 +149,7 @@ const Project = () => {
           <div className={styles.statusContainer}>
             <Status status={`${projeto.ds_status}`} />
             {/* só mostra o lápis se o usuário logado for o criador */}
-            {projeto.id_criador === projeto.id_usuario && (
+            {usuarioLogado?.id === projeto.id_criador && (
             <i
             className="bi bi-pencil-square"
             onClick={() => {

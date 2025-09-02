@@ -11,7 +11,6 @@ function CreateAccount() {
   const [step, setStep] = useState(1);
 
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [password, setPassword] = useState('');
@@ -47,7 +46,6 @@ function CreateAccount() {
     try {
       const response = await axios.post(`${apiUrl}/api/user`, {
         name,
-        phone,
         email,
         password,
         confirmpassword: confirmPassword,
@@ -120,8 +118,6 @@ function CreateAccount() {
         <StepTwo
           name={name}
           setName={setName}
-          phone={phone}
-          setPhone={setPhone}
           email={email}
           password={password}
           setPassword={setPassword}

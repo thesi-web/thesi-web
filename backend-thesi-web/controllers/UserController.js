@@ -10,10 +10,10 @@ const { enviarEmailBoasVindas, enviarEmailRecuperacao } = require("../utils/emai
 class UserController {
 
   async create(req, res) {
-    const { phone, name, email, password, confirmpassword } = req.body;
+    const { name, email, password, confirmpassword } = req.body;
 
     // Verificação de campos obrigatórios
-    if (!phone || !name || !email || !password || !confirmpassword) {
+    if ( !name || !email || !password || !confirmpassword) {
       return res.status(400).json({ msg: "Todos os campos são obrigatórios" });
     }
 
@@ -31,7 +31,6 @@ class UserController {
 
       // Criação do usuário
       const t_usuario = {
-        phone: phone.trim(),
         name: name.trim(),
         email: email.toLowerCase(),
         password,

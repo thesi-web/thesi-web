@@ -1,0 +1,12 @@
+import { jwtDecode } from "jwt-decode";
+
+export function getUsuarioLogado() {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+  try {
+    return jwtDecode(token);
+  } catch (err) {
+    console.error("Erro ao decodificar token:", err);
+    return null;
+  }
+}

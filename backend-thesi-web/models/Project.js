@@ -220,6 +220,7 @@ class Project {
       await trx("t_imagens").where({ id_projeto: projetoId, id_usuario: userId }).del();
       await trx("t_arquivos").where({ id_projeto: projetoId, id_usuario: userId }).del();
       await trx("t_projeto_usuario").where("id_projeto", projetoId).del();
+      await trx("t_projeto_convite").where("id_projeto", projetoId).del();
       await trx("t_projeto").where("id_projeto", projetoId).del();
   
       await trx.commit();

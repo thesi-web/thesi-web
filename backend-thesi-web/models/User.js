@@ -9,7 +9,6 @@ class User {
       const hashedPassword = await bcrypt.hash(user.password, 10);
 
       await database("t_usuario").insert({
-        nr_telefone: user.phone,
         nm_usuario: user.name,
         ds_email: user.email,
         ds_senha: hashedPassword,
@@ -51,7 +50,7 @@ class User {
   async findById(id) {
     try {
         const result = await database("t_usuario")
-            .select("id_usuario", "nr_telefone", "nm_usuario", "ds_email")
+            .select("id_usuario", "nm_usuario", "ds_email")
             .where({ id_usuario: id })
             .first();
         return result;
@@ -65,7 +64,7 @@ class User {
   async findById(id) {
     try {
       const result = await database("t_usuario")
-        .select("id_usuario", "nr_telefone", "nm_usuario", "ds_email")
+        .select("id_usuario", "nm_usuario", "ds_email")
         .where({ id_usuario: id })
         .first();
       return result;
