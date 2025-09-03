@@ -69,7 +69,7 @@ const Modal = ({ isOpen, setModalOpen, index, src, projetoId }) => {
     <div className={styles.backdrop} onClick={setModalOpen}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-          <div className={'h2'}>{`Tela ${index}`}</div>
+          <div className={styles.title}>{`Tela ${index}`}</div>
           <div onClick={setModalOpen} className={styles.closeModal} > <i className="bi bi-x-lg"></i> </div>
         </div>
       <div className={styles.container}>

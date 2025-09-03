@@ -13,7 +13,7 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
   const apiUrl = import.meta.env.VITE_API_URL;
 
   // mover para FORA do useEffect
-  const handleHeuristica = async () => {
+  const handleEstado = async () => {
     try {
       const response = await fetch(`${apiUrl}/api/marks/${projetoId}`, {
         headers: {
@@ -28,6 +28,7 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
       const data = await response.json();
       setHeuristica(data.heuristics);
       setSemiotica(data.semiotics);
+      console.log(data);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -36,7 +37,7 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
   };
 
   useEffect(() => {
-    handleHeuristica();
+    handleEstado();
   }, [projetoId]);
 
   const handleDeleteHeuristica = async (id) => {
@@ -49,7 +50,7 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
       });
 
       if (response.ok) {
-        await handleHeuristica();
+        await handleEstado();
       } else {
         console.error('Erro ao deletar marcação:', response.statusText);
       }
@@ -68,7 +69,7 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
       });
 
       if (response.ok) {
-        await handleHeuristica();
+        await handleEstado();
       } else {
         console.error('Erro ao deletar marcação:', response.statusText);
       }
@@ -81,43 +82,45 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
   <div className={styles.backdrop} onClick={setMarksModalOpen}>
     <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
       <div className={styles.header}>
-        <div className='h3'>Current marks</div>
-        <Button variant='close' icon={<i className="bi bi-x-lg"></i>} onClick={setMarksModalOpen} />
+        <div className={styles.title}>Marcações heurísticas e semióticas</div>
+        <div onClick={setMarksModalOpen} className={styles.closeModal}><i className="bi bi-x-lg"></i></div>
       </div>
 
-      {/* Mensagem quando não há heurística nem semiótica */}
-      {heuristica.length === 0 && semiotica.length === 0 && !loading && (
-          <Warning icon={<i class="bi bi-exclamation-circle"></i>} title={'Ainda não há marcações!'} message={'Quando uma avaliação heurística ou semiótica for feita, ela aparecerá aqui para edição.'} />
-      )}
+      <div className={styles.container}>
+        {/* Mensagem quando não há heurística nem semiótica */}
+        {heuristica.length === 0 && semiotica.length === 0 && !loading && (
+            <Warning icon={<i class="bi bi-exclamation-circle"></i>} title={'Ainda não há marcações!'} message={'Quando uma avaliação heurística ou semiótica for feita, ela aparecerá aqui para edição.'} />
+        )}
 
-      {heuristica.map((heuristic, index) => (
-        <EditHeuristic
-          key={index}
-          image={heuristic.ds_caminho}
-          userName={heuristic.nm_usuario}
-          violatedHeuristic={heuristic.nm_heuristica}
-          severityLevel={heuristic.nr_severidade}
-          description={heuristic.ds_problemas}
-          recommendations={heuristic.ds_recomendacoes}
-          heuristicId={heuristic.id_heuristica}
-          onDelete={handleDeleteHeuristica}
-        />
-      ))}
+        {heuristica.map((heuristic, index) => (
+          <EditHeuristic
+            key={index}
+            image={heuristic.ds_caminho}
+            userName={heuristic.nm_usuario}
+            violatedHeuristic={heuristic.nm_heuristica}
+            severityLevel={heuristic.nr_severidade}
+            description={heuristic.ds_problemas}
+            recommendations={heuristic.ds_recomendacoes}
+            heuristicId={heuristic.id_heuristica}
+            onDelete={handleDeleteHeuristica}
+          />
+        ))}
 
-      {semiotica.map((semiotic, index) => (
-        <EditSemiotic
-          key={index}
-          image={semiotic.ds_caminho}
-          userName={semiotic.nm_usuario}
-          signName={semiotic.nm_signo}
-          expected={semiotic.ds_esperada}
-          possible={semiotic.ds_possivel}
-          observed={semiotic.ds_quebra}
-          recommendations={semiotic.ds_recomendacoes}
-          semioticId={semiotic.id_semiotica}
-          onDelete={handleDeleteSemiotica}
-        />
-      ))}
+        {semiotica.map((semiotic, index) => (
+          <EditSemiotic
+            key={index}
+            image={semiotic.ds_caminho}
+            userName={semiotic.nm_usuario}
+            signName={semiotic.nm_signo}
+            expected={semiotic.ds_esperada}
+            possible={semiotic.ds_possivel}
+            observed={semiotic.ds_quebra}
+            recommendations={semiotic.ds_recomendacoes}
+            semioticId={semiotic.id_semiotica}
+            onDelete={handleDeleteSemiotica}
+          />
+        ))}
+      </div>
     </div>
   </div>
 );

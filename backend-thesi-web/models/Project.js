@@ -15,14 +15,14 @@ class Project {
     const result = await database.transaction(async (trx) => {
       console.log("[MODEL] Inserindo projeto:", project.name);
 
+      // garante que authors é sempre array
+      const participants = Array.isArray(project.authors) ? project.authors : [];
+
       const [inserted] = await trx("t_projeto")
         .insert({
           nm_projeto: project.name,
-          nm_autores: Array.isArray(project.authors) 
-            ? project.authors.join(",") 
-            : project.authors,
+          nm_autores: participants.length > 0 ? participants.join(",") : null,
           ds_projeto: project.objective,
-          ds_usuario: project.user,
           ds_plataforma: project.platform,
           id_criador: userId
         })
@@ -31,72 +31,71 @@ class Project {
       const projectId = inserted.id_projeto;
       console.log("[MODEL] Projeto inserido com ID:", projectId);
 
+      // vincula criador ao projeto
       await trx("t_projeto_usuario").insert({
         id_projeto: projectId,
         id_usuario: userId
       });
       console.log("[MODEL] Criador vinculado ao projeto");
 
-      // salva imagens
+      // salva imagens (se houver)
       for (const image of project.templates) {
         console.log("[MODEL] Salvando imagem:", image.originalname);
-        const uploaded = await uploader.execute(image.originalname);
         await trx("t_imagens").insert({
           id_projeto: projectId,
           id_usuario: userId,
-          nm_imagem: uploaded.filename,
-          ds_caminho: uploaded.url
+          nm_imagem: image.originalname,
+          ds_caminho: image.url
         });
       }
 
-      const uniqueParticipants = [...new Set(project.authors)].filter(
+      // trata convites (só se tiver participantes além do criador)
+      const uniqueParticipants = [...new Set(participants)].filter(
         (p) => String(p) !== String(userId)
       );
 
-      console.log("[MODEL] Participantes únicos (sem criador):", uniqueParticipants);
+      if (uniqueParticipants.length > 0) {
+        for (const participantId of uniqueParticipants) {
+          console.log("[MODEL] Criando convite para participante:", participantId);
 
-      for (const participantId of uniqueParticipants) {
-        console.log("[MODEL] Criando convite para participante:", participantId);
+          const token = crypto.randomBytes(16).toString("hex");
 
-        const token = crypto.randomBytes(16).toString("hex");
-
-        await trx("t_projeto_convite").insert({
-          id_projeto: projectId,
-          id_usuario: participantId,
-          token,
-          ds_status: "pendente"
-        });
-        console.log("[MODEL] Convite inserido para:", participantId);
-
-        // socket
-        const socketId = mapaDeSockets?.[participantId];
-        if (socketId) {
-          io.to(socketId).emit("novoConviteProjeto", {
-            projetoId,
-            mensagem: `Você foi convidado para o projeto ${project.name}`
+          await trx("t_projeto_convite").insert({
+            id_projeto: projectId,
+            id_usuario: participantId,
+            token,
+            ds_status: "pendente"
           });
-        } else {
-          console.warn("[MODEL] Nenhum socket encontrado para participante:", participantId);
-        }
+          console.log("[MODEL] Convite inserido para:", participantId);
 
-        // email
-        const userEmail = await trx("t_usuario")
-          .where({ id_usuario: participantId })
-          .first()
-          .then((u) => u?.ds_email);
-
-        console.log("[MODEL] Email encontrado para", participantId, ":", userEmail);
-
-        if (userEmail) {
-          try {
-            await enviarEmailConvite(userEmail, project.name, projectId, token);
-            console.log("[MODEL] Email enviado para:", userEmail);
-          } catch (err) {
-            console.error("[MODEL] Erro ao enviar email para:", userEmail, err);
+          // socket
+          const socketId = mapaDeSockets?.[participantId];
+          if (socketId) {
+            io.to(socketId).emit("novoConviteProjeto", {
+              projetoId,
+              mensagem: `Você foi convidado para o projeto ${project.name}`
+            });
           }
-        } else {
-          console.warn("[MODEL] Nenhum email encontrado para participante:", participantId);
+
+          // email
+          const userEmail = await trx("t_usuario")
+            .where({ id_usuario: participantId })
+            .first()
+            .then((u) => u?.ds_email);
+
+          if (userEmail) {
+            try {
+              await enviarEmailConvite(userEmail, project.name, projectId, token);
+              console.log("[MODEL] Email enviado para:", userEmail);
+            } catch (err) {
+              console.error("[MODEL] Erro ao enviar email para:", userEmail, err);
+            }
+          } else {
+            console.warn("[MODEL] Nenhum email encontrado para participante:", participantId);
+          }
         }
+      } else {
+        console.log("[MODEL] Nenhum participante convidado — projeto só com criador.");
       }
 
       return { projectId };

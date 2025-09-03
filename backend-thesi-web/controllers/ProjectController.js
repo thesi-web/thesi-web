@@ -10,7 +10,7 @@ class ProjectController {
   async create(req, res) {
     try {
       const userId = req.userId;
-      const { name, authors, objective, user, platform } = req.body;
+      const { name, authors, objective, platform } = req.body;
   
       const templates = req.files["template"] || [];
   
@@ -41,7 +41,6 @@ class ProjectController {
         name,
         authors: participants,
         objective,
-        user,
         platform,
         templates: uploadedTemplates
       };

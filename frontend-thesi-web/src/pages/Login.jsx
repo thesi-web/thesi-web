@@ -100,9 +100,10 @@ function Login() {
                 variant={'secondary'}
                 type="submit"
                 disabled={loading}
+                loading={loading}
                 id={'form_btn'}
               >
-                {loading ? "Loading..." : "Log in"}
+                {loading ? "" : "Login"}
               </Button>
 
             <div className={styles.textContainer} >

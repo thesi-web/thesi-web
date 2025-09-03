@@ -22,14 +22,11 @@ export default function MultiStepForm() {
 
   const [projectData, setProjectData] = useState({
     name: '',
-    participants: '',
+    participants: [],
     objective: '',
     platform: '',
-    user: 'fixed',
     templateFile: [],
   });
-
-  console.log(projectData);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -153,8 +150,9 @@ export default function MultiStepForm() {
             variant='secondary'
             id='form_btn'
             disabled={isLoading} // Aqui é onde a mágica acontece
+            loading={isLoading}
           >
-            {isLoading ? "Criando..." : "Criar projeto"}
+            {isLoading ? "" : ""}
           </Button>
         )}
       </div>

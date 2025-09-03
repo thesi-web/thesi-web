@@ -147,21 +147,31 @@ const Project = () => {
             <div className={"project-title"}>{projeto.nm_projeto}</div>
           )}
           <div className={styles.statusContainer}>
-            <Status status={`${projeto.ds_status}`} />
             {/* só mostra o lápis se o usuário logado for o criador */}
-            {usuarioLogado?.id === projeto.id_criador && (
-            <i
-            className="bi bi-pencil-square"
-            onClick={() => {
-              setEditForm({
-                ds_projeto: projeto.ds_projeto || "",
-                nm_projeto: projeto.nm_projeto || ""
-              });
-              setIsEditing(true);
-            }}
-            style={{ cursor: "pointer" }}
-          ></i>
+            {usuarioLogado?.id === projeto.id_criador && 
+              projeto.ds_status !== 'entregue' && 
+              projeto.ds_status !== 'finalizado' && (
+                <div 
+                className={styles.icon}
+                onClick={() => {
+                  setEditForm({
+                    ds_projeto: projeto.ds_projeto || "",
+                    nm_projeto: projeto.nm_projeto || ""
+                  });
+                  setIsEditing(true);
+                }}>
+                    <i className="bi bi-pencil-square"></i>
+                  </div>
+            )}
+            {(projeto.ds_status !== 'entregue' && projeto.ds_status !== 'finalizado') && (
+              <div   
+              className={styles.icon}
+              onClick={() => setMarksModal(true)}
+              >
+              <i class="bi bi-inboxes"></i>
+            </div>
           )}
+          <Status status={`${projeto.ds_status}`} />
           </div>
         </div>
 
@@ -231,19 +241,3 @@ const Project = () => {
 };
 
 export default Project;
-
-
-/*
-
- {(projeto.ds_status !== 'entregue' && projeto.ds_status !== 'finalizado') && (
-          <Button
-            id="bullet"
-            variant="icon"
-            icon={<i className="bi bi-journal-bookmark"></i>}
-            iconPosition='left'
-            onClick={() => setMarksModal(true)}
-            children={'Current marks'}
-          />
-        )}
-
-*/

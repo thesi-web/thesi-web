@@ -6,12 +6,12 @@
 .title {
     color: var(--color-heading);
     font-size: var(--font-size-sm);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
 }
 
 .explanation {
     color: var(--color-primary);
-    font-size: var(--font-size-sm);
+    font-size: 12px;;
     text-transform: lowercase;
     margin-bottom: 1em;
 }

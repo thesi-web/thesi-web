@@ -8,13 +8,26 @@ const Carroussel = ({ images, projetoId, isDisabled, onUpload, onDelete }) => {
   const [openModalIndex, setOpenModalIndex] = useState(null);
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [imageToDelete, setImageToDelete] = useState(null);
+  const [uploadingImage, setUploadingImage] = useState(null);
   const fileInputRef = React.useRef(null);
   const apiUrl = import.meta.env.VITE_API_URL;
 
+  /*
   const handleFileChange = (e) => {
     const files = e.target.files;
     if (files.length > 0) {
       onUpload(files); // chama o Project para enviar os arquivos
+    }
+  };
+  */
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setUploadingImage({ file, tempId: Math.random().toString(36).substr(2, 9) });
+      
+      onUpload([file]).finally(() => {
+        setUploadingImage(null); // remove o loader depois do fetch do pai
+      });
     }
   };
 
@@ -80,6 +93,13 @@ const Carroussel = ({ images, projetoId, isDisabled, onUpload, onDelete }) => {
             )}
           </div>
         ))}
+
+        {/* loader de upload */}
+        {uploadingImage && (
+          <div key={uploadingImage.tempId} className={styles.imageContainerLoading}>
+            <div className="carregando"></div>
+          </div>
+        )}
 
         {/* Botão de adicionar imagem */}
         {!isDisabled && images.length < 5 && (

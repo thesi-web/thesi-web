@@ -21,6 +21,17 @@
     overflow: hidden;
 }
 
+.imageContainerLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-transparency);
+    border-radius: var(--border-radius);
+    width: 300px;
+    height: 150px;
+    margin: 10px;
+}
+
 
 .trashIcon {
   position: absolute; /* <--- troque de fixed para absolute */
@@ -94,3 +105,4 @@
 .adicionarContainerText{
     font-size: var(--font-size-sm);
 }
+

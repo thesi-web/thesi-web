@@ -26,12 +26,12 @@
 
 .title {
     border-bottom: solid 1px var(--color-transparency);
-    padding-bottom: 0.5em;
     display: flex;
     justify-content: space-between;
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-bold);
     color: var(--color-heading);
+    align-items: center;
 }
 
 

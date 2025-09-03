@@ -86,7 +86,7 @@ const Trash = () => {
       {trash.length === 0 ? (
         <div className={styles.tableWarning}>
           <Warning 
-            icon = {<i className="bi bi-patch-check-fill"></i>} 
+            icon = {<i className="bi bi-check-circle"></i>} 
             title={'Continue assim!'} 
             message={'Nada por aqui. Sua lixeira está limpinha.'}/>
         </div>

@@ -20,6 +20,12 @@
     overflow: hidden;
 }
 
+.title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-heading);
+}
+
 .sideBarModal{
     padding: 1em;
     width: 30vw;

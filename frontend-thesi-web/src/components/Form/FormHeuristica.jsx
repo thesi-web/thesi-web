@@ -133,8 +133,8 @@ const FormHeuristica = ({
         ))}
       </div>
 
-      <Button id='form_btn' variant="secondary" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Salvando...' : 'Salvar anotação'}
+      <Button variant="secondary" type="submit" disabled={isSubmitting} loading={isSubmitting}>
+        {isSubmitting ? '' : 'Salvar anotação'}
       </Button>
     </form>
   );
