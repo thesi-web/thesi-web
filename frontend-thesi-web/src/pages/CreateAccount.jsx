@@ -9,7 +9,7 @@ import Button from "../components/Button/Button";
 function CreateAccount() {
 
   const [step, setStep] = useState(1);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
@@ -25,44 +25,51 @@ function CreateAccount() {
   const prevStep = () => setStep((prev) => prev - 1);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
+  setIsLoading(true); // começa carregamento
 
-    const emailRegex = /\S+@\S+\.\S+/;
-    if (!emailRegex.test(email)) {
-      setErrorMessage('Por favor, insira um e-mail válido.');
-      return;
+  const emailRegex = /\S+@\S+\.\S+/;
+  if (!emailRegex.test(email)) {
+    setErrorMessage('Por favor, insira um e-mail válido.');
+    setIsLoading(false);
+    return;
+  }
+
+  if (!validatePassword(password)) {
+    setErrorMessage('A senha deve conter letras maiúsculas, minúsculas, números e símbolos.');
+    setIsLoading(false);
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    setErrorMessage('As senhas não coincidem.');
+    setIsLoading(false);
+    return;
+  }
+
+  try {
+    const response = await axios.post(`${apiUrl}/api/user`, {
+      name,
+      email,
+      password,
+      confirmpassword: confirmPassword,
+    });
+
+    if (response && response.status === 201) {
+      setSuccessMessage('Usuário criado com sucesso!');
+      setTimeout(() => {
+        navigate('/Login');
+      }, 1000);
+    } else {
+      setErrorMessage('Erro inesperado ao criar usuário');
     }
+  } catch (error) {
+    setErrorMessage(error.response?.data?.msg || 'Erro ao criar usuário');
+  } finally {
+    setIsLoading(false); // finaliza carregamento
+  }
+};
 
-    if (!validatePassword(password)) {
-      setErrorMessage('A senha deve conter letras maiúsculas, minúsculas, números e símbolos.');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setErrorMessage('As senhas não coincidem.');
-      return;
-    }
-
-    try {
-      const response = await axios.post(`${apiUrl}/api/user`, {
-        name,
-        email,
-        password,
-        confirmpassword: confirmPassword,
-      });
-
-      if (response && response.status === 201) {
-        setSuccessMessage('Usuário criado com sucesso!');
-        setTimeout(() => {
-          navigate('/Login');
-        }, 1000);
-      } else {
-        setErrorMessage('Erro inesperado ao criar usuário');
-      }
-    } catch (error) {
-      setErrorMessage(error.response?.data?.msg || 'Erro ao criar usuário');
-    }
-  };
 
   const validatePassword = (password) => {
     
@@ -92,43 +99,50 @@ function CreateAccount() {
       <div className={styles.titleContainer}>
         {step === 1 && (
           <>
-            <div className="title">Practical, safe.</div>
-            <p>Create your Thesi account in just a few steps!</p>
+            <div className="title">Prático, seguro.</div>
+            <p>Crie sua conta Thesi UX em poucos passos!</p>
           </>
         )}
+
         {step === 2 && (
           <>
-            <div className="h1">Create your profile</div>
-            <p>Here's how your Thesi profile will look to others</p>
+            <div className="h1">Crie seu perfil</div>
+            <p>Como seu perfil Thesi aparecerá para os outros</p>
           </>
         )}
+      
+        <div className={styles.contentContainer}>
+          {step === 1 && (
+            <StepOne
+              email={email}
+              setEmail={setEmail}
+              verificationCode={verificationCode}
+              setVerificationCode={setVerificationCode}
+              nextStep={nextStep}
+            />
+          )}
+
+          {step === 2 && (
+            <StepTwo
+              name={name}
+              setName={setName}
+              email={email}
+              password={password}
+              setPassword={setPassword}
+              confirmPassword={confirmPassword}
+              setConfirmPassword={setConfirmPassword}
+              errorMessage={errorMessage}
+              successMessage={successMessage}
+              handleSubmit={handleSubmit}
+              prevStep={prevStep}
+              isLoading={isLoading}
+            />
+          )}
+        </div>
+
       </div>
 
-      {step === 1 && (
-        <StepOne
-          email={email}
-          setEmail={setEmail}
-          verificationCode={verificationCode}
-          setVerificationCode={setVerificationCode}
-          nextStep={nextStep}
-        />
-      )}
-
-      {step === 2 && (
-        <StepTwo
-          name={name}
-          setName={setName}
-          email={email}
-          password={password}
-          setPassword={setPassword}
-          confirmPassword={confirmPassword}
-          setConfirmPassword={setConfirmPassword}
-          errorMessage={errorMessage}
-          successMessage={successMessage}
-          handleSubmit={handleSubmit}
-          prevStep={prevStep}
-        />
-      )}
+      
     </div>
 </div>
   );

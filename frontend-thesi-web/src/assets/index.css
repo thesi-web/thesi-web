@@ -152,6 +152,13 @@ a {
   color: var(--color-subtext);
 }
 
+.subtitleForm{
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-subtext);
+  margin-bottom: 1em;
+}
+
 .subtext{
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);
@@ -215,6 +222,9 @@ b:hover{
   font-size: var(--font-size-md);
 }
 
+#margem{
+  margin-top: 1em;
+}
 
 .errorMessage{
   display: flex;

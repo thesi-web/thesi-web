@@ -180,31 +180,8 @@ class UserController {
       ).json({ error: error.message });
     }
   }
-/*
-  async requestToken(req, res) {
-    try {
-      const { email } = req.body;
-  
-      if (!email.endsWith('@fatec.sp.gov.br')) {
-        return res.status(400).json({ error: 'Please enter an institutional email address.' });
-      }
-  
-      const achou = await User.findByEmail(email);
-  
-      if (achou) {
-        return res.status(400).json({ error: 'Email already registered.' });
-      }
-  
-      await gerarToken(email);
-  
-      return res.status(200).json({ message: 'Token enviado com sucesso.' });
-  
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
-    }
-  }
-*/
 
+  /*
   async requestToken(req, res) {
     try {
       const { email } = req.body;
@@ -242,6 +219,42 @@ class UserController {
     }
   
     return res.status(200).json({ message: 'Token conferido!' });
+  }  
+  */
+  async requestToken(req, res) {
+    try {
+      const { email } = req.body;
+      const allowedDomains = ["@fatec.sp.gov.br", "@maua.br", "@gmail.com"];
+
+      if (!allowedDomains.some((d) => email.endsWith(d))) {
+        return res.status(400).json({ error: "Use um e-mail institucional." });
+      }
+
+      const achou = await User.findByEmail(email);
+      if (achou) {
+        return res.status(400).json({ error: "Email já registrado." });
+      }
+
+      await gerarToken(email);
+      return res.status(200).json({ message: "Token enviado com sucesso." });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  async confirmToken(req, res) {
+    try {
+      const { email, token } = req.body;
+      const valid = await validarToken(email, token);
+
+      if (!valid) {
+        return res.status(400).json({ error: "Token inválido ou expirado." });
+      }
+
+      return res.status(200).json({ message: "Token conferido!" });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 
 }

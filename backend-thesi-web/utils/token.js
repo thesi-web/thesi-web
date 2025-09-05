@@ -1,9 +1,13 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const database = require("../database/connection");
 const secret = process.env.JWT_SECRET;
 const { enviarEmailToken } = require("../utils/email");
 
 exports.secret = secret;
+
+// -- LOGIN DE USUÁRIO
 
 exports.gerarTokenRecuperacao = (email) => {
   return jwt.sign({ email }, secret, { expiresIn: "1h" });
@@ -20,29 +24,52 @@ exports.verificarToken = (token) => {
   });
 };
 
-const tokensPendentes = new Map(); // No lugar disso, use um banco ou Redis se for produção
+// -- CRIAÇÃO DE CONTA
 
+// Gera e salva token no banco
 exports.gerarToken = async (email) => {
   const token = Math.floor(100000 + Math.random() * 900000).toString();
-  const expiresAt = Date.now() + 10 * 60 * 1000; // expira em 10 minutos
+  const hashedToken = await bcrypt.hash(token, 10);
+  const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
-  tokensPendentes.set(email, { token, expiresAt });
+  // Atualiza usuário com token e expiração
+    await database("t_usuario_token")
+    .insert({
+      ds_email: email,
+      nr_token: hashedToken,
+      token_expires_at: expiresAt,
+    })
+    .onConflict("ds_email") // se já existir, atualiza
+    .merge({
+      nr_token: hashedToken,
+      token_expires_at: expiresAt,
+      created_at: database.fn.now(),
+    });
 
-  await enviarEmailToken(email, token); // dispara aqui
+    // Envia o token por e-mail
+    await enviarEmailToken(email, token);
 
-  return { message: 'Token enviado com sucesso.' };
+    return { message: "Token enviado com sucesso." };
 };
 
-exports.validarToken = (email, tokenEnviado) => {
-  const info = tokensPendentes.get(email);
-  if (!info) return false;
+// Valida token recebido
+exports.validarToken =  async (email, tokenEnviado) => {
+  const tokenData = await database("t_usuario_token")
+  .where({ ds_email: email })
+  .first();
 
-  const { token, expiresAt } = info;
-  if (Date.now() > expiresAt) {
-    tokensPendentes.delete(email);
-    return false;
-  }
+  if (!tokenData) return false;
+  if (new Date() > tokenData.token_expires_at) return false;
 
-  return token === tokenEnviado;
-};
+  const match = await bcrypt.compare(tokenEnviado, tokenData.nr_token);
+  if (!match) return false;
+
+  // se bateu → invalida token
+  await database("t_usuario_token")
+    .where({ ds_email: email })
+    .delete();
+
+  return true;
+}
+
 

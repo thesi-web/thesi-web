@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer';
 const emailUser = process.env.EMAIL_USER;
 const emailPass = process.env.EMAIL_PASS;
 const apiUrl = process.env.VITE_API_URL;
+const thesiUX = process.env.THESI_UX;
 
 export async function enviarEmailRecuperacao(destinatario, token) {
   const transporter = nodemailer.createTransport({
@@ -66,10 +67,11 @@ export async function enviarEmailToken(destinatario, token) {
     html: `
     <div style="font-family: 'Montserrat', Arial, sans-serif; background-color: #f6f8fa; padding: 1em;">
     <div style="max-width: 600px; margin: auto; background: #fff; border-radius: 10px; padding: 1em; border: 1px solid #e1e4e8;">
+      <p style="color: #24292e; font-size: 14px; font-weight: 600;"> Thesi UX </p>
       <h2 style="color: #24292e; font-size: 18px;">Verifique sua identidade</h2>
       <p style="color: #586069; font-size: 14px;">Aqui está seu código de verificação:</p>
       <h2 style="font-size: 16px; letter-spacing: 5px; color: #24292e; text-align: center;">${token}</h2>
-      <p style="color: #586069; font-size: 14px;" >Esse código é válido por <strong>15 minutos</strong> e só pode ser usado uma vez.</p>
+      <p style="color: #586069; font-size: 14px;" >Esse código é válido por <strong>10 minutos</strong> e só pode ser usado uma vez.</p>
       <p style="color: #586069; font-size: 12px; text-align: center; border-top: solid 1px #e1e4e8; padding-top: 1em;">Por favor não compartilhe esse código com ninguém.</p>
     </div>
   `,
@@ -99,7 +101,7 @@ export async function enviarEmailBoasVindas(destinatario, name) {
         <h2 style="color: #586069; font-size: 18px; text-align: center; ">Prazer em conhecer você!</h2>
         <p style="color: #586069; font-size: 14px; text-align: center" >Sua conta foi criada com sucesso e você está pronto para explorar um mundo de ideias e soluções práticas projetadas especialmente para você.</p>
         <div style="display: flex; justify-content: center; padding: 1em 0;">
-          <a href="${apiUrl}" 
+          <a href="${thesiUX}" 
           style="
               display: inline-block;
               background-color: #24292e; 

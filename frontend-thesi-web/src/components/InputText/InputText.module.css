@@ -11,6 +11,18 @@
     font-family: var(--font-family-base);
 }
 
+.inputForm{
+    width: 40vw;
+    align-items: center;
+    padding: 0.5em ;
+    border: solid 1px var(--color-transparency);
+    background-color: white;
+    margin-bottom: 0.5px;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family-base);
+}
+
 .editing {
     align-items: center;
     padding: 0.6em ;
@@ -41,12 +53,15 @@
 
 
 .errorInput {
-    width: 23.5vw;
     align-items: center;
-    padding: 0.6em ;
-    border: solid 1px crimson;
-    background-color: transparent;
-    margin-bottom: 5px;
-  }
+    margin-bottom: 0.5px;
+    width: 40vw;
+    padding: 0.5em ;
+    background-color: white;
+    border: solid 1px var(--color-danger);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family-base);
+}
 
   

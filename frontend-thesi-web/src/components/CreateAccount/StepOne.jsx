@@ -37,7 +37,7 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
       });
       nextStep(); // Callback para o próximo passo
     } catch (error) {
-      setMessageToken("Invalid or expired code.");
+      setMessageToken("Código inválido ou expirado.");
     setTimeout(() => {
       setMessageToken('');
     }, 3000); 
@@ -50,32 +50,32 @@ const StepOne = ({ email, setEmail, verificationCode, setVerificationCode, nextS
     <div>
       <form onSubmit={tokenSent ? handleValidateToken : handleSendToken}>
         <InputText
-          variant={message ? 'errorInput' : 'input'}
-          label="Institutional e-mail"
+          variant={message ? 'errorInput' : 'inputForm'}
+          label="Email institutional"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={tokenSent || isLoading}
-          placeholder={'enter your e-mail address'}
+          placeholder={'Digite seu endereço de e-mail'}
         />
         {message &&  <div className={'errorMessage'} >{message} <i className="bi bi-exclamation-circle-fill"></i> </div>}
-        <div className={'subtitle'}>Use your @fatec.sp.gov.br domain email to participate in collaborative projects</div>
+        <div className={'subtitleForm'}>Use seu e-mail institucional @maua.br para participar de projetos colaborativos</div>
 
         {tokenSent && (
           <>
             <InputText
-              variant={ messageToken ? 'errorInput' : 'input'}
-              label="Verification Code"
+              variant={ messageToken ? 'errorInput' : 'inputForm'}
+              label="Código de verificação"
               value={verificationCode}
               onChange={(e) => setVerificationCode(e.target.value)}
               disabled={isLoading}
             />
             {messageToken &&  <div className={'errorMessage'}>{messageToken} <i className="bi bi-exclamation-circle-fill"></i> </div>}
-            <div className={'subtitle'}>We've sent a code to your inbox</div>
+            <div className={'subtitleForm'}>Enviamos um token para sua caixa de entrada</div>
           </>
         )}
 
-        <Button type="submit" variant="secondary" id="form_btn" disabled={isLoading}>
-          {isLoading ? "Please wait..." : tokenSent ? "Check my code" : "Get code"}
+        <Button type="submit" variant="secondary" disabled={isLoading} loading={isLoading}>
+          {isLoading ? "" : tokenSent ? "Conferir" : "Enviar"}
         </Button>
 
         

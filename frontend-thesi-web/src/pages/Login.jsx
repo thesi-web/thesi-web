@@ -45,7 +45,7 @@ function Login() {
       if (error.response?.status === 401) {
         setErrorMessage('Credenciais inválidas. Tente novamente.');
       } else {
-        setErrorMessage('Invalid email or password. Please try again.');
+        setErrorMessage('E-mail ou senha inválidos. Tente novamente.');
       }
     } finally {
       setLoading(false);
@@ -58,27 +58,27 @@ function Login() {
 
       <div className={styles.contentContainer}>
         <div className={styles.formContainer}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.titleContainer} >
-              <div className={'title'}>Sign in</div>
-              <p> Hey! Good to see you again! Let's get you signed in </p>
+              <div className={'title'}>Entrar</div>
+              <p> Que bom ver você de novo! Vamos fazer login. </p>
              </div>
             <InputText
-              label={'E-mail'}
+              label={'Email'}
               type="email"
               name="email"
               value={email}
-              placeholder="enter your e-mail addres"
+              placeholder="Digite seu endereço de e-mail"
               onChange={handleEmailChange}
               required
             />
             <InputText
               variant={errorMessage ? 'errorInput' : 'input'}
-              label={'Password'}
+              label={'Senha'}
               type="password"
               name="password"
               value={password}
-              placeholder="enter your password"
+              placeholder="Digite sua senha"
               onChange={handlePasswordChange}
               required
             />
@@ -91,24 +91,22 @@ function Login() {
                 checked={rememberMe}
                 onChange={() => setRememberMe(!rememberMe)}
               />
-              <div> Remember me </div>
-              <Link to="/forgot/password" >Forgot your password?</Link>
+              <div> Lembrar-me </div>
+              <Link to="/forgot/password" >Esqueceu sua senha?</Link>
             </div>
 
-        
-              <Button
-                variant={'secondary'}
-                type="submit"
-                disabled={loading}
-                loading={loading}
-                id={'form_btn'}
-              >
-                {loading ? "" : "Login"}
-              </Button>
-
+            <Button
+              variant={'secondary'}
+              type="submit"
+              disabled={loading}
+              loading={loading}
+            >
+              {loading ? "" : "Login"}
+            </Button>
+          
             <div className={styles.textContainer} >
-              <div>Don't have an account?</div>
-              <Link to="/create/account">Register here</Link>
+              <div>Não tem uma conta?</div>
+              <Link to="/create/account">Cadastre-se aqui</Link>
             </div>             
           </form>
         </div>

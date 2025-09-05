@@ -42,7 +42,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
     <div>   
 
       <div className={styles.navContainer}> 
-        <Link to="/" >
+        <Link to="/login" >
           <Button variant={'transparent'}>
               Back 
           </Button>

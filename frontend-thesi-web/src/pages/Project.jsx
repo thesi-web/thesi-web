@@ -51,29 +51,33 @@ const Project = () => {
     }
   }, [projetoId]);
 
-  const salvarEdicao = async () => {
-    try {
-      const response = await fetch(`${apiUrl}/api/edit/project/`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({ 
-          idProjeto: projetoId, 
-          name: editForm.nm_projeto, 
-          description: editForm.ds_projeto 
-        })
-      });
+ const salvarEdicao = async () => {
+  try {
+    setLoading(true); // ativa o loading para o botão
+    const response = await fetch(`${apiUrl}/api/edit/project/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ 
+        idProjeto: projetoId, 
+        name: editForm.nm_projeto, 
+        description: editForm.ds_projeto 
+      })
+    });
 
-      if (!response.ok) throw new Error("Erro ao salvar edição");
+    if (!response.ok) throw new Error("Erro ao salvar edição");
 
-      await fetchProjeto(); // atualiza com dados reais
-      setIsEditing(false); // sai do modo edição
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+    await fetchProjeto(); // atualiza dados
+    setIsEditing(false); // sai do modo edição
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setLoading(false); // desativa o loading
+  }
+};
+
 
    const uploadImages = async (files) => {
     try {
@@ -196,8 +200,14 @@ const Project = () => {
               setIsEditing(false);
               setEditForm({ nm_projeto: "", ds_projeto: "" });
             }}>Cancelar</Button>
-            <Button variant="secondary" onClick={salvarEdicao}>
-              Salvar alterações
+            <Button 
+              variant="secondary" 
+              onClick={salvarEdicao}  
+              disabled={loading}
+              loading={loading}
+              id={'form_btn'}
+            >
+              {loading ? "" : "Salvar alterações"}
             </Button>
           </div>
         )}

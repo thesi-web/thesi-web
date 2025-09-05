@@ -10,6 +10,7 @@ const StepTwo = ({
   errorMessage,
   successMessage,
   handleSubmit,
+  isLoading,
   prevStep
 }) => {
 
@@ -25,17 +26,23 @@ const StepTwo = ({
   return (
     <div>  
       <form onSubmit={handleSubmit}>
-        <InputText label={"Enter your name"} type="text" name="name" value={name} onChange={handleChange} placeholder="type your full name" required />
-        <InputText label={"Set your password"} type="password" name="password" value={password} onChange={handleChange} placeholder="type your password" required />
-        <InputText label={"Confirm your password"} type="password" name="confirmpassword" value={confirmPassword} onChange={handleChange} placeholder="confirm your password" required />
+        <InputText label={"Nome"} type="text" name="name" value={name} onChange={handleChange} placeholder="Digite seu nome completo" required />
+        <InputText label={"Senha"} type="password" name="password" value={password} onChange={handleChange} placeholder="Digite sua nova senha" required />
+        <InputText label={"Confirmação de senha"} type="password" name="confirmpassword" value={confirmPassword} onChange={handleChange} placeholder="Confirme sua senha" required />
 
         {errorMessage && <div>{errorMessage}</div>}
         {successMessage && <div>{successMessage}</div>}
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }} >
-        <Button variant={'transparent'} type={'button'} onClick={prevStep}>Back</Button>
-        <Button type={"submit"} variant={'secondary'}>Create account</Button>
-      </div>
+        <Button
+          type="submit"
+          variant="secondary"
+          id="margem"
+          disabled={isLoading}
+          loading={isLoading}
+        >
+          {isLoading ? "" : "Criar conta"}
+        </Button>
+    
       </form>
     </div>
   );
