@@ -129,7 +129,7 @@ export default function MultiStepForm() {
             id='form_btn'
             disabled={isLoading}
           >
-            Anterior
+            Retornar
           </Button>
         )}
 
@@ -152,7 +152,7 @@ export default function MultiStepForm() {
             disabled={isLoading} // Aqui é onde a mágica acontece
             loading={isLoading}
           >
-            {isLoading ? "" : ""}
+            {isLoading ? "" : "Criar projeto"}
           </Button>
         )}
       </div>

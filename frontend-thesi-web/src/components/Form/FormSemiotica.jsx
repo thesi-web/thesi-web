@@ -105,9 +105,9 @@ const FormSemiotica = ({
             Dinâmico
           </Button>
           <Button
-            value="meta"
-            variant={signo === "meta" ? "highcontrast" : "lowcontrast"}
-            onClick={() => handleSigno("meta")}
+            value="metalinguistico"
+            variant={signo === "metalinguistico" ? "highcontrast" : "lowcontrast"}
+            onClick={() => handleSigno("metalinguistico")}
           >
             Meta
           </Button>
