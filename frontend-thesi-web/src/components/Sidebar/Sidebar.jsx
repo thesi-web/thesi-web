@@ -5,11 +5,13 @@ import SidebarItem from '../SidebarItem/SidebarItem';
 import SidebarProject from '../SidebarProject/SidebarProject';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Warning from '../Warning/Warning';
+import { io } from "socket.io-client";
 
 const Sidebar = ({onOpenInbox}) => {
 
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_API_URL;
+  const socket = io(apiUrl); 
   
   const handleLogout = async () => {
     await fetch(`${apiUrl}/api/logout`, { method: "POST" });
@@ -62,9 +64,16 @@ const Sidebar = ({onOpenInbox}) => {
   };
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    fetchProjects(); 
 
+    socket.on("projectsUpdated", () => {
+      fetchProjects();
+    });
+
+    return () => {
+      socket.off("projectsUpdated");
+    };
+  }, []);
   return (
     <div className={styles.container}>
 

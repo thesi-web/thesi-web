@@ -3,7 +3,7 @@ const Heuristic = require("../models/Heuristic");
 const Project = require("../models/Project");
 const Semiotic = require("../models/Semiotic");
 const { UploadService } = require('../services/uploadService');
-
+const { getIo, mapaDeSockets } = require('../config/socket');
 
 class ProjectController {
 
@@ -46,6 +46,9 @@ class ProjectController {
       };
   
       const result = await Project.create(project, userId);
+      
+      const io = getIo();
+      io.emit("projectsUpdated");
   
       res.status(201).json({ msg: "Projeto criado com sucesso", id: result.projectId });
   
@@ -286,17 +289,21 @@ class ProjectController {
   }
 
   async restore(req, res) {
-  try {
-    const { idProjeto } = req.body;
+    try {
+      const { idProjeto } = req.body;
 
-    await Project.restore(idProjeto); // chama o model
+      await Project.restore(idProjeto); // chama o model
+      
+      const io = getIo();
+      io.emit("projectsUpdated");
 
-    return res.status(200).json({ message: "Projeto restaurado com sucesso" });
-  } catch (err) {
-    console.error("Erro ao restaurar:", err);
-    return res.status(500).json({ error: "Erro ao restaurar projeto" });
+      return res.status(200).json({ message: "Projeto restaurado com sucesso" });
+    } catch (err) {
+      console.error("Erro ao restaurar:", err);
+      return res.status(500).json({ error: "Erro ao restaurar projeto" });
+    }
   }
-  }
+
 
   async edit(req, res) {
     const { idProjeto, name, description } = req.body;

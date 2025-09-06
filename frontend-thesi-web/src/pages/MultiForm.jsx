@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { io } from 'socket.io-client';
 import { useProjects } from '../context/ProjectContext';
 import StepOneForm from '../components/Form/StepOneForm';
 import StepTwoForm from '../components/Form/StepTwoForm';
@@ -11,8 +12,10 @@ import Stepper from '../components/Stepper/Stepper';
 export default function MultiStepForm() {
 
   const { fetchProjects } = useProjects();
-
-  const apiUrl = import.meta.env.VITE_API_URL;
+  
+   
+   const apiUrl = import.meta.env.VITE_API_URL;
+   const socket = io(apiUrl); 
   
   const navigate = useNavigate();
   

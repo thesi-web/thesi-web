@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { io } from 'socket.io-client';
 import styles from './Trash.module.css';
 import Button from '../components/Button/Button'
 import MessageModal from '../components/Modal/MessageModal';
@@ -7,6 +8,7 @@ import Warning from '../components/Warning/Warning';
 const Trash = () => {
 
   const apiUrl = import.meta.env.VITE_API_URL;
+  const socket = io(apiUrl); 
   const [trash, setTrash] = useState([]);
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
@@ -66,7 +68,7 @@ const Trash = () => {
     } else {
       fetchTrash();
       setIsMessageModalOpen(false); 
-      setSelectedProjectId(null); 
+      setSelectedProjectId(null);
     }
 
   } catch (error) {
@@ -77,7 +79,16 @@ const Trash = () => {
   // Buscar os projetos da lixeira ao carregar a página
   useEffect(() => {
     fetchTrash();
+
+    socket.on("projectsUpdated", () => {
+      fetchTrash();
+    });
+
+    return () => {
+      socket.off("projectsUpdated");
+    };
   }, []);
+
 
   return (
     <div className={styles.container}>
