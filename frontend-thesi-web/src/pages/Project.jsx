@@ -229,9 +229,9 @@ const Project = () => {
             isMessageOpen={isMessageModalOpen}
             setMessageModalOpen={() => setIsMessageModalOpen(false)}
             onClick={entregarProjeto}
-            title={'Submit Project'}
-            message={`Are you sure? You won't be able to make changes after submission.`}
-            buttonMessage={'Submit'}
+            title={'Entregar projeto'}
+            message={`Tem certeza? Não será possível fazer alterações após o envio.`}
+            buttonMessage={'Entregar'}
           />
         )}
         {marksModal && (

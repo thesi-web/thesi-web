@@ -10,7 +10,7 @@
 }
 
 .explanation {
-    color: var(--color-primary);
+    color: var(--color-label);
     font-size: 12px;;
     text-transform: lowercase;
     margin-bottom: 1em;

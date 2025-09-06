@@ -7,22 +7,25 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  --color-heading: #37352F;
-  --color-subtext: #A6A299;
-  --color-label: #5F5E5B;
-  --color-placeholder: #ccc;
-  --color-transparency: #5f5e5b38;
-
+  /* Cores relacionadas a texto */
+  --color-heading: #141414;
+  --color-subtext: #A19F97;
+  --color-label: #3B3735;
+  /* Subelementos da  aplicaçãp*/
+  --color-placeholder: #1414141a;
+  --color-transparency: #1414141a;
   /* Cores da aplicação */
-  --color-primary: #792AFC;
-  --color-primary-transparency: #7b2afc27;
-  --color-primary-hover: #711cfa;
+  --color-primary: #141414;
+  --color-primary-transparency: #1414141a;
+  --color-primary-hover: #1a1a1a;
+
+  
   --color-disabled: #dbdbdb;
   --color-secondary: #E5E5E5;
-  --color-text: #ffffff;
+  --color-text: rgb(240, 240, 240);
   --color-text-2:  #ffffff4f;
   --color-danger: crimson;
-  --color-danger-transparency: rgba(220, 20, 60, 0.356);
+  --color-danger-transparency: rgba(220, 20, 60, 0.116);
 
   --border-radius: 5px;
 

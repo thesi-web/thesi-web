@@ -93,7 +93,7 @@ const Trash = () => {
   return (
     <div className={styles.container}>
       <div className={styles.title}> Lixeira </div>
-      <p>Um projeto na lixeira está disponível para recuperação durante 30 dias. Após esse período ele será deletado permanentemente.</p>
+      <p>Um projeto na lixeira está disponível para recuperação durante 7 dias. Após esse período ele será deletado permanentemente.</p>
       {trash.length === 0 ? (
         <div className={styles.tableWarning}>
           <Warning 

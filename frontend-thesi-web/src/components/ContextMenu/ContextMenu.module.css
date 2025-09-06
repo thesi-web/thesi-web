@@ -1,7 +1,7 @@
 .menu {
   width: 10vw;
   position: fixed;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.850);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   color: var(--color-heading);
   border: solid 1px var(--color-transparency);

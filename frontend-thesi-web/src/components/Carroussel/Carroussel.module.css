@@ -76,7 +76,6 @@
 
 .imageContainerAdd:hover {
     border: solid 1px var(--color-primary);
-    background-color: var(--color-primary-transparency);
     color: var(--color-primary);
     box-shadow: 1px 0 10px rgba(0, 0, 0, 0.096);
 }
@@ -98,8 +97,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: border 0.3s ease, transform 0.1s ease;
-    transition: color 0.3s ease, transform 0.1s ease;
+    transition: all 0.6s ease, transform 0.1s ease;
 }
 
 .adicionarContainerText{

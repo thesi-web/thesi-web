@@ -99,7 +99,7 @@ export async function enviarEmailBoasVindas(destinatario, name) {
         <p style="color: #24292e; font-size: 14px; font-weight: 600; padding-left: 1em;">Thesi UX</p>
         <h2 style="color: #24292e; font-size: 16px; text-align: center;">Olá, ${name}</h2>
         <h2 style="color: #586069; font-size: 18px; text-align: center; ">Prazer em conhecer você!</h2>
-        <p style="color: #586069; font-size: 14px; text-align: center" >Sua conta foi criada com sucesso e você está pronto para explorar um mundo de ideias e soluções práticas projetadas especialmente para você.</p>
+        <p style="color: #586069; font-size: 14px; text-align: center"> Bem-vindo(a)! Descubra como avaliar usabilidade e comunicação para experiências digitais mais  significativas. </p>
         <div style="display: flex; justify-content: center; padding: 1em 0;">
           <a href="${thesiUX}" 
           style="

@@ -4,3 +4,7 @@
     border-top: solid 1px var(--color-transparency);
     margin: 0;
 }
+
+.background {
+    background-color: white;
+}

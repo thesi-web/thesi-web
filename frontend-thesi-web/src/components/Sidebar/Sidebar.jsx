@@ -37,6 +37,7 @@ const Sidebar = ({onOpenInbox}) => {
     if (!response.ok) {
       throw new Error("Erro ao mover para a lixeira");
     } else {
+      navigate("/home");
       fetchProjects();
     }
     

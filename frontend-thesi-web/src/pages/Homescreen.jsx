@@ -1,12 +1,9 @@
-import styles from './Homescreen.module.css'
+import React from 'react'
 
 const Homescreen = () => {
-
   return (
-    <div>
-      Bem-vindo a THESI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    </div>      
-  );
+    <div>Homescreen</div>
+  )
 }
 
-export default Homescreen;
+export default Homescreen

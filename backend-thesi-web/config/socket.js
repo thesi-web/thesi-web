@@ -12,8 +12,7 @@ function initSocket(server) {
   });
 
   io.on("connection", (socket) => {
-    console.log("Novo usuário conectado:", socket.id);
-
+    
     socket.on("registrarUsuario", (userId) => {
       mapaDeSockets[userId] = socket.id;
       console.log(`Usuário ${userId} registrado com socket ${socket.id}`);

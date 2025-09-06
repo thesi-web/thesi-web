@@ -19,10 +19,11 @@
 }
 
 .content {
+  background-color: white;
   width: inherit;
   border-top: solid 1px var(--color-transparency);
   border-bottom: solid 1px var(--color-transparency);
   border-right: solid 1px var(--color-transparency);
   border-radius: 0 10px 10px 0;
-  overflow: auto;
+  overflow: hidden;
 }
