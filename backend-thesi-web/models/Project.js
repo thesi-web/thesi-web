@@ -10,11 +10,8 @@ class Project {
 
   async create(project, userId) {
   try {
-    console.log("[MODEL] Iniciando criação de projeto para userId:", userId);
 
     const result = await database.transaction(async (trx) => {
-      console.log("[MODEL] Inserindo projeto:", project.name);
-
       // garante que authors é sempre array
       const participants = Array.isArray(project.authors) ? project.authors : [];
 
@@ -29,23 +26,23 @@ class Project {
         .returning("id_projeto");
 
       const projectId = inserted.id_projeto;
-      console.log("[MODEL] Projeto inserido com ID:", projectId);
 
       // vincula criador ao projeto
       await trx("t_projeto_usuario").insert({
         id_projeto: projectId,
         id_usuario: userId
       });
-      console.log("[MODEL] Criador vinculado ao projeto");
 
       // salva imagens (se houver)
       for (const image of project.templates) {
-        console.log("[MODEL] Salvando imagem:", image.originalname);
+
+        const uploaded = await uploader.execute(image.originalname);
+
         await trx("t_imagens").insert({
           id_projeto: projectId,
           id_usuario: userId,
-          nm_imagem: image.originalname,
-          ds_caminho: image.url
+          nm_imagem: uploaded.filename,
+          ds_caminho: uploaded.url
         });
       }
 
@@ -217,7 +214,6 @@ class Project {
       await trx("t_heuristica").where("id_projeto", projetoId).del();
       await trx("t_semiotica").where("id_projeto", projetoId).del();
       await trx("t_imagens").where({ id_projeto: projetoId, id_usuario: userId }).del();
-      await trx("t_arquivos").where({ id_projeto: projetoId, id_usuario: userId }).del();
       await trx("t_projeto_usuario").where("id_projeto", projetoId).del();
       await trx("t_projeto_convite").where("id_projeto", projetoId).del();
       await trx("t_projeto").where("id_projeto", projetoId).del();

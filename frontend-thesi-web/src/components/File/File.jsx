@@ -20,7 +20,7 @@ const File = ( { title, onClick, size }) => {
         </div>
         
         <div>
-          <Button icon={<i class="bi bi-x-lg"></i>} variant={'icon'} onClick={onClick} />
+          <Button icon={<i className="bi bi-x-lg"></i>} variant={'icon'} onClick={onClick} />
         </div>
     </div>
   )

@@ -13,8 +13,6 @@ import { getUsuarioLogado } from '../hooks/auth';
 
 const Project = () => {
 
-  
-
   const [projeto, setProjeto] = useState({ imagens: [] });
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -51,33 +49,32 @@ const Project = () => {
     }
   }, [projetoId]);
 
- const salvarEdicao = async () => {
-  try {
-    setLoading(true); // ativa o loading para o botão
-    const response = await fetch(`${apiUrl}/api/edit/project/`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({ 
-        idProjeto: projetoId, 
-        name: editForm.nm_projeto, 
-        description: editForm.ds_projeto 
-      })
-    });
+  const salvarEdicao = async () => {
+    try {
+      setLoading(true); // ativa o loading para o botão
+      const response = await fetch(`${apiUrl}/api/edit/project/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ 
+          idProjeto: projetoId, 
+          name: editForm.nm_projeto, 
+          description: editForm.ds_projeto 
+        })
+      });
 
-    if (!response.ok) throw new Error("Erro ao salvar edição");
+      if (!response.ok) throw new Error("Erro ao salvar edição");
 
-    await fetchProjeto(); // atualiza dados
-    setIsEditing(false); // sai do modo edição
-  } catch (err) {
-    setError(err.message);
-  } finally {
-    setLoading(false); // desativa o loading
-  }
-};
-
+      await fetchProjeto(); // atualiza dados
+      setIsEditing(false); // sai do modo edição
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false); // desativa o loading
+    }
+  };
 
    const uploadImages = async (files) => {
     try {
@@ -172,7 +169,7 @@ const Project = () => {
               className={styles.icon}
               onClick={() => setMarksModal(true)}
               >
-              <i class="bi bi-inboxes"></i>
+              <i className="bi bi-inboxes"></i>
             </div>
           )}
           <Status status={`${projeto.ds_status}`} />

@@ -89,7 +89,7 @@ const MarksModal = ({ isMarksModalOpen, setMarksModalOpen, projetoId }) => {
       <div className={styles.container}>
         {/* Mensagem quando não há heurística nem semiótica */}
         {heuristica.length === 0 && semiotica.length === 0 && !loading && (
-            <Warning icon={<i class="bi bi-exclamation-circle"></i>} title={'Ainda não há marcações!'} message={'Quando uma avaliação heurística ou semiótica for feita, ela aparecerá aqui para edição.'} />
+            <Warning icon={<i className="bi bi-exclamation-circle"></i>} title={'Ainda não há marcações!'} message={'Quando uma avaliação heurística ou semiótica for feita, ela aparecerá aqui para edição.'} />
         )}
 
         {heuristica.map((heuristic, index) => (

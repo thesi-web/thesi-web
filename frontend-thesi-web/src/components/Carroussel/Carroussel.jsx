@@ -12,14 +12,6 @@ const Carroussel = ({ images, projetoId, isDisabled, onUpload, onDelete }) => {
   const fileInputRef = React.useRef(null);
   const apiUrl = import.meta.env.VITE_API_URL;
 
-  /*
-  const handleFileChange = (e) => {
-    const files = e.target.files;
-    if (files.length > 0) {
-      onUpload(files); // chama o Project para enviar os arquivos
-    }
-  };
-  */
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
